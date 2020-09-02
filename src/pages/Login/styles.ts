@@ -11,18 +11,22 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     header: {
-        height:  '35%',
+        // height:  '20%',
+        flex: .3,
         justifyContent: 'space-around',
         padding: 10,
         backgroundColor: colors.imobcasaPrimary,
     },
     appImage: {
+        flex: 1,
         resizeMode: 'contain',
-        width: '100%',
+        justifyContent: 'center',
+        alignSelf:'center',
+        width: '50%',
         // marginBottom: 100
     },
     loginFormContainer: {
-        flex: 1,
+        flex: .7,
         justifyContent: 'center',
         backgroundColor: colors.background
     },

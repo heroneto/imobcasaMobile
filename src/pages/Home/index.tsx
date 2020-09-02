@@ -1,29 +1,16 @@
 import React, { useState } from 'react'
+
 import { View , Text, RefreshControl, Image } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput, FlatList, RectButton } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons'; 
+import DashboardGroup from '../../Components/DashboardGroup';
+import colors from '../../theme';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function HomeView(){
     const [ refreshing, setRefreshing ] = useState(false)
-    const [ searchResults, setSearchResults ] = useState([])
-    const [ searchInput, setSearchInput ] = useState('')
-    const data: Array<ItemResultProps> = [
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-          title: 'Heron Eto',
-        },
-        {
-          id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-          title: 'Vagner Zanela',
-        },
-        {
-          id: '58694a0f-3da1-471f-bd96-145571e29d72',
-          title: 'Nadia Zanela',
-        },
-    ]
-
     const onRefresh = async () => {
         setRefreshing(true)
         
@@ -36,7 +23,7 @@ export default function HomeView(){
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <View style={styles.myselfContainer}>
-                    <Image style={styles.myselfImage} source={{uri: "https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"}} />
+                    <Image  style={styles.myselfImage} source={{uri: "https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"}} />
                 </View>
                 <View style={styles.headerOptionsContainer}>
                     <RectButton
@@ -72,125 +59,66 @@ export default function HomeView(){
                     />
                 }
             >
-                <View style={styles.leadStatusContainer}>
-                    <View style={styles.leadStatusHeader}>
-                        <Text style={styles.leadStatusHeaderText}>
-                            Leads
-                        </Text>
-                        <View style={styles.lineHeader}/>
-                        <RectButton
-                            style={styles.leadStatusContainerOptions}
-                        >
-                            <SimpleLineIcons name="options" size={24} color="black" />
-                        </RectButton>
-                    </View>
-                    <View style={styles.leadStatusContent}>
-                        <View style={styles.statusContainer}>
-                            <RectButton
-                                style={styles.statusButton}
-                            >
-                                <View style={styles.statusCount}>
-                                    <Text style={styles.statusCountText}>
-                                        10
-                                    </Text>
-                                </View>
-                                <Text style={styles.statusName}>
-                                    Aguardando
-                                </Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.statusButton}
-                            >
-                                <View style={styles.statusCount}>
-                                    <Text style={styles.statusCountText}>
-                                        10
-                                    </Text>
-                                </View>
-                                <Text style={styles.statusName}>
-                                    Negociação em andamento
-                                </Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.statusButton}
-                            >
-                                <View style={styles.statusCount}>
-                                    <Text style={styles.statusCountText}>
-                                        10
-                                    </Text>
-                                </View>
-                                <Text style={styles.statusName}>
-                                    Negociação concluída
-                                </Text>
-                            </RectButton>
-                        </View>
-                    </View>
+                <DashboardGroup 
+                    items={[
+                        {
+                            count: 10,
+                            name: 'Aguardando',
+                            color: colors.textInput,
+                            id: "1"
+                        },
+                        {
+                            count: 5,
+                            name: 'Negociação em andamento',
+                            color: colors.standardButton,
+                            id: "2"
+                        },
+                        {
+                            count: 1,
+                            name: 'Negociação concluída',
+                            color: colors.success,
+                            id: "3"
+                        }
+                    ]} 
+                    title='Leads'
+                />
+
+                <DashboardGroup 
+                    items={[
+                        {
+                            name: 'Retornar contato',
+                            count: 5,
+                            color: colors.imobcasaPrimary,
+                            id: "1"
+                        },
+                        {
+                            name: 'Visita agendada',
+                            count: 15,
+                            color: colors.imobcasaPrimary,
+                            id: "2"
+                        },
+                        {
+                            name: 'Solicitar documentação',
+                            count: 25,
+                            color: colors.imobcasaPrimary,
+                            id: "3"
+                        },
+                        {
+                            name: 'Cobrar cliente',
+                            count: 45,
+                            color: colors.imobcasaPrimary,
+                            id: "4"
+                        }
+                    ]}
+                    title='Agenda'
+                />
+                <View 
+                    style={styles.bottomContainer}
+                >
+                    <Text style={styles.bottomText}>Deslize para atualizar</Text>
+                    <Ionicons name="ios-arrow-down" size={24} color={colors.textInput} />
                 </View>
-                <View style={styles.scheculeContainer}>
-                    <View style={styles.leadStatusHeader}>
-                        <Text style={styles.leadStatusHeaderText}>
-                            Sua agenda
-                        </Text>
-                        <View style={styles.lineHeader}/>
-                        <RectButton
-                            style={styles.leadStatusContainerOptions}
-                        >
-                            <SimpleLineIcons name="options" size={24} color="black" />
-                        </RectButton>
-                    </View>
-                    <View style={styles.leadStatusContent}>
-                        <View style={styles.statusContainer}>
-                        <RectButton
-                            style={styles.statusButton}
-                        >
-                            <View style={styles.statusCount}>
-                                <Text style={styles.statusCountText}>
-                                    10
-                                </Text>
-                            </View>
-                            <Text style={styles.statusName}>
-                                Retornar contato
-                            </Text>
-                        </RectButton>
-                        <RectButton
-                            style={styles.statusButton}
-                        >
-                            <View style={styles.statusCount}>
-                                <Text style={styles.statusCountText}>
-                                    10
-                                </Text>
-                            </View>
-                            <Text style={styles.statusName}>
-                                Visita agendada
-                            </Text>
-                        </RectButton>
-                        <RectButton
-                            style={styles.statusButton}
-                        >
-                            <View style={styles.statusCount}>
-                                <Text style={styles.statusCountText}>
-                                    10
-                                </Text>
-                            </View>
-                            <Text style={styles.statusName}>
-                                Solicitar documentação
-                            </Text>
-                        </RectButton>
-                        <RectButton
-                            style={styles.statusButton}
-                        >
-                            <View style={styles.statusCount}>
-                                <Text style={styles.statusCountText}>
-                                    10
-                                </Text>
-                            </View>
-                            <Text style={styles.statusName}>
-                                Cobrar cliente
-                            </Text>
-                        </RectButton>
-                        </View>
-                    </View>
-                </View>
-                <Text>Deslize para atualizar {refreshing ? "Atualizando" : "Conteúdo atualizado"}</Text>
+                
 
             </ScrollView>
         </View >

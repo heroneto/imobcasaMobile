@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, Image, CheckBox, KeyboardAvoidingView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Image, Keyboard, KeyboardAvoidingView } from 'react-native'
 import styles from './styles'
 import AppImage from '../../../assets/appImage.png'
 import { TextInput, RectButton } from 'react-native-gesture-handler'
@@ -10,26 +10,43 @@ import { Ionicons } from '@expo/vector-icons';
 import colors from '../../theme'
 import { useNavigation } from '@react-navigation/native'
 
+
 export default function LoginView(){
     const {navigate} = useNavigation()
     const [ isRememberMeSelected, setIsRememberMeSelected ] = useState(false)
-    
+    const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
     function handleNavigateToHomePage(){
         navigate('home')
     }
+    
+    useEffect(() => {
+        Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardOpen(true)
+        })
 
+        Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardOpen(false)
+        })
+    },[])
+
+
+    
     return (
         <KeyboardAvoidingView 
             style={styles.container}
-            behavior='height'
+            // behavior='position'
 
         >
             <View style={styles.header}>
-                <Image 
-                    source={AppImage} 
-                    style={styles.appImage}
-                    
-                />
+                {!isKeyboardOpen ? 
+                    <Image 
+                        source={AppImage} 
+                        style={styles.appImage}
+                    />
+                : 
+                    true
+                }
+                
             </View>
             <View style={styles.loginFormContainer}>
                 <View style={styles.loginTitle}>
