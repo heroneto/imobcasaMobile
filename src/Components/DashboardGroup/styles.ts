@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import colors from '../../theme'
+import { padEnd } from 'lodash'
 
 const styles = StyleSheet.create({
     container: {
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     headerText: {
         fontFamily: 'Poppins_700Bold',
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
         // width: '20%',
     },
     lineHeader: {
-        // flex: .7,
-        width: '60%',
+        flex: .7,
+        // width: '60%',
         // margin: 10,
         // marginLeft: 10,
         height: 1,
@@ -67,7 +68,41 @@ const styles = StyleSheet.create({
         color: colors.textInput,
         marginLeft: 10
     },
-    
+    modalContainer: {
+        backgroundColor: 'rgba(0,0,0,.4)',
+        height: "100%",
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    modalOptions: {
+        backgroundColor: colors.background,
+        width: '60%',
+        alignItems: 'center'
+    },
+    modalTitleContainer: {
+        padding: 5,
+    },
+    modalTitleText: {
+        color: colors.imobcasaPrimary,
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 14,
+    },
+    modalButton: {
+        width: '100%',
+    },
+    modalButtonView: {
+        backgroundColor: colors.background,
+        padding: 10,
+        margin: 0,
+        width: '100%',
+        alignItems: 'center'
+    },
+    modalOptionText: {
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 12,
+        color: colors.textInput
+    }
+      
 })
 
 export default styles

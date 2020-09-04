@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, Modal, Alert } from 'react-native'
-import { RectButton, TouchableHighlight } from 'react-native-gesture-handler'
+import React, { useState, useEffect, useRef } from 'react'
+import { View, Text, Modal, TouchableHighlight, Alert } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 
 interface DashboardItemProps {
@@ -12,12 +13,33 @@ interface DashboardItemProps {
     id: string,
 }
 
+interface ModalOptionsProps {
+    name: string,
+    pageToNavigate: string
+    id: string
+}
+
 interface DashboardGroupProps {
     title: string,
     items: Array<DashboardItemProps>
+    modal: {
+        title: string,
+        options: Array<ModalOptionsProps>
+    }
 }
 
-const DashboardGroup: React.FC<DashboardGroupProps> = ({items, title}) => {
+const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) => {
+    const [ isShowingModal, setIsShowingModal ] = useState(false)
+    const {navigate} = useNavigation()
+
+    function showModal(){
+        setIsShowingModal(true)
+    }
+    
+    function handleNavigateTo(pageName: string){
+        setIsShowingModal(false)
+        navigate(pageName)
+    }
 
     return (
         <>
@@ -27,13 +49,13 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({items, title}) => {
                         {title}
                     </Text>
                     <View style={styles.lineHeader}/>
-                    <View style={styles.contextMenu}>
-                        <RectButton
+                    <RectButton
                             style={styles.options}
+                            onPress={showModal}
                         >
                             <SimpleLineIcons name="options" size={24} color="black" />
-                        </RectButton>
-                    </View>
+                    </RectButton>
+                    
                 </View>
                 <View style={styles.content}>
                     {items.map(item => {
@@ -59,8 +81,63 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({items, title}) => {
                         )
                     })}
                 </View>
-            </View>
+                        <Modal
+                            transparent={true}
+                            animationType='fade'
+                            visible={isShowingModal}
+                            hardwareAccelerated={true}
 
+                        >
+                            <View style={styles.modalContainer}>
+                                <View
+                                    style={styles.modalOptions}
+                                >
+                                    <View style={styles.modalTitleContainer}>
+                                        <Text style={styles.modalTitleText}>
+                                            {modal.title}
+                                        </Text>
+                                    </View>
+                                    {modal.options.map(option => {
+                                        return (
+                                            
+                                                <TouchableHighlight
+                                                    key={option.id}
+                                                    onPressIn={() => 
+                                                        handleNavigateTo(option.pageToNavigate)
+                                                    }
+                                                    style={styles.modalButton}
+                                                >
+                                                    <View style={styles.modalButtonView}>
+                                                        <Text style={styles.modalOptionText}>{option.name}</Text>
+                                                    </View>
+                                                </TouchableHighlight>
+                                            
+                                        )
+                                    })
+
+                                    }
+                                    {/* <TouchableHighlight 
+                                        onPress={() => console.log("Teste")}
+                                        style={styles.modalButton}
+                                        onPressIn={closeModal}
+                                    >
+                                        <View style={styles.modalButtonView}>
+                                            <Text style={styles.modalOptionText}>Novo Lead</Text>
+                                        </View>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight 
+                                        onPress={() => console.log("Teste")}
+                                        style={styles.modalButton}
+                                    >
+                                        <View style={styles.modalButtonView}>
+                                            <Text style={styles.modalOptionText}>Ver Leads</Text>
+                                        </View>
+                                    </TouchableHighlight>                                                                        */}
+                                </View>
+                            </View>
+                        </Modal>
+
+            </View>
         </>
     )
 }

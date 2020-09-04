@@ -20,7 +20,7 @@ export default function App() {
     return (
       <>
         <AppStack />
-        <StatusBar style='auto' />
+        {/* <StatusBar style='auto' /> */}
       </>
     );
   }

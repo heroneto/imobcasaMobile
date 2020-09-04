@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-
 import { View , Text, RefreshControl, Image } from 'react-native'
 import styles from './styles'
-import { ScrollView, TextInput, FlatList, RectButton } from 'react-native-gesture-handler'
+import { ScrollView, RectButton } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
-import { SimpleLineIcons } from '@expo/vector-icons'; 
 import DashboardGroup from '../../Components/DashboardGroup';
 import colors from '../../theme';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function HomeView(){
     const [ refreshing, setRefreshing ] = useState(false)
@@ -65,22 +62,37 @@ export default function HomeView(){
                             count: 10,
                             name: 'Aguardando',
                             color: colors.textInput,
-                            id: "1"
+                            id: '222'
                         },
                         {
                             count: 5,
                             name: 'Negociação em andamento',
                             color: colors.standardButton,
-                            id: "2"
+                            id: '223'
                         },
                         {
                             count: 1,
                             name: 'Negociação concluída',
                             color: colors.success,
-                            id: "3"
+                            id: '244'
                         }
                     ]} 
                     title='Leads'
+                    modal={{
+                        title: 'Selecione uma opção',
+                        options: [
+                            {
+                                name: 'Novo Lead',
+                                pageToNavigate: 'newlead',
+                                id: "424"
+                            },
+                            {
+                                name: 'Ver Leads',
+                                pageToNavigate: 'leads',
+                                id: "24242"
+                            }
+                        ]
+                    }}
                 />
 
                 <DashboardGroup 
@@ -89,28 +101,43 @@ export default function HomeView(){
                             name: 'Retornar contato',
                             count: 5,
                             color: colors.imobcasaPrimary,
-                            id: "1"
+                            id: '1871781'
                         },
                         {
                             name: 'Visita agendada',
                             count: 15,
                             color: colors.imobcasaPrimary,
-                            id: "2"
+                            id: '187178aa'
                         },
                         {
                             name: 'Solicitar documentação',
                             count: 25,
                             color: colors.imobcasaPrimary,
-                            id: "3"
+                            id: '187178asda'
                         },
                         {
                             name: 'Cobrar cliente',
                             count: 45,
                             color: colors.imobcasaPrimary,
-                            id: "4"
+                            id: '18717aaa8'
                         }
                     ]}
                     title='Agenda'
+                    modal={{
+                        title: 'Selecione uma opção',
+                        options: [
+                            {
+                                name: 'Nova tarefa',
+                                pageToNavigate: 'newtask',
+                                id: 'asfa23aa_aa'
+                            },
+                            {
+                                name: 'Ver tarefas',
+                                pageToNavigate: 'tasks',
+                                id: 'asfa23_aa'
+                            }
+                        ]
+                    }}
                 />
                 <View 
                     style={styles.bottomContainer}
