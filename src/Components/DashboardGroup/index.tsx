@@ -116,23 +116,6 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                                     })
 
                                     }
-                                    {/* <TouchableHighlight 
-                                        onPress={() => console.log("Teste")}
-                                        style={styles.modalButton}
-                                        onPressIn={closeModal}
-                                    >
-                                        <View style={styles.modalButtonView}>
-                                            <Text style={styles.modalOptionText}>Novo Lead</Text>
-                                        </View>
-                                    </TouchableHighlight>
-                                    <TouchableHighlight 
-                                        onPress={() => console.log("Teste")}
-                                        style={styles.modalButton}
-                                    >
-                                        <View style={styles.modalButtonView}>
-                                            <Text style={styles.modalOptionText}>Ver Leads</Text>
-                                        </View>
-                                    </TouchableHighlight>                                                                        */}
                                 </View>
                             </View>
                         </Modal>
