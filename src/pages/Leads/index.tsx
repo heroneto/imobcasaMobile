@@ -82,6 +82,35 @@ function TodayLeads(){
             <ItemCard 
                 title="Jamilson Ismaly"
                 subtitle="Retornar contato hoje"
+                modal={{
+                    title: "Selecione uma opção abaixo",
+                    options: [
+                        {
+                            id: "1",
+                            name: "Entrar em contato",
+                            pageToNavigate: `whatsapp://send?phone=${'+5511952827212'}`,
+                            isPageExternalLink: true
+                        },
+                        {
+                            id: "2",
+                            name: "Mais detalhes",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                        {
+                            id: "3",
+                            name: "Editar",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                        {
+                            id: "4",
+                            name: "Concluir tarefa",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                    ]
+                }}
             />
         </View>
     )

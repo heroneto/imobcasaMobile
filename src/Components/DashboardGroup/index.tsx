@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, Modal, TouchableHighlight, Alert } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, Modal } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
-
+import ModalView from '../ModalView';
+import {ModalProps} from '../Shared'
 
 interface DashboardItemProps {
     name: string,
@@ -13,32 +13,21 @@ interface DashboardItemProps {
     id: string,
 }
 
-interface ModalOptionsProps {
-    name: string,
-    pageToNavigate: string
-    id: string
-}
-
 interface DashboardGroupProps {
     title: string,
     items: Array<DashboardItemProps>
-    modal: {
-        title: string,
-        options: Array<ModalOptionsProps>
-    }
+    modal: ModalProps
 }
 
 const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) => {
     const [ isShowingModal, setIsShowingModal ] = useState(false)
-    const {navigate} = useNavigation()
 
     function showModal(){
         setIsShowingModal(true)
     }
     
-    function handleNavigateTo(pageName: string){
+    function closeModal(){
         setIsShowingModal(false)
-        navigate(pageName)
     }
 
     return (
@@ -86,40 +75,16 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                             animationType='fade'
                             visible={isShowingModal}
                             hardwareAccelerated={true}
-
+                            onRequestClose={() => {
+                                setIsShowingModal(false)
+                            }}
                         >
-                            <View style={styles.modalContainer}>
-                                <View
-                                    style={styles.modalOptions}
-                                >
-                                    <View style={styles.modalTitleContainer}>
-                                        <Text style={styles.modalTitleText}>
-                                            {modal.title}
-                                        </Text>
-                                    </View>
-                                    {modal.options.map(option => {
-                                        return (
-                                            
-                                                <TouchableHighlight
-                                                    key={option.id}
-                                                    onPressIn={() => 
-                                                        handleNavigateTo(option.pageToNavigate)
-                                                    }
-                                                    style={styles.modalButton}
-                                                >
-                                                    <View style={styles.modalButtonView}>
-                                                        <Text style={styles.modalOptionText}>{option.name}</Text>
-                                                    </View>
-                                                </TouchableHighlight>
-                                            
-                                        )
-                                    })
-
-                                    }
-                                </View>
-                            </View>
+                                <ModalView 
+                                    title={modal.title}
+                                    options={modal.options}
+                                    closeModalFunc={closeModal}
+                                />
                         </Modal>
-
             </View>
         </>
     )

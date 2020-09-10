@@ -84,12 +84,14 @@ export default function HomeView(){
                             {
                                 name: 'Novo Lead',
                                 pageToNavigate: 'newlead',
-                                id: "424"
+                                id: "424",
+                                isPageExternalLink: false
                             },
                             {
                                 name: 'Ver Leads',
                                 pageToNavigate: 'leads',
-                                id: "24242"
+                                id: "24242",
+                                isPageExternalLink: false
                             }
                         ]
                     }}
