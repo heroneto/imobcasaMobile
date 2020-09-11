@@ -17,7 +17,7 @@ const ModalView : React.FC<ModalViewProps> = ({title, options, closeModalFunc}) 
 
     function handleOptionClick(pageName: string, isPageExternalLink: boolean, navigationParameters? : object){
         closeModalFunc()
-        isPageExternalLink ? Linking.openURL(pageName) : navigate(pageName)
+        isPageExternalLink ? Linking.openURL(pageName) : navigate(pageName, navigationParameters)
         
     }
 
@@ -39,7 +39,7 @@ const ModalView : React.FC<ModalViewProps> = ({title, options, closeModalFunc}) 
                                     <TouchableHighlight
                                         key={option.id}
                                         onPressIn={() => 
-                                            handleOptionClick(option.pageToNavigate, option.isPageExternalLink)
+                                            handleOptionClick(option.pageToNavigate, option.isPageExternalLink, option.navigationParameters)
                                         }
                                         style={styles.modalButton}
                                     >

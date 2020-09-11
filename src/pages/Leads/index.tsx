@@ -94,8 +94,11 @@ function TodayLeads(){
                         {
                             id: "2",
                             name: "Mais detalhes",
-                            pageToNavigate: "home",
-                            isPageExternalLink: false
+                            pageToNavigate: "leadview",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 1223232323,
+                            }
                         },
                         {
                             id: "3",

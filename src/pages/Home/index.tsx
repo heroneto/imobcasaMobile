@@ -131,12 +131,14 @@ export default function HomeView(){
                             {
                                 name: 'Nova tarefa',
                                 pageToNavigate: 'newtask',
-                                id: 'asfa23aa_aa'
+                                id: 'asfa23aa_aa',
+                                isPageExternalLink: false
                             },
                             {
                                 name: 'Ver tarefas',
                                 pageToNavigate: 'tasks',
-                                id: 'asfa23_aa'
+                                id: 'asfa23_aa',
+                                isPageExternalLink: false
                             }
                         ]
                     }}
