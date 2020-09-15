@@ -6,12 +6,13 @@ import { RectButton } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons'; 
 import HeaderActions from '../../Components/HeaderActions';
 import ItemCard from '../../Components/ItemCard';
-
+import { useNavigation } from '@react-navigation/native'
 
 
 const Tab = createMaterialTopTabNavigator();
 
 export default function LeadsView(){
+    const { goBack } = useNavigation()
     return (
 
         <>
@@ -22,6 +23,7 @@ export default function LeadsView(){
                 />
                 <RectButton
                     style={styles.backButtonHeader}
+                    onPress={goBack}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
                 </RectButton>
@@ -103,8 +105,11 @@ function TodayLeads(){
                         {
                             id: "3",
                             name: "Editar",
-                            pageToNavigate: "home",
-                            isPageExternalLink: false
+                            pageToNavigate: "leadedit",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 12121212121
+                            }
                         },
                         {
                             id: "4",

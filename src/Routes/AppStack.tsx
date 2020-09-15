@@ -8,7 +8,7 @@ import NewLeadView from '../pages/NewLead'
 import TasksView from '../pages/Tasks'
 import NewTaskView from '../pages/NewTask'
 import LeadView from '../pages/LeadView'
-
+import LeadEdit from '../pages/LeadEdit'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -26,6 +26,7 @@ function AppStack(){
                 <Screen name="tasks" component={TasksView} />
                 <Screen name="newtask" component={NewTaskView} />
                 <Screen name="leadview" component={LeadView} />
+                <Screen name="leadedit" component={LeadEdit} />
             </Navigator>
         </NavigationContainer>
     )

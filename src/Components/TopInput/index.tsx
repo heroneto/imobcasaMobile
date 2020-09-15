@@ -6,19 +6,23 @@ import styles from './style'
 interface TopInputProps {
     placeholder: string,
     label: string,
-    icon?: ReactElement
+    Icon?: ReactElement
 }
 
-const TopInput: React.FC<TopInputProps> = ({placeholder, icon, label}) => {
+const TopInput: React.FC<TopInputProps> = ({placeholder, Icon, label}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.inputLabel}>
                 {label}
             </Text>
-            <TextInput
-                style={styles.input}
-                placeholder={placeholder}
-            />
+            <View style={styles.inputContianer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder={placeholder}
+                />
+                {Icon}
+            </View>
+            
         </View>
     )
 }

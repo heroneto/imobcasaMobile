@@ -4,7 +4,7 @@ import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
-
+import { useNavigation } from '@react-navigation/native'
 
 
 import WhatsAppIcon from '../../../assets/icons/WhatsApp.png'
@@ -16,10 +16,14 @@ interface LeadViewProps {
 
 const LeadView : React.FC<LeadViewProps> = ({route}) => {
     const { leadid } = route.params
-
+    const {navigate, goBack} = useNavigation()
 
     function handleToWhatsApp(){
         Linking.openURL(`whatsapp://send?phone=${'+5511952827212'}`)
+    }
+
+    function handleNavigateToEditPage(){
+        navigate('leadedit', {leadid})
     }
 
     return (
@@ -32,6 +36,7 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
                 <View style={styles.backButtonContainer}>
                     <RectButton
                         style={styles.backButtonHeader}
+                        onPress={goBack}
                     >
                             <Ionicons name="ios-arrow-back" size={24} color="#000" />
                     </RectButton>
@@ -46,6 +51,7 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
                     <View style={styles.leftButtonContainer}>
                         <RectButton
                             style={styles.leftButton}
+                            onPress={handleNavigateToEditPage}
                         >
                             <Text style={styles.buttonText}>Editar</Text>
                         </RectButton>

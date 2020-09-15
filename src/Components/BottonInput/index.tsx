@@ -1,19 +1,19 @@
 import React, { useState, ReactElement } from 'react'
-import { View, Text, TextInput, Image, Button } from 'react-native'
+import { View, Text, TextInput, Image, Button, TextInputProperties } from 'react-native'
 import styles from './style'
 import { RectButton } from 'react-native-gesture-handler'
 import { Octicons } from '@expo/vector-icons'; 
 
 
-interface BottomInputProps{
+interface BottomInputProps extends TextInputProperties{
     placeholder: string,
     label: string,
     actionIconName?: string,
-    icon?: any,
-    secureEntry: Boolean
+    Icon?: any,
+    secureEntry: Boolean,
 }
 
-const BottomInput: React.FC<BottomInputProps> = ({placeholder, actionIconName, label, icon, secureEntry}) => {
+const BottomInput: React.FC<BottomInputProps> = ({placeholder, actionIconName, label, Icon, secureEntry, ...rest}) => {
     const [ isActionIconActive, setIsActionIconActive ] = useState(false)
     
 
@@ -33,6 +33,7 @@ const BottomInput: React.FC<BottomInputProps> = ({placeholder, actionIconName, l
                     style={styles.input}
                     placeholder={placeholder}
                     secureTextEntry={secureEntry ? !isActionIconActive : false}
+                    {...rest}
                 />
                 {actionIconName? 
                     <RectButton 
@@ -48,6 +49,7 @@ const BottomInput: React.FC<BottomInputProps> = ({placeholder, actionIconName, l
                 : 
                     true
                 }
+                {Icon}
 
             </View>
         </View>

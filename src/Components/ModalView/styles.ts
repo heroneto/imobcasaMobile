@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     },
     modalOptions: {
         backgroundColor: colors.background,
-        width: '60%',
+        width: '70%',
         alignItems: 'center'
     },
     modalTitleContainer: {
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     modalTitleText: {
         color: colors.imobcasaPrimary,
         fontFamily: 'Poppins_700Bold',
-        fontSize: 14,
+        fontSize: 16,
     },
     modalButton: {
         width: '100%',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     modalOptionText: {
         fontFamily: 'Poppins_400Regular',
-        fontSize: 12,
+        fontSize: 14,
         color: colors.textInput
     }
 })
