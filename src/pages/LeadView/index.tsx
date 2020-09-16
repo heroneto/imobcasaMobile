@@ -22,6 +22,10 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
         Linking.openURL(`whatsapp://send?phone=${'+5511952827212'}`)
     }
 
+    function handleNavigateToLeadsPage(){
+        navigate('leads')
+    }
+
     function handleNavigateToEditPage(){
         navigate('leadedit', {leadid})
     }
@@ -36,7 +40,7 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
                 <View style={styles.backButtonContainer}>
                     <RectButton
                         style={styles.backButtonHeader}
-                        onPress={goBack}
+                        onPress={handleNavigateToLeadsPage}
                     >
                             <Ionicons name="ios-arrow-back" size={24} color="#000" />
                     </RectButton>

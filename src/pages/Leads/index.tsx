@@ -12,7 +12,13 @@ import { useNavigation } from '@react-navigation/native'
 const Tab = createMaterialTopTabNavigator();
 
 export default function LeadsView(){
-    const { goBack } = useNavigation()
+    const { navigate } = useNavigation()
+
+
+    function handleNavigateToHomePage(){
+        navigate('home')
+    }
+
     return (
 
         <>
@@ -23,7 +29,7 @@ export default function LeadsView(){
                 />
                 <RectButton
                     style={styles.backButtonHeader}
-                    onPress={goBack}
+                    onPress={handleNavigateToHomePage}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
                 </RectButton>
@@ -78,9 +84,6 @@ export default function LeadsView(){
 function TodayLeads(){
     return (
         <View style={styles.contentContainer}>
-            <Text style={styles.title}>
-                Leads View hoje
-            </Text>
             <ItemCard 
                 title="Jamilson Ismaly"
                 subtitle="Retornar contato hoje"

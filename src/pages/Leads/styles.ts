@@ -5,7 +5,7 @@ import colors from '../../theme'
 const styles = StyleSheet.create({
     header: {
         backgroundColor: colors.imobcasaPrimary,
-        // paddingHorizontal: 10,
+
     },
     backButtonHeader: {
         padding: 5,
@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: 'rgba(100,100,100,0)',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 20,
     },
     navigatorContainer: {
         backgroundColor: colors.imobcasaPrimary,

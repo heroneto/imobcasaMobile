@@ -9,12 +9,7 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     headerContainer: {
-        // flex: .2,
-        flexDirection: 'row',
-        marginTop: 40,
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        padding: 10,
     },
     myselfContainer: {
         width: "10%",

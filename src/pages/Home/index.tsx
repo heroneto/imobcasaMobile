@@ -5,9 +5,12 @@ import { ScrollView, RectButton } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
 import DashboardGroup from '../../Components/DashboardGroup';
 import colors from '../../theme';
+import { useNavigation } from '@react-navigation/native'
+import HeaderActions from '../../Components/HeaderActions';
 
 export default function HomeView(){
     const [ refreshing, setRefreshing ] = useState(false)
+    const { navigate } = useNavigation()
     const onRefresh = async () => {
         setRefreshing(true)
         
@@ -16,24 +19,16 @@ export default function HomeView(){
         }, 2000)
     }
 
+    function handleNavigateToSearchPage(){
+        navigate('search')
+    }
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <View style={styles.myselfContainer}>
-                    <Image  style={styles.myselfImage} source={{uri: "https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"}} />
-                </View>
-                <View style={styles.headerOptionsContainer}>
-                    <RectButton
-                        style={styles.settingsButton}
-                    >
-                        <Ionicons name="md-settings" size={24} color="black" />
-                    </RectButton>
-                    <RectButton 
-                        style={styles.searchButton}
-                    >
-                        <Ionicons name="md-search" size={24} color="black" />
-                    </RectButton>
-                </View>
+                <HeaderActions 
+                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
+                    settingsIconColor="#000"
+                />
             </View>
             <View style={styles.wellcomeContainer}>
                 <Text 

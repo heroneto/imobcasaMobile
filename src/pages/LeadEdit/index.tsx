@@ -28,7 +28,9 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
     }
 
     function handleSaveButtom(){
-        goBack()
+        navigate('leadview', {
+            leadid
+        })
     }
 
     return (
@@ -156,7 +158,7 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
 
                     <StandardButton
                         onPress={handleSaveButtom} 
-                        text="Salvar"
+                        text="Atualizar"
                     />
                 </View>
             </View>

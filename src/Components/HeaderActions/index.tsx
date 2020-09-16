@@ -3,7 +3,7 @@ import styles from './styles'
 import { View, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
-
+import { useNavigation } from '@react-navigation/native'
 
 interface IHeaderActionsProps {
     imageurl: string,
@@ -12,6 +12,12 @@ interface IHeaderActionsProps {
 }
 
 const HeaderActions: React.FC<IHeaderActionsProps> = ({imageurl, settingsIconColor}) => {
+    const { navigate }= useNavigation()
+
+    function handleNavigateToSearchPage(){
+        navigate('search')
+    }
+
     return (
         <View style={styles.headerContainer}>
             <View style={styles.myselfContainer}>
@@ -20,11 +26,13 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({imageurl, settingsIconCol
             <View style={styles.headerOptionsContainer}>
                 <RectButton
                     style={styles.settingsButton}
+
                 >
                     <Ionicons name="md-settings" size={24} color={settingsIconColor} />
                 </RectButton>
                 <RectButton 
                     style={styles.searchButton}
+                    onPress={handleNavigateToSearchPage}
                 >
                     <Ionicons name="md-search" size={24} color="black" />
                 </RectButton>
