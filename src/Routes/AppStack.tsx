@@ -6,10 +6,12 @@ import HomeView from '../pages/Home'
 import LeadsView from '../pages/Leads'
 import NewLeadViewStepOne from '../pages/NewLead'
 import TasksView from '../pages/Tasks'
+import TaskView from '../pages/TaskView'
 import NewTaskView from '../pages/NewTask'
 import LeadView from '../pages/LeadView'
 import LeadEdit from '../pages/LeadEdit'
 import SearchPage from '../pages/SearchPage'
+import TaskEdit from '../pages/TaskEdit'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -25,7 +27,9 @@ function AppStack(){
                 <Screen name="leads" component={LeadsView} />
                 <Screen name="newlead" component={NewLeadViewStepOne} />
                 <Screen name="tasks" component={TasksView} />
+                <Screen name="taskview" component={TaskView} />
                 <Screen name="newtask" component={NewTaskView} />
+                <Screen name="taskedit" component={TaskEdit} />
                 <Screen name="leadview" component={LeadView} />
                 <Screen name="leadedit" component={LeadEdit} />
                 <Screen name="search" component={SearchPage} />

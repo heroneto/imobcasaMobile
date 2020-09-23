@@ -7,6 +7,18 @@ const styles = StyleSheet.create({
         backgroundColor: colors.imobcasaPrimary,
 
     },
+    backButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    pageTitleContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    pageTitle: {
+        fontFamily: 'Poppins_700Bold',
+        color: '#FFF',
+    },
     backButtonHeader: {
         padding: 5,
         marginLeft: 10,

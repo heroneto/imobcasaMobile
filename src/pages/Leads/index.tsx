@@ -27,12 +27,19 @@ export default function LeadsView(){
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#FFF"
                 />
-                <RectButton
-                    style={styles.backButtonHeader}
-                    onPress={handleNavigateToHomePage}
-                >
-                    <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
-                </RectButton>
+                <View style={styles.backButtonContainer}>
+                    <RectButton
+                        style={styles.backButtonHeader}
+                        onPress={handleNavigateToHomePage}
+                    >
+                        <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
+                    </RectButton>
+                    <View style={styles.pageTitleContainer}>
+                            <Text style={styles.pageTitle}>
+                                Lista de Leads
+                            </Text>
+                    </View>
+                </View>
             </View>
             <Tab.Navigator
                 initialRouteName="todayleads"
@@ -86,7 +93,7 @@ function TodayLeads(){
         <View style={styles.contentContainer}>
             <ItemCard 
                 title="Jamilson Ismaly"
-                subtitle="Retornar contato hoje"
+                subtitle="5 Dias aguardando"
                 modal={{
                     title: "Selecione uma opção abaixo",
                     options: [
@@ -116,7 +123,13 @@ function TodayLeads(){
                         },
                         {
                             id: "4",
-                            name: "Concluir tarefa",
+                            name: "Ver tarefas",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                        {
+                            id: "4",
+                            name: "Nova tarefa",
                             pageToNavigate: "home",
                             isPageExternalLink: false
                         },
