@@ -12,6 +12,11 @@ import LeadView from '../pages/LeadView'
 import LeadEdit from '../pages/LeadEdit'
 import SearchPage from '../pages/SearchPage'
 import TaskEdit from '../pages/TaskEdit'
+import AppConfig from '../pages/AppConfig'
+import UsersList from '../pages/Users/intex'
+import UserEdit from '../pages/UserEdit'
+import UserView from '../pages/UserView'
+import UserPasswordChange from '../pages/UserPasswordChange'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -33,6 +38,11 @@ function AppStack(){
                 <Screen name="leadview" component={LeadView} />
                 <Screen name="leadedit" component={LeadEdit} />
                 <Screen name="search" component={SearchPage} />
+                <Screen name="appconfig" component={AppConfig} />
+                <Screen name="users" component={UsersList} />
+                <Screen name="useredit" component={UserEdit} />
+                <Screen name="userview" component={UserView} />
+                <Screen name="userpasswordchange" component={UserPasswordChange} />
             </Navigator>
         </NavigationContainer>
     )

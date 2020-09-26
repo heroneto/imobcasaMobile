@@ -2,7 +2,7 @@ import React, { useState, ReactElement } from 'react'
 import { View, Text, TextInput, Image, Button, TextInputProperties } from 'react-native'
 import styles from './style'
 import { RectButton } from 'react-native-gesture-handler'
-import { Octicons } from '@expo/vector-icons'; 
+import { Octicons } from '@expo/vector-icons'
 
 
 interface BottomInputProps extends TextInputProperties{

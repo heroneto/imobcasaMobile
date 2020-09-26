@@ -49,6 +49,7 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                         label="Nome"
                         Icon={<Feather name="user" size={24} color="rgba(0,0,0,.2)" />}
                         placeholder="Insira o nome do Lead"
+                        secureEntry={false}
                     />
                     <BottomInput 
                         label="Telefone"

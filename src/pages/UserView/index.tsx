@@ -7,27 +7,25 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 
 
-import WhatsAppIcon from '../../../assets/icons/WhatsApp.png'
-import colors from '../../theme'
-
 interface TaskViewProps {
     route: any
 }
 
-const TaskView : React.FC<TaskViewProps> = ({route}) => {
-    const { taskid } = route.params
+const UserView : React.FC<TaskViewProps> = ({route}) => {
+    const { userid } = route.params
     const {navigate, goBack} = useNavigation()
 
-    function handleToWhatsApp(){
-        Linking.openURL(`whatsapp://send?phone=${'+5511952827212'}`)
-    }
 
-    function handleNavigateToTasksPage(){
-        navigate('tasks')
+    function handleNavigateToUsersPage(){
+        navigate('users')
     }
 
     function handleNavigateToEditPage(){
-        navigate('taskedit', {taskid})
+        navigate('useredit', {userid})
+    }
+
+    function handleNavigateToPasswordChange(){
+        navigate('userpasswordchange', {userid})
     }
 
     return (
@@ -40,7 +38,7 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
                 <View style={styles.backButtonContainer}>
                     <RectButton
                         style={styles.backButtonHeader}
-                        onPress={handleNavigateToTasksPage}
+                        onPress={handleNavigateToUsersPage}
                     >
                             <Ionicons name="ios-arrow-back" size={24} color="#000" />
                     </RectButton>
@@ -49,8 +47,8 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
             </View>
             <View style={styles.pageHeaderContainer}>
                 <View style={styles.pageHeaderTitleContainer}>
-                    <Text style={styles.pageHeaderTitle}>Solicitar documentação</Text>
-                    <Text style={styles.pageHeaderSubtitle}>ontem - Atrasada</Text>
+                    <Text style={styles.pageHeaderTitle}>Heron Hideki de Queiroz Eto</Text>
+                    <Text style={styles.pageHeaderSubtitle}>150 Leads - 2 campanhas</Text>
                 </View>
                 <View style={styles.actionsContainer}>
                     <View style={styles.leftButtonContainer}>
@@ -64,29 +62,9 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
                     <View  style={styles.middleButtonContainer}>
                         <RectButton
                             style={styles.middleButton}
+                            onPress={handleNavigateToPasswordChange}
                         >
-                            <Ionicons name="md-trash" size={24} color="#FFF" />
-                        </RectButton>
-                    </View>
-                    <View style={styles.middleButtonContainer}>
-                        <RectButton
-                            style={styles.middleButton}
-                        >
-                            <Ionicons name="md-checkmark" size={24} color="#FFF" />
-                        </RectButton>
-                    </View>
-                    <View style={{
-                        ...styles.rightButtonContainer,
-                        backgroundColor: colors.whatsapp,
-                    }}>
-                        <RectButton
-                            style={styles.rightButton}
-                            onPress={handleToWhatsApp}
-                        >
-                            <Image 
-                                source={WhatsAppIcon}
-                                style={styles.whatsappIcon}
-                            />
+                            <Ionicons name="md-key" size={24} color="#FFF" />
                         </RectButton>
                     </View>
                 </View>
@@ -97,56 +75,56 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
                 <View style={styles.contentGroup}>
                     <View style={styles.contentGroupHeader}>
                         <Text style={styles.headerTitle}>
-                            Dados da tarefa
+                            Sobre o usuário
                         </Text>
                         <View style={styles.headerLine}/>
                     </View>
                     <View style={styles.content}>
                         <View style={styles.contentItem}>
-                            <Text style={styles.category}>Data planejada</Text>
-                            <Text style={styles.value}>12/02/2020</Text>
-                        </View>
-                        <View style={styles.contentItem}>
-                            <Text style={styles.category}>Data planejada</Text>
-                            <Text style={styles.value}>12/02/2020</Text>
-                        </View>
-                        <View style={styles.contentItem}>
-                            <Text style={styles.category}>Detalhes</Text>
-                            <Text style={styles.value}>Cliente malucoooo</Text>
-                        </View>
-                        <View style={styles.contentItem}>
-                            <Text style={styles.category}>Responsável</Text>
+                            <Text style={styles.category}>Nome completo</Text>
                             <Text style={styles.value}>Heron Hideki de Queiroz Eto</Text>
+                        </View>
+                        <View style={styles.contentItem}>
+                            <Text style={styles.category}>E-Mail</Text>
+                            <Text style={styles.value}>heron@imobcasa.com.br</Text>
+                        </View>
+                        <View style={styles.contentItem}>
+                            <Text style={styles.category}>Data de criação</Text>
+                            <Text style={styles.value}>01/01/2020</Text>
+                        </View>
+                        <View style={styles.contentItem}>
+                            <Text style={styles.category}>Data de atualização</Text>
+                            <Text style={styles.value}>21/01/2020</Text>
+                        </View>
+                        <View style={styles.contentItem}>
+                            <Text style={styles.category}>Status</Text>
+                            <Text style={styles.value}>Ativo</Text>
                         </View>
                     </View>
                 </View>
                 <View style={styles.contentGroup}>
                     <View style={styles.contentGroupHeader}>
                         <Text style={styles.headerTitle}>
-                            Dados do Lead
+                            Sobre seus Leads
                         </Text>
                         <View style={styles.headerLine}/>
                     </View>
                     <View style={styles.content}>
                         <View style={styles.contentItem}>
-                            <Text style={styles.category}>Nome</Text>
-                            <Text style={styles.value}>José da Silva Junior</Text>
+                            <Text style={styles.category}>Total</Text>
+                            <Text style={styles.value}>150</Text>
                         </View>
                         <View style={styles.contentItem}>
-                            <Text style={styles.category}>Telefone</Text>
-                            <Text style={styles.value}>(11) 95282-7212</Text>
+                            <Text style={styles.category}>Leads aguardando</Text>
+                            <Text style={styles.value}>50</Text>
                         </View>
                         <View style={styles.contentItem}>
-                            <Text style={styles.category}>Status</Text>
-                            <Text style={styles.value}>Aguardando</Text>
+                            <Text style={styles.category}>Leads com negociação em andamento</Text>
+                            <Text style={styles.value}>25</Text>
                         </View>
                         <View style={styles.contentItem}>
-                            <Text style={styles.category}>Data do cadastro</Text>
-                            <Text style={styles.value}>12/08/2020 às 21:45</Text>
-                        </View>
-                        <View style={styles.contentItem}>
-                            <Text style={styles.category}>Data da última alteração</Text>
-                            <Text style={styles.value}>12/08/2020 às 22:00</Text>
+                            <Text style={styles.category}>Leads com negociação concluída</Text>
+                            <Text style={styles.value}>666</Text>
                         </View>
                     </View>
                 </View>
@@ -156,4 +134,4 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
     )
 }
 
-export default TaskView
+export default UserView

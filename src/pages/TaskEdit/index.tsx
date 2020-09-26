@@ -12,7 +12,7 @@ import InputContainer from '../../Components/InputContainer';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons'; 
 import colors from '../../theme';
-import { onChange } from 'react-native-reanimated';
+import moment from 'moment'
 
 interface TaskEditProps {
     route: any
@@ -73,7 +73,7 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                     </Text>
                     <TopPicker 
                        label="Responsável"
-                       defaultValue={taskowner}
+                       selectedValue={taskowner}
                        itens={[
                             {
                                id: "1",
@@ -95,7 +95,7 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                     />
                     <MiddlePicker 
                         label="Tipo de tarefa"
-                        defaultValue={taskType}
+                        selectedValue={taskType}
                         itens={[
                             {
                                id: "1" ,
@@ -149,7 +149,7 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                                     color: date ? colors.textInput : colors.textInputLabel
                                 
                                 }}>
-                                    {date.toLocaleDateString()|| "Selecione a data"}
+                                    {moment(date).format('DD-MM-YYYY') || "Selecione a data"}
                                 </Text>
                             </View>
                             <View style={styles.dateButtonContainer}>

@@ -18,6 +18,10 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({imageurl, settingsIconCol
         navigate('search')
     }
 
+    function handleNavigateToSettingsPage(){
+        navigate('appconfig')
+    }
+
     return (
         <View style={styles.headerContainer}>
             <View style={styles.myselfContainer}>
@@ -26,7 +30,7 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({imageurl, settingsIconCol
             <View style={styles.headerOptionsContainer}>
                 <RectButton
                     style={styles.settingsButton}
-
+                    onPress={handleNavigateToSettingsPage}
                 >
                     <Ionicons name="md-settings" size={24} color={settingsIconColor} />
                 </RectButton>

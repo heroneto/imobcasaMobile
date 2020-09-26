@@ -2,6 +2,7 @@ import React, { useState, ReactElement } from 'react'
 import { View, Text, TextInput, Image, Button, TextInputProperties, PickerProperties } from 'react-native'
 import styles from './styles'
 import { Picker } from '@react-native-community/picker';
+import colors from '../../theme';
 
 
 interface ItensProps {
@@ -13,12 +14,10 @@ interface ItensProps {
 
 interface BottonPickerProps extends PickerProperties {
     label: string,
-    itens: Array<ItensProps>,
-    defaultValue: string,
-    
+    itens: Array<ItensProps>,   
 }
 
-const BottonPicker: React.FC<BottonPickerProps> = ({label,itens, defaultValue, ...rest}) => {
+const BottonPicker: React.FC<BottonPickerProps> = ({label,itens, ...rest}) => {
     const [ isActionIconActive, setIsActionIconActive ] = useState(false)
     
 
@@ -32,8 +31,8 @@ const BottonPicker: React.FC<BottonPickerProps> = ({label,itens, defaultValue, .
             <View style={styles.inputContainer}>
                 <Picker
                     mode='dialog'
-                    selectedValue={defaultValue}
                     style={{height: 30, width: "100%"}}
+                    prompt="Selecione uma opção abaixo"
                     {...rest}
                 >
                     {itens.map(item => {

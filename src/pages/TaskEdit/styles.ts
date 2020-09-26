@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         color: colors.textInputLabel,
     },
     dateInputContainer: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
     textLabel: {
         fontFamily: 'Archivo_400Regular',
         fontSize: 16,
-        color: colors.textInputLabel
     },
     dateButtonContainer: {
 

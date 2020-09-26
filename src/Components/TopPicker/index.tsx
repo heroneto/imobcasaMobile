@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, PickerProperties } from 'react-native'
 import styles from './styles'
 import { Picker } from '@react-native-community/picker';
+import colors from '../../theme';
 
 
 interface ItensProps {
@@ -13,12 +14,14 @@ interface ItensProps {
 
 interface TopPickerProps extends PickerProperties {
     label: string,
-    itens: Array<ItensProps>,
-    defaultValue: string,
-    
+    itens: Array<ItensProps>,   
 }
 
-const TopPicker: React.FC<TopPickerProps> = ({label, itens, defaultValue, ...rest}) => {
+const TopPicker: React.FC<TopPickerProps> = ({label, itens,  ...rest}) => {
+    function teste(){
+        console.log('oooi')
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.inputLabel}>
@@ -27,8 +30,11 @@ const TopPicker: React.FC<TopPickerProps> = ({label, itens, defaultValue, ...res
             <View style={styles.inputContianer}>
                 <Picker
                     mode='dialog'
-                    selectedValue={defaultValue}
                     style={{height: 30, width: "100%"}}
+                    onTouchStart={() => {
+                        console.log("Selecionandooo")
+                    }}
+                    prompt="Selecione uma opção abaixo"
                     {...rest}
                 >
                     {itens.map(item => {
