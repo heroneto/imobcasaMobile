@@ -1,15 +1,24 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { View, Text, TextInput, TextInputProperties } from 'react-native'
 import styles from './style'
-
+import { RectButton } from 'react-native-gesture-handler'
+import { Octicons } from '@expo/vector-icons'
 
 interface MiddleInputProps extends TextInputProperties {
     placeholder: string,
     label: string,
-    Icon?: ReactElement
+    actionIconName?: string,
+    Icon?: any,
+    secureEntry: Boolean,
 }
 
-const MiddleInput: React.FC<MiddleInputProps> = ({placeholder, Icon, label, ...rest}) => {
+const MiddleInput: React.FC<MiddleInputProps> = ({placeholder, actionIconName, label, Icon, secureEntry, ...rest}) => {
+    const [ isActionIconActive, setIsActionIconActive ] = useState(false)
+
+    
+    function togglePasswordView(){
+        setIsActionIconActive(!isActionIconActive)
+    }    
     return (
         <View style={styles.container}>
             <Text style={styles.inputLabel}>
@@ -19,8 +28,23 @@ const MiddleInput: React.FC<MiddleInputProps> = ({placeholder, Icon, label, ...r
                 <TextInput
                     style={styles.input}
                     placeholder={placeholder}
+                    secureTextEntry={secureEntry ? !isActionIconActive : false}
                     {...rest}
                 />
+                {actionIconName? 
+                    <RectButton 
+                        style={styles.inputAction}
+                        onPress={togglePasswordView}
+                    >
+                        <Octicons 
+                            name={actionIconName}
+                            size={24} 
+                            color={isActionIconActive ? "#309AE7" : "#F0F0F7"}
+                        />
+                    </RectButton>
+                : 
+                    true
+                }
                 {Icon}
             </View>
             

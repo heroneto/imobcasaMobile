@@ -50,8 +50,8 @@ const UserPasswordChange : React.FC<UserPasswordChangeProps> = ({route}) => {
                         secureEntry={true}
                     />                                    
                     <BottomInput
-                        label="E-Mail"
-                        placeholder="Insira o E-Mail do usuário"
+                        label="Confirmação de senha"
+                        placeholder="Digite a senha novamente"
                         value={passwordConfirmation}
                         secureEntry={true}
                         onChangeText={text => setPasswordConfirmation(text)}

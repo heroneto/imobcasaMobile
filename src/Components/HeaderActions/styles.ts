@@ -10,8 +10,16 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     myselfContainer: {
-        width: "10%",
-        flex: .2,
+        // width: "10%",
+        // flex: .2,
+        alignSelf: 'center',
+        width: 48,
+        height: 48,
+        borderRadius: 50,
+        backgroundColor: 'rgba(100, 100, 100, 0)',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems:'center'
     },
     myselfImage: {
         width: 48,

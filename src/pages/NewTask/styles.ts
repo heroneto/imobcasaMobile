@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingHorizontal: 30,
+        paddingHorizontal: 10,
     },
-    nextPageButtonContainert: {
+    nextPageButtonContainer: {
         width: 100,
         height: 30,
     },

@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         color: '#6A6180',
         fontSize: 16
+    },
+    inputAction: {
+        width: 24,
+        height: 24,
+        borderRadius: 100,
+        justifyContent: 'space-around',
+        flexDirection: 'row'
+        
     }
 })
 

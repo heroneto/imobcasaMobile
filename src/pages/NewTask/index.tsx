@@ -196,7 +196,7 @@ const NewTaskStepOne = () => {
                 </View>
             </View>
             <View style={styles.formActionContainer}>
-                    <View style={styles.nextPageButtonContainert}>
+                    <View style={styles.nextPageButtonContainer}>
                         <StandardButton 
                             icon={<Ionicons name="ios-arrow-forward" size={24} color="#FFF"/>}
                             onPress={handleNavigateToNextPage}

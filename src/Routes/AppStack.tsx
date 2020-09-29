@@ -17,6 +17,9 @@ import UsersList from '../pages/Users/intex'
 import UserEdit from '../pages/UserEdit'
 import UserView from '../pages/UserView'
 import UserPasswordChange from '../pages/UserPasswordChange'
+import NewUser from '../pages/NewUser'
+import MyUserEdit from '../pages/MyUserEdit'
+import MyPasswordEdit from '../pages/MyPasswordEdit'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -31,18 +34,21 @@ function AppStack(){
                 <Screen name="home" component={HomeView} />
                 <Screen name="leads" component={LeadsView} />
                 <Screen name="newlead" component={NewLeadViewStepOne} />
+                <Screen name="leadview" component={LeadView} />
+                <Screen name="leadedit" component={LeadEdit} />
                 <Screen name="tasks" component={TasksView} />
                 <Screen name="taskview" component={TaskView} />
                 <Screen name="newtask" component={NewTaskView} />
                 <Screen name="taskedit" component={TaskEdit} />
-                <Screen name="leadview" component={LeadView} />
-                <Screen name="leadedit" component={LeadEdit} />
                 <Screen name="search" component={SearchPage} />
                 <Screen name="appconfig" component={AppConfig} />
                 <Screen name="users" component={UsersList} />
                 <Screen name="useredit" component={UserEdit} />
                 <Screen name="userview" component={UserView} />
+                <Screen name="newuser" component={NewUser} />
                 <Screen name="userpasswordchange" component={UserPasswordChange} />
+                <Screen name="myuseredit" component={MyUserEdit} />
+                <Screen name="mypasswordedit" component={MyPasswordEdit} />
             </Navigator>
         </NavigationContainer>
     )

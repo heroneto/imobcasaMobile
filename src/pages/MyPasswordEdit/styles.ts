@@ -4,7 +4,8 @@ import colors from '../../theme'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.background, 
+        backgroundColor: colors.background,
+        
     },
     inputTitle: {
         fontFamily: 'Poppins_700Bold',
@@ -13,19 +14,20 @@ const styles = StyleSheet.create({
     formContent: {
         paddingHorizontal: 20,
         height: '100%',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     formActions: {
         width: "100%",
         paddingHorizontal: 80,
-        flex: .3,
+        marginTop: 20,
+        marginBottom: 50,
+        height: '25%',
         justifyContent: 'flex-end',
     },
     inputGroup: {
         padding: 10,
     },
     contentTitleContainer: {
-        flex: .2,
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center'

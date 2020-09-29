@@ -24,16 +24,6 @@ const styles = StyleSheet.create({
     inputGroup: {
         padding: 10,
     },
-    contentTitleContainer: {
-        flex: .2,
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    contentTitle: {
-        fontFamily: 'Poppins_400Regular',
-        fontSize: 36,
-    }
 })
 
 export default styles

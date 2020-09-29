@@ -140,7 +140,7 @@ export default function AppConfig(){
                         options: [
                             {
                                 name: 'Novo usuário',
-                                pageToNavigate: 'home',
+                                pageToNavigate: 'newuser',
                                 id: 'asfa23aa_aa',
                                 isPageExternalLink: false
                             },
