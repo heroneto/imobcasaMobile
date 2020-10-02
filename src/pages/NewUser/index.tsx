@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles'
-import { View, Text } from 'react-native'
+import { View, Text, Keyboard } from 'react-native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import FormPageHeader from '../../Components/HeaderFormContainer'
 import TopInput from '../../Components/TopInput'
@@ -40,7 +40,18 @@ const NewUserStepOne = () => {
     const [ username, setUsername ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ active, setActive ] = useState('')
+    const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
 
+
+    useEffect(() => {
+        Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardOpen(true)
+        })
+
+        Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardOpen(false)
+        })
+    },[])
 
     function handleNavigateToNextPage(){
         navigate('newtaskstepthree', {
@@ -49,20 +60,38 @@ const NewUserStepOne = () => {
             email,
             active
         })
+        // navigate('useralreadyexists', {
+        //     userid: "sdsds"
+        // })
     }
     
     return (
         <View style={styles.container}>
-            <HeaderActions 
-                imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                settingsIconColor="#000"
-            />
-            <View style={styles.formContent}>
-                <View style={styles.contentTitleContainer}>
+            <View style={styles.headerContainer}>
+                <HeaderActions 
+                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
+                    settingsIconColor="#000"
+                />
+                <View style={styles.backButtonContainer}>
+                    <RectButton
+                        style={styles.backButtonHeader}
+                        onPress={goBack}
+                    >
+                        <Ionicons name="ios-arrow-back" size={24} color="#000" />
+                    </RectButton>
+                </View>
+            </View>
+            <View style={styles.contentTitleContainer}>
+                {!isKeyboardOpen ? 
                     <Text style={styles.contentTitle}>
                         Insira as informações básicas do usuário
                     </Text>
-                </View>
+                :
+                    true
+                }
+
+            </View>
+            <View style={styles.contentContainer}>
                 <View style={styles.inputGroup}>
                     <TopInput
                         label="Nome completo"
@@ -78,6 +107,7 @@ const NewUserStepOne = () => {
                         Icon={<Feather name="user" size={24} color={colors.textInputLabel} />}
                         value={username}
                         onChangeText={text => setUsername(text)}
+                        secureEntry={false}
                     />                      
                     <MiddleInput
                         label="E-Mail"
@@ -85,6 +115,7 @@ const NewUserStepOne = () => {
                         Icon={<Feather name="mail" size={24} color={colors.textInputLabel} />}
                         value={email}
                         onChangeText={text => setEmail(text)}
+                        secureEntry={false}
                     />
                     <BottonPicker 
                         label="Status"
@@ -104,8 +135,6 @@ const NewUserStepOne = () => {
                         onValueChange={value => setActive(value)}
                     />
                 </View>
-
-              
                 <View style={styles.formActionContainer}>
                     <View style={styles.nextPageButtonContainer}>
                         <StandardButton
@@ -115,6 +144,16 @@ const NewUserStepOne = () => {
                     </View>
                 </View>
             </View>
+            {/* <View style={styles.pageActionsContainer}>
+                <View style={styles.formActionContainer}>
+                    <View style={styles.nextPageButtonContainer}>
+                        <StandardButton
+                            onPress={handleNavigateToNextPage} 
+                            icon={<Ionicons name="ios-arrow-forward" size={24} color="#FFF" />}
+                        />
+                    </View>
+                </View>
+            </View> */}
             
         </View>
     )
@@ -141,27 +180,37 @@ const NewUserAlreadyExists : React.FC<NewUserAlreadyExistsProps> = ({route}) => 
 
     return (
         <View style={styles.container}>
-            <HeaderActions 
-                imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                settingsIconColor="#000"
-            />
-            <View style={styles.messageContainer}>
+            <View style={styles.headerContainer}>
+                <HeaderActions 
+                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
+                    settingsIconColor="#000"
+                />
+            </View>
+            <View style={{
+                ...styles.contentContainer,
+                flex: .5,
+                justifyContent: 'center',
+                alignItems: 'center'
+                }}
+            >
                 <Text style={styles.messageText}>
-                    Ops, parece que já existe um usuário com esse username, deseja atualizar o atual ou escolher outro Username?
+                        Ops, parece que já existe um usuário com esse username, deseja atualizar o atual ou escolher outro Username?
                 </Text>
             </View>
-            <View style={styles.actionsContainer}>
-                <View style={styles.backButtonContainer}>
-                    <StandardButton 
-                        icon={<Ionicons name="ios-arrow-back" size={24} color="#FFF" />}
-                        onPress={goBack}
-                    />
-                </View>
-                <View style={styles.saveButtonContainer}>
-                    <StandardButton 
-                        text="Atualizar atual"
-                        onPress={handleNavigateToEditPage}
-                    />
+            <View style={styles.pageActionsContainer}>
+                <View style={styles.actionsContainer}>
+                    <View style={styles.backButtonContainer}>
+                        <StandardButton 
+                            icon={<Ionicons name="ios-arrow-back" size={24} color="#FFF" />}
+                            onPress={goBack}
+                        />
+                    </View>
+                    <View style={styles.saveButtonContainer}>
+                        <StandardButton 
+                            text="Atualizar atual"
+                            onPress={handleNavigateToEditPage}
+                        />
+                    </View>
                 </View>
             </View>
 
@@ -179,6 +228,18 @@ const NewUserStepTwo : React.FC<NewUserStepTwoProps> = ({route}) => {
     const { navigate, goBack } = useNavigation()
     const [ password, setPassword ] = useState('')
     const [ passwordConfirmation, setPasswordConfirmation ] = useState('')
+    const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
+
+
+    useEffect(() => {
+        Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardOpen(true)
+        })
+
+        Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardOpen(false)
+        })
+    },[])
 
     function handleSaveButtom(){
         navigate('userview', {
@@ -187,18 +248,33 @@ const NewUserStepTwo : React.FC<NewUserStepTwoProps> = ({route}) => {
     }
     return (
         <View style={styles.container}>
-            <FormPageHeader 
-                backButtomAction={goBack}
-            />
-            <View style={styles.formContent}>
-                <View style={styles.contentTitleContainer}>
+            <View style={styles.headerContainer}>
+                <HeaderActions 
+                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
+                    settingsIconColor="#000"
+                />
+                <View style={styles.backButtonContainer}>
+                    <RectButton
+                        style={styles.backButtonHeader}
+                        onPress={goBack}
+                    >
+                        <Ionicons name="ios-arrow-back" size={24} color="#000" />
+                    </RectButton>
+                </View>
+            </View>
+            <View style={styles.contentTitleContainer}>
+                {!isKeyboardOpen ? 
                     <Text style={{
                         ...styles.contentTitle,
-                        fontSize: 24,
+                        fontSize: 36,
                     }}>
                         Shhhhhh....
                     </Text>
-                </View>
+                :
+                    true
+                }
+            </View>
+            <View style={styles.contentContainer}>
                 <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>
                         Segurança
@@ -220,8 +296,8 @@ const NewUserStepTwo : React.FC<NewUserStepTwoProps> = ({route}) => {
                         actionIconName='eye'
                     />
                 </View>
-
-              
+            </View>
+            <View style={styles.pageActionsContainer}>
                 <View style={{
                     ...styles.formActionContainer,
                     paddingHorizontal: 80,

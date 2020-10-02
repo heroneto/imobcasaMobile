@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Keyboard } from 'react-native'
 import styles from './styles'
 import FormPageHeader from '../../Components/HeaderFormContainer';
 import StandardButton from '../../Components/StandardButton';
@@ -21,6 +21,18 @@ const UserEdit : React.FC<UserEditProps> = ({route}) => {
     const [ username, setUsername ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ active, setActive ] = useState('')
+    const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
+
+
+    useEffect(() => {
+        Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardOpen(true)
+        })
+
+        Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardOpen(false)
+        })
+    },[])
 
     function handleSaveButtom(){
         navigate('userview', {
@@ -35,9 +47,14 @@ const UserEdit : React.FC<UserEditProps> = ({route}) => {
             />
             <View style={styles.formContent}>
                 <View style={styles.contentTitleContainer}>
-                    <Text style={styles.contentTitle}>
-                        Editando usuário
-                    </Text>
+                    {!isKeyboardOpen ? 
+                        <Text style={styles.contentTitle}>
+                            Editando usuário
+                        </Text>
+                    :
+                        true
+                    }
+
                 </View>
                 <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>
@@ -57,6 +74,7 @@ const UserEdit : React.FC<UserEditProps> = ({route}) => {
                         Icon={<Feather name="user" size={24} color={colors.textInputLabel} />}
                         value={username}
                         onChangeText={text => setUsername(text)}
+                        secureEntry={false}
                     />                      
                     <MiddleInput
                         label="E-Mail"
@@ -64,6 +82,7 @@ const UserEdit : React.FC<UserEditProps> = ({route}) => {
                         Icon={<Feather name="mail" size={24} color={colors.textInputLabel} />}
                         value={email}
                         onChangeText={text => setEmail(text)}
+                        secureEntry={false}
                     />
                     <BottonPicker 
                         label="Status"

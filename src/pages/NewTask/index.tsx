@@ -102,30 +102,28 @@ const NewTaskStepOne = () => {
                 <View style={styles.inputGroup}>
                     <TopPicker 
                         label="Responsável"
-                        defaultValue={taskowner}
                         selectedValue={taskowner}
                         itens={[
                              {
                                 id: "1",
                                 label: "Heron Hideki de Queiroz Eto",
-                                value: 1
+                                value: '1',
                              },
                              {
                                  id: "2",
                                  label: "Vagner Zanella",
-                                 value: 2
+                                 value: '2'
                              },
                              {
                                  id: "3",
                                  label: "Nadia",
-                                 value: 3
+                                 value: '3'
                              },
                         ]}
                         onValueChange={(value, index) => handleTaskOwner(index)}
                     />
                     <MiddlePicker
                         label="Tipo de tarefa"
-                        defaultValue={taskType}
                         selectedValue={taskType}
                         itens={[
                             {
@@ -275,7 +273,7 @@ const NewTaskStepTwo: React.FC<NewTaskSetpTwoProps> = ({userid, tasktypeid, star
             </View>
 
             <View style={styles.formActionContainer}>
-                    <View style={styles.nextPageButtonContainert}>
+                    <View style={styles.nextPageButtonContainer}>
                         <StandardButton 
                             icon={<Ionicons name="ios-arrow-forward" size={24} color="#FFF"/>}
                             onPress={handleNavigateToNextPage}

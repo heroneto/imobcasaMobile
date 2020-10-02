@@ -5,11 +5,11 @@ import colors from '../../theme'
 const styles = StyleSheet.create({
     header: {
         backgroundColor: colors.imobcasaPrimary,
-
     },
     backButtonContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
     },
     pageTitleContainer: {
         justifyContent: 'center',
@@ -20,8 +20,6 @@ const styles = StyleSheet.create({
         color: '#FFF',
     },
     backButtonHeader: {
-        padding: 5,
-        marginLeft: 10,
         width: 32,
         height: 32,
         borderRadius: 50,

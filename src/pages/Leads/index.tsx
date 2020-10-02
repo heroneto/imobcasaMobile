@@ -127,9 +127,42 @@ function TodayLeads(){
                             pageToNavigate: "home",
                             isPageExternalLink: false
                         },
+                    ]
+                }}
+            />
+            <ItemCard 
+                title="Ribamar Marromenu"
+                subtitle="99 Dias aguardando"
+                modal={{
+                    title: "Selecione uma opção abaixo",
+                    options: [
+                        {
+                            id: "1",
+                            name: "Entrar em contato",
+                            pageToNavigate: `whatsapp://send?phone=${'+5511952827212'}`,
+                            isPageExternalLink: true
+                        },
+                        {
+                            id: "2",
+                            name: "Mais detalhes",
+                            pageToNavigate: "leadview",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 1223232323,
+                            }
+                        },
+                        {
+                            id: "3",
+                            name: "Editar",
+                            pageToNavigate: "leadedit",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 12121212121
+                            }
+                        },
                         {
                             id: "4",
-                            name: "Nova tarefa",
+                            name: "Ver tarefas",
                             pageToNavigate: "home",
                             isPageExternalLink: false
                         },

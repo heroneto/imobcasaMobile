@@ -28,16 +28,18 @@ const UserPasswordChange : React.FC<UserPasswordChangeProps> = ({route}) => {
 
     return (
         <View style={styles.container}>
-            <FormPageHeader 
-                backButtomAction={goBack}
-            />
-            <View style={styles.formContent}>
-                <View style={styles.contentTitleContainer}>
-                    <Text style={styles.contentTitle}>
+            <View style={styles.headerContainer}>
+                <FormPageHeader 
+                    backButtomAction={goBack}
+                />
+            </View>
+            <View style={styles.contentTitleContainer}>
+                <Text style={styles.contentTitle}>
                         Shhhhhh....
-                    </Text>
-                </View>
-                <View style={styles.inputGroup}>
+                </Text>
+            </View>
+            <View style={styles.contentContainer}>
+              <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>
                         Segurança
                     </Text>
@@ -58,17 +60,16 @@ const UserPasswordChange : React.FC<UserPasswordChangeProps> = ({route}) => {
                         actionIconName='eye'
                     />
                 </View>
-
-              
+            </View>
+            <View style={styles.pageActionsContainer}>
                 <View style={styles.formActions}>
-
                     <StandardButton
                         onPress={handleSaveButtom} 
                         text="Salvar"
                     />
                 </View>
             </View>
-            
+                       
         </View>
     )
 }

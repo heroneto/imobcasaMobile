@@ -60,11 +60,11 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <FormPageHeader 
                 backButtomAction={goBack}
             />
-            <View style={styles.formContent}>
+            <ScrollView style={styles.formContent}>
                 <View
                     style={styles.inputGroup}
                 >
@@ -224,9 +224,9 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                         text="Atualizar"
                     />
                 </View>
-            </View>
+            </ScrollView>
             
-        </ScrollView>
+        </View>
     )
 }
 

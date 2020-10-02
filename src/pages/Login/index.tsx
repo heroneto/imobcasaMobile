@@ -56,6 +56,7 @@ export default function LoginView(){
                     <TopInput 
                         placeholder="Digite seu Login"
                         label="E-Mail"
+                        secureEntry={false}
                     />
                     <BottomInput 
                         placeholder="Digite sua senha"

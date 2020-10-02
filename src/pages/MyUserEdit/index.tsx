@@ -25,12 +25,13 @@ const MyUserEdit : React.FC<MyUserEditProps> = ({route}) => {
     }
 
     return (
-<View style={styles.container}>
-            <FormPageHeader 
-                backButtomAction={goBack}
-            />
-            <View style={styles.formContent}>
-
+        <View style={styles.container}>
+            <View style={styles.headerContainer} >
+                <FormPageHeader 
+                    backButtomAction={goBack}
+                />
+            </View>
+            <View style={styles.contentContainer} >
                 <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>
                         Dados do usuário
@@ -53,9 +54,7 @@ const MyUserEdit : React.FC<MyUserEditProps> = ({route}) => {
                     />
                 </View>
 
-              
                 <View style={styles.formActions}>
-
                     <StandardButton
                         onPress={handleSaveButtom} 
                         text="Atualizar"

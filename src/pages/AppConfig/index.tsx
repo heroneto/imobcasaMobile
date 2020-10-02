@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { View, Text, RefreshControl } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
-import { ScrollView } from 'react-native-gesture-handler'
+import { ScrollView, RectButton } from 'react-native-gesture-handler'
 import DashboardGroup from '../../Components/DashboardGroup'
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../theme'
@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function AppConfig(){
     const [ refreshing, setRefreshing ] = useState(false)
-    const { navigate } = useNavigation()
+    const { navigate, goBack } = useNavigation()
     
     
     const onRefresh = async () => {
@@ -32,6 +32,14 @@ export default function AppConfig(){
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#000"
                 />
+            </View>
+            <View style={styles.backButtonContainer}>
+                    <RectButton
+                        style={styles.backButtonHeader}
+                        onPress={goBack}
+                    >
+                        <Ionicons name="ios-arrow-back" size={24} color="#000" />
+                    </RectButton>
             </View>
             <View style={styles.wellcomeContainer}>
                 <Text 

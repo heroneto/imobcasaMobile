@@ -34,11 +34,11 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <FormPageHeader 
                 backButtomAction={goBack}
             />
-            <View style={styles.formContent}>
+            <ScrollView style={styles.formContent}>
                 <View
                     style={styles.inputGroup}
                 >
@@ -70,7 +70,7 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                     </Text>
                     <TopPicker 
                         label="Origem"
-                        defaultValue={origin}
+                        selectedValue={origin}
                         itens={[
                             {
                                 id: "1",
@@ -87,7 +87,7 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                     />
                     <BottonPicker 
                         label="Sub-Categoria"
-                        defaultValue={category}
+                        selectedValue={category}
                         itens={[
                             {
                                 id: "1",
@@ -162,9 +162,9 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                         text="Atualizar"
                     />
                 </View>
-            </View>
+            </ScrollView>
             
-        </ScrollView>
+        </View>
     )
 }
 

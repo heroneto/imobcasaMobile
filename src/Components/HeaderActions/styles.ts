@@ -49,6 +49,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems:'center'
     },
+    backButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+    },
+    backButtonHeader: {
+        width: 32,
+        height: 32,
+        borderRadius: 50,
+        backgroundColor: 'rgba(100,100,100,0)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 20,
+    },
 })
 
 export default styles

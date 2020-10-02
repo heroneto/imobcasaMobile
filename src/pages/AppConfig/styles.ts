@@ -23,6 +23,22 @@ const styles = StyleSheet.create({
     headerOptionsContainer: {
         flexDirection: 'row',
     },
+    backButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    backButtonHeader: {
+        padding: 5,
+        marginLeft: 10,
+        width: 32,
+        height: 32,
+        borderRadius: 50,
+        backgroundColor: 'rgba(100,100,100,0)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 20,
+    },
     settingsButton: {
         alignSelf: 'center',
         width: 32,

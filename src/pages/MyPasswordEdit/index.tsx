@@ -25,54 +25,56 @@ const MyPasswordEdit : React.FC<MyPasswordEditProps> = ({route}) => {
 
     return (
         <View style={styles.container}>
-        <FormPageHeader 
-            backButtomAction={goBack}
-        />
-        <View style={styles.formContent}>
+            <View style={styles.headerContainer}>
+                <FormPageHeader 
+                    backButtomAction={goBack}
+                />
+            </View>
             <View style={styles.contentTitleContainer}>
                 <Text style={styles.contentTitle}>
-                    Shhhhhh....
+                        Shhhhhh....
                 </Text>
             </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.inputTitle}>
-                    Segurança
-                </Text>
-                <TopInput
-                    label="Senha antiga"
-                    placeholder="Digite a senha antiga"
-                    value={oldPassword}
-                    onChangeText={text => setOldPassword(text)}
-                    actionIconName='eye'
-                    secureEntry={true}
-                />
-                <MiddleInput 
-                    label="Senha nova"
-                    placeholder="Digite a nova senha"
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    actionIconName='eye'
-                    secureEntry={true}
-                />                    
-                <BottomInput
-                    label="Confirmação de senha"
-                    placeholder="Digite a senha novamente"
-                    value={passwordConfirmation}
-                    secureEntry={true}
-                    onChangeText={text => setPasswordConfirmation(text)}
-                    actionIconName='eye'
-                />
+            <View style={styles.contentContainer}>
+                <View style={styles.inputGroup}>
+                    <Text style={styles.inputTitle}>
+                        Segurança
+                    </Text>
+                    <TopInput
+                        label="Senha antiga"
+                        placeholder="Digite a senha antiga"
+                        value={oldPassword}
+                        onChangeText={text => setOldPassword(text)}
+                        actionIconName='eye'
+                        secureEntry={true}
+                    />
+                    <MiddleInput 
+                        label="Senha nova"
+                        placeholder="Digite a nova senha"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        actionIconName='eye'
+                        secureEntry={true}
+                    />                    
+                    <BottomInput
+                        label="Confirmação de senha"
+                        placeholder="Digite a senha novamente"
+                        value={passwordConfirmation}
+                        secureEntry={true}
+                        onChangeText={text => setPasswordConfirmation(text)}
+                        actionIconName='eye'
+                    />
+                </View>
+                <View style={styles.formActions}>
+                    <StandardButton
+                        onPress={handleSaveButtom} 
+                        text="Salvar"
+                    />
+                </View>
             </View>
+            <View style={styles.pageActionsContainer}>
 
-          
-            <View style={styles.formActions}>
-
-                <StandardButton
-                    onPress={handleSaveButtom} 
-                    text="Salvar"
-                />
             </View>
-        </View>
         
     </View>
     )

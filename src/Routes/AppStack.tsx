@@ -28,7 +28,7 @@ function AppStack(){
         <NavigationContainer>
             <Navigator screenOptions={{
                 headerShown: false,
-                cardStyleInterpolator: CardStyleInterpolators.forNoAnimation
+                // cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
             }}>
                 <Screen name="login" component={LoginView} />
                 <Screen name="home" component={HomeView} />

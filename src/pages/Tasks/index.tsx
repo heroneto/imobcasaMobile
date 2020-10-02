@@ -93,8 +93,8 @@ function TodayTasks(){
     return (
         <View style={styles.contentContainer}>
             <ItemCard 
-                title="Jamilson Ismaly"
-                subtitle="Retornar contato hoje"
+                title="Retornar contato"
+                subtitle="Jamilson Ismaly"
                 modal={{
                     title: "Selecione uma opção abaixo",
                     options: [
