@@ -107,7 +107,7 @@ export default function AppConfig(){
                             },
                             {
                                 name: 'Novo Login FB',
-                                pageToNavigate: 'home',
+                                pageToNavigate: 'facebookloginpage',
                                 id: "24244",
                                 isPageExternalLink: false
                             }

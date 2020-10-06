@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
         fontFamily: 'Archivo_700Bold',
+        textAlign: 'center',
+        width: '100%',
     },
 })
 

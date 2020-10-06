@@ -25,6 +25,9 @@
     "android": {
       "package": "com.imobcasa.imobcasaapp",
       "versionCode": 1
-    }
+    },
+    "facebookScheme": "fb561773431399086",
+    "facebookAppId": "561773431399086",
+    "facebookDisplayName": "imobcasa api"
   }
 }

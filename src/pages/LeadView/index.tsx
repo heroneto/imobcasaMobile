@@ -107,7 +107,7 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
                         </View>
                         <View style={styles.contentItem}>
                             <Text style={styles.category}>Telefone</Text>
-                            <Text style={styles.value}>(11) 95282-7212</Text>
+                            <Text style={styles.value}>(11) 9 99999-9999</Text>
                         </View>
                         <View style={styles.contentItem}>
                             <Text style={styles.category}>Data do cadastro</Text>

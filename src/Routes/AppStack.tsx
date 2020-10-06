@@ -20,6 +20,7 @@ import UserPasswordChange from '../pages/UserPasswordChange'
 import NewUser from '../pages/NewUser'
 import MyUserEdit from '../pages/MyUserEdit'
 import MyPasswordEdit from '../pages/MyPasswordEdit'
+import FacebookLogin from '../pages/FacebookLogin'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -49,6 +50,7 @@ function AppStack(){
                 <Screen name="userpasswordchange" component={UserPasswordChange} />
                 <Screen name="myuseredit" component={MyUserEdit} />
                 <Screen name="mypasswordedit" component={MyPasswordEdit} />
+                <Screen name="facebookloginpage" component={FacebookLogin} />
             </Navigator>
         </NavigationContainer>
     )
