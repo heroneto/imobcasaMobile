@@ -2,6 +2,7 @@ const colors = {
     standardButton: "#309AE7",
     submitButton: "#28A790",
     cancelButton: "#757575",
+    disabledButton: "#DADADA",
     whatsapp: "#25D366",
     error: "#BD2323",
     success: "#28A790",
@@ -14,6 +15,7 @@ const colors = {
     textInputPlaceholder: "#DADADA",
     textInactive: "#F0F0F7",
     textHiperlinkAlternative: "#9C98A6",
+    facebook: "#1877F2",
 }
 
 export default colors

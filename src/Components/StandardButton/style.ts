@@ -4,9 +4,7 @@ import colors from '../../theme'
 const styles = StyleSheet.create({
     submitButton: {
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.standardButton,
         padding: 15,
         width: "100%",
         height: 55,
@@ -17,7 +15,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Archivo_700Bold',
         textAlign: 'center',
-        width: '100%',
+        // width: '100%',
     },
 })
 

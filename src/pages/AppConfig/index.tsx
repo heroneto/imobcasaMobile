@@ -95,7 +95,7 @@ export default function AppConfig(){
                         options: [
                             {
                                 name: 'Nova campanha',
-                                pageToNavigate: 'home',
+                                pageToNavigate: 'newcampaign',
                                 id: "424",
                                 isPageExternalLink: false
                             },
@@ -103,12 +103,6 @@ export default function AppConfig(){
                                 name: 'Ver campanhas',
                                 pageToNavigate: 'home',
                                 id: "24243",
-                                isPageExternalLink: false
-                            },
-                            {
-                                name: 'Novo Login FB',
-                                pageToNavigate: 'facebookloginpage',
-                                id: "24244",
                                 isPageExternalLink: false
                             }
                         ]
