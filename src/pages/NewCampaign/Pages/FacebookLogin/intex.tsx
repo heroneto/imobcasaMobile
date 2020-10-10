@@ -17,7 +17,9 @@ const FacebookLogin : React.FC = () => {
     const [ facebookToken, setFacebookToken ] = useState('')
 
     function handleNavigateToNextPage(){
-        goBack()
+        navigate('adaccountselect', {
+            fbToken: facebookToken
+        })
     }
     
     async function handleFacebookLogin(){

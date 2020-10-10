@@ -4,6 +4,7 @@ import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import FacebookLogin from './Pages/FacebookLogin/intex'
+import FacebookAdAccountSelect from './Pages/FacebookAdAccountSelect'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -17,7 +18,7 @@ export default function NewCampaign(){
         initialRouteName='newleadstepone'
     >
             <Screen name="facebooklogin" component={FacebookLogin} />
-    
+            <Screen name="adaccountselect" component={FacebookAdAccountSelect} />
         </Navigator>
 
     )
