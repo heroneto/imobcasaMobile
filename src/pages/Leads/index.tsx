@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RectButton } from 'react-native-gesture-handler';
@@ -28,12 +28,12 @@ export default function LeadsView(){
                     settingsIconColor="#FFF"
                 />
                 <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={handleNavigateToHomePage}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
-                    </RectButton>
+                    </TouchableOpacity>
                     <View style={styles.pageTitleContainer}>
                             <Text style={styles.pageTitle}>
                                 Lista de Leads

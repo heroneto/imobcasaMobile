@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import { View, Text, RefreshControl } from 'react-native'
+import { View, Text, RefreshControl, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
-import { ScrollView, RectButton } from 'react-native-gesture-handler'
+import { ScrollView } from 'react-native-gesture-handler'
 import DashboardGroup from '../../Components/DashboardGroup'
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../theme'
@@ -34,12 +34,12 @@ export default function AppConfig(){
                 />
             </View>
             <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={goBack}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </RectButton>
+                    </TouchableOpacity>
             </View>
             <View style={styles.wellcomeContainer}>
                 <Text 

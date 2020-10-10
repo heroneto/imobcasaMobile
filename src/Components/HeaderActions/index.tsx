@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from './styles'
-import { View, Image, Modal, Text } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import { View, Image, Modal, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'
 import ModalView from '../ModalView';
@@ -35,25 +34,19 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({imageurl, settingsIconCol
 
     return (
             <View style={styles.headerContainer}>
-                <RectButton
+                <TouchableOpacity
                     style={styles.myselfContainer}
                     onPress={showModal}
                 >
                         <Image  style={styles.myselfImage} source={{uri: imageurl}} />
-                </RectButton>
+                </TouchableOpacity>
                 <View style={styles.headerOptionsContainer}>
-                    {/* <RectButton
-                        style={styles.settingsButton}
-                        onPress={handleNavigateToSettingsPage}
-                    >
-                        <Ionicons name="md-settings" size={24} color={settingsIconColor} />
-                    </RectButton> */}
-                    <RectButton 
+                    <TouchableOpacity 
                         style={styles.searchButton}
                         onPress={handleNavigateToSearchPage}
                     >
                         <Ionicons name="md-search" size={24} color="black" />
-                    </RectButton>
+                    </TouchableOpacity>
                 </View>
                 <Modal
                         transparent={true}

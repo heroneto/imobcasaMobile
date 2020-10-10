@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
-import { RectButton } from 'react-native-gesture-handler'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'
@@ -26,12 +25,12 @@ export default function UsersList(){
                     settingsIconColor="#FFF"
                 />
                 <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={handleNavigateToAppConfigPage}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
-                    </RectButton>
+                    </TouchableOpacity>
                     <View style={styles.pageTitleContainer}>
                             <Text style={styles.pageTitle}>
                                 Lista de usuários

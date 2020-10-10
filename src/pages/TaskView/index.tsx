@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, Linking } from 'react-native'
+import { View, Text, Image, Linking, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
@@ -38,12 +38,12 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
                     settingsIconColor="#000"
                 />
                 <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={handleNavigateToTasksPage}
                     >
                             <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </RectButton>
+                    </TouchableOpacity>
                 </View>
                 
             </View>

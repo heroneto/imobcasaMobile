@@ -1,7 +1,6 @@
 import React, { useState, ReactElement } from 'react'
-import { View, Text, TextInput, Image, Button, TextInputProperties } from 'react-native'
+import { View, Text, TextInput, Image, Button, TextInputProperties, TouchableOpacity } from 'react-native'
 import styles from './style'
-import { RectButton } from 'react-native-gesture-handler'
 import { Octicons } from '@expo/vector-icons'
 
 
@@ -36,7 +35,7 @@ const BottomInput: React.FC<BottomInputProps> = ({placeholder, actionIconName, l
                     {...rest}
                 />
                 {actionIconName? 
-                    <RectButton 
+                    <TouchableOpacity 
                         style={styles.inputAction}
                         onPress={togglePasswordView}
                     >
@@ -45,7 +44,7 @@ const BottomInput: React.FC<BottomInputProps> = ({placeholder, actionIconName, l
                             size={24} 
                             color={isActionIconActive ? "#309AE7" : "#F0F0F7"}
                         />
-                    </RectButton>
+                    </TouchableOpacity>
                 : 
                     true
                 }

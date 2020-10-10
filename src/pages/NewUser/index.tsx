@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles'
-import { View, Text, Keyboard } from 'react-native'
+import { View, Text, Keyboard, TouchableOpacity } from 'react-native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import FormPageHeader from '../../Components/HeaderFormContainer'
 import TopInput from '../../Components/TopInput'
@@ -12,7 +12,6 @@ import colors from '../../theme'
 import StandardButton from '../../Components/StandardButton'
 import { Ionicons } from '@expo/vector-icons'; 
 import HeaderActions from '../../Components/HeaderActions'
-import { RectButton } from 'react-native-gesture-handler'
 import BottomInput from '../../Components/BottonInput'
 
 const { Navigator, Screen } = createStackNavigator()
@@ -73,12 +72,12 @@ const NewUserStepOne = () => {
                     settingsIconColor="#000"
                 />
                 <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={goBack}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </RectButton>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.contentTitleContainer}>
@@ -254,12 +253,12 @@ const NewUserStepTwo : React.FC<NewUserStepTwoProps> = ({route}) => {
                     settingsIconColor="#000"
                 />
                 <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={goBack}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </RectButton>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.contentTitleContainer}>

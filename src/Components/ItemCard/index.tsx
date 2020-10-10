@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {View, Text, Modal} from 'react-native'
+import {View, Text, Modal, TouchableOpacity} from 'react-native'
 import styles from './styles'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { RectButton } from 'react-native-gesture-handler';
@@ -40,12 +40,12 @@ const ItemCard: React.FC<IItemCardProps> = ({title, subtitle, modal}) => {
                 
             </View>
             <View style={styles.itemButtonContainer}>
-                <RectButton
+                <TouchableOpacity
                     style={styles.itemButton}
                     onPress={showModal}
                 >
                     <SimpleLineIcons name="options-vertical" size={24} color="rgba(0,0,0,.8)" />
-                </RectButton>
+                </TouchableOpacity>
                 
             </View>
                 <Modal

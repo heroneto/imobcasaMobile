@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../../../Components/HeaderActions'
-import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import * as Facebook from 'expo-facebook'
 import { Ionicons } from '@expo/vector-icons'
@@ -55,12 +54,12 @@ const FacebookLogin : React.FC = () => {
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#000"
                 />
-                <RectButton
+                <TouchableOpacity
                     style={styles.backButtonHeader}
                     onPress={goBack}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </RectButton>
+                </TouchableOpacity>
             </View>
             <View style={styles.contentContainer}>
                 <View style={styles.contentTextContainer}>

@@ -1,5 +1,5 @@
 import React, { useState, ReactElement } from 'react'
-import { View, Text, TextInput, Image, Button, TextInputProperties, PickerProperties } from 'react-native'
+import { View, Text, PickerProperties, Platform } from 'react-native'
 import styles from './styles'
 import { Picker } from '@react-native-community/picker';
 import colors from '../../theme';
@@ -29,20 +29,19 @@ const BottonPicker: React.FC<BottonPickerProps> = ({label,itens, ...rest}) => {
                 </Text>
             </View>
             <View style={styles.inputContainer}>
-                <Picker
-                    mode='dialog'
-                    style={{height: 30, width: "100%"}}
-                    prompt="Selecione uma opção abaixo"
-                    {...rest}
-                >
-                    {itens.map(item => {
-                        return (
-                            <Picker.Item label={item.label} value={item.value} key={item.id}/>
-                        )
-                    })}
-                
-                </Picker>
-
+                    <Picker
+                        mode='dialog'
+                        style={{height: 30, width: "100%"}}
+                        prompt="Selecione uma opção abaixo"
+                        {...rest}
+                    >
+                        {itens.map(item => {
+                            return (
+                                <Picker.Item label={item.label} value={item.value} key={item.id}/>
+                            )
+                        })}
+                    
+                    </Picker>
             </View>
         </View>
     )

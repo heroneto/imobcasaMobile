@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import styles from './styles'
-import { TextInput, RectButton } from 'react-native-gesture-handler'
+import { TextInput } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'
 
@@ -13,12 +13,12 @@ export default function SearchPage(){
         <View style={styles.container}>
             <View style={styles.searchInputContainer}>
   
-                <RectButton
+                <TouchableOpacity
                     style={styles.backButtonHeader}
                     onPress={goBack}
                 >
                         <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </RectButton>
+                </TouchableOpacity>
 
                 <View style={styles.inputTextContainer}>
                     <TextInput 
@@ -28,11 +28,11 @@ export default function SearchPage(){
                 </View>
 
 
-                <RectButton
+                <TouchableOpacity
                     style={styles.searchButton}
                 >
                     <Ionicons name="md-search" size={24} color="black" />
-                </RectButton>
+                </TouchableOpacity>
 
 
             </View>

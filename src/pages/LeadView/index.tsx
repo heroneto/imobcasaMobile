@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image, Linking } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
+import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'
 
@@ -38,12 +38,12 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
                     settingsIconColor="#000"
                 />
                 <View style={styles.backButtonContainer}>
-                    <RectButton
+                    <TouchableOpacity
                         style={styles.backButtonHeader}
                         onPress={handleNavigateToLeadsPage}
                     >
                             <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </RectButton>
+                    </TouchableOpacity>
                 </View>
                 
             </View>

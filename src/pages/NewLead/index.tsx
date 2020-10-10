@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
@@ -59,12 +59,12 @@ const StepOne = () => {
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#000"
                 />
-                <RectButton
+                <TouchableOpacity
                     style={styles.backButtonHeader}
                     onPress={handleNavigateToHomePage}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </RectButton>
+                </TouchableOpacity>
             </View>
             <View style={styles.formContainer}>
                 <View style={styles.formTitleContainer}>
@@ -74,6 +74,7 @@ const StepOne = () => {
                 </View>
                 <View style={styles.inputGroup}>
                     <TopInput 
+                        secureEntry={false}
                         label="Nome completo"
                         placeholder="Digite o nome completo"
                         Icon={<Feather name="user" size={24} color="rgba(0,0,0,.2)" />}
@@ -128,12 +129,12 @@ const StepTwo : React.FC<StepTwoProps> = ({route}) => {
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#000"
                 />
-                <RectButton
+                <TouchableOpacity
                     style={styles.backButtonHeader}
                     onPress={goBack}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </RectButton>
+                </TouchableOpacity>
             </View>
             <View style={styles.formContainer}>
                 <View style={styles.formTitleContainer}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Modal } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import { View, Text, Modal, TouchableOpacity } from 'react-native'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import styles from './styles';
 import ModalView from '../ModalView';
@@ -38,19 +37,19 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                         {title}
                     </Text>
                     <View style={styles.lineHeader}/>
-                    <RectButton
+                    <TouchableOpacity
                             style={styles.options}
                             onPress={showModal}
                         >
                             <SimpleLineIcons name="options" size={24} color="black" />
-                    </RectButton>
+                    </TouchableOpacity>
                     
                 </View>
                 <View style={styles.content}>
                     {items.map(item => {
                         return (
                             
-                                <RectButton
+                                <TouchableOpacity
                                     style={styles.itemButton}
                                     key={item.id}
                                 >
@@ -65,7 +64,7 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                                     <Text style={styles.itemNameText}>
                                         {item.name}
                                     </Text>
-                                </RectButton>
+                                </TouchableOpacity>
                             
                         )
                     })}

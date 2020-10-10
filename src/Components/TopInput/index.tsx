@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from 'react'
-import { View, Text, TextInput, TextInputProperties } from 'react-native'
+import { View, Text, TextInput, TextInputProperties, TouchableOpacity } from 'react-native'
 import styles from './style'
-import { RectButton } from 'react-native-gesture-handler'
 import { Octicons } from '@expo/vector-icons'
 
 interface TopInputProps extends TextInputProperties {
@@ -33,7 +32,7 @@ const TopInput: React.FC<TopInputProps> = ({placeholder, actionIconName, label, 
                     {...rest}
                 />
                 {actionIconName? 
-                    <RectButton 
+                    <TouchableOpacity 
                         style={styles.inputAction}
                         onPress={togglePasswordView}
                     >
@@ -42,7 +41,7 @@ const TopInput: React.FC<TopInputProps> = ({placeholder, actionIconName, label, 
                             size={24} 
                             color={isActionIconActive ? "#309AE7" : "#F0F0F7"}
                         />
-                    </RectButton>
+                    </TouchableOpacity>
                 : 
                     true
                 }
