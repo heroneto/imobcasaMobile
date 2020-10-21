@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Platform, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import HeaderActions from '../../Components/HeaderActions'
-import { RectButton, TextInput } from 'react-native-gesture-handler'
+import { RectButton, Switch, TextInput } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -15,7 +15,8 @@ import colors from '../../theme'
 import moment from 'moment'
 import StandardButton from '../../Components/StandardButton'
 import SinglePicker from '../../Components/SinglePicker'
-import { stringify } from 'uuid'
+import PickerInput from '../../Components/PickerInput'
+import * as data from '../appData.json'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -37,25 +38,30 @@ export default function NewTaskView(){
 }
 
 
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
+}
 
 const NewTaskStepOne = () => {
     const { navigate } = useNavigation()
-    const [ taskowner, setTaskOwner ] = useState(-1)
-    const [ taskType, setTaskType ] = useState('')
+    const [taskOwner, setTaskOwner] = useState<inputPickerProps>({})
+    const [ taskType, setTaskType ] = useState<inputPickerProps>({})
     const [ date, setDate ] = useState(new Date())
     const [ isShowingDatePicker, setIsShowingDatePicker ] = useState(false)
+    // const [show, setShow] = useState(false);
+
 
     const handleTaskDate = (event: any, dateSelected: any) => {
-        console.log("Alkterando data")
         const currentDate = dateSelected || date;
         // setShow(Platform.OS === 'ios');
-        setIsShowingDatePicker(false)
+        setIsShowingDatePicker(Platform.OS === 'ios')
         setDate(currentDate)
     }
 
     function showDatePicker(){
-        console.log("Abrtindo picker")
-        setIsShowingDatePicker(true)
+        setIsShowingDatePicker(!isShowingDatePicker)
     }
 
     function handleNavigateToHomePage(){
@@ -66,19 +72,6 @@ const NewTaskStepOne = () => {
         navigate('newtasksteptwo')
     }
 
-    function handleTaskOwner(value: number){
-        if(value !== -1){
-            console.log(value)
-            setTaskOwner(value)
-        } 
-    }
-    
-    function handleTaskType(value: string){
-        if(value !== ''){
-            setTaskType(value)
-        }
-    }
-
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -86,12 +79,12 @@ const NewTaskStepOne = () => {
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#000"
                 />
-                <RectButton
+                <TouchableOpacity
                     style={styles.backButtonHeader}
                     onPress={handleNavigateToHomePage}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </RectButton>
+                </TouchableOpacity>
             </View>
             <View style={styles.formContainer}>
                 <View style={styles.formTitleContainer}>
@@ -100,56 +93,37 @@ const NewTaskStepOne = () => {
                     </Text>
                 </View>
                 <View style={styles.inputGroup}>
-                    <TopPicker 
+                    <PickerInput 
+                        value={taskOwner.label}
+                        borderRadius={{
+                            topLeft: 8,
+                            topRight: 8,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        }}
+                        data={data.users}
                         label="Responsável"
-                        selectedValue={taskowner}
-                        itens={[
-                             {
-                                id: "1",
-                                label: "Heron Hideki de Queiroz Eto",
-                                value: '1',
-                             },
-                             {
-                                 id: "2",
-                                 label: "Vagner Zanella",
-                                 value: '2'
-                             },
-                             {
-                                 id: "3",
-                                 label: "Nadia",
-                                 value: '3'
-                             },
-                        ]}
-                        onValueChange={(value, index) => handleTaskOwner(index)}
+                        placeholder="Selecione um usuário"
+                        onChange={(option)=>{ 
+                            setTaskOwner(option) 
+                        }}
                     />
-                    <MiddlePicker
+                    <PickerInput 
+                        value={taskType.label}
+                        borderRadius={{
+                            topLeft: 0,
+                            topRight: 0,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        }}
+                        data={data.taskType}
                         label="Tipo de tarefa"
-                        selectedValue={taskType}
-                        itens={[
-                            {
-                               id: "1" ,
-                               label: "Cobrar cliente",
-                               value: 'cobrarcliente'
-                            },
-                            {
-                                id: "2" ,
-                                label: "Retornar contato",
-                                value: 'retornarcontato'
-                            },
-                            {
-                                id: "3" ,
-                                label: "Enviar doc/foto/vídeo",
-                                value: 'enviardoc'
-                            },
-                            {
-                                id: "4" ,
-                                label: "Visita agendada",
-                                value: 'visitaagendada'
-                            },
-                        ]}
-                        onValueChange={value => handleTaskType(value)}
+                        placeholder="Selecione um tipo de tarefa"
+                        onChange={(option)=>{ 
+                            setTaskType(option) 
+                        }}
                     />
-                     <InputContainer
+                    <InputContainer
                         label="Data planejada"
                         inputRadiusStyle={{
                             bottomLeft: true,
@@ -163,10 +137,8 @@ const NewTaskStepOne = () => {
                                 testID="dateTimePicker"
                                 value={date}
                                 mode='date'
-                                // is24Hour={true}
                                 display="default"
-                                // onChange={handleTaskDate}
-                                onChange={handleTaskDate}
+                                onChange={(event: any, date: any) => handleTaskDate(event,date)}
                                 locale='pt-BR'
                             />)
                         : true}
@@ -182,12 +154,12 @@ const NewTaskStepOne = () => {
                                 </Text>
                             </View>
                             <View style={styles.dateButtonContainer}>
-                                <RectButton
+                                <TouchableOpacity
                                     style={styles.dateButton}
                                     onPress={showDatePicker}
                                 >
                                     <Ionicons name="md-calendar" size={24} color={colors.textInput} />
-                                </RectButton>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </InputContainer>

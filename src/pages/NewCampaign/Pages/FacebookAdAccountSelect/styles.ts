@@ -36,7 +36,12 @@ const styles = StyleSheet.create({
     },
     inputGroupContainer: {
         paddingHorizontal: 20,
-    }
+    },
+    nextPageButtonContainert: {
+        width: "25%",
+        alignSelf: 'flex-end',
+        paddingHorizontal: 10,
+    },
 })
 
 export default styles

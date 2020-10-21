@@ -14,7 +14,7 @@ interface ItensProps {
 interface SinglePickerProps extends PickerProperties {
     label: string,
     itens: Array<ItensProps>,
-    defaultValue: string,
+    defaultValue?: string,
     
 }
 

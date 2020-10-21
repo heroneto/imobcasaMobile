@@ -7,6 +7,9 @@ import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import SinglePicker from '../../../../Components/SinglePicker'
 import axios from 'axios'
+import { Picker } from '@react-native-community/picker';
+import StandardButton from '../../../../Components/StandardButton'
+import colors from '../../../../theme'
 
 interface FacebookAdAccountSelectProps {
     route: any
@@ -18,17 +21,26 @@ interface adAccountsRequestResult {
     id: string
 }
 
+interface adAccounts {
+    label: string,
+    value: string,
+    id: string
+}
+
 const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route}) => {
     const { goBack, navigate } = useNavigation()
     const { fbToken } = route.params
-    const [ adAccounts , setAdAccounts ] = useState([])
-    const [ adAccountSelected, setAdAccountSelected] = useState('')
+    const [ adAccounts , setAdAccounts ] = useState<adAccounts[]>([])
+    const [ adAccountSelected, setAdAccountSelected] = useState<adAccounts>()
 
+    function handleNavigateToCampaignSelectPage(){
+        navigate('campaignselect', {
+            adAccountSelected
+        })
+    }
 
     async function getAdAccounts(fbToken: string){
-        console.log(fbToken)
         const result = await axios.get('https://graph.facebook.com/v8.0/me?fields=adaccounts%7Bname%2Caccount_id%7D&access_token='+fbToken)
-        console.log(result)
         const adAccountsToShow = result.data.adaccounts.data.map((item: adAccountsRequestResult) => {
             const { name, account_id, id } = item
             
@@ -69,16 +81,33 @@ const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route
                     </Text>
                 </View>
                 <View style={styles.inputGroupContainer}>
-                    <SinglePicker 
-                        defaultValue=""
+                    
+                    {/* <Picker 
+                        mode="dropdown"
                         selectedValue=""
+                        style={{height: 30, width: "100%", backgroundColor: '#FFF'}}
+                    >
+                        {adAccounts.map(adaccount => (
+                            <Picker.Item label={adaccount.label} value={adaccount.value} key={adaccount.id}/>
+                        ))}
+                    </Picker>  */}
+                    
+                    <SinglePicker
+                        selectedValue={adAccountSelected}
                         itens={adAccounts}
                         label="Conta de anúncios"
+                        onValueChange={value => setAdAccountSelected(value)}
                     />
                 </View>
             </View>
             <View style={styles.pageActionsContainer}>
-
+                <View style={styles.nextPageButtonContainert}>
+                    <StandardButton 
+                        icon={<Ionicons style={{alignSelf: 'center'}} name="ios-arrow-forward" size={24} color="#FFF"/>}
+                        onPress={handleNavigateToCampaignSelectPage}
+                        color={colors.standardButton}
+                    />
+                </View>
             </View>
         </View>
     )

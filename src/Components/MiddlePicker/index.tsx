@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, Text, PickerProperties } from 'react-native'
 import styles from './styles'
-import { Picker } from '@react-native-community/picker';
-import colors from '../../theme';
+import { Picker, PickerIOS } from '@react-native-community/picker';
 
 
 interface ItensProps {
@@ -26,7 +25,7 @@ const MiddlePicker: React.FC<MiddlePickerProps> = ({label, itens, ...rest}) => {
             </Text>
             <View style={styles.inputContianer}>
                 <Picker
-                    mode='dropdown'
+                    mode='dialog'
                     style={{height: 30, width: "100%"}}
                     prompt="Selecione uma opção abaixo"
                     {...rest}

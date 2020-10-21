@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text, PickerProperties } from 'react-native'
 import styles from './styles'
 import { Picker } from '@react-native-community/picker';
-import colors from '../../theme';
 
 
 interface ItensProps {
@@ -18,10 +17,7 @@ interface TopPickerProps extends PickerProperties {
 }
 
 const TopPicker: React.FC<TopPickerProps> = ({label, itens,  ...rest}) => {
-    function teste(){
-        console.log('oooi')
-    }
-
+    
     return (
         <View style={styles.container}>
             <Text style={styles.inputLabel}>

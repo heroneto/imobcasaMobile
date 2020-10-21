@@ -1,0 +1,82 @@
+{
+    "users":[
+        {
+            "label": "Usuários",
+            "key": 0,
+            "section": true
+        },
+        {
+            "label": "Heron Hideki de Queiroz Eto",
+            "key": 1
+         },
+         {
+             "label": "Vagner Zanella",
+             "key": 2
+         },
+         {
+             "label": "Nadia",
+             "key": 3
+         }
+    ],
+    "leads": [
+        {
+            "label": "Leads",
+            "key": 0,
+            "section": true
+        },
+        {
+            "label": "José Silva",
+            "key": 1
+         },
+         {
+             "label": "Everisto Pereira",
+             "key": 2
+         },
+         {
+             "label": "Ispiritidiberto Silveira",
+             "key": 3
+         }
+    ],
+    "taskType": [
+        {
+            "label": "Tipos de tarefa",
+            "key": 0,
+            "section": true
+        },
+        {
+            "key": 1 ,
+            "label": "Cobrar cliente"
+        },
+        {
+            "key": 2 ,
+            "label": "Retornar contato"
+        },
+        {
+            "key": 3 ,
+            "label": "Enviar doc/foto/vídeo"
+        },
+        {
+            "key": 4 ,
+            "label": "Visita agendada"
+        }
+    ],
+    "leadStatus": [
+        {
+            "label": "Status do Lead",
+            "key": 0,
+            "section": true
+        },
+        {
+            "label": "Aguardando",
+            "id": 1
+        },
+        {
+            "label": "Negociação em andamento",
+            "id": 2
+        },
+        {
+            "label": "Negociação concluída",
+            "id": 3
+        }
+    ]
+}
