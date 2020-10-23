@@ -1,45 +1,54 @@
-import { StyleSheet } from 'react-native'
-import colors from '../../theme'
 
+import {StyleSheet} from 'react-native'
+import colors from '../../theme'
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.background
+        backgroundColor: colors.background,
     },
-    headerContainer: {
-        padding: 10,
-    },
-    backButtonHeader: {
-        padding: 5,
-        width: 32,
-        height: 32,
-        borderRadius: 50,
-        backgroundColor: 'rgba(100,100,100,0)',
+    title: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 50,
+        marginBottom: 10,
     },
-    formContainer: {
-        alignSelf: 'center',
-        padding: 10,
-        flex: .9,
-        justifyContent: 'center'
-    },
-    formTitleContainer: {
-        
-    },
-    formTitle: {
-        fontFamily: 'Poppins_700Bold',
-        fontSize: 24,
-        textAlign: 'center'
+    titleText: {
+        fontFamily: 'Poppins_700Bold',      
+        textAlign: 'center',
+        fontSize: 36
     },
     inputGroup: {
+        padding: 10
+    },
+    inputTitle: {
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 18,
+    },
+    formActions: {
+        width: "100%",
+        paddingHorizontal: 80,
+        marginTop: 20,
+        marginBottom: 50,
+    },
+    formContent: {
         paddingHorizontal: 20,
-        marginTop: 50,
+    },
+    textMultiLineInput: {
+        fontFamily: 'Archivo_400Regular',
+        fontSize: 16,
+        padding: 5,
+        color: colors.textInput
+    },
+    textMultiLineTextCount: {
+        fontFamily: 'Archivo_400Regular',
+        fontSize: 10,
+        color: colors.textInputLabel,
     },
     dateInputContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        
     },
     labelContainer: {
         padding: 2,
@@ -61,38 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(100,100,100,0)',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    formActionContainer: {
-        width: "100%",
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-    },
-    nextPageButtonContainer: {
-        width: 100,
-        height: 30,
-    },
-    formSaveButtonContainer: {
-        width: "100%",
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    saveButtonContainer: {
-        width: 200,
-    },
-    textMultiLineInput: {
-        fontFamily: 'Archivo_400Regular',
-        fontSize: 16,
-        padding: 5,
-        color: colors.textInput
-    },
-    textMultiLineTextCount: {
-        fontFamily: 'Archivo_400Regular',
-        fontSize: 10,
-        color: colors.textInputLabel,
-    },
+    }
 })
 
 export default styles

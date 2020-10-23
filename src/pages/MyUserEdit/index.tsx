@@ -17,8 +17,8 @@ interface MyUserEditProps{
 const MyUserEdit : React.FC<MyUserEditProps> = ({route}) => {
     const { userid } = route
     const { navigate, goBack } = useNavigation()
-    const [ name, setName ] = useState('')
-    const [ email, setEmail ] = useState('')
+    const [ name, setName ] = useState('Heron Eto')
+    const [ email, setEmail ] = useState('heron@imobcasa.com')
 
     function handleSaveButtom(){
         goBack()

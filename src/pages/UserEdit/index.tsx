@@ -8,19 +8,28 @@ import { Feather } from '@expo/vector-icons';
 import colors from '../../theme';
 import TopInput from '../../Components/TopInput';
 import MiddleInput from '../../Components/MiddleInput';
-import BottonPicker from '../../Components/BottonPicker';
+
+import * as data from '../appData.json'
+import PickerInput from '../../Components/PickerInput';
 
 interface UserEditProps {
     route: any
 }
 
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
+}
+
+
 const UserEdit : React.FC<UserEditProps> = ({route}) => {
     const { userid } = route.params
     const { navigate, goBack } = useNavigation()
-    const [ name, setName ] = useState('')
-    const [ username, setUsername ] = useState('')
-    const [ email, setEmail ] = useState('')
-    const [ active, setActive ] = useState('')
+    const [ name, setName ] = useState('Heron Eto')
+    const [ username, setUsername ] = useState('heroneto')
+    const [ email, setEmail ] = useState('heron@imobcasa.com')
+    const [ status, setStatus ] = useState<inputPickerProps>({key: 1, label: "Ativo"})
     const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
 
 
@@ -84,22 +93,20 @@ const UserEdit : React.FC<UserEditProps> = ({route}) => {
                         onChangeText={text => setEmail(text)}
                         secureEntry={false}
                     />
-                    <BottonPicker 
+                   <PickerInput 
+                        value={status.label}
+                        borderRadius={{
+                            topLeft: 0,
+                            topRight: 0,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        }}
+                        data={data.userStatus}
                         label="Status"
-                        selectedValue={active}
-                        itens={[
-                            {
-                                id:"1",
-                                label:"Ativo",
-                                value:"1"
-                            },
-                            {
-                                id:"2",
-                                label:"Inativo",
-                                value:"2"
-                            }   
-                        ]}
-                        onValueChange={value => setActive(value)}
+                        placeholder="Selecione o status do usuário"
+                        onChange={(option)=>{ 
+                            setStatus(option) 
+                        }}
                     />
                 </View>
 

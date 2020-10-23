@@ -1,31 +1,25 @@
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native'
 import colors from '../../theme'
-
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.background
+        backgroundColor: colors.background,
     },
     title: {
-        fontSize: 18
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 50,
+        marginBottom: 10,
+    },
+    titleText: {
+        fontFamily: 'Poppins_700Bold',      
+        textAlign: 'center',
+        fontSize: 36
     },
     headerContainer: {
         padding: 10,
-    },
-    formContainer: {
-        alignSelf: 'center',
-        padding: 10,
-        flex: .9,
-        justifyContent: 'center'
-    },
-    formTitleContainer: {
-        
-    },
-    formTitle: {
-        fontFamily: 'Poppins_700Bold',
-        fontSize: 24,
-        textAlign: 'center'
+        marginTop: 30,
     },
     backButtonHeader: {
         padding: 5,
@@ -37,32 +31,20 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputGroup: {
+        padding: 10
+    },
+    inputTitle: {
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 18,
+    },
+    formActions: {
+        width: "100%",
+        paddingHorizontal: 80,
+        marginTop: 20,
+        marginBottom: 50,
+    },
+    formContent: {
         paddingHorizontal: 20,
-        marginTop: 50,
-    },
-    formActionContainer: {
-        width: "100%",
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        paddingHorizontal: 30,
-    },
-    nextPageButtonContainert: {
-        width: 100,
-        height: 30,
-    },
-    formSaveButtonContainer: {
-        width: "100%",
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    saveButtonContainer: {
-        width: 200,
-    },
-    backButtonContainer: {
-        width:50,
-        marginRight: 5,
     }
 })
 

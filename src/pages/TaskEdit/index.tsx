@@ -1,56 +1,51 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, NativeSyntheticEvent, NativeScrollEvent, Platform } from 'react-native'
 import styles from './styles'
-import { ScrollView, TextInput, RectButton } from 'react-native-gesture-handler'
+import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import FormPageHeader from '../../Components/HeaderFormContainer';
-import TopPicker from '../../Components/TopPicker'
-import SinglePicker from '../../Components/SinglePicker';
 import StandardButton from '../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
-import MiddlePicker from '../../Components/MiddlePicker';
 import InputContainer from '../../Components/InputContainer';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons'; 
 import colors from '../../theme';
 import moment from 'moment'
+import PickerInput from '../../Components/PickerInput';
+
+import * as data from '../appData.json'
 
 interface TaskEditProps {
     route: any
 }
 
+
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
+}
+
 const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
     const { taskid } = route.params
     const { navigate, goBack } = useNavigation()
-    const [ taskowner, setTaskOwner ] = useState('heroneto')
-    const [ taskType, setTaskType ] = useState('cobrarcliente')
-    const [ taskLead, setTaskLead ] = useState('jose')
+    const [ user, setUser ] = useState<inputPickerProps>({key:5, label: "Heron Hideki"})
+    const [ taskType, setTaskType ] = useState<inputPickerProps>({key: 5, label: "Cobrar cliente"})
+    const [ lead, setLead ] = useState<inputPickerProps>({key: 5, label: "Evaristo Ismaelly"})
     const [ taskDescription, setTaskDescription ] = useState('Cliente malucoooo')
     const [ date, setDate ] = useState(new Date())
     const [ isShowingDatePicker, setIsShowingDatePicker ] = useState(false)
+    const [ titleAlpha, setTitleAlpha ] = useState(100)
 
+    
     const handleTaskDate = (event: any, dateSelected: any) => {
         console.log("Alkterando data")
         const currentDate = dateSelected || date;
-        // setShow(Platform.OS === 'ios');
-        setIsShowingDatePicker(false)
+        setIsShowingDatePicker(Platform.OS === 'ios')
         setDate(currentDate)
     }
 
     function showDatePicker(){
-        console.log("Abrtindo picker")
-        setIsShowingDatePicker(true)
-    }
-
-    function handleTaskOwner(value: string){
-        setTaskOwner(value)
-    }
-
-    function handleTaskLead(value: string){
-        setTaskLead(value)
-    }
-
-    function handleTaskType(value: string){
-        setTaskType(value)
+        setIsShowingDatePicker(!isShowingDatePicker)
     }
 
     function handleSaveButtom(){
@@ -59,66 +54,61 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
         })
     }
 
+    function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>){
+        const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
+        setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
+    }
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} onScroll={(event) => handleContentOffsetChanges(event)}>
             <FormPageHeader 
                 backButtomAction={goBack}
             />
-            <ScrollView style={styles.formContent}>
+
+            <View style={styles.title}>
+                <Text style={{
+                    ...styles.titleText,
+                    color: `rgba(0,0,0,${titleAlpha})`
+                }}>
+                    Edição de Tarefa
+                </Text>
+            </View>
+            <View style={styles.formContent}>
                 <View
                     style={styles.inputGroup}
                 >
                     <Text style={styles.inputTitle}>
                         Dados da Tarefa
                     </Text>
-                    <TopPicker 
-                       label="Responsável"
-                       selectedValue={taskowner}
-                       itens={[
-                            {
-                               id: "1",
-                               label: "Heron Hideki de Queiroz Eto",
-                               value: "heroneto"
-                            },
-                            {
-                                id: "2",
-                                label: "Vagner Zanella",
-                                value: "vzanela"
-                            },
-                            {
-                                id: "3",
-                                label: "Nadia",
-                                value: "nadia"
-                            },
-                       ]}
-                       onValueChange={value => handleTaskOwner(value)}
+                    <PickerInput 
+                        data={data.users}
+                        borderRadius={{
+                            bottomLeft:0,
+                            bottomRight:0,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
+                        label="Usuário"
+                        placeholder="Selecione o usuário"
+                        value={user.label}
+                        onChange={(option) => {
+                            setUser(option)
+                        }}
                     />
-                    <MiddlePicker 
+                    <PickerInput 
+                        value={taskType.label}
+                        borderRadius={{
+                            topLeft: 0,
+                            topRight: 0,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        }}
+                        data={data.taskType}
                         label="Tipo de tarefa"
-                        selectedValue={taskType}
-                        itens={[
-                            {
-                               id: "1" ,
-                               label: "Cobrar cliente",
-                               value: 'cobrarcliente'
-                            },
-                            {
-                                id: "2" ,
-                                label: "Retornar contato",
-                                value: 'retornarcontato'
-                            },
-                            {
-                                id: "3" ,
-                                label: "Enviar doc/foto/vídeo",
-                                value: 'enviardoc'
-                            },
-                            {
-                                id: "4" ,
-                                label: "Visita agendada",
-                                value: 'visitaagendada'
-                            },
-                        ]}
-                        onValueChange={value => handleTaskType(value)}
+                        placeholder="Selecione um tipo de tarefa"
+                        onChange={(option)=>{ 
+                            setTaskType(option) 
+                        }}
                     />
                     <InputContainer
                         label="Data planejada"
@@ -153,12 +143,12 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                                 </Text>
                             </View>
                             <View style={styles.dateButtonContainer}>
-                                <RectButton
+                                <TouchableOpacity
                                     style={styles.dateButton}
                                     onPress={showDatePicker}
                                 >
                                     <Ionicons name="md-calendar" size={24} color={colors.textInput} />
-                                </RectButton>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </InputContainer>
@@ -172,22 +162,20 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                     <Text style={styles.inputTitle}>
                         Lead
                     </Text>
-                    <SinglePicker 
+                    <PickerInput 
+                        data={data.leads}
+                        borderRadius={{
+                            bottomLeft: 8,
+                            bottomRight: 8,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
                         label="Lead"
-                        defaultValue={taskLead}
-                        itens={[
-                            {
-                                id: "1",
-                                label: 'José Silva',
-                                value: 'jose'
-                            },
-                            {
-                                id: "2",
-                                label: 'Everisto Pereira',
-                                value: 'everisto'
-                            }
-                        ]}
-                        onValueChange={value => handleTaskLead(value)}
+                        placeholder="Selecione o Lead"
+                        value={lead.label}
+                        onChange={(option) => {
+                            setLead(option)
+                        }}
                     />
                 </View>
 
@@ -224,9 +212,9 @@ const TaskEdit : React.FC<TaskEditProps> = ({route}) => {
                         text="Atualizar"
                     />
                 </View>
-            </ScrollView>
+            </View>
             
-        </View>
+        </ScrollView>
     )
 }
 

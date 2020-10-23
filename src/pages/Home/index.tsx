@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View , Text, RefreshControl, Image } from 'react-native'
+import { View , Text, RefreshControl, Image, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import styles from './styles'
 import { ScrollView, RectButton } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'; 
@@ -11,7 +11,7 @@ import HeaderActions from '../../Components/HeaderActions';
 export default function HomeView(){
     const [ refreshing, setRefreshing ] = useState(false)
     const { navigate } = useNavigation()
-    
+    const [ titleAlpha, setTitleAlpha ] = useState(100)
     
     const onRefresh = async () => {
         setRefreshing(true)
@@ -21,9 +21,11 @@ export default function HomeView(){
         }, 2000)
     }
 
-    function handleNavigateToSearchPage(){
-        navigate('search')
+    function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>){
+        const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
+        setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -31,18 +33,6 @@ export default function HomeView(){
                     imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
                     settingsIconColor="#000"
                 />
-            </View>
-            <View style={styles.wellcomeContainer}>
-                <Text 
-                    style={styles.wellcomeTextPrimary}
-                >
-                    Olá Heron!
-                </Text>
-                <Text 
-                    style={styles.wellcomeTextSecondary}
-                >
-                    Veja como estão os seus clientes
-                </Text>
             </View>
             <ScrollView
                 contentContainerStyle={styles.scrollView}
@@ -52,7 +42,26 @@ export default function HomeView(){
                         onRefresh={onRefresh}
                     />
                 }
+                onScroll={(event) => handleContentOffsetChanges(event)}
             >
+                <View style={styles.wellcomeContainer}>
+                    <Text 
+                        style={{
+                            ...styles.wellcomeTextPrimary,
+                            color: `rgba(0,0,0,${titleAlpha})`
+                        }}
+                    >
+                        Olá Heron!
+                    </Text>
+                    <Text 
+                        style={{
+                            ...styles.wellcomeTextSecondary,
+                            color: `rgba(0,0,0,${titleAlpha})`
+                        }}
+                    >
+                        Veja como estão os seus clientes
+                    </Text>
+                </View>
                 <DashboardGroup 
                     items={[
                         {

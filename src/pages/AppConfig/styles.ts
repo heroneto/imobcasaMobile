@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     wellcomeContainer:{
-        height: '15%',
+        marginTop: 100,
+        marginBottom: 60,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 
     },
     wellcomeTextPrimary: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: 'Poppins_600SemiBold',
         fontSize: 36
     },
     wellcomeTextSecondary: {

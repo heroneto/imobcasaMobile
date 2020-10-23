@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         padding: 10,
+        backgroundColor: "rgba(0,0,0,0)"
     },
     myselfContainer: {
         width: "10%",
@@ -44,20 +45,22 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     wellcomeContainer:{
-        height: '15%',
+        // height: '15%',
+        marginTop: 100,
+        marginBottom: 60,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     scrollView: {
 
     },
     wellcomeTextPrimary: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: 'Poppins_600SemiBold',
         fontSize: 36
     },
     wellcomeTextSecondary: {
         fontFamily: 'Archivo_400Regular',
-        fontSize: 14
+        fontSize: 18
     },
     bottomContainer: {
         flex: 1,

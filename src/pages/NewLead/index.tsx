@@ -1,277 +1,174 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
+import { View, Text, NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../Components/HeaderActions'
-import { RectButton } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
-import { Ionicons } from '@expo/vector-icons'; 
-import TopInput from '../../Components/TopInput'
+import { ScrollView } from 'react-native-gesture-handler'
+import FormPageHeader from '../../Components/HeaderFormContainer';
+import TopInput from '../../Components/TopInput';
 import { Feather } from '@expo/vector-icons'; 
-import BottomInput from '../../Components/BottonInput'
-import StandardButton from '../../Components/StandardButton'
-import TopPicker from '../../Components/TopPicker'
-import MiddlePicker from '../../Components/MiddlePicker'
-import BottonPicker from '../../Components/BottonPicker'
-const { Navigator, Screen } = createStackNavigator()
+import BottomInput from '../../Components/BottonInput';
+import StandardButton from '../../Components/StandardButton';
+import { useNavigation } from '@react-navigation/native'
 
 
+import  * as data from '../appData.json'
+import PickerInput from '../../Components/PickerInput';
 
-export default function NewLead(){
-    return (
-        <Navigator 
-            screenOptions={{
-                headerShown: false,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            initialRouteName='newleadstepone'
-        >
-            <Screen name="newleadstepone" component={StepOne} />
-            <Screen name="newleadsteptwo" component={StepTwo} />
-            <Screen name="newleadalreadyexists" component={LeadExists} />
-        </Navigator>
 
-    )
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
 }
 
-
-const StepOne = () => {
+export default function NewLead(){
+    const { navigate, goBack } = useNavigation()
     const [ name, setName ] = useState('')
     const [ phone, setPhone ] = useState('')
-    const { goBack, navigate } = useNavigation()
+    const [ origin, setOrigin ] = useState<inputPickerProps>({})
+    const [ campaign, setCampaign] = useState<inputPickerProps>({})
+    const [ user, setUser] = useState<inputPickerProps>({})
+    const [ leadStatus, setLeadStatus ] = useState<inputPickerProps>({})
+    const [ titleAlpha, setTitleAlpha ] = useState(100)
 
-
-    function handleNavigateToHomePage(){
-        navigate('home')
-    }
-
-    function handleNavigateToNextPage(){
-        navigate('newleadsteptwo', {
-            name,
-            phone
+    function handleSaveButtom(){
+        navigate('leadview', {
+            leadid: ""
         })
     }
 
+    function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>){
+        const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
+        setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
+    }
+
     return (
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
-                />
-                <TouchableOpacity
-                    style={styles.backButtonHeader}
-                    onPress={handleNavigateToHomePage}
-                >
-                    <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </TouchableOpacity>
+        <ScrollView style={styles.container} onScroll={(event) => handleContentOffsetChanges(event)}>
+            <FormPageHeader 
+                backButtomAction={goBack}
+            />
+            <View style={styles.title}>
+                <Text style={{
+                    ...styles.titleText,
+                    color: `rgba(0,0,0,${titleAlpha})`
+                }}>
+                    Cadastro de Lead
+                </Text>
             </View>
-            <View style={styles.formContainer}>
-                <View style={styles.formTitleContainer}>
-                    <Text style={styles.formTitle}>
-                        Insira os dados de contato deste Lead {phone} {name}
+            <View style={styles.formContent}>
+                <View
+                    style={styles.inputGroup}
+                >
+                    <Text style={styles.inputTitle}>
+                        Dados do Lead
                     </Text>
-                </View>
-                <View style={styles.inputGroup}>
                     <TopInput 
-                        secureEntry={false}
-                        label="Nome completo"
-                        placeholder="Digite o nome completo"
+                        label="Nome"
                         Icon={<Feather name="user" size={24} color="rgba(0,0,0,.2)" />}
+                        placeholder="Insira o nome do Lead"
+                        secureEntry={false}
                         value={name}
-                        onChangeText={text => setName(text)}
+                        onChangeText={value => setName(value)}
                     />
                     <BottomInput 
-                        label="WhatsApp"
-                        placeholder="Digite o telefone com DDD"
+                        label="Telefone"
+                        placeholder="Insira o telefone"
                         Icon={<Feather name="phone" size={24} color="rgba(0,0,0,.2)"  />}
                         secureEntry={false}
                         textContentType="telephoneNumber"
                         keyboardType="phone-pad"
                         value={phone}
-                        onChangeText={text => setPhone(text)}
+                        onChangeText={value => setPhone(value)}
                     />
+
                 </View>
-            </View>
-            <View style={styles.formActionContainer}>
-                <View style={styles.nextPageButtonContainert}>
-                    <StandardButton 
-                        icon={<Ionicons name="ios-arrow-forward" size={24} color="#FFF"/>}
-                        onPress={handleNavigateToNextPage}
-                    />
-                </View>
-            </View>
-        </View>
-    )
-}
 
-
-interface StepTwoProps {
-    route: any
-}
-
-const StepTwo : React.FC<StepTwoProps> = ({route}) => {
-    const { name, phone } = route.params
-    
-    
-    const { goBack, navigate } = useNavigation()
-
-    function handleSaveButton(){
-        navigate('leadview', {
-            leadid: "12121"
-        })
-    }
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
-                />
-                <TouchableOpacity
-                    style={styles.backButtonHeader}
-                    onPress={goBack}
+                <View
+                    style={styles.inputGroup}
                 >
-                    <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.formContainer}>
-                <View style={styles.formTitleContainer}>
-                    <Text style={styles.formTitle}>
-                        Insira os dados de contato deste Lead {phone} {name}
+                    <Text style={styles.inputTitle}>
+                        Origem
                     </Text>
+                    <PickerInput 
+                        data={data.leadOrigin}
+                        borderRadius={{
+                            bottomLeft:0,
+                            bottomRight:0,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
+                        label="Origem"
+                        placeholder="Selecione a origem do Lead"
+                        value={origin.label}
+                        onChange={(option) => {
+                            setOrigin(option)
+                        }}
+                    />
+                    <PickerInput 
+                        data={data.leadCampaign}
+                        borderRadius={{
+                            bottomLeft:8,
+                            bottomRight:8,
+                            topLeft: 0,
+                            topRight: 0
+                        }}
+                        label="Origem"
+                        placeholder="Selecione a campanha do Lead"
+                        value={campaign.label}
+                        onChange={(option) => {
+                            setCampaign(option)
+                        }}
+                    />
                 </View>
                 <View style={styles.inputGroup}>
-                    <TopPicker 
-                        defaultValue="facebook"
-                        itens={[
-                            {
-                                id: "1",
-                                label: "Facebook",
-                                value: 'facebook'
-                            },
-                            {
-                                id: "2",
-                                label: "Manual",
-                                value: 'manual'
-                            }
-                        ]}
-                        label="Campanha"
-                    />
-                    <MiddlePicker 
-                        defaultValue=""
-                        itens={[
-                            {
-                                id: "1",
-                                label: "Heron Eto",
-                                value: 'heto'
-                            },
-                            {
-                                id: "2",
-                                label: "Vagner Zanela",
-                                value: 'vagner'
-                            },
-                            {
-                                id: "3",
-                                label: "Nadia",
-                                value: 'nadia'
-                            }
-                        ]}
-                        label="Responsável"
-                    />
-                    <BottonPicker 
-                        defaultValue=""
-                        itens={[
-                            {
-                                label: "Aguardando",
-                                id: "1",
-                                value: "pending"
-                            },
-                            {
-                                label: "Negociação em andamento",
-                                id: "2",
-                                value: "inProgress"
-                            },
-                            {
-                                label: "Negociação concluída",
-                                id: "3",
-                                value: "done"
-                            },
-                        ]}
-                        label="Status"
-                    />
-                </View>
-            </View>
-            <View style={styles.formSaveButtonContainer}>
-                <View style={styles.saveButtonContainer}>
-                    <StandardButton 
-                        text="Salvar"
-                        onPress={handleSaveButton}
-                    />
-                </View>
-            </View>
-
-        </View>
-    )
-
-}
-
-interface LeadExistsProps{
-    route: any
-}
-
-const LeadExists : React.FC<LeadExistsProps> = ({route}) => {
-    const { leadid } = route.params
-    const { goBack, navigate } = useNavigation()
-
-    function handleNavigateToHomePage(){
-        navigate('home')
-    }
-
-    function handleNavigateToEditLead(){
-        navigate('leadedit', {
-            leadid
-        })
-    }
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
-                />
-                <RectButton
-                    style={styles.backButtonHeader}
-                    onPress={handleNavigateToHomePage}
-                >
-                    <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </RectButton>
-            </View>
-            <View style={styles.formContainer}>
-                <View style={styles.formTitleContainer}>
-                    <Text style={styles.formTitle}>
-                        Ops, parece que este Lead já exite. Deseja atualizar ou voltar para criar outro?
+                    <Text style={styles.inputTitle}>
+                        Responsável
                     </Text>
-                </View>
-            </View>
-            <View style={styles.formSaveButtonContainer}>
-                <View style={styles.backButtonContainer}>
-                    <StandardButton 
-                        icon={<Ionicons name="ios-arrow-back" size={24} color="#FFF" />}
-                        onPress={goBack}
+                    <PickerInput 
+                        data={data.users}
+                        borderRadius={{
+                            bottomLeft:8,
+                            bottomRight:8,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
+                        label="Usuário"
+                        placeholder="Selecione o usuário"
+                        value={user.label}
+                        onChange={(option) => {
+                            setUser(option)
+                        }}
                     />
                 </View>
-                <View style={styles.saveButtonContainer}>
-                    <StandardButton 
-                        text="Atualizar atual"
-                        onPress={handleNavigateToEditLead}
+                <View style={styles.inputGroup}>
+                    <Text style={styles.inputTitle}>
+                        Negociação 
+                    </Text>
+                    <PickerInput 
+                        data={data.leadStatus}
+                        borderRadius={{
+                            bottomLeft:8,
+                            bottomRight:8,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
+                        label="Status"
+                        placeholder="Insira o status da negociação"
+                        value={leadStatus.label}
+                        onChange={(option) => {
+                            setLeadStatus(option)
+                        }}
                     />
                 </View>
-            </View>
 
-        </View>
+                <View style={styles.formActions}>
+
+                    <StandardButton
+                        onPress={handleSaveButtom} 
+                        text="Cadastrar"
+                    />
+                </View>
+            </View>
+            
+        </ScrollView>
     )
-
 }

@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styles from './styles'
 import { View, Text, Keyboard, TouchableOpacity } from 'react-native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
-import FormPageHeader from '../../Components/HeaderFormContainer'
 import TopInput from '../../Components/TopInput'
 import MiddleInput from '../../Components/MiddleInput'
-import BottonPicker from '../../Components/BottonPicker'
 import { Feather } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../theme'
@@ -13,8 +11,13 @@ import StandardButton from '../../Components/StandardButton'
 import { Ionicons } from '@expo/vector-icons'; 
 import HeaderActions from '../../Components/HeaderActions'
 import BottomInput from '../../Components/BottonInput'
+import PickerInput from '../../Components/PickerInput'
+
+import * as data from '../appData.json'
 
 const { Navigator, Screen } = createStackNavigator()
+
+
 
 export default function NewUser() {
     return (
@@ -33,12 +36,18 @@ export default function NewUser() {
     )
 }
 
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
+}
+
 const NewUserStepOne = () => {
     const { navigate, goBack } = useNavigation()
     const [ name, setName ] = useState('')
     const [ username, setUsername ] = useState('')
     const [ email, setEmail ] = useState('')
-    const [ active, setActive ] = useState('')
+    const [ status, setStatus ] = useState<inputPickerProps>({})
     const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
 
 
@@ -57,7 +66,7 @@ const NewUserStepOne = () => {
             name,
             username,
             email,
-            active
+            active: status
         })
         // navigate('useralreadyexists', {
         //     userid: "sdsds"
@@ -116,23 +125,22 @@ const NewUserStepOne = () => {
                         onChangeText={text => setEmail(text)}
                         secureEntry={false}
                     />
-                    <BottonPicker 
+                    <PickerInput 
+                        value={status.label}
+                        borderRadius={{
+                            topLeft: 0,
+                            topRight: 0,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        }}
+                        data={data.userStatus}
                         label="Status"
-                        selectedValue={active}
-                        itens={[
-                            {
-                                id:"1",
-                                label:"Ativo",
-                                value:"1"
-                            },
-                            {
-                                id:"2",
-                                label:"Inativo",
-                                value:"2"
-                            }   
-                        ]}
-                        onValueChange={value => setActive(value)}
+                        placeholder="Selecione o status do usuário"
+                        onChange={(option)=>{ 
+                            setStatus(option) 
+                        }}
                     />
+                   
                 </View>
                 <View style={styles.formActionContainer}>
                     <View style={styles.nextPageButtonContainer}>

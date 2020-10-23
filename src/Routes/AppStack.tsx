@@ -1,10 +1,9 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 import LoginView from '../pages/Login'
 import HomeView from '../pages/Home'
 import LeadsView from '../pages/Leads'
-import NewLeadViewStepOne from '../pages/NewLead'
 import TasksView from '../pages/Tasks'
 import TaskView from '../pages/TaskView'
 import NewTaskView from '../pages/NewTask'
@@ -20,8 +19,8 @@ import UserPasswordChange from '../pages/UserPasswordChange'
 import NewUser from '../pages/NewUser'
 import MyUserEdit from '../pages/MyUserEdit'
 import MyPasswordEdit from '../pages/MyPasswordEdit'
-import FacebookLogin from '../pages/FacebookLogin'
 import NewCampaign from '../pages/NewCampaign/intex'
+import NewLead from '../pages/NewLead'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -35,7 +34,7 @@ function AppStack(){
                 <Screen name="login" component={LoginView} />
                 <Screen name="home" component={HomeView} />
                 <Screen name="leads" component={LeadsView} />
-                <Screen name="newlead" component={NewLeadViewStepOne} />
+                <Screen name="newlead" component={NewLead} />
                 <Screen name="leadview" component={LeadView} />
                 <Screen name="leadedit" component={LeadEdit} />
                 <Screen name="tasks" component={TasksView} />

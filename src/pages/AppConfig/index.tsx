@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, Text, RefreshControl, TouchableOpacity } from 'react-native'
+import { View, Text, RefreshControl, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import styles from './styles'
 import HeaderActions from '../../Components/HeaderActions'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 export default function AppConfig(){
     const [ refreshing, setRefreshing ] = useState(false)
     const { navigate, goBack } = useNavigation()
-    
+    const [ titleAlpha, setTitleAlpha ] = useState(100)
     
     const onRefresh = async () => {
         setRefreshing(true)
@@ -24,6 +24,12 @@ export default function AppConfig(){
     function handleNavigateToSearchPage(){
         navigate('search')
     }
+
+    function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>){
+        const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
+        setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
+    }
+
 
     return (
         <View style={styles.container}>
@@ -41,18 +47,6 @@ export default function AppConfig(){
                         <Ionicons name="ios-arrow-back" size={24} color="#000" />
                     </TouchableOpacity>
             </View>
-            <View style={styles.wellcomeContainer}>
-                <Text 
-                    style={styles.wellcomeTextPrimary}
-                >
-                    Configurações
-                </Text>
-                <Text 
-                    style={styles.wellcomeTextSecondary}
-                >
-                    Precisando fazer ajustes? é aqui mesmo
-                </Text>
-            </View>
             <ScrollView
                 contentContainerStyle={styles.scrollView}
                 refreshControl={
@@ -61,7 +55,26 @@ export default function AppConfig(){
                         onRefresh={onRefresh}
                     />
                 }
+                onScroll={(event) => handleContentOffsetChanges(event)}
             >
+                <View style={styles.wellcomeContainer}>
+                    <Text 
+                        style={{
+                            ...styles.wellcomeTextPrimary,
+                            color: `rgba(0,0,0,${titleAlpha})`
+                        }}
+                    >
+                        Configurações
+                    </Text>
+                    <Text 
+                        style={{
+                            ...styles.wellcomeTextSecondary,
+                            color: `rgba(0,0,0,${titleAlpha})`
+                        }}
+                    >
+                        Precisando fazer ajustes? é aqui mesmo
+                    </Text>
+                </View>
                 <DashboardGroup 
                     items={[
                         {

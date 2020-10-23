@@ -1,31 +1,39 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import styles from './styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import FormPageHeader from '../../Components/HeaderFormContainer';
 import TopInput from '../../Components/TopInput';
 import { Feather } from '@expo/vector-icons'; 
 import BottomInput from '../../Components/BottonInput';
-import TopPicker from '../../Components/TopPicker'
-import BottonPicker from '../../Components/BottonPicker';
-import SinglePicker from '../../Components/SinglePicker';
 import StandardButton from '../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
+import PickerInput from '../../Components/PickerInput';
 
+import * as data from '../appData.json'
 
 interface LeadEditProps {
     route: any
 }
 
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
+}
+
 const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
     const { leadid } = route.params
     const { navigate, goBack } = useNavigation()
-    const [ origin, setOrigin ] = useState("manual")
-    const [ category, setCategory ] = useState("semcategoria")
+    const [ name, setName ] = useState('Everisto de Barros')
+    const [ phone, setPhone ] = useState('119999999')
+    const [ origin, setOrigin ] = useState<inputPickerProps>({key: 5, label: "Facebook"})
+    const [ campaign, setCampaign] = useState<inputPickerProps>({key: 5, label: "Vila Formosa"})
+    const [ user, setUser] = useState<inputPickerProps>({key: 5, label: "Heron Hideki"})
+    const [ leadStatus, setLeadStatus ] = useState<inputPickerProps>({key: 5, label: "Negociação em andamento"})
+    const [ titleAlpha, setTitleAlpha ] = useState(100)
 
-    function handleOrigem(value: string){
-        setOrigin(value)
-    }
+
 
     function handleSaveButtom(){
         navigate('leadview', {
@@ -33,12 +41,25 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
         })
     }
 
+    function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>){
+        const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
+        setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
+    }
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} onScroll={(event) => handleContentOffsetChanges(event)}>
             <FormPageHeader 
                 backButtomAction={goBack}
             />
-            <ScrollView style={styles.formContent}>
+            <View style={styles.title}>
+                <Text style={{
+                    ...styles.titleText,
+                    color: `rgba(0,0,0,${titleAlpha})`
+                }}>
+                    Edição de Lead
+                </Text>
+            </View>
+            <View style={styles.formContent}>
                 <View
                     style={styles.inputGroup}
                 >
@@ -50,6 +71,8 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                         Icon={<Feather name="user" size={24} color="rgba(0,0,0,.2)" />}
                         placeholder="Insira o nome do Lead"
                         secureEntry={false}
+                        value={name}
+                        onChangeText={value => setName(value)}
                     />
                     <BottomInput 
                         label="Telefone"
@@ -58,6 +81,8 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                         secureEntry={false}
                         textContentType="telephoneNumber"
                         keyboardType="phone-pad"
+                        value={phone}
+                        onChangeText={value => setPhone(value)}
                     />
 
                 </View>
@@ -68,90 +93,75 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                     <Text style={styles.inputTitle}>
                         Origem
                     </Text>
-                    <TopPicker 
+                    <PickerInput 
+                        data={data.leadOrigin}
+                        borderRadius={{
+                            bottomLeft:0,
+                            bottomRight:0,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
                         label="Origem"
-                        selectedValue={origin}
-                        itens={[
-                            {
-                                id: "1",
-                                label: 'Facebook',
-                                value: 'facebook'
-                            },
-                            {
-                                id: "2",
-                                label: 'Manual',
-                                value: 'manual'
-                            }
-                        ]}
-                        onValueChange={value => handleOrigem(value)}
+                        placeholder="Selecione a origem do Lead"
+                        value={origin.label}
+                        onChange={(option) => {
+                            setOrigin(option)
+                        }}
                     />
-                    <BottonPicker 
-                        label="Sub-Categoria"
-                        selectedValue={category}
-                        itens={[
-                            {
-                                id: "1",
-                                label: 'Formulário - Tatuapé',
-                                value: 'formtatu'
-                            },
-                            {
-                                id: "2",
-                                label: 'Sem categoria',
-                                value: 'semcategoria'
-                            }
-                        ]}
+                    <PickerInput 
+                        data={data.leadCampaign}
+                        borderRadius={{
+                            bottomLeft:8,
+                            bottomRight:8,
+                            topLeft: 0,
+                            topRight: 0
+                        }}
+                        label="Origem"
+                        placeholder="Selecione a campanha do Lead"
+                        value={campaign.label}
+                        onChange={(option) => {
+                            setCampaign(option)
+                        }}
                     />
                 </View>
                 <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>
                         Responsável
                     </Text>
-                    <SinglePicker 
-                        label="Responsável"
-                        defaultValue="heron"
-                        itens={[
-                            {
-                                label: "Heron Hideki",
-                                id: "1",
-                                value: "heron"
-                            },
-                            {
-                                label: "Vagner Zanela",
-                                id: "2",
-                                value: "vagner"
-                            },
-                            {
-                                label: "Nadia",
-                                id: "3",
-                                value: "nadia"
-                            },
-                        ]}
+                    <PickerInput 
+                        data={data.users}
+                        borderRadius={{
+                            bottomLeft:8,
+                            bottomRight:8,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
+                        label="Usuário"
+                        placeholder="Selecione o usuário"
+                        value={user.label}
+                        onChange={(option) => {
+                            setUser(option)
+                        }}
                     />
                 </View>
                 <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>
-                        Responsável
+                        Negociação 
                     </Text>
-                    <SinglePicker 
+                    <PickerInput 
+                        data={data.leadStatus}
+                        borderRadius={{
+                            bottomLeft:8,
+                            bottomRight:8,
+                            topLeft: 8,
+                            topRight: 8
+                        }}
                         label="Status"
-                        defaultValue="pending"
-                        itens={[
-                            {
-                                label: "Aguardando",
-                                id: "1",
-                                value: "pending"
-                            },
-                            {
-                                label: "Negociação em andamento",
-                                id: "2",
-                                value: "inProgress"
-                            },
-                            {
-                                label: "Negociação concluída",
-                                id: "3",
-                                value: "done"
-                            },
-                        ]}
+                        placeholder="Insira o status da negociação"
+                        value={leadStatus.label}
+                        onChange={(option) => {
+                            setLeadStatus(option)
+                        }}
                     />
                 </View>
 
@@ -162,9 +172,9 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                         text="Atualizar"
                     />
                 </View>
-            </ScrollView>
+            </View>
             
-        </View>
+        </ScrollView>
     )
 }
 

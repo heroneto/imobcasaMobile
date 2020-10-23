@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react'
 import styles from './styles'
 import { View, Text, TouchableOpacity } from 'react-native'
 import HeaderActions from '../../../../Components/HeaderActions'
-import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
-import SinglePicker from '../../../../Components/SinglePicker'
 import axios from 'axios'
-import { Picker } from '@react-native-community/picker';
 import StandardButton from '../../../../Components/StandardButton'
 import colors from '../../../../theme'
+import PickerInput from '../../../../Components/PickerInput'
 
 interface FacebookAdAccountSelectProps {
     route: any
@@ -22,16 +20,24 @@ interface adAccountsRequestResult {
 }
 
 interface adAccounts {
-    label: string,
-    value: string,
-    id: string
+    key: any,
+    label: any,
+    section?: any
+    account_id?: any
+}
+
+interface inputPickerProps {
+    key?: any,
+    label?: any,
+    section?: any
+    account_id?: any
 }
 
 const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route}) => {
     const { goBack, navigate } = useNavigation()
     const { fbToken } = route.params
-    const [ adAccounts , setAdAccounts ] = useState<adAccounts[]>([])
-    const [ adAccountSelected, setAdAccountSelected] = useState<adAccounts>()
+    const [ adAccounts , setAdAccounts ] = useState<Array<adAccounts>>([])
+    const [ adAccountSelected, setAdAccountSelected] = useState<inputPickerProps>()
 
     function handleNavigateToCampaignSelectPage(){
         navigate('campaignselect', {
@@ -41,17 +47,21 @@ const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route
 
     async function getAdAccounts(fbToken: string){
         const result = await axios.get('https://graph.facebook.com/v8.0/me?fields=adaccounts%7Bname%2Caccount_id%7D&access_token='+fbToken)
-        const adAccountsToShow = result.data.adaccounts.data.map((item: adAccountsRequestResult) => {
+        const adAccountsToShow: Array<adAccounts> = result.data.adaccounts.data.map((item: adAccountsRequestResult, index: number) => {
             const { name, account_id, id } = item
             
             return {
                 label: name,
-                value: account_id,
-                id: id
+                account_id: account_id,
+                key: index
             }
         })
 
-        setAdAccounts(adAccountsToShow)
+        setAdAccounts([{
+            key: -1,
+            label: "Contas de anúncios",
+            section: true
+        },...adAccountsToShow])
 
     }
 
@@ -77,27 +87,27 @@ const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route
             <View style={styles.contentContainer}>
                 <View style={styles.contentTextContainer}>
                     <Text style={styles.contentText}>
-                        Encontramos X contas de anúncios, selecione uma conta para continuar.
+                        Encontramos {adAccounts.length - 1} contas de anúncios, selecione uma conta para continuar.
                     </Text>
                 </View>
                 <View style={styles.inputGroupContainer}>
                     
-                    {/* <Picker 
-                        mode="dropdown"
-                        selectedValue=""
-                        style={{height: 30, width: "100%", backgroundColor: '#FFF'}}
-                    >
-                        {adAccounts.map(adaccount => (
-                            <Picker.Item label={adaccount.label} value={adaccount.value} key={adaccount.id}/>
-                        ))}
-                    </Picker>  */}
-                    
-                    <SinglePicker
-                        selectedValue={adAccountSelected}
-                        itens={adAccounts}
-                        label="Conta de anúncios"
-                        onValueChange={value => setAdAccountSelected(value)}
+                    <PickerInput 
+                        value={adAccountSelected?.label}
+                        borderRadius={{
+                            topLeft: 0,
+                            topRight: 0,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        }}
+                        data={adAccounts}
+                        label="Conta de anúncio"
+                        placeholder="Selecione uma conta de anúncios"
+                        onChange={(option)=>{ 
+                            setAdAccountSelected(option) 
+                        }}
                     />
+
                 </View>
             </View>
             <View style={styles.pageActionsContainer}>

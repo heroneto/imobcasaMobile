@@ -10,7 +10,8 @@ interface PickerProps extends IModalSelectorProps<IOption>{
     data: Array<{
         key: number,
         label: string,
-        section?: boolean
+        section?: boolean,
+        account_id?: string,
     }>,
     borderRadius:{
         topRight: number,

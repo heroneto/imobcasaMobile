@@ -6,6 +6,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background,
     },
+    title: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 50,
+        marginBottom: 10,
+    },
+    titleText: {
+        fontFamily: 'Poppins_700Bold',      
+        textAlign: 'center',
+        fontSize: 36
+    },
     inputGroup: {
         padding: 10
     },
