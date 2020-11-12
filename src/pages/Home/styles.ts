@@ -1,38 +1,30 @@
+import { flatten } from 'lodash'
 import { StyleSheet, BackHandler } from 'react-native'
 import colors from '../../theme'
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: colors.background,
-        width: "100%"
+        backgroundColor: colors.background
     },
-    headerContainer: {
-        padding: 10,
-        backgroundColor: "rgba(0,0,0,0)"
+    header: {
+        flex: .1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 10,      
     },
     myselfContainer: {
-        width: "10%",
-        flex: .2,
+        alignSelf: 'center',
+        backgroundColor: 'rgba(100, 100, 100, 0)',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems:'center'
     },
     myselfImage: {
         width: 48,
         height: 48,
         borderRadius: 50,
-    },
-    headerOptionsContainer: {
-        flexDirection: 'row',
-    },
-    settingsButton: {
-        alignSelf: 'center',
-        width: 32,
-        height: 32,
-        borderRadius: 50,
-        backgroundColor: 'rgba(100, 100, 100, 0)',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        alignItems:'center'
     },
     searchButton: {
         alignSelf: 'center',
@@ -44,15 +36,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems:'center'
     },
-    wellcomeContainer:{
-        // height: '15%',
-        marginTop: 100,
-        marginBottom: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
+    content: {
+        flex: .8,
     },
-    scrollView: {
-
+    wellcomeContainer:{
+        justifyContent: 'flex-end',
+        alignItems: 'center',       
+        flex: .5,
     },
     wellcomeTextPrimary: {
         fontFamily: 'Poppins_600SemiBold',
@@ -62,11 +52,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Archivo_400Regular',
         fontSize: 18
     },
-    bottomContainer: {
-        flex: 1,
+    dashboard: {
+        flex: .5,
         justifyContent: 'center',
+    },
+    bottom: {
+        flex: .1,
         alignItems: 'center',
-        marginTop: 50,
         opacity: .4,
     },
     bottomText: {
@@ -76,6 +68,5 @@ const styles = StyleSheet.create({
     }
 
 })
-
 
 export default styles

@@ -28,10 +28,6 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({imageurl, settingsIconCol
         navigate('search')
     }
 
-    function handleNavigateToSettingsPage(){
-        navigate('appconfig')
-    }
-
     return (
             <View style={styles.headerContainer}>
                 <TouchableOpacity

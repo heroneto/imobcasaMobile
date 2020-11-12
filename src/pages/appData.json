@@ -18,6 +18,21 @@
              "key": 3
          }
     ],
+    "userStatus": [
+        {
+            "label": "Status do usuário",
+            "key": 0,
+            "section": true
+        },
+        {
+            "label": "Ativo",
+            "key": 1
+         },
+         {
+             "label": "Inativo",
+             "key": 2
+         }
+    ],
     "leads": [
         {
             "label": "Leads",
@@ -68,15 +83,46 @@
         },
         {
             "label": "Aguardando",
-            "id": 1
+            "key": 1
         },
         {
             "label": "Negociação em andamento",
-            "id": 2
+            "key": 2
         },
         {
             "label": "Negociação concluída",
-            "id": 3
+            "key": 3
+        }
+    ],
+    "leadCampaign": [
+        {
+            "key": 0,
+            "label": "Campanha do Lead",
+            "section": true
+        },
+        {
+            "key": 1,
+            "label": "Vila Formosa"
+        },
+        {
+            "key": 2,
+            "label": "Penha"
+        }
+    ],
+    "leadOrigin": [
+        {
+            "key": 0,
+            "label": "Origem do Lead",
+            "section": true
+        },
+        {
+            "key": 1,
+            "label": "Facebook"
+        },
+        {
+            "key": 2,
+            "label": "Manual"
         }
     ]
+    
 }

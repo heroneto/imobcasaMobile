@@ -4,11 +4,9 @@ import { padEnd } from 'lodash'
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 10,
     },
-    header: {
-        // flex: 1,        
+    header: {      
         paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center',
@@ -17,13 +15,9 @@ const styles = StyleSheet.create({
     headerText: {
         fontFamily: 'Poppins_700Bold',
         fontSize: 18,
-        // width: '20%',
     },
     lineHeader: {
         flex: .7,
-        // width: '60%',
-        // margin: 10,
-        // marginLeft: 10,
         height: 1,
         backgroundColor: '#000'
     },

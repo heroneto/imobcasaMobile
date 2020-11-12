@@ -33,7 +33,7 @@ export default function NewTask(){
 
     
     const handleTaskDate = (event: any, dateSelected: any) => {
-        console.log("Alkterando data")
+        console.log("Alterando data")
         const currentDate = dateSelected || date;
         setIsShowingDatePicker(Platform.OS === 'ios')
         setDate(currentDate)
