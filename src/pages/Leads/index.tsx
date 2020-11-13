@@ -1,13 +1,14 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import styles from './styles'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { RectButton } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons'; 
 import HeaderActions from '../../Components/HeaderActions';
 import ItemCard from '../../Components/ItemCard';
 import { useNavigation } from '@react-navigation/native'
-
+import { SafeAreaView } from 'react-native-safe-area-context';
+import colors from '../../theme';
+import { ScrollView } from 'react-native-gesture-handler';
+import facebookIcon from '../../../assets/icons/facebook.png'
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -21,26 +22,14 @@ export default function LeadsView(){
 
     return (
 
-        <>
-            <View style={styles.header} >
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#FFF"
-                />
-                <View style={styles.backButtonContainer}>
-                    <TouchableOpacity
-                        style={styles.backButtonHeader}
-                        onPress={handleNavigateToHomePage}
-                    >
-                        <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
-                    </TouchableOpacity>
-                    <View style={styles.pageTitleContainer}>
-                            <Text style={styles.pageTitle}>
-                                Lista de Leads
-                            </Text>
-                    </View>
-                </View>
-            </View>
+        <SafeAreaView style={styles.container}>
+            <HeaderActions 
+                backButtonFunc={handleNavigateToHomePage}
+                backButtonColor="#FFF"
+                headerColor={colors.imobcasaPrimary}
+            >
+                <Text style={styles.pageTitle}>Lista de Leads</Text>    
+            </HeaderActions>   
             <Tab.Navigator
                 initialRouteName="todayleads"
                 tabBarOptions={{
@@ -51,7 +40,7 @@ export default function LeadsView(){
                         height: "100%",
                     },
                     labelStyle:{
-                        fontFamily: 'Poppins_400Regular',
+                        fontFamily: 'Poppins_600SemiBold',
                         fontSize: 14,
                         margin: 0,
                     },
@@ -65,36 +54,45 @@ export default function LeadsView(){
                     name="todayleads" 
                     component={TodayLeads} 
                     options={{
-                        tabBarLabel: "Hoje"
+                        tabBarLabel: "Aguardando"
                     }}
                 />
                 <Tab.Screen 
                     name="overdueleads" 
                     component={OverdueLeads} 
                     options={{
-                        tabBarLabel: "Atrasados"
+                        tabBarLabel: "Em andamento"
                     }}
                 />
                 <Tab.Screen 
                     name="commingleads" 
                     component={CommingLeads}
                     options={{
-                        tabBarLabel: "Próximos"
+                        tabBarLabel: "Concluídos"
                     }}
                 />
             </Tab.Navigator>
-        </>
+        </SafeAreaView>
     )
 }
 
 
 function TodayLeads(){
     return (
-        <View style={styles.contentContainer}>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+            <Text style={styles.itemGroupName}>Não respondidas(1)</Text>
             <ItemCard 
-                title="Jamilson Ismaly"
-                subtitle="5 Dias aguardando"
-                modal={{
+                topText="José da Silva"
+                middleIcon={<Image source={facebookIcon} style={styles.socialIcon}/>}
+                middleText="[Tatuapé] Tatuapé"
+                leftBottomText="Vagner Fernando Zanella"
+                customRightText={{
+                    text: "Duas Aguardando",
+                    value: 5,
+                    valueBackgroundColor: colors.textInput
+                }}
+                
+                modalOptions={{
                     title: "Selecione uma opção abaixo",
                     options: [
                         {
@@ -129,64 +127,207 @@ function TodayLeads(){
                         },
                     ]
                 }}
-            />
-            <ItemCard 
-                title="Ribamar Marromenu"
-                subtitle="99 Dias aguardando"
-                modal={{
-                    title: "Selecione uma opção abaixo",
-                    options: [
-                        {
-                            id: "1",
-                            name: "Entrar em contato",
-                            pageToNavigate: `whatsapp://send?phone=${'+55119999999999'}`,
-                            isPageExternalLink: true
-                        },
-                        {
-                            id: "2",
-                            name: "Mais detalhes",
-                            pageToNavigate: "leadview",
-                            isPageExternalLink: false,
-                            navigationParameters: {
-                                leadid: 1223232323,
-                            }
-                        },
-                        {
-                            id: "3",
-                            name: "Editar",
-                            pageToNavigate: "leadedit",
-                            isPageExternalLink: false,
-                            navigationParameters: {
-                                leadid: 12121212121
-                            }
-                        },
-                        {
-                            id: "4",
-                            name: "Ver tarefas",
-                            pageToNavigate: "home",
-                            isPageExternalLink: false
-                        },
-                    ]
-                }}
-            />
-        </View>
+            />          
+        </ScrollView>
     )
 }
 function OverdueLeads(){
     return (
-        <View style={styles.contentContainer}>
-            <Text style={styles.title}>
-                Leads View atrasados
-            </Text>
-        </View>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+            <Text style={styles.itemGroupName}>Pendentes(1)</Text>
+            <ItemCard 
+                topText="José da Silva"
+                middleIcon={<Image source={facebookIcon} style={styles.socialIcon}/>}
+                middleText="[Tatuapé] Tatuapé"
+                leftBottomText="Vagner Fernando Zanella"
+                customRightText={{
+                    text: "Duas Aguardando",
+                    value: 5,
+                    valueBackgroundColor: colors.textInput
+                }}
+                
+                modalOptions={{
+                    title: "Selecione uma opção abaixo",
+                    options: [
+                        {
+                            id: "1",
+                            name: "Entrar em contato",
+                            pageToNavigate: `whatsapp://send?phone=${'+55119999999999'}`,
+                            isPageExternalLink: true
+                        },
+                        {
+                            id: "2",
+                            name: "Mais detalhes",
+                            pageToNavigate: "leadview",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 1223232323,
+                            }
+                        },
+                        {
+                            id: "3",
+                            name: "Editar",
+                            pageToNavigate: "leadedit",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 12121212121
+                            }
+                        },
+                        {
+                            id: "4",
+                            name: "Ver tarefas",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                    ]
+                }}
+            />          
+            <Text style={styles.itemGroupName}>Futuras(1)</Text>
+            <ItemCard 
+                topText="José da Silva"
+                middleIcon={<Image source={facebookIcon} style={styles.socialIcon}/>}
+                middleText="[Tatuapé] Tatuapé"
+                leftBottomText="Vagner Fernando Zanella"
+                  rightBottomText={{
+                    text:"Visita agendada para 12 horas",
+                    textColor: colors.textHiperlink
+                }}
+                
+                modalOptions={{
+                    title: "Selecione uma opção abaixo",
+                    options: [
+                        {
+                            id: "1",
+                            name: "Entrar em contato",
+                            pageToNavigate: `whatsapp://send?phone=${'+55119999999999'}`,
+                            isPageExternalLink: true
+                        },
+                        {
+                            id: "2",
+                            name: "Mais detalhes",
+                            pageToNavigate: "leadview",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 1223232323,
+                            }
+                        },
+                        {
+                            id: "3",
+                            name: "Editar",
+                            pageToNavigate: "leadedit",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 12121212121
+                            }
+                        },
+                        {
+                            id: "4",
+                            name: "Ver tarefas",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                    ]
+                }}
+            />        
+        </ScrollView>
     )
 }
 function CommingLeads(){
     return (
-        <View style={styles.contentContainer}>
-            <Text style={styles.title}>
-                Leads View próximos dias
-            </Text>
-        </View>
+<ScrollView contentContainerStyle={styles.contentContainer}>
+            <Text style={styles.itemGroupName}>Concluídos(2)</Text>
+            <ItemCard 
+                topText="José da Silva"
+                middleIcon={<Image source={facebookIcon} style={styles.socialIcon}/>}
+                middleText="[Tatuapé] Tatuapé"
+                leftBottomText="Vagner Fernando Zanella"
+                rightBottomText={{
+                    text:"Arquivado - Sem contato",
+                    textColor: colors.textInput
+                }}
+                
+                modalOptions={{
+                    title: "Selecione uma opção abaixo",
+                    options: [
+                        {
+                            id: "1",
+                            name: "Entrar em contato",
+                            pageToNavigate: `whatsapp://send?phone=${'+55119999999999'}`,
+                            isPageExternalLink: true
+                        },
+                        {
+                            id: "2",
+                            name: "Mais detalhes",
+                            pageToNavigate: "leadview",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 1223232323,
+                            }
+                        },
+                        {
+                            id: "3",
+                            name: "Editar",
+                            pageToNavigate: "leadedit",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 12121212121
+                            }
+                        },
+                        {
+                            id: "4",
+                            name: "Ver tarefas",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                    ]
+                }}
+            />          
+            <ItemCard 
+                topText="José da Silva"
+                middleIcon={<Image source={facebookIcon} style={styles.socialIcon}/>}
+                middleText="[Tatuapé] Tatuapé"
+                leftBottomText="Vagner Fernando Zanella"
+                rightBottomText={{
+                    text:"Negócio fechado em 15/04/2020",
+                    textColor: colors.success
+                }}
+                
+                modalOptions={{
+                    title: "Selecione uma opção abaixo",
+                    options: [
+                        {
+                            id: "1",
+                            name: "Entrar em contato",
+                            pageToNavigate: `whatsapp://send?phone=${'+55119999999999'}`,
+                            isPageExternalLink: true
+                        },
+                        {
+                            id: "2",
+                            name: "Mais detalhes",
+                            pageToNavigate: "leadview",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 1223232323,
+                            }
+                        },
+                        {
+                            id: "3",
+                            name: "Editar",
+                            pageToNavigate: "leadedit",
+                            isPageExternalLink: false,
+                            navigationParameters: {
+                                leadid: 12121212121
+                            }
+                        },
+                        {
+                            id: "4",
+                            name: "Ver tarefas",
+                            pageToNavigate: "home",
+                            isPageExternalLink: false
+                        },
+                    ]
+                }}
+            />        
+        </ScrollView>
     )
 }

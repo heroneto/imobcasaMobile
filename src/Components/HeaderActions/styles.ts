@@ -3,41 +3,23 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
-        marginTop: 40,
         justifyContent: 'space-between',
+        alignItems: 'center',
         paddingHorizontal: 10,
         paddingVertical: 5,
     },
-    myselfContainer: {
-        // width: "10%",
-        // flex: .2,
-        alignSelf: 'center',
-        // width: 48,
-        // height: 48,
-        // borderRadius: 50,
-        backgroundColor: 'rgba(100, 100, 100, 0)',
-        justifyContent: 'center',
+    backButtonContainer: {
         flexDirection: 'row',
-        alignItems:'center'
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingHorizontal: 10,
     },
-    myselfImage: {
+    backButton: {
         width: 48,
         height: 48,
         borderRadius: 50,
-    },
-    headerOptionsContainer: {
-        flexDirection: 'row',
-    },
-    settingsButton: {
-        alignSelf: 'center',
-        width: 32,
-        height: 32,
-        borderRadius: 50,
-        backgroundColor: 'rgba(100, 100, 100, 0)',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        alignItems:'center'
-    },
+        justifyContent: "center",
+    },   
     searchButton: {
         alignSelf: 'center',
         width: 32,
@@ -47,22 +29,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems:'center'
-    },
-    backButtonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-    },
-    backButtonHeader: {
-        width: 32,
-        height: 32,
-        borderRadius: 50,
-        backgroundColor: 'rgba(100,100,100,0)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
+    }
 })
 
 export default styles

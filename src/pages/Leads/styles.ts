@@ -3,21 +3,14 @@ import colors from '../../theme'
 
 
 const styles = StyleSheet.create({
-    header: {
-        backgroundColor: colors.imobcasaPrimary,
-    },
-    backButtonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-    },
-    pageTitleContainer: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+    container: {
+        flex: 1,
+        backgroundColor: colors.background,        
+    }, 
     pageTitle: {
         fontFamily: 'Poppins_700Bold',
         color: '#FFF',
+        fontSize: 18,
     },
     backButtonHeader: {
         width: 32,
@@ -37,6 +30,16 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         backgroundColor: colors.background,
+    },
+    itemGroupName: {
+        textAlign: 'center',
+        fontSize: 14,
+        fontFamily: 'Poppins_700Bold',
+        marginVertical: 12,
+    },
+    socialIcon: {
+        width: 18,
+        height: 18,                
     }
 })
 

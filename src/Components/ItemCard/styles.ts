@@ -2,54 +2,75 @@ import { StyleSheet } from 'react-native'
 import colors from '../../theme'
 
 const styles = StyleSheet.create({
-    container:{
+    cardButton: {
+        flex: 1,
         backgroundColor: '#FFF',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
         elevation: 6,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        height: 80,
+        marginHorizontal: 5,
         marginVertical: 5,
     },
-    itemContentContainer: {
+    cardColor: {
+        width: 8,
+        backgroundColor: colors.imobcasaPrimary,
+    },
+    cardBody: {
+        flex: 1,
+        padding: 8,
+    },
+    header: {
+        flex: 1,
+    },
+    content: {
+        flex: 2,
         flexDirection: 'row',
-
+        alignItems: 'center',
+        paddingVertical: 10,
     },
-    itemColorIndicator: {
-        borderColor: colors.textInput,
-        borderWidth: 5,
-        height: '100%',
+    bottom: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-    itemTextContainer: {
-        justifyContent: 'center',
-        marginLeft: 15,
-    },
+    divider: {
+        flex: 1,
+        height: 1,
+        backgroundColor: colors.textInactive
+    },  
     subtitle: {
         fontFamily: 'Poppins_400Regular',
         fontSize: 12,
         color: colors.textInput,
+        marginLeft: 5,
     },
     title: {
         fontFamily: 'Poppins_600SemiBold',
         fontSize: 18,
         color: colors.textInput,
     },
-    itemButtonContainer: {
+
+    customTextContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'                ,
+    },
+    cardCustomTextContainer: {
+        backgroundColor: colors.textInput,
+        borderRadius: 100,
+        padding: 4,       
+        width: 28,
+        height: 28,
         justifyContent: 'center',
         alignItems: 'center',
+        fontFamily: 'Poppins_400Regular',        
     },
-    itemButton: {
-        padding: 5,
-        width: 32,
-        height: 32,
-        borderRadius: 50,
-        backgroundColor: 'rgba(100,100,100,.0)'
+    cardCustomText: {
+        color: '#FFF',
+        fontSize: 14,
+    },
+    customText: {
+        marginLeft: 5,
     }
 })
 
