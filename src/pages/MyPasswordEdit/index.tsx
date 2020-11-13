@@ -25,11 +25,9 @@ const MyPasswordEdit : React.FC<MyPasswordEditProps> = ({route}) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <FormPageHeader 
+            <FormPageHeader 
                     backButtomAction={goBack}
                 />
-            </View>
             <View style={styles.contentTitleContainer}>
                 <Text style={styles.contentTitle}>
                         Shhhhhh....
@@ -72,10 +70,6 @@ const MyPasswordEdit : React.FC<MyPasswordEditProps> = ({route}) => {
                     />
                 </View>
             </View>
-            <View style={styles.pageActionsContainer}>
-
-            </View>
-        
     </View>
     )
 }

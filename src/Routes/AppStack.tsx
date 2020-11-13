@@ -2,9 +2,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import LoginView from '../pages/Login'
-import HomeView from '../pages/Home'
 import LeadsView from '../pages/Leads'
-import TasksView from '../pages/Tasks'
 import TaskView from '../pages/TaskView'
 import NewTaskView from '../pages/NewTask'
 import LeadView from '../pages/LeadView'
@@ -32,12 +30,10 @@ function AppStack(){
                 // cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
             }}>
                 <Screen name="login" component={LoginView} />
-                <Screen name="home" component={HomeView} />
                 <Screen name="leads" component={LeadsView} />
                 <Screen name="newlead" component={NewLead} />
                 <Screen name="leadview" component={LeadView} />
                 <Screen name="leadedit" component={LeadEdit} />
-                <Screen name="tasks" component={TasksView} />
                 <Screen name="taskview" component={TaskView} />
                 <Screen name="newtask" component={NewTaskView} />
                 <Screen name="taskedit" component={TaskEdit} />

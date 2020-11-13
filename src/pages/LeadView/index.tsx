@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import WhatsAppIcon from '../../../assets/icons/WhatsApp.png'
 import colors from '../../theme'
+import FormPageHeader from '../../Components/HeaderFormContainer'
 
 interface LeadViewProps {
     route: any
@@ -32,21 +33,9 @@ const LeadView : React.FC<LeadViewProps> = ({route}) => {
 
     return (
         <View style={styles.container}>
-            <View>
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
-                />
-                <View style={styles.backButtonContainer}>
-                    <TouchableOpacity
-                        style={styles.backButtonHeader}
-                        onPress={handleNavigateToLeadsPage}
-                    >
-                            <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </TouchableOpacity>
-                </View>
-                
-            </View>
+            <FormPageHeader
+                backButtomAction={handleNavigateToLeadsPage}
+            />          
             <View style={styles.leadHeaderContainer}>
                 <View style={styles.leadNameContainer}>
                     <Text style={styles.leadName}>José da Silva Junior</Text>

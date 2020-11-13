@@ -6,22 +6,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background,
     },
-    headerContainer: {
-        flex: .2,
-    },
     contentTitleContainer: {
         padding: 10,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        flex: .2,
     },
     contentContainer: {
         paddingHorizontal: 20,
-        flex: .5,
-    },
-    pageActionsContainer: {
-        paddingHorizontal: 20,
-        flex: .1
     },
     inputTitle: {
         fontFamily: 'Poppins_700Bold',
@@ -37,7 +28,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 80,
         marginTop: 20,
         marginBottom: 50,
-        height: '25%',
         justifyContent: 'flex-end',
     },
     inputGroup: {

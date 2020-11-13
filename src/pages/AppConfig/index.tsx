@@ -1,16 +1,16 @@
 import React, {useState} from 'react'
-import { View, Text, RefreshControl, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
+import { View, Text, RefreshControl, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../Components/HeaderActions'
 import { ScrollView } from 'react-native-gesture-handler'
 import DashboardGroup from '../../Components/DashboardGroup'
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../theme'
 import { Ionicons } from '@expo/vector-icons'; 
+import FormPageHeader from '../../Components/HeaderFormContainer'
 
 export default function AppConfig(){
     const [ refreshing, setRefreshing ] = useState(false)
-    const { navigate, goBack } = useNavigation()
+    const { goBack } = useNavigation()
     const [ titleAlpha, setTitleAlpha ] = useState(100)
     
     const onRefresh = async () => {
@@ -21,10 +21,6 @@ export default function AppConfig(){
         }, 2000)
     }
 
-    function handleNavigateToSearchPage(){
-        navigate('search')
-    }
-
     function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>){
         const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
         setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
@@ -33,20 +29,9 @@ export default function AppConfig(){
 
     return (
         <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
-                />
-            </View>
-            <View style={styles.backButtonContainer}>
-                    <TouchableOpacity
-                        style={styles.backButtonHeader}
-                        onPress={goBack}
-                    >
-                        <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                    </TouchableOpacity>
-            </View>
+            <FormPageHeader
+                backButtomAction={goBack}
+            />                  
             <ScrollView
                 contentContainerStyle={styles.scrollView}
                 refreshControl={

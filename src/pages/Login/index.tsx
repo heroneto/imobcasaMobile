@@ -16,7 +16,7 @@ export default function LoginView(){
     const [ isRememberMeSelected, setIsRememberMeSelected ] = useState(false)
     const [ isKeyboardOpen, setIsKeyboardOpen ] = useState(false)
     function handleNavigateToHomePage(){
-        navigate('home')
+        navigate('leads')
     }
     
     useEffect(() => {

@@ -15,6 +15,7 @@ interface TaskViewProps {
 }
 
 const TaskView : React.FC<TaskViewProps> = ({route}) => {
+    const [ imageUrl, setImageUrl ] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
     const { taskid } = route.params
     const {navigate, goBack} = useNavigation()
 
@@ -34,17 +35,25 @@ const TaskView : React.FC<TaskViewProps> = ({route}) => {
         <View style={styles.container}>
             <View>
                 <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
+                    headerColor=""
+                    imageUrl={imageUrl}
+                    children={
+                        <TouchableOpacity
+                            style={styles.backButtonHeader}
+                            onPress={goBack}
+                        >
+                                <Ionicons name="ios-arrow-back" size={24} color="#000" />
+                        </TouchableOpacity>
+                    }
                 />
-                <View style={styles.backButtonContainer}>
+                {/* <View style={styles.backButtonContainer}>
                     <TouchableOpacity
                         style={styles.backButtonHeader}
-                        onPress={handleNavigateToTasksPage}
+                        onPress={goBack}
                     >
                             <Ionicons name="ios-arrow-back" size={24} color="#000" />
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 
             </View>
             <View style={styles.pageHeaderContainer}>

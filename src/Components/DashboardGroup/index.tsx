@@ -4,12 +4,15 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import styles from './styles';
 import ModalView from '../ModalView';
 import {ModalProps} from '../Shared'
+import { useNavigation } from '@react-navigation/native'
 
 interface DashboardItemProps {
     name: string,
     count: number,
     color: string,
     id: string,
+    nestedRouteName?: string,
+    pageToNavigate?: string
 }
 
 interface DashboardGroupProps {
@@ -19,6 +22,7 @@ interface DashboardGroupProps {
 }
 
 const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) => {
+    const { navigate } = useNavigation()
     const [ isShowingModal, setIsShowingModal ] = useState(false)
 
     function showModal(){
@@ -28,6 +32,9 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
     function closeModal(){
         setIsShowingModal(false)
     }
+
+
+  
 
     return (
         <>
@@ -52,6 +59,7 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                                 <TouchableOpacity
                                     style={styles.itemButton}
                                     key={item.id}
+                                    onPress={() => navigate(item.pageToNavigate, {inicialRoute: item.nestedRouteName})}
                                 >
                                     <View style={{
                                         ...styles.itemContainerCountText,

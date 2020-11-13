@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins_700Bold',
         color: '#FFF',
         fontSize: 18,
+        marginTop: 18,
     },
     backButtonHeader: {
         width: 32,

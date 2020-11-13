@@ -26,11 +26,9 @@ const MyUserEdit : React.FC<MyUserEditProps> = ({route}) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.headerContainer} >
-                <FormPageHeader 
+            <FormPageHeader 
                     backButtomAction={goBack}
                 />
-            </View>
             <View style={styles.contentContainer} >
                 <View style={styles.inputGroup}>
                     <Text style={styles.inputTitle}>

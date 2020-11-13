@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import styles from './styles'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -9,29 +9,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
 import facebookIcon from '../../../assets/icons/facebook.png'
+import FloatButton from '../../Components/FloatButton';
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function LeadsView(){
-    const { navigate } = useNavigation()
+const LeadsView = () => {
+    const [ imageUrl, setImageUrl ] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
 
-
-    function handleNavigateToHomePage(){
-        navigate('home')
-    }
 
     return (
 
         <SafeAreaView style={styles.container}>
             <HeaderActions 
-                backButtonFunc={handleNavigateToHomePage}
-                backButtonColor="#FFF"
                 headerColor={colors.imobcasaPrimary}
-            >
-                <Text style={styles.pageTitle}>Lista de Leads</Text>    
-            </HeaderActions>   
+                imageUrl={imageUrl}
+                children={<Text style={styles.pageTitle}>Lista de Leads</Text>}
+            />
+                
             <Tab.Navigator
-                initialRouteName="todayleads"
+                initialRouteName="0"
                 tabBarOptions={{
                     style: styles.navigatorContainer,
                     activeTintColor: "#FFF",
@@ -51,27 +47,31 @@ export default function LeadsView(){
                 
             >
                 <Tab.Screen 
-                    name="todayleads" 
+                    name="0" 
                     component={TodayLeads} 
                     options={{
                         tabBarLabel: "Aguardando"
                     }}
                 />
                 <Tab.Screen 
-                    name="overdueleads" 
+                    name="1" 
                     component={OverdueLeads} 
                     options={{
                         tabBarLabel: "Em andamento"
                     }}
                 />
                 <Tab.Screen 
-                    name="commingleads" 
+                    name="2" 
                     component={CommingLeads}
                     options={{
                         tabBarLabel: "Concluídos"
                     }}
                 />
             </Tab.Navigator>
+
+            <FloatButton 
+                pageToNavigate="newlead"
+            />
         </SafeAreaView>
     )
 }
@@ -127,7 +127,7 @@ function TodayLeads(){
                         },
                     ]
                 }}
-            />          
+            />        
         </ScrollView>
     )
 }
@@ -331,3 +331,5 @@ function CommingLeads(){
         </ScrollView>
     )
 }
+
+export default LeadsView
