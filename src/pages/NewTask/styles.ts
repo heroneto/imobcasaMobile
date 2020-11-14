@@ -1,6 +1,7 @@
 
 import {StyleSheet} from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     titleText: {
-        fontFamily: 'Poppins_700Bold',      
+        fontFamily: fonts.primary.bold,
         textAlign: 'center',
         fontSize: 36
     },
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     inputTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
     },
     formActions: {
@@ -35,13 +36,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     textMultiLineInput: {
-        fontFamily: 'Archivo_400Regular',
+        fontFamily: fonts.secondary.regular,
         fontSize: 16,
         padding: 5,
         color: colors.textInput
     },
     textMultiLineTextCount: {
-        fontFamily: 'Archivo_400Regular',
+        fontFamily: fonts.secondary.regular,
         fontSize: 10,
         color: colors.textInputLabel,
     },
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textLabel: {
-        fontFamily: 'Archivo_400Regular',
+        fontFamily: fonts.secondary.regular,
         fontSize: 16,
     },
     dateButtonContainer: {

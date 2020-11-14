@@ -4,9 +4,9 @@ import * as Facebook from 'expo-facebook'
 import styles from './styles'
 import StandardButton from '../../Components/StandardButton'
 import axios from 'axios'
-import SinglePicker from '../../Components/SinglePicker'
+// import SinglePicker from '../../Components/SinglePicker'
 import HeaderActions from '../../Components/HeaderActions'
-import colors from '../../theme'
+import colors from '../../theme/colors'
 
 export default function FacebookLogin(){
     const [ isLogged, setIsLogged ] = useState(false)

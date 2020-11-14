@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     },
     modalTitleText: {
         color: colors.imobcasaPrimary,
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 16,
     },
     modalButton: {

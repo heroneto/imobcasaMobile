@@ -4,7 +4,7 @@ import styles from './styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import DashboardGroup from '../../Components/DashboardGroup'
 import { useNavigation } from '@react-navigation/native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
 import { Ionicons } from '@expo/vector-icons'; 
 import FormPageHeader from '../../Components/HeaderFormContainer'
 

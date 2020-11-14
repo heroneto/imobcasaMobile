@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -17,10 +18,10 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     pageTitle: {
-        fontFamily:'Poppins_700Bold'
+        fontFamily: fonts.primary.bold
     },
     profileName: {
-        fontFamily: 'Archivo_400Regular',
+        fontFamily: fonts.secondary.regular,
         fontSize: 14,
         color: colors.textInput
     },

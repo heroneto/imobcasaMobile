@@ -1,5 +1,6 @@
 import { StyleSheet, BackHandler } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container:{
@@ -69,11 +70,11 @@ const styles = StyleSheet.create({
 
     },
     wellcomeTextPrimary: {
-        fontFamily: 'Poppins_600SemiBold',
+        fontFamily: fonts.primary.semiBold,
         fontSize: 36
     },
     wellcomeTextSecondary: {
-        fontFamily: 'Archivo_400Regular',
+        fontFamily: fonts.secondary.regular,
         fontSize: 14
     },
     bottomContainer: {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     },
     bottomText: {
         color: colors.textInput,
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 18,
     }
 

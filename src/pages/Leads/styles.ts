@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 
 const styles = StyleSheet.create({
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,        
     }, 
     pageTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         color: '#FFF',
         fontSize: 18,
         marginTop: 18,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     itemGroupName: {
         textAlign: 'center',
         fontSize: 14,
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         marginVertical: 12,
     },
     socialIcon: {

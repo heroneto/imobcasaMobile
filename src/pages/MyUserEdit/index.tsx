@@ -4,7 +4,7 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import BottomInput from '../../Components/BottonInput'
 import TopInput from '../../Components/TopInput'
-import colors from '../../theme'
+import colors from '../../theme/colors'
 import { Feather } from '@expo/vector-icons'; 
 import FormPageHeader from '../../Components/HeaderFormContainer'
 import StandardButton from '../../Components/StandardButton'

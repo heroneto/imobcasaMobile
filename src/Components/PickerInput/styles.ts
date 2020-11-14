@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     },
     inputedValue: {
         color: colors.textInput,
-        fontFamily: "Archivo_400Regular",
+        fontFamily: fonts.secondary.regular,
         fontSize: 16,
     }
 })

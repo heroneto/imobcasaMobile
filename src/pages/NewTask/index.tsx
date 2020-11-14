@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import InputContainer from '../../Components/InputContainer';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons'; 
-import colors from '../../theme';
+import colors from '../../theme/colors';
 import moment from 'moment'
 import PickerInput from '../../Components/PickerInput';
 

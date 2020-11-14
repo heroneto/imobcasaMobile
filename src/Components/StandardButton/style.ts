@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     submitButton: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     submitButtonText: {
         color: '#FFF',
         fontSize: 18,
-        fontFamily: 'Archivo_700Bold',
+        fontFamily: fonts.secondary.bold,
         textAlign: 'center',
         // width: '100%',
     },

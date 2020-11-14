@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background, 
     },
     inputTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
     },
     formContent: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     contentTitle: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 36,
     }
 })

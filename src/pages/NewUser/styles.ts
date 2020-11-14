@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -26,6 +27,8 @@ const styles = StyleSheet.create({
     backButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        width:50,
+        marginRight: 5,
     },
     backButtonHeader: {
         marginLeft: 10,
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     inputTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
     },
     formContent: {
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     contentTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 24,
         textAlign: 'center'
     },
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         flex: .9
     },
     messageText: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
         textAlign: 'center'
     },
@@ -86,10 +89,6 @@ const styles = StyleSheet.create({
     },
     saveButtonContainer: {
         width: 200,
-    },
-    backButtonContainer: {
-        width:50,
-        marginRight: 5,
     }
 })
 

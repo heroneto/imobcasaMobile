@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 
 const styles = StyleSheet.create({
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     formTitle: {
         fontSize: 32,
         color: colors.textTitle,
-        fontFamily: 'Poppins_600SemiBold'
+        fontFamily: fonts.primary.semiBold
     },
     formContainer: {
         paddingVertical: 10,
@@ -65,13 +66,13 @@ const styles = StyleSheet.create({
     checkboxLabel: {
         marginVertical: 12,
         marginHorizontal: 8,
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.secondary.regular,
         color: colors.textHiperlinkAlternative,
         fontSize: 12
     },
     forgotPasswordLink: {
         alignSelf: 'center',
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         color: colors.textHiperlinkAlternative,
         fontSize: 12
     },

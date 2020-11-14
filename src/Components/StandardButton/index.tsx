@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { RectButton, RectButtonProperties } from 'react-native-gesture-handler'
 import { Text } from 'react-native'
 import styles from './style'
-import colors from '../../theme'
+import colors from '../../theme/colors'
 
 
 interface StandardButtonProps extends RectButtonProperties {

@@ -6,7 +6,7 @@ import HeaderActions from '../../Components/HeaderActions';
 import ItemCard from '../../Components/ItemCard';
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import colors from '../../theme';
+import colors from '../../theme/colors'
 import { ScrollView } from 'react-native-gesture-handler';
 import facebookIcon from '../../../assets/icons/facebook.png'
 import FloatButton from '../../Components/FloatButton';

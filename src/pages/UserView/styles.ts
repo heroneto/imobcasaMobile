@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -26,12 +27,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     pageHeaderTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 24,
         
     },
     pageHeaderSubtitle: {
-        fontFamily: 'Poppins_600SemiBold',
+        fontFamily: fonts.primary.semiBold,
         fontSize: 14,
         
     },
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonText: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
         color: '#FFF',
     },
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     headerTitle: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
     },
     headerLine: {
@@ -124,11 +125,11 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     category: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 12
     },
     value: {
-        fontFamily: 'Archivo_700Bold',
+        fontFamily: fonts.secondary.bold,
         fontSize: 16,
         color: colors.textInput
     }

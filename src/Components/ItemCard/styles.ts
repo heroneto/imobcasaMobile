@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     cardButton: {
@@ -39,13 +40,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.textInactive
     },  
     subtitle: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 12,
         color: colors.textInput,
         marginLeft: 5,
     },
     title: {
-        fontFamily: 'Poppins_600SemiBold',
+        fontFamily: fonts.primary.semiBold,
         fontSize: 18,
         color: colors.textInput,
     },
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
         height: 28,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Poppins_400Regular',        
+        fontFamily: fonts.primary.regular,        
     },
     cardCustomText: {
         color: '#FFF',

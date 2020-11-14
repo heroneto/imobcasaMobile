@@ -7,7 +7,7 @@ import * as Facebook from 'expo-facebook'
 import { Ionicons } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 import StandardButton from '../../../../Components/StandardButton'
-import colors from '../../../../theme'
+import colors from '../../../../theme/colors'
 
 const FacebookLogin : React.FC = () => {
     const { goBack, navigate } = useNavigation()

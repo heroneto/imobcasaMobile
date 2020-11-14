@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
 
 const styles = StyleSheet.create({
     headerContainer: {
         padding: 10,
-        marginTop: 30,
+        // marginTop: 30,
     },
     backButtonHeader: {
         padding: 5,

@@ -7,7 +7,7 @@ import TopInput from '../../Components/TopInput'
 import BottomInput from '../../Components/BottonInput'
 import StandardButton from '../../Components/StandardButton'
 import { Ionicons } from '@expo/vector-icons';
-import colors from '../../theme'
+import colors from '../../theme/colors'
 import { useNavigation } from '@react-navigation/native'
 
 

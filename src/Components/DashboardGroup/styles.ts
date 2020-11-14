@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme'
+import colors from '../../theme/colors'
 import { padEnd } from 'lodash'
+import fonts from '../../theme/fonts'
 
 const styles = StyleSheet.create({
     container: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     headerText: {
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 18,
     },
     lineHeader: {
@@ -52,12 +53,12 @@ const styles = StyleSheet.create({
         height: 48,
     },
     itemCountText: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 18,
         color: '#FFF',
     },
     itemNameText: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 16,
         color: colors.textInput,
         marginLeft: 10
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     },
     modalTitleText: {
         color: colors.imobcasaPrimary,
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: fonts.primary.bold,
         fontSize: 14,
     },
     modalButton: {
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     modalOptionText: {
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: fonts.primary.regular,
         fontSize: 12,
         color: colors.textInput
     }

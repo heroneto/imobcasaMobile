@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 
 
 import WhatsAppIcon from '../../../assets/icons/WhatsApp.png'
-import colors from '../../theme'
+import colors from '../../theme/colors';
 
 interface TaskViewProps {
     route: any
