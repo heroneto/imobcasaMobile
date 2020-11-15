@@ -19,22 +19,11 @@ const styles = StyleSheet.create({
     formActions: {
         width: "100%",
         paddingHorizontal: 80,
-        flex: .3,
         justifyContent: 'flex-end',
     },
     inputGroup: {
         padding: 10,
     },
-    contentTitleContainer: {
-        flex: .2,
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    contentTitle: {
-        fontFamily: fonts.primary.regular,
-        fontSize: 36,
-    }
 })
 
 export default styles

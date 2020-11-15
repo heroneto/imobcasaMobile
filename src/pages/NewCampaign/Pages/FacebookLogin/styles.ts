@@ -7,25 +7,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background
     },
-    headerContainer: {
-        flex: .2,
-    },
     contentContainer: {
-        flex: .6,
+        height: "70%",
         justifyContent: 'space-evenly'
     },
     pageActionsContainer: {
-        flex: .2,
+        height: "30%",
         justifyContent: 'center',
-    },
-    backButtonHeader: {
-        padding: 5,
-        width: 32,
-        height: 32,
-        borderRadius: 50,
-        backgroundColor: 'rgba(100,100,100,0)',
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     contentTextContainer: {
         paddingHorizontal: 25,

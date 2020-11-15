@@ -7,15 +7,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background
     },
-    headerContainer: {
-        flex: .2,
-    },
     contentContainer: {
-        flex: .6,
+        height: "70%",
         justifyContent: 'space-evenly'
     },
     pageActionsContainer: {
-        flex: .2,
+        height: "30%",
         justifyContent: 'center',
     },
     backButtonHeader: {

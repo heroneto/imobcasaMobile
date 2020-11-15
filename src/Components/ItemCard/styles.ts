@@ -11,10 +11,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         marginVertical: 5,
     },
-    cardColor: {
-        width: 8,
-        backgroundColor: colors.imobcasaPrimary,
-    },
     cardBody: {
         flex: 1,
         padding: 8,
@@ -44,6 +40,10 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: colors.textInput,
         marginLeft: 5,
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        
     },
     title: {
         fontFamily: fonts.primary.semiBold,

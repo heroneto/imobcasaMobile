@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     contentContainer: {
         justifyContent: 'center',
         paddingHorizontal: 20,
+        height: '100%',
     },
     inputTitle: {
         fontFamily: fonts.primary.bold,

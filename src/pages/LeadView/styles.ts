@@ -6,6 +6,7 @@ import fonts from '../../theme/fonts'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.background
     },
     leadHeaderContainer: {
         justifyContent: 'center',

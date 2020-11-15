@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     },
     backButtonContainer: {
         width: '100%',
+        height: 50,        
         flexDirection: 'row',
-        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 10,
     },

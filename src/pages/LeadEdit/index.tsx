@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 import PickerInput from '../../Components/PickerInput';
 
 import * as data from '../appData.json'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface LeadEditProps {
     route: any
@@ -47,7 +48,11 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
     }
 
     return (
-        <ScrollView style={styles.container} onScroll={(event) => handleContentOffsetChanges(event)}>
+        <SafeAreaView style={styles.container}>
+            <ScrollView
+                style={styles.container}
+                onScroll={(event) => handleContentOffsetChanges(event)}
+            >
             <FormPageHeader 
                 backButtomAction={goBack}
             />
@@ -173,8 +178,10 @@ const LeadEdit : React.FC<LeadEditProps> = ({route}) => {
                     />
                 </View>
             </View>
+            </ScrollView>
             
-        </ScrollView>
+            
+        </SafeAreaView>
     )
 }
 

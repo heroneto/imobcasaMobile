@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles'
-import { View, Text, TouchableOpacity } from 'react-native'
-import HeaderActions from '../../../../Components/HeaderActions'
+import { View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import StandardButton from '../../../../Components/StandardButton'
 import colors from '../../../../theme/colors'
 import PickerInput from '../../../../Components/PickerInput'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import FormPageHeader from '../../../../Components/HeaderFormContainer'
 
 interface FacebookAdAccountSelectProps {
     route: any
@@ -62,7 +63,6 @@ const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route
             label: "Contas de anúncios",
             section: true
         },...adAccountsToShow])
-
     }
 
 
@@ -71,19 +71,10 @@ const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route
     }, [])
 
     return (
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <HeaderActions 
-                    imageurl="https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4"
-                    settingsIconColor="#000"
-                />
-                <TouchableOpacity
-                    style={styles.backButtonHeader}
-                    onPress={goBack}
-                >
-                    <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </TouchableOpacity>
-            </View>
+        <SafeAreaView style={styles.container}>
+            <FormPageHeader 
+                backButtomAction={goBack}
+            />
             <View style={styles.contentContainer}>
                 <View style={styles.contentTextContainer}>
                     <Text style={styles.contentText}>
@@ -119,7 +110,7 @@ const FacebookAdAccountSelect : React.FC<FacebookAdAccountSelectProps> = ({route
                     />
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
 
 }

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     formActions: {
         width: "100%",
         paddingHorizontal: 80,
-        marginTop: 20,
+        // marginTop: 20,
         marginBottom: 50,
     },
     formContent: {
