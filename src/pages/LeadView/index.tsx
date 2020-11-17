@@ -13,6 +13,7 @@ import FormPageHeader from '../../Components/HeaderFormContainer'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LeadStatus from './components/LeadStatus'
 import ButtonContainer from '../../Components/ButtonContainer'
+import ItemDetails from '../../Components/ItemDetails'
 
 interface LeadViewProps {
   route: any
@@ -36,7 +37,7 @@ const LeadView: React.FC<LeadViewProps> = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView >
+      <ScrollView>
         <FormPageHeader backButtomAction={handleNavigateToLeadsPage}/>
         <View style={styles.contentContainer}>
           <View style={styles.leadHeaderGroup}>
@@ -109,68 +110,53 @@ const LeadView: React.FC<LeadViewProps> = ({ route }) => {
 
         </View>
         <View style={styles.contentContainer}>
-          <View style={styles.contentGroup}>
-            <View style={styles.contentHeader}>
-              <Text style={styles.headerTitle}>
-                Dados do Lead
-                          </Text>
-              <View style={styles.headerLine} />
-            </View>
-            <View style={styles.content}>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Nome</Text>
-                <Text style={styles.value}>José da Silva Junior</Text>
-              </View>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Telefone</Text>
-                <Text style={styles.value}>(11) 9 99999-9999</Text>
-              </View>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Data do cadastro</Text>
-                <Text style={styles.value}>12/08/2020 às 21:45</Text>
-              </View>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Status</Text>
-                <Text style={styles.value}>Aguardando</Text>
-              </View>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Data da última alteração</Text>
-                <Text style={styles.value}>12/08/2020 às 22:00</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.contentGroup}>
-            <View style={styles.contentHeader}>
-              <Text style={styles.headerTitle}>
-                Fonte
-                          </Text>
-              <View style={styles.headerLine} />
-            </View>
-            <View style={styles.content}>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Fonte</Text>
-                <Text style={styles.value}>Facebook</Text>
-              </View>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Formulário</Text>
-                <Text style={styles.value}>Penha</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.contentGroup}>
-            <View style={styles.contentHeader}>
-              <Text style={styles.headerTitle}>
-                Responsável
-                          </Text>
-              <View style={styles.headerLine} />
-            </View>
-            <View style={styles.content}>
-              <View style={styles.contentItem}>
-                <Text style={styles.category}>Nome</Text>
-                <Text style={styles.value}>Heron Hideki de Queiroz Eto</Text>
-              </View>
-            </View>
-          </View>
+          <ItemDetails 
+            title="Dados do Lead"
+            itens={[
+              {
+               category: "Nome",
+               value: "José da Silva Junior"
+              },
+              {
+                category: "Telefone",
+                value: "(11) 9 99999-9999"
+              },
+              {
+                category: "Data do cadastro",
+                value: "12/08/2020 às 21:45"
+              },
+              {
+                category: "Status",
+                value: "Aguardando"
+              },
+              {
+                category: "Data da última alteração",
+                value: "12/08/2020 às 22:00"
+              }
+            ]}
+          />
+          <ItemDetails 
+            title="Fonte"
+            itens={[
+              {
+                category: "Fonte",
+                value: "Facebook"
+              },
+              {
+                category: "Campanha",
+                value: "Penha"
+              }
+            ]}
+          />
+          <ItemDetails 
+            title="Responsável"
+            itens={[
+              {
+                category: "Nome",
+                value: "Heron Eto"
+              }
+            ]}
+          />                 
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.contentHeader}>

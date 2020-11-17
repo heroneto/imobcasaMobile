@@ -7,28 +7,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background, 
     },
-        headerContainer: {
-            flex: .2,
-        },
-        contentTitleContainer: {
-            padding: 10,
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            flex: .2,
-        },
-        contentContainer: {
-            paddingHorizontal: 20,
-            flex: .5,
-        },
-        pageActionsContainer: {
-            paddingHorizontal: 20,
-            flex: .1
-        },
-    backButtonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width:50,
-        marginRight: 5,
+    
+    pageActionsContainer: {
+        paddingHorizontal: 20,
+        // flex: .1
     },
     backButtonHeader: {
         marginLeft: 10,
@@ -53,14 +35,12 @@ const styles = StyleSheet.create({
     formActionContainer: {
         width: "100%",
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10,
-        // flex: 1,
     },
     nextPageButtonContainer: {
-        width: 100,
-        height: 30,
+        width: 150,
     },
     inputGroup: {
         padding: 10,
@@ -74,7 +54,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        flex: .9
+        // flex: .9
     },
     messageText: {
         fontFamily: fonts.primary.bold,
@@ -89,6 +69,14 @@ const styles = StyleSheet.create({
     },
     saveButtonContainer: {
         width: 200,
+    },
+    inputAction: {
+        width: 24,
+        height: 24,
+        borderRadius: 100,
+        justifyContent: 'space-around',
+        flexDirection: 'row'
+        
     }
 })
 

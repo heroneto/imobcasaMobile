@@ -29,7 +29,10 @@ const InputContainer : React.FC<InputContainerProps> = ({children, inputRadiusSt
                     {label}
                 </Text>
             </View>
-            {children} 
+            <View style={styles.inputRow}>
+                {children}
+            </View>
+            
         </View>
     )
 }

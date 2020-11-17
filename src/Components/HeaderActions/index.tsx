@@ -10,10 +10,11 @@ import colors from '../../theme/colors';
 interface IHeaderActionsProps {
   headerColor: string,
   imageUrl: string,
-  enableBackButton?: boolean
+  enableBackButton?: boolean,
+  backButtonCustomAction?: any
 }
 
-const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, imageUrl, enableBackButton = false }) => {
+const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, imageUrl, enableBackButton = false, backButtonCustomAction }) => {
   const { navigate, goBack } = useNavigation()
   const [isShowingModal, setIsShowingModal] = useState(false)
 
@@ -53,7 +54,7 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, i
         {enableBackButton &&
           <TouchableOpacity
             style={styles.backButton}
-            onPress={goBack}
+            onPress={backButtonCustomAction || goBack}
           >
             <Ionicons name="ios-arrow-back" size={24} color={"#FFF"} />
           </TouchableOpacity>

@@ -5,12 +5,17 @@ const styles = StyleSheet.create({
         padding: 20,
         borderWidth: .5,
         borderColor: '#E6E6E6',
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
     },
     label: {
         color: "#C1BCCC",
         fontSize: 10
     },
+    inputRow: {
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-between",
+    }
 })
 
 export default styles

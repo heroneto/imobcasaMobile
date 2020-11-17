@@ -20,6 +20,8 @@ import MyPasswordEdit from '../pages/MyPasswordEdit'
 import NewCampaign from '../pages/NewCampaign/intex'
 import NewLead from '../pages/NewLead'
 import Campaigns from '../pages/Campaigns'
+import CampaignView from '../pages/CampaignView'
+import CampaignEdit from '../pages/CampaignEdit'
 const { Navigator, Screen } = createStackNavigator()
 
 
@@ -49,6 +51,8 @@ function AppStack(){
                 <Screen name="mypasswordedit" component={MyPasswordEdit} />
                 <Screen name="newcampaign" component={NewCampaign} />
                 <Screen name="campaigns" component={Campaigns} />
+                <Screen name="campaignview" component={CampaignView} />
+                <Screen name="campaignedit" component={CampaignEdit} />
             </Navigator>
         </NavigationContainer>
     )

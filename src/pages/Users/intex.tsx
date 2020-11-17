@@ -9,10 +9,18 @@ import ItemCard from '../../Components/ItemCard'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
 import { ScrollView } from 'react-native-gesture-handler';
+import ActiveUsers from './pages/ActiveUsers';
+import InactiveUsers from './pages/InactiveUsers';
+import FloatButton from '../../Components/FloatButton';
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function UsersList() {
+interface UsersListProps {
+  route: any
+}
+
+const UsersList : React.FC<UsersListProps> = ({route}) =>  {
+  const { inicialRoute } = route.params
   const { navigate, goBack } = useNavigation()
   const [ imageUrl, setImageUrl ] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
 
@@ -27,9 +35,10 @@ export default function UsersList() {
         imageUrl={imageUrl} 
         children={<Text style={styles.pageTitle}>Lista de Usuários do App</Text>}
         enableBackButton={true}
+        backButtonCustomAction={handleNavigateToAppConfigPage}
       />
       <Tab.Navigator
-        initialRouteName="0"
+        initialRouteName={inicialRoute || "0"}
         tabBarOptions={{
           style: styles.navigatorContainer,
           activeTintColor: "#FFF",
@@ -62,76 +71,12 @@ export default function UsersList() {
           }}
         />
       </Tab.Navigator>
+      <FloatButton 
+        pageToNavigate="newuser"        
+      />
     </SafeAreaView>
   )
 }
 
 
-function ActiveUsers() {
-  return (
-    <ScrollView style={styles.contentContainer}>
-      <ItemCard
-        level="neutral"
-        topText="Heron Eto"
-        middleText="Atua em 1 campanha"
-        modalOptions={{
-          title: "Selecione uma opção",
-          options: [
-            {
-              id: "1",
-              name: "Ver Detalhes",
-              pageToNavigate: "userview",
-              isPageExternalLink: false,
-              navigationParameters: {
-                userid: "123"
-              }
-            },
-            {
-              id: "2",
-              name: "Editar",
-              pageToNavigate: "useredit",
-              isPageExternalLink: false,
-              navigationParameters: {
-                userid: "123"
-              }
-            }
-          ]
-        }}
-      />
-    </ScrollView>
-  )
-}
-function InactiveUsers() {
-  return (
-    <ScrollView style={styles.contentContainer}>
-      <ItemCard
-        level="neutral"
-        topText="Heron Eto"
-        middleText="Atua em 1 campanha"
-        modalOptions={{
-          title: "Selecione uma opção",
-          options: [
-            {
-              id: "1",
-              name: "Ver Detalhes",
-              pageToNavigate: "userview",
-              isPageExternalLink: false,
-              navigationParameters: {
-                userid: "123"
-              }
-            },
-            {
-              id: "2",
-              name: "Editar",
-              pageToNavigate: "useredit",
-              isPageExternalLink: false,
-              navigationParameters: {
-                userid: "123"
-              }
-            }
-          ]
-        }}
-      />
-    </ScrollView>
-  )
-}
+export default UsersList

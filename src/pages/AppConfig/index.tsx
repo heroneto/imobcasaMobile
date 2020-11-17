@@ -67,25 +67,17 @@ export default function AppConfig() {
               count: 0,
               name: 'Ativas',
               color: colors.imobcasaPrimary,
-              id: '222'
+              id: '0',
+              pageToNavigate:"campaigns",
+              nestedRouteName: "0"
             },
             {
               count: 5,
               name: 'Inativas',
               color: colors.imobcasaPrimary,
-              id: '223'
-            },
-            {
-              count: 1,
-              name: 'Rascunho',
-              color: colors.imobcasaPrimary,
-              id: '244'
-            },
-            {
-              count: 1,
-              name: 'Ativas sem usuários',
-              color: colors.imobcasaPrimary,
-              id: '245'
+              id: '1',
+              pageToNavigate:"campaigns",
+              nestedRouteName: "1"
             }
           ]}
           title='Suas campanhas'
@@ -114,45 +106,20 @@ export default function AppConfig() {
               name: 'Ativos',
               count: 5,
               color: colors.imobcasaPrimary,
-              id: '1871781'
+              id: '0',
+              nestedRouteName: "0",
+              pageToNavigate: "users"
             },
             {
               name: 'Inativos',
               count: 15,
               color: colors.imobcasaPrimary,
-              id: '187178aa'
-            },
-            {
-              name: 'Com campanha',
-              count: 25,
-              color: colors.imobcasaPrimary,
-              id: '187178asda'
-            },
-            {
-              name: 'Sem campanha',
-              count: 45,
-              color: colors.imobcasaPrimary,
-              id: '18717aaa8'
+              id: '1',
+              nestedRouteName: "1",
+              pageToNavigate: "users"
             }
           ]}
           title='Seus usuários'
-          modal={{
-            title: 'Selecione uma opção',
-            options: [
-              {
-                name: 'Novo usuário',
-                pageToNavigate: 'newuser',
-                id: 'asfa23aa_aa',
-                isPageExternalLink: false
-              },
-              {
-                name: 'Ver usuários',
-                pageToNavigate: 'users',
-                id: 'asfa23_aa',
-                isPageExternalLink: false
-              }
-            ]
-          }}
         />
         <View
           style={styles.bottomContainer}

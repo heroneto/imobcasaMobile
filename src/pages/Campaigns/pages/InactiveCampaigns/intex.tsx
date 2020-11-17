@@ -20,13 +20,13 @@ export default function InactiveCampaigs(){
             {
               id: "1",
               name: "Ver Campanha",
-              pageToNavigate: `appconfig`,
+              pageToNavigate: `campaignview`,
               isPageExternalLink: false
             },
             {
               id: "2",
               name: "Editar Campanha",
-              pageToNavigate: `appconfig`,
+              pageToNavigate: `campaignedit`,
               isPageExternalLink: false,              
             }
           ]

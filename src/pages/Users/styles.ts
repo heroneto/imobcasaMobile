@@ -23,9 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
   },
-  contentContainer: {
-    backgroundColor: colors.background,
-  }
+
 })
 
 export default styles

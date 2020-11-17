@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, Modal, TouchableOpacity } from 'react-native'
-import { SimpleLineIcons } from '@expo/vector-icons'; 
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles';
-import ModalView from '../ModalView';
-import {ModalProps} from '../Shared'
 import { useNavigation } from '@react-navigation/native'
 
 interface DashboardItemProps {
@@ -12,13 +9,12 @@ interface DashboardItemProps {
     color: string,
     id: string,
     nestedRouteName?: string,
-    pageToNavigate?: string
+    pageToNavigate: string
 }
 
 interface DashboardGroupProps {
     title: string,
     items: Array<DashboardItemProps>
-    modal: ModalProps
 }
 
 const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) => {
@@ -43,14 +39,7 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                     <Text style={styles.headerText}>
                         {title}
                     </Text>
-                    <View style={styles.lineHeader}/>
-                    <TouchableOpacity
-                            style={styles.options}
-                            onPress={showModal}
-                        >
-                            <SimpleLineIcons name="options" size={24} color="black" />
-                    </TouchableOpacity>
-                    
+                    <View style={styles.lineHeader}/>                    
                 </View>
                 <View style={styles.content}>
                     {items.map(item => {
@@ -77,21 +66,6 @@ const DashboardGroup: React.FC<DashboardGroupProps> = ({modal, items, title}) =>
                         )
                     })}
                 </View>
-                        <Modal
-                            transparent={true}
-                            animationType='fade'
-                            visible={isShowingModal}
-                            hardwareAccelerated={true}
-                            onRequestClose={() => {
-                                setIsShowingModal(false)
-                            }}
-                        >
-                                <ModalView 
-                                    title={modal.title}
-                                    options={modal.options}
-                                    closeModalFunc={closeModal}
-                                />
-                        </Modal>
             </View>
         </>
     )

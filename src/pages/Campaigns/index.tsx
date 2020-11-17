@@ -12,8 +12,13 @@ import InactiveCampaigs from './pages/InactiveCampaigns/intex';
 
 const Tab = createMaterialTopTabNavigator();
 
+interface CampaignsListProps {
+  route: any
+}
 
-export default function Campaigns() {
+
+const Campaigns: React.FC<CampaignsListProps> = ({route}) => {
+  const { inicialRoute } = route.params
   const [imageUrl, setImageUrl] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
 
   return (
@@ -25,7 +30,7 @@ export default function Campaigns() {
         enableBackButton={true}
       />
        <Tab.Navigator
-        initialRouteName="0"
+        initialRouteName={inicialRoute}
         tabBarOptions={{
           style: styles.navigatorContainer,
           activeTintColor: "#FFF",
@@ -55,7 +60,7 @@ export default function Campaigns() {
           name="1"
           component={InactiveCampaigs}
           options={{
-            tabBarLabel: "Em andamento"
+            tabBarLabel: "Inativas"
           }}
         />
       </Tab.Navigator>
@@ -66,3 +71,5 @@ export default function Campaigns() {
     </SafeAreaView>
   )
 }
+
+export default Campaigns
