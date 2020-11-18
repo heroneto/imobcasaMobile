@@ -81,6 +81,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 10,
         paddingHorizontal: 40,
+    },
+    inputAction: {
+        width: 24,
+        height: 24,
+        borderRadius: 100,
+        justifyContent: 'space-around',
+        flexDirection: 'row'
+        
     }
 })
 

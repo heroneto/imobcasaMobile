@@ -5,6 +5,7 @@ import ModalView from '../ModalView';
 import { ModalProps } from '../Shared'
 import CardVerticalBar from './components/CardVerticalBar';
 import CustomText from './components/CustomText';
+import { useNavigation } from '@react-navigation/native';
 
 
 interface IItemCardProps {
@@ -17,15 +18,17 @@ interface IItemCardProps {
     text: string,
     textColor: string,
   },
-  modalOptions: ModalProps,
   customRightText?: {
     value?: number,
     text: string,
   },
-  level: 'error' | 'success' | 'info' | 'neutral'
+  level: 'error' | 'success' | 'info' | 'neutral',
+  pageToNavigate: string,
+  navigationParameters: object
 }
 
-const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, middleIcon, leftBottomText, rightBottomText, customRightText, modalOptions, level }) => {
+const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, middleIcon, leftBottomText, rightBottomText, customRightText, level, pageToNavigate, navigationParameters }) => {
+  const { navigate } = useNavigation()
   const [isShowingModal, setIsShowingModal] = useState(false)
 
   function showModal() {
@@ -40,8 +43,8 @@ const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, midd
 
   return (
     <TouchableOpacity
-      onPress={showModal}
-      style={styles.cardButton}
+      onPress={() => navigate(pageToNavigate, navigationParameters)}
+      style={styles.cardButton}      
     >
       <CardVerticalBar level={level} />
       <View style={styles.cardBody}>
@@ -64,33 +67,8 @@ const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, midd
             value={customRightText?.value}
             level={level}
           />         
-          {/* <View style={styles.customTextContainer}>
-            {customRightText?.value &&
-              <View style={styles.cardCustomTextContainer}>
-                <Text style={styles.cardCustomText}>{customRightText?.value}</Text>
-              </View>
-            }
-
-            <Text style={styles.customText}>{customRightText?.text}</Text>
-          </View> */}
         </View>
       </View>
-
-      <Modal
-        transparent={true}
-        animationType='fade'
-        visible={isShowingModal}
-        hardwareAccelerated={true}
-        onRequestClose={() => {
-          setIsShowingModal(false)
-        }}
-      >
-        <ModalView
-          title={modalOptions.title}
-          options={modalOptions.options}
-          closeModalFunc={closeModal}
-        />
-      </Modal>
     </TouchableOpacity>
   )
 }

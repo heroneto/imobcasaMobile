@@ -3,32 +3,24 @@ import styles from './styles'
 import { View, TouchableOpacity, ViewComponent, Image, Modal } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
-import ModalView from '../ModalView';
-import colors from '../../theme/colors';
 
 
 interface IHeaderActionsProps {
   headerColor: string,
   imageUrl: string,
   enableBackButton?: boolean,
-  backButtonCustomAction?: any
+  backButtonCustomAction?: any,
+  openDrawerFunc: any
 }
 
-const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, imageUrl, enableBackButton = false, backButtonCustomAction }) => {
+const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, imageUrl, enableBackButton = false, backButtonCustomAction, openDrawerFunc }) => {
   const { navigate, goBack } = useNavigation()
-  const [isShowingModal, setIsShowingModal] = useState(false)
-
+  
   function handleNavigateToSearchPage() {
     navigate('search')
   }
 
-  function showModal() {
-    setIsShowingModal(true)
-  }
 
-  function closeModal() {
-    setIsShowingModal(false)
-  }
 
   return (
     <View style={{
@@ -38,9 +30,10 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, i
       <View style={styles.imageSearchContainer}>
         <TouchableOpacity
           style={styles.myselfContainer}
-          onPress={showModal}
+          onPress={openDrawerFunc}
         >
-          <Image style={styles.myselfImage} source={{ uri: imageUrl }} />
+          {/* <Image style={styles.myselfImage} source={{ uri: imageUrl }} /> */}
+          <Ionicons name="md-menu" size={32} color="#FFF" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.searchButton}
@@ -63,53 +56,6 @@ const HeaderActions: React.FC<IHeaderActionsProps> = ({ children, headerColor, i
 
         {children}
       </View>
-
-      <Modal
-        transparent={true}
-        animationType='fade'
-        visible={isShowingModal}
-        hardwareAccelerated={true}
-        onRequestClose={() => {
-          setIsShowingModal(false)
-        }}
-      >
-        <ModalView
-          title="Selecione uma opção"
-          options={[
-            {
-              id: "1",
-              isPageExternalLink: false,
-              name: "Meu usuário",
-              pageToNavigate: 'myuseredit',
-              navigationParameters: {
-                userid: "123"
-              }
-            },
-            {
-              id: "2",
-              isPageExternalLink: false,
-              name: "Alterar senha",
-              pageToNavigate: 'mypasswordedit',
-              navigationParameters: {
-                userid: "123"
-              }
-            },
-            {
-              id: "4",
-              isPageExternalLink: false,
-              name: "Configurações",
-              pageToNavigate: 'appconfig'
-            },
-            {
-              id: "3",
-              isPageExternalLink: false,
-              name: "Sair",
-              pageToNavigate: 'login'
-            }
-          ]}
-          closeModalFunc={closeModal}
-        />
-      </Modal>
     </View>
   )
 }
