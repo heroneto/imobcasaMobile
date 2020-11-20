@@ -1,7 +1,6 @@
-import { padEnd } from 'lodash'
 import { StyleSheet } from 'react-native'
-import colors from '../../theme/colors'
-import fonts from '../../theme/fonts'
+import colors from '../../../theme/colors'
+import fonts from '../../../theme/fonts'
 
 
 const styles = StyleSheet.create({

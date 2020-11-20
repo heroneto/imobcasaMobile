@@ -1,12 +1,12 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { View,Text, Image } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import ItemCard from '../../../../Components/ItemCard'
+import ItemCard from '../../../../../Components/ItemCard'
 import styles from './styles'
 
-import facebookIcon from '../../../../../assets/icons/facebook.png'
+import facebookIcon from '../../../../../../assets/icons/facebook.png'
 
-export default function InactiveCampaigs(){
+export default function ActiveCampaigs(){
   return (
     <ScrollView style={styles.container}>
       <ItemCard

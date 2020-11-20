@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
-import colors from '../../theme/colors'
-import fonts from '../../theme/fonts'
+import colors from '../../../theme/colors'
+import fonts from '../../../theme/fonts'
 
 
 const styles = StyleSheet.create({
@@ -8,12 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background,        
     }, 
-    pageTitle: {
-        fontFamily: fonts.primary.bold,
-        color: '#FFF',
-        fontSize: 18,
-        marginTop: 18,
-    },
+
     backButtonHeader: {
         width: 32,
         height: 32,

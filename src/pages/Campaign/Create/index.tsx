@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
-import FacebookLogin from './pages/FacebookLogin/intex'
+import FacebookLogin from './pages/FacebookLogin'
 import FacebookAdAccountSelect from './pages/FacebookAdAccountSelect'
 import FacebookCampaignSelect from './pages/FacebookCampaignSelect'
 import JoinCampaignUsers from './pages/JoinCampaignUsers'

@@ -16,21 +16,20 @@ import FloatButton from '../../../Components/FloatButton';
 const Tab = createMaterialTopTabNavigator();
 
 interface UsersListProps {
-  route: any
+  route: any,
+  navigation: any
 }
 
-const UsersList : React.FC<UsersListProps> = () =>  {
-  const { navigate, goBack } = useNavigation()
-  const [ imageUrl, setImageUrl ] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
-
+const UsersList : React.FC<UsersListProps> = ({navigation}) =>  {
+  
   return (
     <SafeAreaView style={styles.container}>
       <HeaderActions 
         headerColor={colors.imobcasaPrimary}
-        imageUrl={imageUrl} 
+        title="Usuários"   
         children={<Text style={styles.pageTitle}>Lista de Usuários do App</Text>}
         enableBackButton={false}
-        
+        openDrawerFunc={() => navigation.openDrawer()}
       />
       <Tab.Navigator
         initialRouteName="0"

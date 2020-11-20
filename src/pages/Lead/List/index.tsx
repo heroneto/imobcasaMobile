@@ -1,34 +1,29 @@
 import React, { useState } from 'react'
-import { Text, Image } from 'react-native'
+import { Text, Image, View } from 'react-native'
 import styles from './styles'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import HeaderActions from '../../../Components/HeaderActions';
-import ItemCard from '../../../Components/ItemCard';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import colors from '../../../theme/colors'
-import { ScrollView } from 'react-native-gesture-handler';
-import facebookIcon from '../../../assets/icons/facebook.png'
-import FloatButton from '../../../Components/FloatButton';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import ItemCard from '../../../Components/ItemCard'
+import { ScrollView } from 'react-native-gesture-handler'
+import facebookIcon from '../../../../assets/icons/facebook.png'
+import FloatButton from '../../../Components/FloatButton'
 
 const Tab = createMaterialTopTabNavigator()
 
-export default function LeadsView({navigation}){
-  const [imageUrl, setImageUrl] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
+interface LeadsViewProps {
+  navigation: any
+}
 
+const LeadsView: React.FC<LeadsViewProps> = ({navigation}) => {
 
-  function openDrawer(){
-    navigation.openDrawer()
-  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <HeaderActions
+    <View style={styles.container}>
+      {/* <HeaderActions
         headerColor={colors.imobcasaPrimary}
-        imageUrl={imageUrl}
-        children={<Text style={styles.pageTitle}>Lista de Leads</Text>}
+        title="Leads"        
         enableBackButton={false}
-        openDrawerFunc={openDrawer}        
-      />
+        openDrawerFunc={() => navigation.openDrawer()}        
+      /> */}
 
       <Tab.Navigator
         initialRouteName="0"
@@ -76,7 +71,7 @@ export default function LeadsView({navigation}){
       <FloatButton
         pageToNavigate="newlead"
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -176,3 +171,5 @@ function CommingLeads() {
   )
 }
 
+
+export default LeadsView

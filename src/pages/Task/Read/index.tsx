@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 
 
-import WhatsAppIcon from '../../../assets/icons/WhatsApp.png'
+import WhatsAppIcon from '../../../../assets/icons/WhatsApp.png'
 import colors from '../../../theme/colors';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormPageHeader from '../../../Components/HeaderFormContainer'

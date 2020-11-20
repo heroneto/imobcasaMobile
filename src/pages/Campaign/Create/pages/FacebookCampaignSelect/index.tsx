@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../../Components/HeaderFormContainer'
+import FormPageHeader from '../../../../../Components/HeaderFormContainer'
 import styles from './styles'
-import StandardButton from '../../../../Components/StandardButton'
-import colors from '../../../../theme/colors'
+import StandardButton from '../../../../../Components/StandardButton'
+import colors from '../../../../../theme/colors'
 
 import { Ionicons } from '@expo/vector-icons'
-import InputContainer from '../../../../Components/InputContainer'
+import InputContainer from '../../../../../Components/InputContainer'
 import { TextInput } from 'react-native-gesture-handler'
 
 interface FacebookCampaignSelect {
@@ -74,22 +74,6 @@ export default function FacebookCampaignSelect() {
             <TextInput placeholder="Digite o nome da campanha..." value={search} onChangeText={text => handleInput(text)}/>
           </InputContainer>
           <Text>{execucoes} execuções</Text>
-          {/* <PickerInput 
-                        value={adAccountSelected?.label}
-                        borderRadius={{
-                            topLeft: 0,
-                            topRight: 0,
-                            bottomLeft: 0,
-                            bottomRight: 0
-                        }}
-                        data={adAccounts}
-                        label="Conta de anúncio"
-                        placeholder="Selecione uma conta de anúncios"
-                        onChange={(option)=>{ 
-                            // setAdAccountSelected(option) 
-                        }}
-                    /> */}
-
         </View>
       </View>
       <View style={styles.pageActionsContainer}>

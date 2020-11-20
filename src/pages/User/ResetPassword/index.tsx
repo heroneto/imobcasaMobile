@@ -5,9 +5,9 @@ import FormPageHeader from '../../../Components/HeaderFormContainer';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 
-import TopInput from '../../../Components/TopInput';
-import BottomInput from '../../../Components/BottonInput';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import InputContainer from '../../../Components/InputContainer';
+import PasswordInput from '../../../Components/PasswordInput';
 
 
 interface UserPasswordChangeProps {
@@ -36,22 +36,36 @@ const UserPasswordChange: React.FC<UserPasswordChangeProps> = ({ route }) => {
           <Text style={styles.inputTitle}>
             Segurança
           </Text>
-          <TopInput
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: true,
+              topRight: true
+            }}
             label="Senha"
-            placeholder="Digite a nova senha"
-            value={password}
-            onChangeText={text => setPassword(text)}
-            actionIconName='eye'
-            secureEntry={true}
-          />
-          <BottomInput
+          >
+            <PasswordInput 
+              value={password}
+              placeholder="Digite a nova senha..."
+              onChangeText={text => setPassword(text)}
+            />
+          </InputContainer>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: true,
+              bottomRight: true,
+              topLeft: false,
+              topRight: false
+            }}
             label="Confirmação de senha"
-            placeholder="Digite a senha novamente"
-            value={passwordConfirmation}
-            secureEntry={true}
-            onChangeText={text => setPasswordConfirmation(text)}
-            actionIconName='eye'
-          />
+          >
+            <PasswordInput 
+              value={passwordConfirmation}
+              placeholder="Digite a nova senha novamente..."
+              onChangeText={text => setPasswordConfirmation(text)}
+            />
+          </InputContainer>         
         </View>
 
         <View style={styles.formActions}>

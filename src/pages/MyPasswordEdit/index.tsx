@@ -3,12 +3,10 @@ import { View, Text } from 'react-native'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import FormPageHeader from '../../Components/HeaderFormContainer'
-import TopInput from '../../Components/TopInput'
-import BottomInput from '../../Components/BottonInput'
 import StandardButton from '../../Components/StandardButton'
-import MiddleInput from '../../Components/MiddleInput'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ScrollView } from 'react-native-gesture-handler'
+import InputContainer from '../../Components/InputContainer'
+import PasswordInput from '../../Components/PasswordInput'
 
 interface MyPasswordEditProps {
   route: any
@@ -16,7 +14,7 @@ interface MyPasswordEditProps {
 
 const MyPasswordEdit: React.FC<MyPasswordEditProps> = ({ route }) => {
   const { userid } = route
-  const { navigate, goBack } = useNavigation()
+  const { goBack } = useNavigation()
   const [oldPassword, setOldPassword] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -32,31 +30,52 @@ const MyPasswordEdit: React.FC<MyPasswordEditProps> = ({ route }) => {
         <View style={styles.inputGroup}>
           <Text style={styles.inputTitle}>
             Segurança
-                    </Text>
-          <TopInput
+          </Text>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: true,
+              topRight: true
+            }}
             label="Senha antiga"
-            placeholder="Digite a senha antiga"
-            value={oldPassword}
-            onChangeText={text => setOldPassword(text)}
-            actionIconName='eye'
-            secureEntry={true}
-          />
-          <MiddleInput
+          >
+            <PasswordInput 
+              placeholder="Digite a senha antiga"
+              value={oldPassword}
+              onChangeText={text => setOldPassword(text)}
+            />
+          </InputContainer>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: false,
+              topRight: false
+            }}
             label="Senha nova"
-            placeholder="Digite a nova senha"
-            value={password}
-            onChangeText={text => setPassword(text)}
-            actionIconName='eye'
-            secureEntry={true}
-          />
-          <BottomInput
+          >
+            <PasswordInput 
+              placeholder="Digite a nova senha"
+              value={password}
+              onChangeText={text => setPassword(text)}
+            />
+          </InputContainer>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: false,
+              topRight: false
+            }}
             label="Confirmação de senha"
-            placeholder="Digite a senha novamente"
-            value={passwordConfirmation}
-            secureEntry={true}
-            onChangeText={text => setPasswordConfirmation(text)}
-            actionIconName='eye'
-          />
+          >
+            <PasswordInput 
+              placeholder="Digite a senha novamente"
+              value={passwordConfirmation}
+              onChangeText={text => setPasswordConfirmation(text)}
+            />
+          </InputContainer>          
         </View>
         <View style={styles.formActions}>
           <StandardButton

@@ -6,12 +6,12 @@ import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons';
 import colors from '../../../theme/colors';
-import TopInput from '../../../Components/TopInput';
-import MiddleInput from '../../../Components/MiddleInput';
 
 import * as data from '../../appData.json'
 import PickerInput from '../../../Components/PickerInput';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import InputContainer from '../../../Components/InputContainer';
+import { TextInput } from 'react-native-gesture-handler';
 
 interface UserEditProps {
   route: any
@@ -49,30 +49,54 @@ const UserEdit: React.FC<UserEditProps> = ({ route }) => {
           <Text style={styles.inputTitle}>
             Dados do usuário
           </Text>
-          <TopInput
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: true,
+              topRight: true,
+            }}
             label="Nome completo"
-            placeholder="Insira o nome completo"
-            Icon={<Feather name="user" size={24} color={colors.textInputLabel} />}
-            value={name}
-            onChangeText={text => setName(text)}
-            secureEntry={false}
-          />
-          <MiddleInput
+          >
+            <TextInput
+              placeholder="Insira o nome completo"
+              value={name}
+              onChangeText={text => setName(text)}
+            />
+            <Feather name="user" size={24} color={colors.textInputLabel} />
+          </InputContainer>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: false,
+              topRight: false,
+            }}
             label="Username"
-            placeholder="Insira o Username"
-            Icon={<Feather name="user" size={24} color={colors.textInputLabel} />}
-            value={username}
-            onChangeText={text => setUsername(text)}
-            secureEntry={false}
-          />
-          <MiddleInput
+          >
+            <TextInput
+              placeholder="Insira o Username"
+              value={username}
+              onChangeText={text => setUsername(text)}
+            />
+            <Feather name="user" size={24} color={colors.textInputLabel} />
+          </InputContainer>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: false,
+              topRight: false,
+            }}
             label="E-Mail"
-            placeholder="Insira o E-Mail do usuário"
-            Icon={<Feather name="mail" size={24} color={colors.textInputLabel} />}
-            value={email}
-            onChangeText={text => setEmail(text)}
-            secureEntry={false}
-          />
+          >
+            <TextInput
+              placeholder="Insira o E-Mail do usuário"
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
+            <Feather name="user" size={24} color={colors.textInputLabel} />
+          </InputContainer>          
           <PickerInput
             value={status.label}
             borderRadius={{

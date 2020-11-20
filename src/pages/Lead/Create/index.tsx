@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
 import styles from './styles'
-import { ScrollView } from 'react-native-gesture-handler'
+import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import FormPageHeader from '../../../Components/HeaderFormContainer';
-import TopInput from '../../../Components/TopInput';
 import { Feather } from '@expo/vector-icons';
-import BottomInput from '../../../Components/BottonInput';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 
@@ -13,6 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 import * as data from '../../appData.json'
 import PickerInput from '../../../Components/PickerInput';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import InputContainer from '../../../Components/InputContainer';
 
 
 interface inputPickerProps {
@@ -62,34 +61,45 @@ export default function NewLead() {
           >
             <Text style={styles.inputTitle}>
               Dados do Lead
-                    </Text>
-            <TopInput
+            </Text>
+            <InputContainer
+              inputRadiusStyle={{
+                bottomLeft: false,
+                bottomRight: false,
+                topLeft: true,
+                topRight: true,
+              }}
               label="Nome"
-              Icon={<Feather name="user" size={24} color="rgba(0,0,0,.2)" />}
-              placeholder="Insira o nome do Lead"
-              secureEntry={false}
-              value={name}
-              onChangeText={value => setName(value)}
-            />
-            <BottomInput
+            >
+              <TextInput 
+                placeholder="Insira o nome do Lead"
+                value={name}
+                onChangeText={value => setName(value)}
+              />
+              <Feather name="user" size={24} color="rgba(0,0,0,.2)" />
+            </InputContainer>
+            <InputContainer
+              inputRadiusStyle={{
+                bottomLeft: true,
+                bottomRight: true,
+                topLeft: false,
+                topRight: false,
+              }}
               label="Telefone"
-              placeholder="Insira o telefone"
-              Icon={<Feather name="phone" size={24} color="rgba(0,0,0,.2)" />}
-              secureEntry={false}
-              textContentType="telephoneNumber"
-              keyboardType="phone-pad"
-              value={phone}
-              onChangeText={value => setPhone(value)}
-            />
-
+            >
+              <TextInput 
+                placeholder="Insira o telefone"
+                value={phone}
+                onChangeText={value => setPhone(value)}
+              />
+              <Feather name="phone" size={24} color="rgba(0,0,0,.2)" />
+            </InputContainer>
           </View>
 
-          <View
-            style={styles.inputGroup}
-          >
+          <View style={styles.inputGroup}>
             <Text style={styles.inputTitle}>
               Origem
-                    </Text>
+            </Text>
             <PickerInput
               data={data.leadOrigin}
               borderRadius={{

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, Keyboard, KeyboardAvoidingView } from 'react-native'
 import styles from './styles'
 import AppImage from '../../../assets/appImage.png'
-import { RectButton, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import TopInput from '../../Components/TopInput'
-import BottomInput from '../../Components/BottonInput'
+import { RectButton, TextInput } from 'react-native-gesture-handler'
 import StandardButton from '../../Components/StandardButton'
-import { Ionicons, Octicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import colors from '../../theme/colors'
 import { useNavigation } from '@react-navigation/native'
 import InputContainer from '../../Components/InputContainer'
+import PasswordInput from '../../Components/PasswordInput'
 
 
 export default function LoginView() {
@@ -22,7 +21,7 @@ export default function LoginView() {
 
 
   function handleNavigateToHomePage() {
-    navigate('leads')
+    navigate('home')
   }
 
   useEffect(() => {
@@ -84,17 +83,11 @@ export default function LoginView() {
             }}
             label="Senha"
           >
-            <TextInput secureTextEntry={!isActionIconActive} value={password} onChangeText={text => setPassword(text)} placeholder="Digite a senha" />
-            <TouchableOpacity 
-              style={styles.inputAction}
-              onPress={togglePasswordView}
-            >
-              <Octicons 
-                  name='eye'
-                  size={24} 
-                  color={isActionIconActive ? "#309AE7" : "#F0F0F7"}
-              />
-            </TouchableOpacity>
+            <PasswordInput 
+              value={password}
+              onChangeText={text => setPassword(text)}
+              placeholder="Digite a senha"
+            />            
           </InputContainer>
         </View>
         <View style={styles.formActions}>

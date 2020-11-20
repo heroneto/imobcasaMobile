@@ -158,7 +158,7 @@ const TaskEdit: React.FC<TaskEditProps> = ({ route }) => {
           <View style={styles.inputGroup}>
             <Text style={styles.inputTitle}>
               Lead
-                      </Text>
+            </Text>
             <PickerInput
               data={data.leads}
               borderRadius={{

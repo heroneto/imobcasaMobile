@@ -10,8 +10,12 @@ export const MainStackNavigator = () => {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}>
-      <Stack.Screen name="login" component={LoginView} />
-      <Stack.Screen name="leads" component={DrawerNavigator} />
+      <Stack.Screen 
+        name="login" 
+        component={LoginView} 
+        
+      />
+      <Stack.Screen name="home" component={DrawerNavigator} />
     </Stack.Navigator>
   )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../../Components/HeaderActions'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
@@ -17,10 +16,6 @@ const UserView: React.FC<TaskViewProps> = ({ route }) => {
   const { userid } = route.params
   const { navigate, goBack } = useNavigation()
 
-
-  function handleNavigateToUsersPage() {
-    navigate('users')
-  }
 
   function handleNavigateToEditPage() {
     navigate('useredit', { userid })

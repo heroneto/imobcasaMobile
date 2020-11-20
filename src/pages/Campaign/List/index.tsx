@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import HeaderActions from '../../Components/HeaderActions'
+import HeaderActions from '../../../Components/HeaderActions'
 import { Text } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import colors from '../../theme/colors'
+import colors from '../../../theme/colors'
 import styles from './styles'
-import FloatButton from '../../Components/FloatButton'
-import ActiveCampaigs from './pages/ActiveCampaigns';
-import InactiveCampaigs from './pages/InactiveCampaigns/intex';
+import FloatButton from '../../../Components/FloatButton'
+import ActiveCampaigs from './pages/ActiveCampaigns'
+import InactiveCampaigs from './pages/InactiveCampaigns'
 
 
 const Tab = createMaterialTopTabNavigator();
 
 interface CampaignsListProps {
-  route: any
+  route: any,
+  navigation: any
 }
 
 
-const Campaigns: React.FC<CampaignsListProps> = () => {
-  const [imageUrl, setImageUrl] = useState<string>("https://avatars1.githubusercontent.com/u/41599309?s=400&u=65b95962731f7965ead8de961b01c59e66554721&v=4")
+const Campaigns: React.FC<CampaignsListProps> = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
        <HeaderActions
         headerColor={colors.imobcasaPrimary}
-        imageUrl={imageUrl}
-        children={<Text style={styles.pageTitle}>Lista de Campanhas</Text>}
-        enableBackButton={true}
+        title="Campanhas"
+        enableBackButton={false}
+        openDrawerFunc={() => navigation.openDrawer()}        
       />
        <Tab.Navigator
         initialRouteName="0"

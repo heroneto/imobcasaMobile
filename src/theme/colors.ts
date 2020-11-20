@@ -9,6 +9,7 @@ const colors = {
   success: "#28A790",
   background: "#F0F0F7",
   imobcasaPrimary: "#5E0130",
+  imobcasaSecondary: "#37011C",
   textInput: "#6A6180",
   textTitle: "#684A59",
   textHiperlink: "#309AE7",
@@ -17,7 +18,7 @@ const colors = {
   textInputPlaceholder: "#DADADA",
   textInactive: "#F0F0F7",
   textHiperlinkAlternative: "#9C98A6",
-  facebook: "#1877F2",
+  facebook: "#1877F2"  
 }
 
 

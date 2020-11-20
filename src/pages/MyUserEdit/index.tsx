@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
-import BottomInput from '../../Components/BottonInput'
-import TopInput from '../../Components/TopInput'
 import colors from '../../theme/colors'
 import { Feather } from '@expo/vector-icons';
 import FormPageHeader from '../../Components/HeaderFormContainer'
 import StandardButton from '../../Components/StandardButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import InputContainer from '../../Components/InputContainer'
+import { TextInput } from 'react-native-gesture-handler'
 
 
 interface MyUserEditProps {
@@ -34,23 +34,39 @@ const MyUserEdit: React.FC<MyUserEditProps> = ({ route }) => {
         <View style={styles.inputGroup}>
           <Text style={styles.inputTitle}>
             Dados do usuário
-                    </Text>
-          <TopInput
+          </Text>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: false,
+              bottomRight: false,
+              topLeft: true,
+              topRight: true
+            }}
             label="Nome completo"
-            placeholder="Insira o nome completo"
-            Icon={<Feather name="user" size={24} color={colors.textInputLabel} />}
-            value={name}
-            onChangeText={text => setName(text)}
-            secureEntry={false}
-          />
-          <BottomInput
+          >
+            <TextInput 
+              placeholder="Insira o nome completo"
+              value={name}
+              onChangeText={text => setName(text)}
+            />
+            <Feather name="user" size={24} color={colors.textInputLabel} />
+          </InputContainer>
+          <InputContainer
+            inputRadiusStyle={{
+              bottomLeft: true,
+              bottomRight: true,
+              topLeft: false,
+              topRight: false
+            }}
             label="E-Mail"
-            placeholder="Insira o E-Mail do usuário"
-            Icon={<Feather name="mail" size={24} color={colors.textInputLabel} />}
-            value={email}
-            onChangeText={text => setEmail(text)}
-            secureEntry={false}
-          />
+          >
+            <TextInput 
+              placeholder="Insira o E-Mail do usuário"
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
+            <Feather name="mail" size={24} color={colors.textInputLabel} />
+          </InputContainer>
         </View>
 
         <View style={styles.formActions}>

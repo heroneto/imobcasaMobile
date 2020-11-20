@@ -4,11 +4,11 @@ import { View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
-import StandardButton from '../../../../Components/StandardButton'
-import colors from '../../../../theme/colors'
-import PickerInput from '../../../../Components/PickerInput'
+import StandardButton from '../../../../../Components/StandardButton'
+import colors from '../../../../../theme/colors'
+import PickerInput from '../../../../../Components/PickerInput'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../../Components/HeaderFormContainer'
+import FormPageHeader from '../../../../../Components/HeaderFormContainer'
 
 interface FacebookAdAccountSelectProps {
     route: any

@@ -1,44 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './styles'
-import { View, Text, Keyboard, TouchableOpacity } from 'react-native'
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
-import TopInput from '../../../Components/TopInput'
-import MiddleInput from '../../../Components/MiddleInput'
+import { View, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../../theme/colors';
 import StandardButton from '../../../Components/StandardButton'
-import { Ionicons } from '@expo/vector-icons';
-import HeaderActions from '../../../Components/HeaderActions'
-import BottomInput from '../../../Components/BottonInput'
+
 import PickerInput from '../../../Components/PickerInput'
-import { Octicons } from '@expo/vector-icons'
 
 import * as data from '../../appData.json'
 import FormPageHeader from '../../../Components/HeaderFormContainer'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import InputContainer from '../../../Components/InputContainer'
-
-const { Navigator, Screen } = createStackNavigator()
-
-
+import PasswordInput from '../../../Components/PasswordInput'
 
 export default function NewUser() {
-  const { navigate, goBack } = useNavigation()
+  const { goBack } = useNavigation()
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<inputPickerProps>({})
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [ isActionIconActive, setIsActionIconActive ] = useState(false)
 
-
-  function togglePasswordView(){
-    setIsActionIconActive(!isActionIconActive)
-}    
 
 
   return (
@@ -116,17 +101,11 @@ export default function NewUser() {
             }}
             label="Senha"
           >
-            <TextInput secureTextEntry={!isActionIconActive} placeholder="Digite a senha..." value={password} onChangeText={text => setPassword(text)} />
-            <TouchableOpacity 
-              style={styles.inputAction}
-              onPress={togglePasswordView}
-            >
-              <Octicons 
-                  name='eye'
-                  size={24} 
-                  color={isActionIconActive ? "#309AE7" : "#F0F0F7"}
-              />
-            </TouchableOpacity>
+            <PasswordInput 
+              placeholder="Digite a senha..."
+              value={password}
+              onChangeText={text => setPassword(text)}
+            />            
           </InputContainer>
           <InputContainer
             inputRadiusStyle={{
@@ -137,17 +116,11 @@ export default function NewUser() {
             }}
             label="Confirmação de senha"
           >
-            <TextInput secureTextEntry={!isActionIconActive} placeholder="Digite a senha novamente..." value={passwordConfirmation} onChangeText={text => setPasswordConfirmation(text)} />
-            <TouchableOpacity 
-              style={styles.inputAction}
-              onPress={togglePasswordView}
-            >
-              <Octicons 
-                  name='eye'
-                  size={24} 
-                  color={isActionIconActive ? "#309AE7" : "#F0F0F7"}
-              />
-            </TouchableOpacity>
+            <PasswordInput 
+              placeholder="Digite a senha novamente..." 
+              value={passwordConfirmation} 
+              onChangeText={text => setPasswordConfirmation(text)}
+            />            
           </InputContainer>
         </View>
         <View style={styles.formActionContainer}>
