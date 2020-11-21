@@ -1,41 +1,40 @@
-import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text } from 'react-native'
 import styles from './styles'
 import { TextInput } from 'react-native-gesture-handler'
-import { Ionicons } from '@expo/vector-icons'; 
-import { useNavigation } from '@react-navigation/native'
 
-export default function SearchPage(){
-    const { goBack } = useNavigation()
-    
+var timeout: any = null
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.searchInputContainer}>
-  
-                <TouchableOpacity
-                    style={styles.backButtonHeader}
-                    onPress={goBack}
-                >
-                        <Ionicons name="ios-arrow-back" size={24} color="#000" />
-                </TouchableOpacity>
+export default function SearchPage() {
+  const [searchValue, setSearchValue] = useState<string>("")
+  const [ searchTries, setSearchTries ] = useState<number>(0)
 
-                <View style={styles.inputTextContainer}>
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder="Digite para encontrar o seu Lead"
-                    />
-                </View>
+  function handleSearch(value: string) {
+    setSearchValue(value)
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      search(value)
+    }, 500)
+  }
 
+  function search(value: string) {
+    console.log("buscando....")
+    setSearchTries(prevValue => prevValue +1)
+  }
 
-                <TouchableOpacity
-                    style={styles.searchButton}
-                >
-                    <Ionicons name="md-search" size={24} color="black" />
-                </TouchableOpacity>
-
-
-            </View>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <View style={styles.searchInputContainer}>
+        <View style={styles.inputTextContainer}>
+          <TextInput
+            value={searchValue}
+            onChangeText={text => handleSearch(text)}
+            style={styles.inputText}
+            placeholder="Digite para encontrar o seu Lead"
+          />
+        </View>   
+      </View>
+      <Text>{searchTries} Buscas Realizadas</Text>
+    </View>
+  )
 }

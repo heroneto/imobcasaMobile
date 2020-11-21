@@ -190,7 +190,7 @@ export const LeadStackNavigator = () => {
         name="Busca de Leads"
         component={SearchPage}
         options={{
-          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} showSearchButton={false} />,
           headerShown: true,
         }}
       />
