@@ -10,21 +10,15 @@ import FloatButton from '../../../Components/FloatButton'
 const Tab = createMaterialTopTabNavigator()
 
 interface LeadsViewProps {
-  navigation: any
+  navigation: any,
+  theme: any
 }
 
-const LeadsView: React.FC<LeadsViewProps> = ({navigation}) => {
-
+const LeadsView: React.FC<LeadsViewProps> = (props) => {
+  
 
   return (
     <View style={styles.container}>
-      {/* <HeaderActions
-        headerColor={colors.imobcasaPrimary}
-        title="Leads"        
-        enableBackButton={false}
-        openDrawerFunc={() => navigation.openDrawer()}        
-      /> */}
-
       <Tab.Navigator
         initialRouteName="0"
         tabBarOptions={{
@@ -69,7 +63,7 @@ const LeadsView: React.FC<LeadsViewProps> = ({navigation}) => {
       </Tab.Navigator>
 
       <FloatButton
-        pageToNavigate="newlead"
+        pageToNavigate="Novo Lead"
       />
     </View>
   )
@@ -81,7 +75,7 @@ function TodayLeads() {
     <ScrollView style={styles.contentContainer}>
       <Text style={styles.itemGroupName}>Não respondidas(1)</Text>
       <ItemCard
-        pageToNavigate="leadview"
+        pageToNavigate="Lead"
         navigationParameters={{
           leadid: 1223232323,
         }}
@@ -103,7 +97,7 @@ function OverdueLeads() {
     <ScrollView style={styles.contentContainer}>
       <Text style={styles.itemGroupName}>Pendentes(1)</Text>
       <ItemCard
-        pageToNavigate="leadview"
+        pageToNavigate="Lead"
         navigationParameters={{
           leadid: 1223232323,
         }}
@@ -119,7 +113,7 @@ function OverdueLeads() {
       />
       <Text style={styles.itemGroupName}>Futuras(1)</Text>
       <ItemCard
-        pageToNavigate="leadview"
+        pageToNavigate="Lead"
         navigationParameters={{
           leadid: 1223232323,
         }}
@@ -140,7 +134,7 @@ function CommingLeads() {
     <ScrollView style={styles.contentContainer}>
       <Text style={styles.itemGroupName}>Concluídos(2)</Text>
       <ItemCard
-        pageToNavigate="leadview"
+        pageToNavigate="Lead"
         navigationParameters={{
           leadid: 1223232323,
         }}
@@ -154,7 +148,7 @@ function CommingLeads() {
         }}
       />
       <ItemCard
-      pageToNavigate="leadview"
+      pageToNavigate="Lead"
       navigationParameters={{
         leadid: 1223232323,
       }}

@@ -1,14 +1,7 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { View } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../../Components/HeaderActions'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'
-import ItemCard from '../../../Components/ItemCard'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import colors from '../../../theme/colors';
-import { ScrollView } from 'react-native-gesture-handler';
 import ActiveUsers from './pages/ActiveUsers';
 import InactiveUsers from './pages/InactiveUsers';
 import FloatButton from '../../../Components/FloatButton';
@@ -16,21 +9,13 @@ import FloatButton from '../../../Components/FloatButton';
 const Tab = createMaterialTopTabNavigator();
 
 interface UsersListProps {
-  route: any,
-  navigation: any
+  route: any,  
 }
 
-const UsersList : React.FC<UsersListProps> = ({navigation}) =>  {
+const UsersList : React.FC<UsersListProps> = () =>  {
   
   return (
-    <SafeAreaView style={styles.container}>
-      <HeaderActions 
-        headerColor={colors.imobcasaPrimary}
-        title="Usuários"   
-        children={<Text style={styles.pageTitle}>Lista de Usuários do App</Text>}
-        enableBackButton={false}
-        openDrawerFunc={() => navigation.openDrawer()}
-      />
+    <View style={styles.container}>
       <Tab.Navigator
         initialRouteName="0"
         tabBarOptions={{
@@ -68,7 +53,7 @@ const UsersList : React.FC<UsersListProps> = ({navigation}) =>  {
       <FloatButton 
         pageToNavigate="newuser"        
       />
-    </SafeAreaView>
+    </View>
   )
 }
 

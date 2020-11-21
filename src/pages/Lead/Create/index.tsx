@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, Text, NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
-import FormPageHeader from '../../../Components/HeaderFormContainer';
 import { Feather } from '@expo/vector-icons';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
@@ -10,7 +9,6 @@ import { useNavigation } from '@react-navigation/native'
 
 import * as data from '../../appData.json'
 import PickerInput from '../../../Components/PickerInput';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import InputContainer from '../../../Components/InputContainer';
 
 
@@ -21,14 +19,13 @@ interface inputPickerProps {
 }
 
 export default function NewLead() {
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [origin, setOrigin] = useState<inputPickerProps>({})
   const [campaign, setCampaign] = useState<inputPickerProps>({})
   const [user, setUser] = useState<inputPickerProps>({})
   const [leadStatus, setLeadStatus] = useState<inputPickerProps>({})
-  const [titleAlpha, setTitleAlpha] = useState(100)
 
   function handleSaveButtom() {
     navigate('leadview', {
@@ -36,25 +33,9 @@ export default function NewLead() {
     })
   }
 
-  function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>) {
-    const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
-    setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
-  }
-
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView onScroll={(event) => handleContentOffsetChanges(event)}>
-        <FormPageHeader
-          backButtomAction={goBack}
-        />
-        <View style={styles.title}>
-          <Text style={{
-            ...styles.titleText,
-            color: `rgba(0,0,0,${titleAlpha})`
-          }}>
-            Cadastro de Lead
-                </Text>
-        </View>
+    <View style={styles.container}>
+      <ScrollView>        
         <View style={styles.formContent}>
           <View
             style={styles.inputGroup}
@@ -182,6 +163,6 @@ export default function NewLead() {
         </View>
 
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }

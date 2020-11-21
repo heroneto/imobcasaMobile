@@ -1,6 +1,4 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../../../Components/HeaderFormContainer'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 import { View, Text } from 'react-native'
@@ -8,13 +6,10 @@ import StandardButton from '../../../../../Components/StandardButton'
 import colors from '../../../../../theme/colors'
 
 const ConfirmCampaignCreation: React.FC = () => {
-  const { goBack, navigate } = useNavigation()
+  const { navigate } = useNavigation()
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FormPageHeader 
-        backButtomAction={goBack}
-      />
+    <View style={styles.container}>
       <View style={styles.confirmationContainer}>
         <Text style={styles.messageText}>
           Quase tudo pronto, deseja ativar o recebimento de Leads nessa campanha?
@@ -24,20 +19,20 @@ const ConfirmCampaignCreation: React.FC = () => {
             <StandardButton
               text="Sim"  
               color={colors.standardButton}
-              onPress={() => navigate('appconfig')}
+              onPress={() => navigate('Minhas Campanhas')}
             />
           </View>
           <View style={styles.buttonContainer}>
             <StandardButton
               text="Não"  
               color={colors.cancelButton}
-              onPress={() => navigate('appconfig')}
+              onPress={() => navigate('Minhas Campanhas')}
             />
           </View>
           
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

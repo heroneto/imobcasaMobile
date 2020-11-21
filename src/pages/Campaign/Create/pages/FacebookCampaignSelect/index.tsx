@@ -2,8 +2,6 @@ import { useRoute } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../../../Components/HeaderFormContainer'
 import styles from './styles'
 import StandardButton from '../../../../../Components/StandardButton'
 import colors from '../../../../../theme/colors'
@@ -51,10 +49,7 @@ export default function FacebookCampaignSelect() {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FormPageHeader
-        backButtomAction={goBack}
-      />
+    <View style={styles.container}>      
       <View style={styles.contentContainer}>
         <View style={styles.contentTextContainer}>
           <Text style={styles.contentText}>
@@ -86,6 +81,6 @@ export default function FacebookCampaignSelect() {
         </View>
       </View>
 
-    </SafeAreaView>
+    </View>
   )
 }

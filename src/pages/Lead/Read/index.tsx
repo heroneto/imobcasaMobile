@@ -21,24 +21,19 @@ interface LeadViewProps {
 
 const LeadView: React.FC<LeadViewProps> = ({ route }) => {
   const { leadid } = route.params
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
 
   function handleToWhatsApp() {
     Linking.openURL(`whatsapp://send?phone=${'+5511952827212'}`)
   }
 
-  function handleNavigateToLeadsPage() {
-    navigate('leads')
-  }
-
   function handleNavigateToEditPage() {
-    navigate('leadedit', { leadid })
+    navigate('Edição de Lead', { leadid })
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
-        <FormPageHeader backButtomAction={handleNavigateToLeadsPage}/>
         <View style={styles.contentContainer}>
           <View style={styles.leadHeaderGroup}>
             <Text style={styles.leadName}>José da Silva Junior</Text>
@@ -190,7 +185,7 @@ const LeadView: React.FC<LeadViewProps> = ({ route }) => {
         </View>
       </ScrollView>
       
-    </SafeAreaView>
+    </View>
   )
 }
 

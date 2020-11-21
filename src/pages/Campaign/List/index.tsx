@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import HeaderActions from '../../../Components/HeaderActions'
-import { Text } from 'react-native'
+import React from 'react'
+import { View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import colors from '../../../theme/colors'
 import styles from './styles'
 import FloatButton from '../../../Components/FloatButton'
 import ActiveCampaigs from './pages/ActiveCampaigns'
@@ -21,13 +18,7 @@ interface CampaignsListProps {
 const Campaigns: React.FC<CampaignsListProps> = ({navigation}) => {
 
   return (
-    <SafeAreaView style={styles.container}>
-       <HeaderActions
-        headerColor={colors.imobcasaPrimary}
-        title="Campanhas"
-        enableBackButton={false}
-        openDrawerFunc={() => navigation.openDrawer()}        
-      />
+    <View style={styles.container}>
        <Tab.Navigator
         initialRouteName="0"
         tabBarOptions={{
@@ -52,7 +43,7 @@ const Campaigns: React.FC<CampaignsListProps> = ({navigation}) => {
           name="0"
           component={ActiveCampaigs}
           options={{
-            tabBarLabel: "Aguardando"
+            tabBarLabel: "Aguardando",
           }}
         />
         <Tab.Screen
@@ -65,9 +56,9 @@ const Campaigns: React.FC<CampaignsListProps> = ({navigation}) => {
       </Tab.Navigator>
 
       <FloatButton
-        pageToNavigate="newcampaign"
+        pageToNavigate="Nova Campanha"
       />
-    </SafeAreaView>
+    </View>
   )
 }
 

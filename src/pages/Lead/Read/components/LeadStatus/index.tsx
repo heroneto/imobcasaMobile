@@ -18,7 +18,7 @@ const LeadStatus : React.FC<LeadStatusProps> = ({details, title, statusLevel, ta
 
   return (
     <View style={styles[`${statusLevel}`].container}>
-        <TouchableOpacity disabled={!pressable} onPress={() => navigate("taskedit" ,{
+        <TouchableOpacity disabled={!pressable} onPress={() => navigate("Tarefa" ,{
           taskId: taskId
         })}>
           <Text style={styles[`${statusLevel}`].title}>{title}</Text>

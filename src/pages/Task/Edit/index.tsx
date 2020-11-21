@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { View, Text, NativeSyntheticEvent, NativeScrollEvent, Platform } from 'react-native'
+import { View, Text, Platform } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import FormPageHeader from '../../../Components/HeaderFormContainer';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 import InputContainer from '../../../Components/InputContainer';
@@ -28,14 +27,13 @@ interface inputPickerProps {
 
 const TaskEdit: React.FC<TaskEditProps> = ({ route }) => {
   const { taskid } = route.params
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
   const [user, setUser] = useState<inputPickerProps>({ key: 5, label: "Heron Hideki" })
   const [taskType, setTaskType] = useState<inputPickerProps>({ key: 5, label: "Cobrar cliente" })
   const [lead, setLead] = useState<inputPickerProps>({ key: 5, label: "Evaristo Ismaelly" })
   const [taskDescription, setTaskDescription] = useState('Cliente malucoooo')
   const [date, setDate] = useState(new Date())
   const [isShowingDatePicker, setIsShowingDatePicker] = useState(false)
-  const [titleAlpha, setTitleAlpha] = useState(100)
 
 
   const handleTaskDate = (event: any, dateSelected: any) => {
@@ -50,32 +48,17 @@ const TaskEdit: React.FC<TaskEditProps> = ({ route }) => {
   }
 
   function handleSaveButtom() {
-    navigate('taskview', {
+    navigate('Tarefa', {
       taskid
     })
   }
 
-  function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>) {
-    const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
-    setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
-  }
-
+ 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
-        onScroll={(event) => handleContentOffsetChanges(event)}
         style={styles.container}
       >
-        <FormPageHeader backButtomAction={goBack}/>
-
-        <View style={styles.title}>
-          <Text style={{
-            ...styles.titleText,
-            color: `rgba(0,0,0,${titleAlpha})`
-          }}>
-            Edição de Tarefa
-                  </Text>
-        </View>
         <View style={styles.formContent}>
           <View style={styles.inputGroup}>
             <Text style={styles.inputTitle}>

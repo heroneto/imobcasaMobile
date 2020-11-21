@@ -1,7 +1,6 @@
-import React, { ReactChildren } from 'react'
+import React from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
-
 
 interface ContainerRadiusProps {
     topLeft: boolean,

@@ -11,28 +11,9 @@ export default function InactiveUsers() {
         level="neutral"
         topText="Heron Eto"
         middleText="Atua em 1 campanha"
-        modalOptions={{
-          title: "Selecione uma opção",
-          options: [
-            {
-              id: "1",
-              name: "Ver Detalhes",
-              pageToNavigate: "userview",
-              isPageExternalLink: false,
-              navigationParameters: {
-                userid: "123"
-              }
-            },
-            {
-              id: "2",
-              name: "Editar",
-              pageToNavigate: "useredit",
-              isPageExternalLink: false,
-              navigationParameters: {
-                userid: "123"
-              }
-            }
-          ]
+        pageToNavigate="Usuário"
+        navigationParameters={{
+          
         }}
       />
     </ScrollView>

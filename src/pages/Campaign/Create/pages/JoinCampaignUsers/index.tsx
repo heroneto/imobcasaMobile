@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../../../Components/HeaderFormContainer'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 import { View, Text } from 'react-native'
@@ -19,7 +17,7 @@ interface UserListProps {
 }
 
 const JoinCampaignUsers = () => {
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
   const [userSearchName, setUserSearchName] = useState<string>("")
   const [ userList, setUserList ] = useState<UserListProps[]>(usersAPI)
 
@@ -78,17 +76,9 @@ const JoinCampaignUsers = () => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
-        <FormPageHeader
-          backButtomAction={goBack}
-        />
         <View style={styles.contentContainer}>
-          <View style={styles.contentTextContainer}>
-            <Text style={styles.contentText}>
-              Usuários da campanha
-          </Text>
-          </View>
           <View style={styles.inputGroupContainer}>
             <InputContainer
               inputRadiusStyle={{
@@ -148,7 +138,7 @@ const JoinCampaignUsers = () => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 

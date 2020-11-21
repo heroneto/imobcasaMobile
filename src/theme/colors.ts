@@ -18,7 +18,7 @@ const colors = {
   textInputPlaceholder: "#DADADA",
   textInactive: "#F0F0F7",
   textHiperlinkAlternative: "#9C98A6",
-  facebook: "#1877F2"  
+  facebook: "#1877F2"
 }
 
 

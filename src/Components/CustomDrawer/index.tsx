@@ -1,4 +1,4 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList,  } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem,  } from '@react-navigation/drawer';
 import React, { useState } from 'react'
 import { Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -16,6 +16,11 @@ export default function CustomDrawer(props: any) {
   const insets = useSafeAreaInsets();
   const [ optionsIsOpen, setOptionsIsOpen ] = useState<boolean>(false)
 
+  function handleNavigate(page: string){
+    setOptionsIsOpen(false)
+    navigate(page)
+  }
+
   return (
     <DrawerContentScrollView 
       style={styles.container} 
@@ -30,7 +35,7 @@ export default function CustomDrawer(props: any) {
             <Text style={styles.userName}>Heron Eto</Text>
             <Text style={styles.userMail}>heron@imobcasa.com.br</Text>
           </View>
-          <Ionicons name="md-arrow-dropdown" size={24} color="#FFF" />
+          <Ionicons name={optionsIsOpen ? "md-arrow-dropup" : "md-arrow-dropdown"} size={24} color="#FFF" />
         </TouchableOpacity>
       </View>
       <View style={{
@@ -47,31 +52,35 @@ export default function CustomDrawer(props: any) {
             Editar
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigate("login")} style={styles.optionButton}>
+          <Text style={styles.optionText}>
+            Sair
+          </Text>
+        </TouchableOpacity>
       </View>
       
       <View style={styles.drawerContent}>
-        {/* <DrawerItemList {...props} />       */}
-        
+       
         <DrawerItem          
           icon={props => {
             return <Ionicons name="ios-rocket" size={24}  color={colors.textInput} />
           }}          
           label="Leads"
-          onPress={() => navigate("leads")}                  
+          onPress={() => handleNavigate("LeadsStack")}
         />
         <DrawerItem          
           icon={props => {
             return <FontAwesome name="users" size={20} color={colors.textInput} />
           }}          
           label="Usuários"
-          onPress={() => navigate("users")}
+          onPress={() => handleNavigate("UsersStack")}
         />
         <DrawerItem          
           icon={props => {
             return <Ionicons name="logo-facebook" size={24}  color={colors.textInput} />
           }}          
           label="Campanhas"
-          onPress={() => navigate("campaigns")}
+          onPress={() => handleNavigate("CampaignsStack")}
         />
         
       </View>

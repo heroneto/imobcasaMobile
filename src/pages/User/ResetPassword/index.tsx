@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
-import FormPageHeader from '../../../Components/HeaderFormContainer';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import InputContainer from '../../../Components/InputContainer';
 import PasswordInput from '../../../Components/PasswordInput';
 
@@ -16,21 +14,18 @@ interface UserPasswordChangeProps {
 
 const UserPasswordChange: React.FC<UserPasswordChangeProps> = ({ route }) => {
   const { userid } = route.params
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
   function handleSaveButtom() {
-    navigate('userview', {
+    navigate('Usuário', {
       userid
     })
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FormPageHeader
-        backButtomAction={goBack}
-      />
+    <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.inputGroup}>
           <Text style={styles.inputTitle}>
@@ -76,7 +71,7 @@ const UserPasswordChange: React.FC<UserPasswordChangeProps> = ({ route }) => {
         </View>
       </View>
 
-    </SafeAreaView>
+    </View>
   )
 }
 

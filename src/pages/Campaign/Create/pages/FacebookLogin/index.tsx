@@ -8,8 +8,6 @@ import { Ionicons } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 import StandardButton from '../../../../../Components/StandardButton'
 import colors from '../../../../../theme/colors'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../../../Components/HeaderFormContainer'
 
 const FacebookLogin: React.FC = () => {
   const { goBack, navigate } = useNavigation()
@@ -50,15 +48,12 @@ const FacebookLogin: React.FC = () => {
   })
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FormPageHeader
-        backButtomAction={goBack}
-      />
+    <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.contentTextContainer}>
           <Text style={styles.contentText}>
             Clique no botão abaixo para Logar com a sua conta do Facebook
-                    </Text>
+          </Text>
         </View>
         <View style={styles.facebookButtonContainer}>
           <StandardButton
@@ -99,7 +94,7 @@ const FacebookLogin: React.FC = () => {
           />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

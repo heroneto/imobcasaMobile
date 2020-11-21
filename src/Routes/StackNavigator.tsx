@@ -17,8 +17,7 @@ import NewLead from '../pages/Lead/Create'
 import Campaigns from '../pages/Campaign/List'
 import CampaignView from '../pages/Campaign/Read'
 import CampaignEdit from '../pages/Campaign/Edit'
-import HeaderActions from '../Components/HeaderActions'
-import colors from '../theme/colors'
+import { Header } from '../Components/Header'
 
 
 const Stack = createStackNavigator()
@@ -27,60 +26,174 @@ const Stack = createStackNavigator()
 
 export const UserStackNavigator = () => {
   return (
-  <Stack.Navigator screenOptions={{
-      // headerShown: true,
-      cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
-    }}>
-      <Stack.Screen 
-        name="users" 
-        component={UsersList} 
+    <Stack.Navigator
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+      }}
+      initialRouteName="Meus Usuários"
+    >
+      <Stack.Screen
+        name="Meus Usuários"
+        component={UsersList}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={true} />,
+          headerShown: true
+        }}
       />
-      <Stack.Screen name="useredit" component={UserEdit} />
-      <Stack.Screen name="userview" component={UserView} />
-      <Stack.Screen name="newuser" component={NewUser} /> 
-      <Stack.Screen name="userpasswordchange" component={UserPasswordChange} />   
+      <Stack.Screen
+        name="Edição de Usuário"
+        component={UserEdit}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Usuário"
+        component={UserView}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Novo Usuário"
+        component={NewUser}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Reset de Senha"
+        component={UserPasswordChange}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
     </Stack.Navigator>
   )
-  
+
 }
 
 export const CampaignStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-      cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
-    }}>
-      <Stack.Screen name="campaigns" component={Campaigns} />
-      <Stack.Screen name="newcampaign" component={NewCampaign} />     
-      <Stack.Screen name="campaignview" component={CampaignView} />
-      <Stack.Screen name="campaignedit" component={CampaignEdit} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}
+      initialRouteName="Minhas Campanhas"
+    >
+      <Stack.Screen
+        name="Minhas Campanhas"
+        component={Campaigns}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={true} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Nova Campanha"
+        component={NewCampaign}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Campanha"
+        component={CampaignView}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Edição de Campanha"
+        component={CampaignEdit}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
     </Stack.Navigator>
   )
 }
 
-export const LeadStackNavigator = (drawerProps: any) =>  {
-  
+export const LeadStackNavigator = () => {
+
   return (
     <Stack.Navigator screenOptions={{
-      // headerShown: false,
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
-      }}
+    }}
       initialRouteName="Meus Leads"
     >
-      <Stack.Screen 
-        name="Meus Leads"        
-        component={LeadsView} 
+      <Stack.Screen
+        name="Meus Leads"
+        component={LeadsView}
         options={{
-          header: (props) => <HeaderActions title={props.scene.route.name} headerColor={colors.imobcasaPrimary} enableBackButton={false} openDrawerFunc={() => { drawerProps.navigation.openDrawer() }} />,
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={true} />,
+          headerShown: true
         }}
       />
-      <Stack.Screen name="newlead" component={NewLead} />     
-      <Stack.Screen name="leadview" component={LeadView} />
-      <Stack.Screen name="leadedit" component={LeadEdit} />
-      <Stack.Screen name="taskview" component={TaskView} />
-      <Stack.Screen name="newtask" component={NewTaskView} />
-      <Stack.Screen name="taskedit" component={TaskEdit} />
-      <Stack.Screen name="search" component={SearchPage} />
+      <Stack.Screen
+        name="Novo Lead"
+        component={NewLead}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="Lead"
+        component={LeadView}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Edição de Lead"
+        component={LeadEdit}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Tarefa"
+        component={TaskView}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Nova Tarefa"
+        component={NewTaskView}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Edição de Tarefa"
+        component={TaskEdit}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Busca de Leads"
+        component={SearchPage}
+        options={{
+          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          headerShown: true,
+        }}
+      />
     </Stack.Navigator>
   )
 }

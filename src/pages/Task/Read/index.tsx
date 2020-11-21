@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import { View, Text, Image, Linking, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { View, Text, Image, Linking } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../../Components/HeaderActions'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
@@ -24,20 +23,13 @@ const TaskView: React.FC<TaskViewProps> = ({ route }) => {
     Linking.openURL(`whatsapp://send?phone=${'+5511952827212'}`)
   }
 
-  function handleNavigateToTasksPage() {
-    navigate('tasks')
-  }
-
   function handleNavigateToEditPage() {
-    navigate('taskedit', { taskid })
+    navigate('Edição de Tarefa', { taskid })
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <FormPageHeader 
-          backButtomAction={goBack}                    
-        />
         <View style={styles.pageHeaderContainer}>
           <View style={styles.pageHeaderTitleContainer}>
             <Text style={styles.pageHeaderTitle}>Solicitar documentação</Text>

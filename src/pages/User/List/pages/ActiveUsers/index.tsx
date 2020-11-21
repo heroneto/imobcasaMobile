@@ -10,7 +10,7 @@ export default function ActiveUsers() {
         level="neutral"
         topText="Heron Eto"
         middleText="Atua em 1 campanha"       
-        pageToNavigate="userview"
+        pageToNavigate="Usuário"
         navigationParameters={{
           userid: 1
         }}

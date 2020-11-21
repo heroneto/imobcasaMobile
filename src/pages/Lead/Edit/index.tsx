@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { View, Text, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
+import { View, Text } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
-import FormPageHeader from '../../../Components/HeaderFormContainer';
 import { Feather } from '@expo/vector-icons';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
@@ -24,45 +23,26 @@ interface inputPickerProps {
 
 const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
   const { leadid } = route.params
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
   const [name, setName] = useState('Everisto de Barros')
   const [phone, setPhone] = useState('119999999')
   const [origin, setOrigin] = useState<inputPickerProps>({ key: 5, label: "Facebook" })
   const [campaign, setCampaign] = useState<inputPickerProps>({ key: 5, label: "Vila Formosa" })
   const [user, setUser] = useState<inputPickerProps>({ key: 5, label: "Heron Hideki" })
   const [leadStatus, setLeadStatus] = useState<inputPickerProps>({ key: 5, label: "Negociação em andamento" })
-  const [titleAlpha, setTitleAlpha] = useState(100)
-
-
 
   function handleSaveButtom() {
-    navigate('leadview', {
+    navigate('Lead', {
       leadid
     })
   }
 
-  function handleContentOffsetChanges(event: NativeSyntheticEvent<NativeScrollEvent>) {
-    const titleColorTransparency = 1 - Number((event.nativeEvent.contentOffset.y * 1) / 100)
-    setTitleAlpha(titleColorTransparency < 0.1 ? 0 : titleColorTransparency)
-  }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
         style={styles.container}
-        onScroll={(event) => handleContentOffsetChanges(event)}
       >
-        <FormPageHeader
-          backButtomAction={goBack}
-        />
-        <View style={styles.title}>
-          <Text style={{
-            ...styles.titleText,
-            color: `rgba(0,0,0,${titleAlpha})`
-          }}>
-            Edição de Lead
-                </Text>
-        </View>
         <View style={styles.formContent}>
           <View
             style={styles.inputGroup}

@@ -4,17 +4,18 @@ import { CampaignStackNavigator, LeadStackNavigator, UserStackNavigator } from '
 import MyUserEdit from '../pages/MyUserEdit'
 import MyPasswordEdit from '../pages/MyPasswordEdit'
 import CustomDrawer from '../Components/CustomDrawer'
+import { Header } from '../Components/Header'
 
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />} >     
-      <Drawer.Screen name="leads" component={LeadStackNavigator} />
+    <Drawer.Navigator initialRouteName="LeadsStack" drawerContent={props => <CustomDrawer {...props} />} >     
+      <Drawer.Screen name="LeadsStack" component={LeadStackNavigator} />
       <Drawer.Screen name="myuseredit" component={MyUserEdit} />
       <Drawer.Screen name="mypasswordedit" component={MyPasswordEdit} />
-      <Drawer.Screen name="users" component={UserStackNavigator} />
-      <Drawer.Screen name="campaigns" component={CampaignStackNavigator} />
+      <Drawer.Screen name="UsersStack" component={UserStackNavigator} />
+      <Drawer.Screen name="CampaignsStack" component={CampaignStackNavigator} />
     </Drawer.Navigator>
   )
 }

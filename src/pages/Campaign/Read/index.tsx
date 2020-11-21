@@ -2,26 +2,21 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import ButtonContainer from '../../../Components/ButtonContainer'
-import FormPageHeader from '../../../Components/HeaderFormContainer'
 import ItemDetails from '../../../Components/ItemDetails'
 import styles from './styles'
 
 const CampaignView : React.FC = () => {
-  const { goBack, navigate } = useNavigation()
+  const { navigate } = useNavigation()
 
   
   function handleNavigateToEditPage(){
-    navigate('campaignedit')
+    navigate('Edição de Campanha')
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
-        <FormPageHeader 
-          backButtomAction={goBack}
-        />
         <View style={styles.contentContainer}>
           <Text style={styles.campaignName}>Aricanduva</Text>
           <Text style={styles.campaignDetails}>150 Leads - 2 usuários</Text>
@@ -85,7 +80,7 @@ const CampaignView : React.FC = () => {
         </View>
       </ScrollView>
 
-    </SafeAreaView>
+    </View>
   )
 }
 

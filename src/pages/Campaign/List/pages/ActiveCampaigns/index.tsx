@@ -14,22 +14,9 @@ export default function ActiveCampaigs(){
         topText="[Tatuapé] Tatuapé"
         topIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
         middleText="5 usuários atrelados e 200 Leads recebidos"
-        modalOptions={{
-          title: "Selecione uma opção abaixo",
-          options: [
-            {
-              id: "1",
-              name: "Ver Campanha",
-              pageToNavigate: `campaignview`,
-              isPageExternalLink: false
-            },
-            {
-              id: "2",
-              name: "Editar Campanha",
-              pageToNavigate: `campaignedit`,
-              isPageExternalLink: false,              
-            }
-          ]
+        pageToNavigate="Campanha"
+        navigationParameters={{
+          
         }}
       />
       

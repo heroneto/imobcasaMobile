@@ -42,11 +42,7 @@ export default function LoginView() {
 
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-    // behavior='position'
-
-    >
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.header}>
         {!isKeyboardOpen ?
           <Image

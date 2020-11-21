@@ -4,8 +4,6 @@ import styles from './styles'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../Components/HeaderFormContainer'
 
 
 interface TaskViewProps {
@@ -14,21 +12,20 @@ interface TaskViewProps {
 
 const UserView: React.FC<TaskViewProps> = ({ route }) => {
   const { userid } = route.params
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
 
 
   function handleNavigateToEditPage() {
-    navigate('useredit', { userid })
+    navigate('Edição de Usuário', { userid })
   }
 
   function handleNavigateToPasswordChange() {
-    navigate('userpasswordchange', { userid })
+    navigate('Reset de Senha', { userid })
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <FormPageHeader backButtomAction={goBack} />
+    <View style={styles.container}>
+      <ScrollView>        
         <View style={styles.pageHeaderContainer}>
           <View style={styles.pageHeaderTitleContainer}>
             <Text style={styles.pageHeaderTitle}>Heron Hideki de Queiroz Eto</Text>
@@ -115,7 +112,7 @@ const UserView: React.FC<TaskViewProps> = ({ route }) => {
         </View>
       </ScrollView>
 
-    </SafeAreaView>
+    </View>
   )
 }
 

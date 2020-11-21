@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormPageHeader from '../../../Components/HeaderFormContainer'
+import React, {  useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 import { View, Text } from 'react-native'
@@ -73,22 +71,19 @@ export default function CampaignEdit(){
   }
 
   function handleNavigateToCampaignList() {
-    navigate('campaigns')
+    navigate('Minhas Campanhas')
   }
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
-        <FormPageHeader
-          backButtomAction={handleNavigateToCampaignList}
-        />
         <View style={styles.contentContainer}>
-          <View style={styles.contentTextContainer}>
+          {/* <View style={styles.contentTextContainer}>
             <Text style={styles.contentText}>
               Usuários da campanha
-          </Text>
-          </View>
+            </Text>
+          </View> */}
           <View style={styles.inputGroupContainer}>
             <InputContainer
               inputRadiusStyle={{
@@ -148,6 +143,6 @@ export default function CampaignEdit(){
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }

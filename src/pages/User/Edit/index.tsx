@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
-import FormPageHeader from '../../../Components/HeaderFormContainer';
 import StandardButton from '../../../Components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons';
@@ -9,7 +8,6 @@ import colors from '../../../theme/colors';
 
 import * as data from '../../appData.json'
 import PickerInput from '../../../Components/PickerInput';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import InputContainer from '../../../Components/InputContainer';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -34,16 +32,14 @@ const UserEdit: React.FC<UserEditProps> = ({ route }) => {
 
 
   function handleSaveButtom() {
-    navigate('userview', {
+    navigate('Usuário', {
       userid
     })
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FormPageHeader
-        backButtomAction={goBack}
-      />
+    <View style={styles.container}>
+
       <View style={styles.formContent}>
         <View style={styles.inputGroup}>
           <Text style={styles.inputTitle}>
@@ -122,7 +118,7 @@ const UserEdit: React.FC<UserEditProps> = ({ route }) => {
       </View>
 
 
-    </SafeAreaView>
+    </View>
   )
 }
 
