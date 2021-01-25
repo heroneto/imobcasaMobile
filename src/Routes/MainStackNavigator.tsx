@@ -13,9 +13,11 @@ export const MainStackNavigator = () => {
       <Stack.Screen 
         name="login" 
         component={LoginView} 
-        
       />
-      <Stack.Screen name="home" component={DrawerNavigator} />
+      <Stack.Screen 
+        name="home" 
+        component={DrawerNavigator} 
+      />
     </Stack.Navigator>
   )
 }

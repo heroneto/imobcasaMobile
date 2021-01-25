@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItem,  } from '@react-navigation/drawer';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -8,13 +8,34 @@ import styles from './styles'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import colors from '../../theme/colors';
+import styled from 'styled-components/native'
+import { ThemeProps } from '../../theme/theme';
+
+const DrawerContainer = styled(DrawerContentScrollView)`
+  background: ${(props: CustomDrawerProps) => props.theme.colors.background};
+  flex: 1;
+`
+
+const DrawerHeader = styled.View`
+  background: ${(props: CustomDrawerProps) => props.theme.colors.imobcasaPrimary};
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+`
 
 
-export default function CustomDrawer(props: any) {
+interface CustomDrawerProps {
+  theme: ThemeProps
+}
+
+const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
   const { navigate } = useNavigation()
   const insets = useSafeAreaInsets();
   const [ optionsIsOpen, setOptionsIsOpen ] = useState<boolean>(false)
+
+
 
   function handleNavigate(page: string){
     setOptionsIsOpen(false)
@@ -22,13 +43,12 @@ export default function CustomDrawer(props: any) {
   }
 
   return (
-    <DrawerContentScrollView 
-      style={styles.container} 
-      contentContainerStyle={{
+    <DrawerContainer 
+        contentContainerStyle={{
         paddingTop: insets.top,
      }}
     >
-      <View style={styles.header}>
+      <DrawerHeader>
         <Image style={styles.myselfImage} source={{ uri: "https://avatars1.githubusercontent.com/u/41599309?s=460&u=65b95962731f7965ead8de961b01c59e66554721&v=4" }} />
         <TouchableOpacity onPress={() => setOptionsIsOpen(!optionsIsOpen)} style={styles.showUserOptionsButton}>
           <View style={styles.userData}>
@@ -37,7 +57,7 @@ export default function CustomDrawer(props: any) {
           </View>
           <Ionicons name={optionsIsOpen ? "md-arrow-dropup" : "md-arrow-dropdown"} size={24} color="#FFF" />
         </TouchableOpacity>
-      </View>
+      </DrawerHeader>
       <View style={{
         ...styles.userOptions,
         height: !optionsIsOpen ? 0 : "auto",
@@ -84,6 +104,8 @@ export default function CustomDrawer(props: any) {
         />
         
       </View>
-    </DrawerContentScrollView>
+    </DrawerContainer>
   );
 }
+
+export default CustomDrawer

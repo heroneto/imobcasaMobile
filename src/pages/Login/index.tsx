@@ -24,6 +24,8 @@ export default function LoginView() {
     navigate('home')
   }
 
+  
+
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', () => {
       setIsKeyboardOpen(true)

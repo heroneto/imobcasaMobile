@@ -1,4 +1,27 @@
-const colors = {
+export interface ColorsProps {
+  standardButton: string,
+  submitButton: string,
+  cancelButton: string,
+  neutralButton: string,
+  disabledButton: string,
+  whatsapp: string,
+  error: string,
+  success: string,
+  background: string,
+  imobcasaPrimary: string,
+  imobcasaSecondary: string,
+  textInput: string,
+  textTitle: string,
+  textHiperlink: string,
+  textInfo: string,
+  textInputLabel: string,
+  textInputPlaceholder: string,
+  textInactive: string,
+  textHiperlinkAlternative: string,
+  facebook: string,
+}
+
+const colors: ColorsProps = {
   standardButton: "#309AE7",
   submitButton: "#28A790",
   cancelButton: "#757575",
