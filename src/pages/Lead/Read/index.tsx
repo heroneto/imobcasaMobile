@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, Linking } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../../Components/HeaderActions'
+import HeaderActions from '../../../components/HeaderActions'
 import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
@@ -9,11 +9,11 @@ import { useNavigation } from '@react-navigation/native'
 
 import WhatsAppIcon from '../../../../assets/icons/WhatsApp.png'
 import colors from '../../../theme/colors'
-import FormPageHeader from '../../../Components/HeaderFormContainer'
+import FormPageHeader from '../../../components/HeaderFormContainer'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LeadStatus from './components/LeadStatus'
-import ButtonContainer from '../../../Components/ButtonContainer'
-import ItemDetails from '../../../Components/ItemDetails'
+import ButtonContainer from '../../../components/ButtonContainer'
+import ItemDetails from '../../../components/ItemDetails'
 
 interface LeadViewProps {
   route: any

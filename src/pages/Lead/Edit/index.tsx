@@ -3,13 +3,13 @@ import { View, Text } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import { Feather } from '@expo/vector-icons';
-import StandardButton from '../../../Components/StandardButton';
+import StandardButton from '../../../components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
-import PickerInput from '../../../Components/PickerInput';
+import PickerInput from '../../../components/PickerInput';
 
 import * as data from '../../appData.json'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import InputContainer from '../../../Components/InputContainer';
+import InputContainer from '../../../components/InputContainer';
 
 interface LeadEditProps {
   route: any

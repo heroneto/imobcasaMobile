@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
-import FormPageHeader from '../../Components/HeaderFormContainer'
-import StandardButton from '../../Components/StandardButton'
+import FormPageHeader from '../../components/HeaderFormContainer'
+import StandardButton from '../../components/StandardButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import InputContainer from '../../Components/InputContainer'
-import PasswordInput from '../../Components/PasswordInput'
+import InputContainer from '../../components/InputContainer'
+import PasswordInput from '../../components/PasswordInput'
 
 interface MyPasswordEditProps {
   route: any

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
-import HeaderActions from '../../../../../Components/HeaderActions'
+import HeaderActions from '../../../../../components/HeaderActions'
 import { useNavigation } from '@react-navigation/native'
 import * as Facebook from 'expo-facebook'
 import { Ionicons } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
-import StandardButton from '../../../../../Components/StandardButton'
+import StandardButton from '../../../../../components/StandardButton'
 import colors from '../../../../../theme/colors'
 
 const FacebookLogin: React.FC = () => {

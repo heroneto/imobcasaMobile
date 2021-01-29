@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
-import StandardButton from '../../../Components/StandardButton';
+import StandardButton from '../../../components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 
-import InputContainer from '../../../Components/InputContainer';
-import PasswordInput from '../../../Components/PasswordInput';
+import InputContainer from '../../../components/InputContainer';
+import PasswordInput from '../../../components/PasswordInput';
 
 
 interface UserPasswordChangeProps {

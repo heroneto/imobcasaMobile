@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
-import StandardButton from '../../../Components/StandardButton';
+import StandardButton from '../../../components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons';
 import colors from '../../../theme/colors';
 
 import * as data from '../../appData.json'
-import PickerInput from '../../../Components/PickerInput';
-import InputContainer from '../../../Components/InputContainer';
+import PickerInput from '../../../components/PickerInput';
+import InputContainer from '../../../components/InputContainer';
 import { TextInput } from 'react-native-gesture-handler';
 
 interface UserEditProps {

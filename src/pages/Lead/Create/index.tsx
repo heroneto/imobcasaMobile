@@ -3,13 +3,13 @@ import { View, Text, NativeScrollEvent, NativeSyntheticEvent } from 'react-nativ
 import styles from './styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import { Feather } from '@expo/vector-icons';
-import StandardButton from '../../../Components/StandardButton';
+import StandardButton from '../../../components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 
 
 import * as data from '../../appData.json'
-import PickerInput from '../../../Components/PickerInput';
-import InputContainer from '../../../Components/InputContainer';
+import PickerInput from '../../../components/PickerInput';
+import InputContainer from '../../../components/InputContainer';
 
 
 interface inputPickerProps {

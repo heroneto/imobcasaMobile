@@ -4,9 +4,9 @@ import { View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
-import StandardButton from '../../../../../Components/StandardButton'
+import StandardButton from '../../../../../components/StandardButton'
 import colors from '../../../../../theme/colors'
-import PickerInput from '../../../../../Components/PickerInput'
+import PickerInput from '../../../../../components/PickerInput'
 
 interface FacebookAdAccountSelectProps {
   route: any

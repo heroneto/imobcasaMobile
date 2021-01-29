@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 import { View, Text } from 'react-native'
-import StandardButton from '../../../../../Components/StandardButton'
+import StandardButton from '../../../../../components/StandardButton'
 import colors from '../../../../../theme/colors'
 
 const ConfirmCampaignCreation: React.FC = () => {

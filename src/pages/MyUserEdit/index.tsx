@@ -4,10 +4,10 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../theme/colors'
 import { Feather } from '@expo/vector-icons';
-import FormPageHeader from '../../Components/HeaderFormContainer'
-import StandardButton from '../../Components/StandardButton'
+import FormPageHeader from '../../components/HeaderFormContainer'
+import StandardButton from '../../components/StandardButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import InputContainer from '../../Components/InputContainer'
+import InputContainer from '../../components/InputContainer'
 import { TextInput } from 'react-native-gesture-handler'
 
 

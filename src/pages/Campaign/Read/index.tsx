@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import ButtonContainer from '../../../Components/ButtonContainer'
-import ItemDetails from '../../../Components/ItemDetails'
+import ButtonContainer from '../../../components/ButtonContainer'
+import ItemDetails from '../../../components/ItemDetails'
 import styles from './styles'
 
 const CampaignView : React.FC = () => {

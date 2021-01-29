@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
-import ItemCard from '../../../../../Components/ItemCard'
+import ItemCard from '../../../../../components/ItemCard'
 import styles from './styles'
 
 export default function ActiveUsers() {

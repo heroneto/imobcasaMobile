@@ -3,12 +3,12 @@ import { View, Text, Image, Keyboard, KeyboardAvoidingView } from 'react-native'
 import styles from './styles'
 import AppImage from '../../../assets/appImage.png'
 import { RectButton, TextInput } from 'react-native-gesture-handler'
-import StandardButton from '../../Components/StandardButton'
+import StandardButton from '../../components/StandardButton'
 import { Ionicons } from '@expo/vector-icons';
 import colors from '../../theme/colors'
 import { useNavigation } from '@react-navigation/native'
-import InputContainer from '../../Components/InputContainer'
-import PasswordInput from '../../Components/PasswordInput'
+import InputContainer from '../../components/InputContainer'
+import PasswordInput from '../../components/PasswordInput'
 
 
 export default function LoginView() {
