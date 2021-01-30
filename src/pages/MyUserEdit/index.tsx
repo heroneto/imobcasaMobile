@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
-import colors from '../../theme/colors'
+import colors from '@theme/colors'
 import { Feather } from '@expo/vector-icons';
-import FormPageHeader from '../../components/HeaderFormContainer'
-import StandardButton from '../../components/StandardButton'
+import FormPageHeader from '@components/HeaderFormContainer'
+import StandardButton from '@components/StandardButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import InputContainer from '../../components/InputContainer'
+import InputContainer from '@components/InputContainer'
 import { TextInput } from 'react-native-gesture-handler'
 
 

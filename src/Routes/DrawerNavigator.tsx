@@ -3,8 +3,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { CampaignStackNavigator, LeadStackNavigator, UserStackNavigator } from './StackNavigator'
 import MyUserEdit from '../pages/MyUserEdit'
 import MyPasswordEdit from '../pages/MyPasswordEdit'
-import CustomDrawer from '../components/CustomDrawer'
-import { Header } from '../components/Header'
+import CustomDrawer from '@components/CustomDrawer'
+import { Header } from '@components/Header'
 
 const Drawer = createDrawerNavigator()
 

@@ -1,6 +1,6 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import colors from '../../../../theme/colors'
-import fonts from '../../../../theme/fonts'
+import colors from '@theme/colors'
+import fonts from '@theme/fonts'
 
 interface CustomTextStyleProps {
   [key:string]:{

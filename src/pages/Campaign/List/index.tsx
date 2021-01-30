@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import styles from './styles'
-import FloatButton from '../../../components/FloatButton'
+import FloatButton from '@components/FloatButton'
 import ActiveCampaigs from './pages/ActiveCampaigns'
 import InactiveCampaigs from './pages/InactiveCampaigns'
 

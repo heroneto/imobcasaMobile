@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { View } from 'react-native'
-import colors from '../../theme/colors'
+import colors from '@theme/colors'
 import styles from './styles'
 
 

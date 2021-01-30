@@ -4,7 +4,7 @@ import styles from './styles'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ActiveUsers from './pages/ActiveUsers';
 import InactiveUsers from './pages/InactiveUsers';
-import FloatButton from '../../../components/FloatButton';
+import FloatButton from '@components/FloatButton';
 
 const Tab = createMaterialTopTabNavigator();
 

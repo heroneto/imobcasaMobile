@@ -17,7 +17,7 @@ import NewLead from '../pages/Lead/Create'
 import Campaigns from '../pages/Campaign/List'
 import CampaignView from '../pages/Campaign/Read'
 import CampaignEdit from '../pages/Campaign/Edit'
-import { Header } from '../components/Header'
+import { Header } from '@components/Header'
 
 
 const Stack = createStackNavigator()

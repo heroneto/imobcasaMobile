@@ -3,7 +3,7 @@ import {Text, View} from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import ModalSelector, { IModalSelectorProps, IOption } from 'react-native-modal-selector'
 import styles from './styles'
-import colors from '../../theme/colors'
+import colors from '@theme/colors'
 import { Ionicons } from '@expo/vector-icons'; 
 
 interface PickerProps extends IModalSelectorProps<IOption>{

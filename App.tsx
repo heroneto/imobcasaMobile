@@ -25,16 +25,16 @@ export default function App() {
     return <AppLoading />
   } else {
     return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+      // <Provider store={store}>
+      //    <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
             <NavigationContainer>
               <MainStackNavigator />
               <StatusBar style="inverted" backgroundColor="#000" />
             </NavigationContainer>
           </ThemeProvider>
-        </PersistGate>
-      </Provider>
+      //    </PersistGate>
+      //  </Provider>
     );
   }
 }

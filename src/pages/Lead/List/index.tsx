@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Text, Image, View } from 'react-native'
 import styles from './styles'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import ItemCard from '../../../components/ItemCard'
+import ItemCard from '@components/ItemCard'
 import { ScrollView } from 'react-native-gesture-handler'
 import facebookIcon from '../../../../assets/icons/facebook.png'
-import FloatButton from '../../../components/FloatButton'
+import FloatButton from '@components/FloatButton'
 
 const Tab = createMaterialTopTabNavigator()
 

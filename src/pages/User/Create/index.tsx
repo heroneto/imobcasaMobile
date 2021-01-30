@@ -3,17 +3,17 @@ import styles from './styles'
 import { View, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
-import colors from '../../../theme/colors';
-import StandardButton from '../../../components/StandardButton'
+import colors from '@theme/colors';
+import StandardButton from '@components/StandardButton'
 
-import PickerInput from '../../../components/PickerInput'
+import PickerInput from '@components/PickerInput'
 
 import * as data from '../../appData.json'
-import FormPageHeader from '../../../components/HeaderFormContainer'
+import FormPageHeader from '@components/HeaderFormContainer'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
-import InputContainer from '../../../components/InputContainer'
-import PasswordInput from '../../../components/PasswordInput'
+import InputContainer from '@components/InputContainer'
+import PasswordInput from '@components/PasswordInput'
 
 export default function NewUser() {
   const { goBack } = useNavigation()

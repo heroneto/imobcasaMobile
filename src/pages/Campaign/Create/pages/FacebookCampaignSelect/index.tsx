@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
-import StandardButton from '../../../../../components/StandardButton'
-import colors from '../../../../../theme/colors'
+import StandardButton from '@components/StandardButton'
+import colors from '@theme/colors'
 
 import { Ionicons } from '@expo/vector-icons'
-import InputContainer from '../../../../../components/InputContainer'
+import InputContainer from '@components/InputContainer'
 import { TextInput } from 'react-native-gesture-handler'
 
 interface FacebookCampaignSelect {

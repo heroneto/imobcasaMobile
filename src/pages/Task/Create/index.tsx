@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { View, Text, NativeSyntheticEvent, NativeScrollEvent, Platform } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import FormPageHeader from '../../../components/HeaderFormContainer';
-import StandardButton from '../../../components/StandardButton';
+import FormPageHeader from '@components/HeaderFormContainer';
+import StandardButton from '@components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
-import InputContainer from '../../../components/InputContainer';
+import InputContainer from '@components/InputContainer';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons'; 
-import colors from '../../../theme/colors';
+import colors from '@theme/colors';
 import moment from 'moment'
-import PickerInput from '../../../components/PickerInput';
+import PickerInput from '@components/PickerInput';
 
 import * as data from '../../appData.json'
 

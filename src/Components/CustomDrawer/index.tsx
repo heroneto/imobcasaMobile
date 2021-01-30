@@ -9,9 +9,9 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import colors from '../../theme/colors';
+import colors from '@theme/colors';
 import styled from 'styled-components/native'
-import { ThemeProps } from '../../theme/theme';
+import { ThemeProps } from '@theme/theme';
 
 const DrawerContainer = styled(DrawerContentScrollView)`
   background: ${(props: CustomDrawerProps) => props.theme.colors.background};

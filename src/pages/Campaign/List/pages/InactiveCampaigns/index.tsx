@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import ItemCard from '../../../../../components/ItemCard'
+import ItemCard from '@components/ItemCard'
 import styles from './styles'
 
 import facebookIcon from '../../../../../../assets/icons/facebook.png'

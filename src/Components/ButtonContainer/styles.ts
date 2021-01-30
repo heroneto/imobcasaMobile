@@ -1,5 +1,5 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import colors from '../../theme/colors'
+import colors from '@theme/colors'
 
 
 export interface ButtonContainerStylesProps {
