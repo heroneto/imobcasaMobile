@@ -1,5 +1,5 @@
 import { Effect, put } from 'redux-saga/effects';
-import { login, getNewAccessToken } from '../../../services/apis'
+import { login, getNewAccessToken } from '@core/services/apis'
 
 import { loadSuccess, loadFailure } from './actions';
 
@@ -9,8 +9,8 @@ export function* authenticate(action: Effect) {
   try {
     const { username, password } = action.payload
     const response = yield login(username, password)
-
-    const { accessToken, refreshToken, fullName, email, userId: id } = response.data
+    const { tokens, fullName, email, userId: id } = response.data
+    const { accessToken, refreshToken } = tokens
     yield setAccessToken(accessToken)
     yield setRefreshToken(refreshToken)
 
@@ -50,16 +50,26 @@ export function* getTokensStorage(){
 export function* refreshAccessToken(){
   try{
     const refreshToken = yield getRefreshToken()
-    //call api and save in storage
     const result = yield getNewAccessToken(refreshToken)
-    yield setAccessToken(result.data)
+    const { tokens, fullName, email, userId: id } = result.data
+    const userData = {
+      fullName,
+      email,
+      id,
+      isLogged: true
+    }
+    yield setUser(userData)
+
+    const { accessToken } = tokens
+    yield setAccessToken(accessToken)
     yield put(loadSuccess({ 
-      accessToken: result.data, 
+      accessToken,
       refreshToken
     })
   );
     
   }catch(err){
+    console.log(err)
     yield put(loadFailure());
   }
 }

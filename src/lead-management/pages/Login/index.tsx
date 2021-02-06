@@ -10,35 +10,41 @@ import { useNavigation } from '@react-navigation/native'
 import InputContainer from '@lead-management/components/InputContainer'
 import PasswordInput from "@lead-management/components/PasswordInput"
 
+import { LoggedUser } from '@core/store/ducks/loggedUser/types'
+import { Tokens } from '@core/store/ducks/tokens/types';
+
+
 interface LoginViewProps {
-  tokens: {
-    accessToken: string,
-    refreshToken: string,
-  },
+  tokens: Tokens,
   error: boolean,
   loading: boolean,
-  actions: {
+  tokenActions: {
     login(username: string, password: string): void,
-    refreshAccessToken(token: string): void
+    refreshAccessToken(): void
   }
-
+  loggedUserActions: {
+    getUser(): void
+  }
+  loggedUser: LoggedUser
 }
 
-const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }) => {
+const LoginView: React.FC<LoginViewProps> = ({ tokenActions, error, loading, tokens, loggedUserActions, loggedUser }) => {
   const { navigate } = useNavigation()
   const [isRememberMeSelected, setIsRememberMeSelected] = useState(false)
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
   async function login() {
-    await actions.login(username, password)
+    await tokenActions.login(username, password)
+    await loggedUserActions.getUser()
   }
 
   useEffect(() => {
-    if (tokens.accessToken && tokens.refreshToken) {
+    console.log("LOGGED USER", loggedUser)
+    if (loggedUser?.isLogged) {
       navigate("home")
     }
-  }, [tokens])
+  }, [loggedUser])
 
 
 

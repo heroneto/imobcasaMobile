@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
-import { AuthState, AuthTypes } from './types';
+import { TokenState, TokenTypes } from './types';
 
-const INITIAL_STATE: AuthState = {
+const INITIAL_STATE: TokenState = {
   data: {
     accessToken: "",
     refreshToken: "",
@@ -10,23 +10,23 @@ const INITIAL_STATE: AuthState = {
   loading: false,
 };
 
-const reducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<TokenState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case AuthTypes.LOAD_REQUEST:
+    case TokenTypes.LOAD_REQUEST:
       return { ...state, loading: true };
-    case AuthTypes.LOAD_SUCCESS:
+    case TokenTypes.LOAD_SUCCESS:
       return {
       ...state, loading: false, error: false, data: action.payload.data,
       };
-    case AuthTypes.LOAD_FAILURE:
+    case TokenTypes.LOAD_FAILURE:
       return {
-      ...state, loading: false, error: true, data: {refreshToken: "", accessToken: ""},
+      ...state, loading: false, error: true
       };
-    case AuthTypes.LOAD_TOKENS_STORAGE:
+    case TokenTypes.LOAD_TOKENS_STORAGE:
       return {
         ...state, loading: true
       }
-    case AuthTypes.LOAD_REFRESH_ACCESSTOKEN:
+    case TokenTypes.LOAD_REFRESH_ACCESSTOKEN:
       return {
         ...state, loading: true
       }

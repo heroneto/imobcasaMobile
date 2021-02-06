@@ -2,56 +2,80 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
-import { Auth } from '@core/store/ducks/auth/types';
 import { ApplicationState } from '@core/store';
 
-import * as AuthActions from '@core/store/ducks/auth/actions';
+import { Tokens } from '@core/store/ducks/tokens/types';
+import * as TokenActions from '@core/store/ducks/tokens/actions';
+
+import { LoggedUser } from '@core/store/ducks/loggedUser/types'
+import * as LoggedUserActions from "@core/store/ducks/loggedUser/actions"
 
 import LoginView from '@lead-management/pages/Login'
 
 interface StateProps {
-  auth: Auth,
+  tokens: Tokens,
+  loggedUser: LoggedUser,
   loading: boolean,
   error: boolean
 }
 
 interface DispatchProps {
-  loadRequest(username: string, password: string): void,
-  getTokensStorage(): void,
-  refreshAccessToken(): void
+  actions: {
+    tokenActions: {
+      loadRequest(username: string, password: string): void,
+      getTokensStorage(): void,
+      refreshAccessToken(): void
+    },
+    loggedUserActions: {
+      loadRequest(): void
+    }
+  }
 }
 
 type Props = StateProps & DispatchProps
 
 class LoginContainer extends Component<Props> {
   componentDidMount() {
-    const { getTokensStorage, refreshAccessToken } = this.props
-    getTokensStorage()
+    const { refreshAccessToken } = this.props.actions.tokenActions
+    const { loadRequest } = this.props.actions.loggedUserActions
     refreshAccessToken()
+    loadRequest()
   }
 
   render() {
-    const { loadRequest, auth, error, loading, refreshAccessToken } = this.props
+    const { actions, tokens, error, loading, loggedUser } = this.props
     return (
       <LoginView  
-        actions={{
-          login: loadRequest,
-          refreshAccessToken: refreshAccessToken
+        tokenActions={{
+          login: actions.tokenActions.loadRequest,
+          refreshAccessToken: actions.tokenActions.refreshAccessToken,
+        }}
+        loggedUserActions={{
+          getUser: actions.loggedUserActions.loadRequest
         }}
         error={error}
         loading={loading}
-        tokens={auth}
+        tokens={tokens}
+        loggedUser={loggedUser}
       />
     );
   }
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  auth: state.auth.data,
-  error: state.auth.error,
-  loading: state.auth.loading
+  tokens: state.tokens.data,
+  loggedUser: state.loggedUser.data,
+  error: state.tokens.error,
+  loading: state.tokens.loading
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(AuthActions, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    actions: {
+      tokenActions: bindActionCreators(TokenActions, dispatch),
+      loggedUserActions: bindActionCreators(LoggedUserActions, dispatch)
+    }
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
