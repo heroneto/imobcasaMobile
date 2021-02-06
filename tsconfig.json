@@ -10,12 +10,16 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-        "@components/*": [
-            "src/components/*"
+        "@lead-management/*":[
+          "src/lead-management/*"
         ],
-        "@theme/*":[
-          "src/theme/*"
+        "@core/*":[
+          "src/core/*"
+        ],
+        "@commons/*":[
+          "src/commons/*"
         ]
+        
     }
   }
 }

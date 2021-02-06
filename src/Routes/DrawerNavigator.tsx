@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { CampaignStackNavigator, LeadStackNavigator, UserStackNavigator } from './StackNavigator'
-import MyUserEdit from '../pages/MyUserEdit'
-import MyPasswordEdit from '../pages/MyPasswordEdit'
-import CustomDrawer from '@components/CustomDrawer'
-import { Header } from '@components/Header'
+import MyUserEdit from '../lead-management/pages/MyUserEdit'
+import MyPasswordEdit from '../lead-management/pages/MyPasswordEdit'
+import CustomDrawer from '@lead-management/components/CustomDrawer'
+import { Header } from '@lead-management/components/Header'
 
 const Drawer = createDrawerNavigator()
 

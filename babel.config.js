@@ -8,8 +8,9 @@ module.exports = function(api) {
         {
           "root": ["./"],
           "alias": {
-            "@components": "./src/components",
-            "@theme": "./src/theme"
+            "@lead-management": "./src/lead-management",
+            "@core": "./src/core",
+            "@commons": "./src/commons"
           }
         },
       ],

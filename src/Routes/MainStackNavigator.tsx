@@ -1,6 +1,6 @@
 import React from 'react'
 import {  createStackNavigator } from '@react-navigation/stack'
-import LoginView from '../pages/Login'
+import LoginContainer from '@lead-management/containers/Login'
 import DrawerNavigator from './DrawerNavigator'
 const Stack = createStackNavigator()
 
@@ -12,7 +12,7 @@ export const MainStackNavigator = () => {
     }}>
       <Stack.Screen 
         name="login" 
-        component={LoginView} 
+        component={LoginContainer} 
       />
       <Stack.Screen 
         name="home" 
