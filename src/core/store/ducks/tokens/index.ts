@@ -8,6 +8,7 @@ const INITIAL_STATE: TokenState = {
   },
   error: false,
   loading: false,
+  httpCode: -1
 };
 
 const reducer: Reducer<TokenState> = (state = INITIAL_STATE, action) => {

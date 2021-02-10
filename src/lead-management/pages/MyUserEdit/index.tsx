@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
@@ -9,21 +9,41 @@ import StandardButton from '@lead-management/components/StandardButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import InputContainer from '@lead-management/components/InputContainer'
 import { TextInput } from 'react-native-gesture-handler'
+import { LoggedUser } from '@core/store/ducks/loggedUser/types';
 
 
 interface MyUserEditProps {
-  route: any
+  loggedUser: {
+    id: string,
+    username: string,
+    email: string,
+    fullName: string,
+    active: boolean,
+    isLogged: boolean,
+    admin: boolean
+  }
+  actions: {
+    loadEditUser(data: Omit<LoggedUser, 'isLogged'>): void,
+  }
 }
 
-const MyUserEdit: React.FC<MyUserEditProps> = ({ route }) => {
-  const { userid } = route
+const MyUserEdit: React.FC<MyUserEditProps> = ({ loggedUser, actions }) => {
   const { navigate, goBack } = useNavigation()
-  const [name, setName] = useState('Heron Eto')
-  const [email, setEmail] = useState('heron@imobcasa.com')
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
-  function handleSaveButtom() {
+  async function handleSaveButtom() {
+    const { isLogged, ...data } = loggedUser
+    data.email = email
+    data.fullName = name
+    await actions.loadEditUser(data)
     goBack()
   }
+
+  useEffect(() => {
+    setName(loggedUser?.fullName)
+    setEmail(loggedUser?.email)
+  }, [loggedUser])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,12 +56,7 @@ const MyUserEdit: React.FC<MyUserEditProps> = ({ route }) => {
             Dados do usuário
           </Text>
           <InputContainer
-            inputRadiusStyle={{
-              bottomLeft: false,
-              bottomRight: false,
-              topLeft: true,
-              topRight: true
-            }}
+            variant="top"
             label="Nome completo"
           >
             <TextInput 
@@ -52,12 +67,7 @@ const MyUserEdit: React.FC<MyUserEditProps> = ({ route }) => {
             <Feather name="user" size={24} color={colors.textInputLabel} />
           </InputContainer>
           <InputContainer
-            inputRadiusStyle={{
-              bottomLeft: true,
-              bottomRight: true,
-              topLeft: false,
-              topRight: false
-            }}
+            variant="bottom"
             label="E-Mail"
           >
             <TextInput 

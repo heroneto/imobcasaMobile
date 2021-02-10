@@ -10,41 +10,41 @@ import { useNavigation } from '@react-navigation/native'
 import InputContainer from '@lead-management/components/InputContainer'
 import PasswordInput from "@lead-management/components/PasswordInput"
 
-import { LoggedUser } from '@core/store/ducks/loggedUser/types'
 import { Tokens } from '@core/store/ducks/tokens/types';
-
+import { getUser } from '@core/services/storage'
 
 interface LoginViewProps {
   tokens: Tokens,
   error: boolean,
   loading: boolean,
-  tokenActions: {
+  actions: {
     login(username: string, password: string): void,
-    refreshAccessToken(): void
   }
-  loggedUserActions: {
-    getUser(): void
-  }
-  loggedUser: LoggedUser
 }
 
-const LoginView: React.FC<LoginViewProps> = ({ tokenActions, error, loading, tokens, loggedUserActions, loggedUser }) => {
+const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }) => {
   const { navigate } = useNavigation()
   const [isRememberMeSelected, setIsRememberMeSelected] = useState(false)
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
   async function login() {
-    await tokenActions.login(username, password)
-    await loggedUserActions.getUser()
+    await actions.login(username, password)
   }
 
-  useEffect(() => {
-    console.log("LOGGED USER", loggedUser)
-    if (loggedUser?.isLogged) {
-      navigate("home")
+  async function checkAuth(){
+    const data = await getUser()
+    if(data){
+      const user = JSON.parse(data)
+      if(user.isLogged){
+        navigate('home')
+      }
     }
-  }, [loggedUser])
+  }
+
+  useEffect(() => {    
+    checkAuth()
+  }, [tokens, error])
 
 
 
@@ -58,7 +58,7 @@ const LoginView: React.FC<LoginViewProps> = ({ tokenActions, error, loading, tok
       </View>
       <View style={styles.loginFormContainer}>
         <View style={styles.loginTitle}>
-          <Text style={styles.formTitle}>Fazer Login {loading ? "Carregando" : ""}</Text>
+          <Text style={styles.formTitle}>Fazer Login</Text>
         </View>
         <View style={styles.formContainer}>
           <InputContainer

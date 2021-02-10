@@ -2,8 +2,6 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react';
 
 import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-
 import { MainStackNavigator } from './src/routes/MainStackNavigator'
 import { AppLoading } from 'expo'
 import { Archivo_400Regular, Archivo_700Bold, useFonts } from '@expo-google-fonts/archivo'

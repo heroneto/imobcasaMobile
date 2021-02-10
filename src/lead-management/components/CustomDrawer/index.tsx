@@ -1,8 +1,7 @@
 import { DrawerContentScrollView, DrawerItem,  } from '@react-navigation/drawer';
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
 
 import styles from './styles'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
@@ -11,36 +10,65 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import colors from '@core/theme/colors';
 import styled from 'styled-components/native'
-import { ThemeProps } from '@core/theme/theme';
+
+import { getUser, setUser, setAccessToken, setRefreshToken } from '@core/services/storage'
 
 const DrawerContainer = styled(DrawerContentScrollView)`
-  background: ${(props: CustomDrawerProps) => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.background};
   flex: 1;
 `
 
 const DrawerHeader = styled.View`
-  background: ${(props: CustomDrawerProps) => props.theme.colors.imobcasaPrimary};
+  background: ${(props) => props.theme.colors.imobcasaPrimary};
   padding: 5px;
   padding-right: 10px;
   padding-left: 10px;
 `
 
-
-interface CustomDrawerProps {
-  theme: ThemeProps
+interface UserProps {
+  fullName: string,
+  email: string,
+  id: string,
+  isLogged: boolean
 }
 
-const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
+const CustomDrawer: React.FC = () => {
   const { navigate } = useNavigation()
   const insets = useSafeAreaInsets();
   const [ optionsIsOpen, setOptionsIsOpen ] = useState<boolean>(false)
-
+  const [ loggedUser, setLoggedUser ] = useState<UserProps>()
 
 
   function handleNavigate(page: string){
     setOptionsIsOpen(false)
     navigate(page)
   }
+
+  function logout(){
+    setUser({
+      email: "",
+      fullName: "",
+      id: "",
+      isLogged: false,
+      username: "",
+      admin: false,
+      active: false,
+    })
+    setAccessToken("")
+    setRefreshToken("")
+    navigate("login")
+  }
+
+  async function getUserData(){
+    const data = await getUser()
+    if(data){
+      setLoggedUser(JSON.parse(data))
+    }
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, [optionsIsOpen])
 
   return (
     <DrawerContainer 
@@ -52,8 +80,8 @@ const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
         <Image style={styles.myselfImage} source={{ uri: "https://avatars1.githubusercontent.com/u/41599309?s=460&u=65b95962731f7965ead8de961b01c59e66554721&v=4" }} />
         <TouchableOpacity onPress={() => setOptionsIsOpen(!optionsIsOpen)} style={styles.showUserOptionsButton}>
           <View style={styles.userData}>
-            <Text style={styles.userName}>Heron Eto</Text>
-            <Text style={styles.userMail}>heron@imobcasa.com.br</Text>
+            <Text style={styles.userName}>{loggedUser?.fullName}</Text>
+            <Text style={styles.userMail}>{loggedUser?.email}</Text>
           </View>
           <Ionicons name={optionsIsOpen ? "md-arrow-dropup" : "md-arrow-dropdown"} size={24} color="#FFF" />
         </TouchableOpacity>
@@ -72,7 +100,7 @@ const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
             Editar
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigate("login")} style={styles.optionButton}>
+        <TouchableOpacity onPress={logout} style={styles.optionButton}>
           <Text style={styles.optionText}>
             Sair
           </Text>

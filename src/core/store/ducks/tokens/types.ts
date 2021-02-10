@@ -19,6 +19,7 @@ export enum TokenTypes {
     readonly data: Tokens
     readonly loading: boolean
     readonly error: boolean
+    readonly httpCode?: number 
   }
   
   

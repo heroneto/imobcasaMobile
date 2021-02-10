@@ -4,14 +4,19 @@ export enum LoggedUserTypes {
     LOAD_REQUEST = "@loggedUser/LOAD_REQUEST",
     LOAD_SUCCESS = "@loggedUser/LOAD_SUCCESS",
     LOAD_FAILURE = "@loggedUser/LOAD_FAILURE",
+    LOAD_EDIT_USER = "@loggedUser/LOAD_EDIT_USER",
+    LOAD_CHANGE_PASSWORD = "@loggedUser/LOAD_CHANGE_PASSWORD"
   }
   
   
   export interface LoggedUser {
     id: string,
     fullName: string,
+    username: string,
+    admin: boolean,
     email: string,
-    isLogged: boolean
+    isLogged:boolean,
+    active: boolean
   }
   
   

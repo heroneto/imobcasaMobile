@@ -15,9 +15,12 @@ export const getUser = async () => {
 
 interface UserProps {
     fullName: string,
+    username: string,
+    admin: boolean,
     id: string,
     email: string,
     isLogged: boolean,
+    active: boolean
 }
 
 export const setUser = async (user: UserProps) => {
