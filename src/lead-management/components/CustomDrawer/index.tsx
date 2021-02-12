@@ -1,87 +1,51 @@
-import { DrawerContentScrollView, DrawerItem,  } from '@react-navigation/drawer';
-import React, { useEffect, useState } from 'react'
+import { DrawerItem, } from '@react-navigation/drawer';
+import React, { useState } from 'react'
 import { Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import styles from './styles'
-import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
+import styles, { DrawerContainer, DrawerHeader } from './styles'
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import colors from '@core/theme/colors';
-import styled from 'styled-components/native'
 
-import { getUser, setUser, setAccessToken, setRefreshToken } from '@core/services/storage'
+import { useSelector, useDispatch } from 'react-redux'
+import * as loggedUserActions from '@core/store/ducks/loggedUser/actions'
+import { ApplicationState } from '@core/store';
 
-const DrawerContainer = styled(DrawerContentScrollView)`
-  background: ${(props) => props.theme.colors.background};
-  flex: 1;
-`
 
-const DrawerHeader = styled.View`
-  background: ${(props) => props.theme.colors.imobcasaPrimary};
-  padding: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
-`
 
-interface UserProps {
-  fullName: string,
-  email: string,
-  id: string,
-  isLogged: boolean
-}
 
-const CustomDrawer: React.FC = () => {
+const CustomDrawer = () => {
+  const dispatch = useDispatch()
+  const loggedUser = useSelector((state : ApplicationState) => state.loggedUser )
   const { navigate } = useNavigation()
   const insets = useSafeAreaInsets();
-  const [ optionsIsOpen, setOptionsIsOpen ] = useState<boolean>(false)
-  const [ loggedUser, setLoggedUser ] = useState<UserProps>()
+  const [optionsIsOpen, setOptionsIsOpen] = useState<boolean>(false)
 
-
-  function handleNavigate(page: string){
+  const handleNavigate = (page: string) => {
     setOptionsIsOpen(false)
     navigate(page)
   }
 
-  function logout(){
-    setUser({
-      email: "",
-      fullName: "",
-      id: "",
-      isLogged: false,
-      username: "",
-      admin: false,
-      active: false,
-    })
-    setAccessToken("")
-    setRefreshToken("")
+  const logout = async () => {
+    await dispatch(loggedUserActions.loadLogout())
     navigate("login")
   }
-
-  async function getUserData(){
-    const data = await getUser()
-    if(data){
-      setLoggedUser(JSON.parse(data))
-    }
-  }
-
-  useEffect(() => {
-    getUserData()
-  }, [optionsIsOpen])
-
   return (
-    <DrawerContainer 
-        contentContainerStyle={{
+    <DrawerContainer
+      key={0}
+      contentContainerStyle={{
         paddingTop: insets.top,
-     }}
+      }}
     >
       <DrawerHeader>
         <Image style={styles.myselfImage} source={{ uri: "https://avatars1.githubusercontent.com/u/41599309?s=460&u=65b95962731f7965ead8de961b01c59e66554721&v=4" }} />
         <TouchableOpacity onPress={() => setOptionsIsOpen(!optionsIsOpen)} style={styles.showUserOptionsButton}>
           <View style={styles.userData}>
-            <Text style={styles.userName}>{loggedUser?.fullName}</Text>
-            <Text style={styles.userMail}>{loggedUser?.email}</Text>
+            <Text style={styles.userName}>{loggedUser?.data.fullName}</Text>
+            <Text style={styles.userMail}>{loggedUser?.data.email}</Text>
           </View>
           <Ionicons name={optionsIsOpen ? "md-arrow-dropup" : "md-arrow-dropdown"} size={24} color="#FFF" />
         </TouchableOpacity>
@@ -106,31 +70,31 @@ const CustomDrawer: React.FC = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      
+
       <View style={styles.drawerContent}>
-       
-        <DrawerItem          
+
+        <DrawerItem
           icon={props => {
-            return <Ionicons name="ios-rocket" size={24}  color={colors.textInput} />
-          }}          
+            return <Ionicons name="ios-rocket" size={24} color={colors.textInput} />
+          }}
           label="Leads"
           onPress={() => handleNavigate("LeadsStack")}
         />
-        <DrawerItem          
+        <DrawerItem
           icon={props => {
             return <FontAwesome name="users" size={20} color={colors.textInput} />
-          }}          
+          }}
           label="Usuários"
           onPress={() => handleNavigate("UsersStack")}
         />
-        <DrawerItem          
+        <DrawerItem
           icon={props => {
-            return <Ionicons name="logo-facebook" size={24}  color={colors.textInput} />
-          }}          
+            return <Ionicons name="logo-facebook" size={24} color={colors.textInput} />
+          }}
           label="Campanhas"
           onPress={() => handleNavigate("CampaignsStack")}
         />
-        
+
       </View>
     </DrawerContainer>
   );

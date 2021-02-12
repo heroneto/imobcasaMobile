@@ -19,6 +19,7 @@ interface LoginViewProps {
   loading: boolean,
   actions: {
     login(username: string, password: string): void,
+    getLoggedUser():void
   }
 }
 
@@ -36,7 +37,8 @@ const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }
     const data = await getUser()
     if(data){
       const user = JSON.parse(data)
-      if(user.isLogged){
+      if(user.isLogged  && !error){
+        await actions.getLoggedUser()
         navigate('home')
       }
     }

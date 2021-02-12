@@ -4,7 +4,7 @@ import { TokenTypes } from './tokens/types';
 import { authenticate, getTokensStorage, refreshAccessToken } from './tokens/sagas';
 
 import { LoggedUserTypes } from './loggedUser/types'
-import { editUser, getUserStorage } from './loggedUser/sagas'
+import { editUser, getUserStorage, logout } from './loggedUser/sagas'
 
 export default function* rootSaga() {
   return yield all([
@@ -13,5 +13,6 @@ export default function* rootSaga() {
     takeLatest(TokenTypes.LOAD_REFRESH_ACCESSTOKEN, refreshAccessToken),
     takeLatest(LoggedUserTypes.LOAD_REQUEST, getUserStorage),
     takeLatest(LoggedUserTypes.LOAD_EDIT_USER, editUser),
+    takeLatest(LoggedUserTypes.LOAD_LOGOUT, logout),
   ]);
 }

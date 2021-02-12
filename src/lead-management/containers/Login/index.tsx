@@ -7,6 +7,8 @@ import { ApplicationState } from '@core/store';
 import { Tokens } from '@core/store/ducks/tokens/types';
 import * as TokenActions from '@core/store/ducks/tokens/actions';
 
+import * as LoggedUserActions from '@core/store/ducks/loggedUser/actions'
+
 import LoginView from '@lead-management/pages/Login'
 
 interface StateProps {
@@ -42,6 +44,7 @@ class LoginContainer extends Component<Props> {
       <LoginView  
         actions={{
           login: actions.tokenActions.loadRequest,
+          getLoggedUser: actions.loggedUserActions.loadRequest
         }}
         error={error}
         loading={loading}
@@ -62,6 +65,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     actions: {
       tokenActions: bindActionCreators(TokenActions, dispatch),
+      loggedUserActions: bindActionCreators(LoggedUserActions, dispatch)
     }
   }
 };

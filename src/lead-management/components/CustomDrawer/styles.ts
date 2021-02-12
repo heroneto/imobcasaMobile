@@ -1,6 +1,21 @@
 import {  StyleSheet } from 'react-native'
 import colors from '@core/theme/colors'
 import fonts from '@core/theme/fonts'
+import { DrawerContentScrollView } from '@react-navigation/drawer'
+import styled from 'styled-components/native'
+
+export const DrawerContainer = styled(DrawerContentScrollView)`
+  background: ${(props) => props.theme.colors.background};
+  flex: 1;
+`
+
+export const DrawerHeader = styled.View`
+  background: ${(props) => props.theme.colors.imobcasaPrimary};
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+`
+
 
 const styles = StyleSheet.create({
   container: {

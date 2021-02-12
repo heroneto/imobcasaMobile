@@ -1,7 +1,13 @@
 import { Effect, put } from 'redux-saga/effects';
 import { loadSuccess, loadFailure } from './actions';
 
-import { setUser as setUserService, getUser as getUserService, getAccessToken } from '@core/services/storage'
+import { 
+    setUser as setUserService, 
+    getUser as getUserService, 
+    getAccessToken, 
+    setAccessToken, 
+    setRefreshToken 
+  } from '@core/services/storage'
 import { editLoggedUser } from '@core/services/apis'
 
 export function* getUserStorage() {
@@ -39,5 +45,27 @@ export function* editUser(action: Effect) {
   } catch (error) {
     console.log(error)
     yield put(loadFailure());
+  }
+}
+
+export function* logout(){
+  try {
+    const data = {
+      email: "",
+      fullName: "",
+      id: "",
+      isLogged: false,
+      username: "",
+      admin: false,
+      active: false,
+    }
+    yield setUserService(data)
+    yield setAccessToken("")
+    yield setRefreshToken("")
+    yield put(loadSuccess(data))
+
+  } catch (error) {
+    console.log(error)
+    yield put(loadFailure())
   }
 }

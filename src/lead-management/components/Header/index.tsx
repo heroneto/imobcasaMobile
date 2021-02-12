@@ -49,6 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ primaryStyle, title, navigation,
   const themeContext = useContext(ThemeContext);
   const { goBack, openDrawer, navigate } = navigation as any
 
+
   return (
     <HeaderStyled theme={themeContext} primaryStyle={primaryStyle} paddingTop={insets.top}>
       <HeaderItensContainer>
