@@ -8,7 +8,7 @@ import {
     setAccessToken, 
     setRefreshToken 
   } from '@core/services/storage'
-import { editLoggedUser } from '@core/services/apis'
+import { editLoggedUser, changeMyPassword as changeMyPasswordService } from '@core/services/apis'
 
 export function* getUserStorage() {
   try {
@@ -69,3 +69,4 @@ export function* logout(){
     yield put(loadFailure())
   }
 }
+

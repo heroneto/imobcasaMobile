@@ -128,7 +128,7 @@ const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }
             <StandardButton
               text={loading ? "Carregando" : "Entrar"}
               onPress={login}
-              enabled={!loading}
+              disabled={loading}
               variant={loading ? "disabled" : "normal"}
             />
           </View>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, BackHandler  } from 'react-native'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import FormPageHeader from '@lead-management/components/HeaderFormContainer'
@@ -7,75 +7,99 @@ import StandardButton from '@lead-management/components/StandardButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import InputContainer from '@lead-management/components/InputContainer'
 import PasswordInput from '@lead-management/components/PasswordInput'
+import ModalFeedback from '@lead-management/components/ModalFeedback'
+
 
 interface MyPasswordEditProps {
-  route: any
+  actions: {
+    loadRequest(password: string, newPassword: string): void,
+    loadResetStore(): void
+  },
+  error: boolean,
+  loading: boolean,
+  response: string
 }
 
-const MyPasswordEdit: React.FC<MyPasswordEditProps> = ({ route }) => {
-  const { userid } = route
+const MyPasswordEdit: React.FC<MyPasswordEditProps> = ({ actions, loading, error, response }) => {
   const { goBack } = useNavigation()
   const [oldPassword, setOldPassword] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
 
-  function handleSaveButtom() {
+  async function handleSaveButtom() {
+    await actions.loadRequest(oldPassword, password)
+    setModalVisible(true)
+
+  }
+
+  function closeModalFunc(){
+    if(!error){
+      setPassword("")
+      setOldPassword("")
+      setPasswordConfirmation("")
+    }
+    setModalVisible(false)
+  }
+
+  function clearFields(){
+    setPassword("")
+    setOldPassword("")
+    setPasswordConfirmation("")
+  }
+
+  function handleBackButton(){
+    clearFields()
     goBack()
   }
 
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', function ()  {
+      clearFields()
+      goBack()
+      return true
+    })
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
-      <FormPageHeader backButtomAction={goBack} />
+      <FormPageHeader backButtomAction={handleBackButton} />
       <View style={styles.contentContainer}>
         <View style={styles.inputGroup}>
           <Text style={styles.inputTitle}>
             Segurança
           </Text>
           <InputContainer
-            inputRadiusStyle={{
-              bottomLeft: false,
-              bottomRight: false,
-              topLeft: true,
-              topRight: true
-            }}
+            variant="top"
             label="Senha antiga"
           >
-            <PasswordInput 
+            <PasswordInput
               placeholder="Digite a senha antiga"
               value={oldPassword}
               onChangeText={text => setOldPassword(text)}
+              
             />
           </InputContainer>
           <InputContainer
-            inputRadiusStyle={{
-              bottomLeft: false,
-              bottomRight: false,
-              topLeft: false,
-              topRight: false
-            }}
+            variant="middle"
             label="Senha nova"
           >
-            <PasswordInput 
+            <PasswordInput
               placeholder="Digite a nova senha"
               value={password}
               onChangeText={text => setPassword(text)}
             />
           </InputContainer>
           <InputContainer
-            inputRadiusStyle={{
-              bottomLeft: false,
-              bottomRight: false,
-              topLeft: false,
-              topRight: false
-            }}
+            variant="bottom"
             label="Confirmação de senha"
           >
-            <PasswordInput 
+            <PasswordInput
               placeholder="Digite a senha novamente"
               value={passwordConfirmation}
               onChangeText={text => setPasswordConfirmation(text)}
             />
-          </InputContainer>          
+          </InputContainer>
         </View>
         <View style={styles.formActions}>
           <StandardButton
@@ -83,6 +107,11 @@ const MyPasswordEdit: React.FC<MyPasswordEditProps> = ({ route }) => {
             text="Salvar"
           />
         </View>
+        <ModalFeedback
+          modalVisible={modalVisible}
+          closeModalFunc={closeModalFunc}
+          text={response}
+        />
       </View>
     </SafeAreaView>
   )

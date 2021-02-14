@@ -5,7 +5,6 @@ export enum LoggedUserTypes {
     LOAD_SUCCESS = "@loggedUser/LOAD_SUCCESS",
     LOAD_FAILURE = "@loggedUser/LOAD_FAILURE",
     LOAD_EDIT_USER = "@loggedUser/LOAD_EDIT_USER",
-    LOAD_CHANGE_PASSWORD = "@loggedUser/LOAD_CHANGE_PASSWORD",
     LOAD_LOGOUT = "@loggedUser/LOAD_LOGOUT",
   }
   

@@ -1,17 +1,20 @@
 import React, { ReactElement } from 'react'
-import { RectButton, RectButtonProperties } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
+import { TouchableHighlight, TouchableHighlightProps, Text } from 'react-native'
 
-interface StandardButtonProps extends RectButtonProperties {
+interface StandardButtonProps extends TouchableHighlightProps {
   text?: string,
   icon?: ReactElement,
-  onPress?: any,
+  onPress(): void,
   color?: string,
   variant?: "normal" | "disabled"
 }
 
-const CustomButton = styled(RectButton)`
-    justify-content: ${({ iconAndText }) => iconAndText ? 'space-evenly' : 'center'};
+interface ITouchableHighlightStyled extends TouchableHighlightProps{
+  variant: string | undefined
+}
+
+const CustomButton = styled(TouchableHighlight)<ITouchableHighlightStyled>`
     align-items: center;
     display: flex;
     padding: 16px;
@@ -31,15 +34,21 @@ const CustomButton = styled(RectButton)`
     }
   }}
 `
+const ButtonContent = styled.View<{iconAndText: boolean}>`
+  width: 100%;
+  display: flex;
+  justify-content: ${({iconAndText}) => iconAndText ? "space-between" : "center"};
+  flex-direction: ${({iconAndText}) => iconAndText ? "row" : "column"};
+`
 
-const ButtonLabel = styled.Text`
+const ButtonText = styled.Text`
+  text-align: center;
   color: #FFF;
   font-size: 18px;
   font-family: ${({theme}) => theme.fonts.secondary.bold};
-  text-align: center;
 `
 
-const StandardButton: React.FC<StandardButtonProps> = ({ text, onPress, icon, color, variant, ...rest }) => {
+const StandardButton: React.FC<StandardButtonProps> = ({ text, icon, onPress, color, variant, children, ...rest }) => {
 
   return (
     <CustomButton
@@ -47,10 +56,14 @@ const StandardButton: React.FC<StandardButtonProps> = ({ text, onPress, icon, co
       variant={variant}
       {...rest}
     >
-      {icon}
-      <ButtonLabel>
-        {text}
-      </ButtonLabel>
+      <ButtonContent
+        iconAndText={icon && text ? true : false}
+      >
+        <ButtonText>
+          {text}
+        </ButtonText>
+        {icon && icon}
+      </ButtonContent>
     </CustomButton>
   )
 }

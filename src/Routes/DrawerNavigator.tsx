@@ -5,6 +5,7 @@ import MyPasswordEdit from '../lead-management/pages/MyPasswordEdit'
 import CustomDrawer from '@lead-management/components/CustomDrawer'
 
 import MyUserEditContainer from '@lead-management/containers/MyUserEdit'
+import MyPasswordEditContainer from '@lead-management/containers/MyPasswordEdit'
 
 const Drawer = createDrawerNavigator()
 
@@ -13,7 +14,7 @@ const DrawerNavigator = () => {
     <Drawer.Navigator initialRouteName="LeadsStack" drawerContent={props => <CustomDrawer key={1} {...props} />} >     
       <Drawer.Screen name="LeadsStack" component={LeadStackNavigator} />
       <Drawer.Screen name="myuseredit" component={MyUserEditContainer} />
-      <Drawer.Screen name="mypasswordedit" component={MyPasswordEdit} />
+      <Drawer.Screen name="mypasswordedit" component={MyPasswordEditContainer} />
       <Drawer.Screen name="UsersStack" component={UserStackNavigator} />
       <Drawer.Screen name="CampaignsStack" component={CampaignStackNavigator} />
     </Drawer.Navigator>

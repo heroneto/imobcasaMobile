@@ -8,7 +8,8 @@ const INITIAL_STATE: LoggedUserState = {
     id: "",
     isLogged: false,
     username: "",
-    admin: false
+    admin: false,
+    active: false
   },
   error: false,
   loading: false,
@@ -25,7 +26,7 @@ const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {
     case LoggedUserTypes.LOAD_FAILURE:
       return {
       ...state, loading: false, error: true
-      };   
+      };
     default:
       return state;
   }
