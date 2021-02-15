@@ -15,7 +15,7 @@ export enum LoggedUserTypes {
     username: string,
     admin: boolean,
     email: string,
-    isLogged:boolean,
+    isLogged: boolean,
     active: boolean
   }
   

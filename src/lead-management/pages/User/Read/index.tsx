@@ -4,31 +4,30 @@ import styles from './styles'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
+import { SelectedUser } from '@core/store/ducks/selectedUser/types';
 
 
 interface TaskViewProps {
-  route: any
+  selectedUser: SelectedUser
 }
 
-const UserView: React.FC<TaskViewProps> = ({ route }) => {
-  const { userid } = route.params
+const UserView: React.FC<TaskViewProps> = ({ selectedUser }) => {
   const { navigate } = useNavigation()
 
-
   function handleNavigateToEditPage() {
-    navigate('Edição de Usuário', { userid })
+    navigate('Edição de Usuário', { userid: selectedUser.id })
   }
 
   function handleNavigateToPasswordChange() {
-    navigate('Reset de Senha', { userid })
+    navigate('Reset de Senha', { userid: selectedUser.id })
   }
 
   return (
     <View style={styles.container}>
-      <ScrollView>        
+      <ScrollView>
         <View style={styles.pageHeaderContainer}>
           <View style={styles.pageHeaderTitleContainer}>
-            <Text style={styles.pageHeaderTitle}>Heron Hideki de Queiroz Eto</Text>
+            <Text style={styles.pageHeaderTitle}>{selectedUser.fullName}</Text>
             <Text style={styles.pageHeaderSubtitle}>150 Leads - 2 campanhas</Text>
           </View>
           <View style={styles.actionsContainer}>
@@ -57,29 +56,29 @@ const UserView: React.FC<TaskViewProps> = ({ route }) => {
             <View style={styles.contentGroupHeader}>
               <Text style={styles.headerTitle}>
                 Sobre o usuário
-                        </Text>
+              </Text>
               <View style={styles.headerLine} />
             </View>
             <View style={styles.content}>
               <View style={styles.contentItem}>
                 <Text style={styles.category}>Nome completo</Text>
-                <Text style={styles.value}>Heron Hideki de Queiroz Eto</Text>
+                <Text style={styles.value}>{selectedUser.fullName}</Text>
               </View>
               <View style={styles.contentItem}>
                 <Text style={styles.category}>E-Mail</Text>
-                <Text style={styles.value}>heron@imobcasa.com.br</Text>
+                <Text style={styles.value}>{selectedUser.email}</Text>
               </View>
               <View style={styles.contentItem}>
                 <Text style={styles.category}>Data de criação</Text>
-                <Text style={styles.value}>01/01/2020</Text>
+                <Text style={styles.value}>{new Date(selectedUser.createdAt).toLocaleDateString('pt-BR')} {new Date(selectedUser.createdAt).toLocaleTimeString('pt-BR')}</Text>
               </View>
               <View style={styles.contentItem}>
                 <Text style={styles.category}>Data de atualização</Text>
-                <Text style={styles.value}>21/01/2020</Text>
+                <Text style={styles.value}>{new Date(selectedUser.updatedAt).toLocaleDateString('pt-BR')} {new Date(selectedUser.updatedAt).toLocaleTimeString('pt-BR')}</Text>
               </View>
               <View style={styles.contentItem}>
                 <Text style={styles.category}>Status</Text>
-                <Text style={styles.value}>Ativo</Text>
+                <Text style={styles.value}>{selectedUser.active ? "Ativo" : "Inativo"}</Text>
               </View>
             </View>
           </View>

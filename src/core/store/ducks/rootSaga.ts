@@ -9,6 +9,12 @@ import { editUser, getUserStorage, logout } from './loggedUser/sagas'
 import { ChangeMyPasswordTypes } from './changeMyPassword/types'
 import { changeMyPassword } from './changeMyPassword/sagas'
 
+import { ListUserTypes } from './listUser/types'
+import { getUsers } from './listUser/sagas'
+
+import { SelectedUserTypes } from './selectedUser/types'
+import * as selectedUserSagas from './selectedUser/sagas'
+
 export default function* rootSaga() {
   return yield all([
     takeLatest(TokenTypes.LOAD_REQUEST, authenticate),
@@ -18,5 +24,8 @@ export default function* rootSaga() {
     takeLatest(LoggedUserTypes.LOAD_EDIT_USER, editUser),
     takeLatest(LoggedUserTypes.LOAD_LOGOUT, logout),
     takeLatest(ChangeMyPasswordTypes.LOAD_REQUEST, changeMyPassword),
+    takeLatest(ListUserTypes.LOAD_REQUEST, getUsers),
+    takeLatest(SelectedUserTypes.LOAD_REQUEST, selectedUserSagas.getUserStorage),
+    takeLatest(SelectedUserTypes.LOAD_EDIT_USER, selectedUserSagas.editUser)
   ]);
 }

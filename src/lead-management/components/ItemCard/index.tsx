@@ -1,8 +1,6 @@
 import React, { ReactElement, useState } from 'react'
-import { View, Text, Modal, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
-import ModalView from '../ModalView';
-import { ModalProps } from '../Shared'
 import CardVerticalBar from './components/CardVerticalBar';
 import CustomText from './components/CustomText';
 import { useNavigation } from '@react-navigation/native';
@@ -24,10 +22,11 @@ interface IItemCardProps {
   },
   level: 'error' | 'success' | 'info' | 'neutral',
   pageToNavigate: string,
-  navigationParameters: object
+  navigationParameters: object,
+  onPressFunc():void
 }
 
-const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, middleIcon, leftBottomText, rightBottomText, customRightText, level, pageToNavigate, navigationParameters }) => {
+const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, middleIcon, leftBottomText, rightBottomText, customRightText, level, pageToNavigate, navigationParameters, onPressFunc }) => {
   const { navigate } = useNavigation()
   const [isShowingModal, setIsShowingModal] = useState(false)
 
@@ -40,10 +39,14 @@ const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, midd
     setIsShowingModal(false)
   }
 
+  // function handleCardItem(){
+
+  //   navigate(pageToNavigate, navigationParameters)
+  // }
 
   return (
     <TouchableOpacity
-      onPress={() => navigate(pageToNavigate, navigationParameters)}
+      onPress={onPressFunc}
       style={styles.cardButton}      
     >
       <CardVerticalBar level={level} />

@@ -19,6 +19,9 @@ import CampaignView from '@lead-management/pages/Campaign/Read'
 import CampaignEdit from '@lead-management/pages/Campaign/Edit'
 import { Header } from '@lead-management/components/Header'
 
+import UserListContainer from '@lead-management/containers/UserList'
+import UserDetailsContainer from "@lead-management/containers/UserDetails"
+import UserEditContainer from '@lead-management/containers/UserEditContainer'
 
 const Stack = createStackNavigator()
 
@@ -34,7 +37,7 @@ export const UserStackNavigator = () => {
     >
       <Stack.Screen
         name="Meus Usuários"
-        component={UsersList}
+        component={UserListContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={true} />,
           headerShown: true
@@ -42,7 +45,7 @@ export const UserStackNavigator = () => {
       />
       <Stack.Screen
         name="Edição de Usuário"
-        component={UserEdit}
+        component={UserEditContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true
@@ -50,7 +53,7 @@ export const UserStackNavigator = () => {
       />
       <Stack.Screen
         name="Usuário"
-        component={UserView}
+        component={UserDetailsContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true

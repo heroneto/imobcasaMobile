@@ -27,11 +27,6 @@ export function* editUser(action: Effect) {
     data.active = true
 
     const accessToken = yield getAccessToken()
-
-    console.log(data)
-    console.log(accessToken)
-
-
     const result = yield editLoggedUser(data, accessToken)
     const user = result.data
     delete user.createdAt

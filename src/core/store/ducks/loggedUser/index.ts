@@ -12,7 +12,7 @@ const INITIAL_STATE: LoggedUserState = {
     active: false
   },
   error: false,
-  loading: false,
+  loading: false
 };
 
 const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {

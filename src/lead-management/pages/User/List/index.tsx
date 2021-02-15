@@ -6,14 +6,20 @@ import ActiveUsers from './pages/ActiveUsers';
 import InactiveUsers from './pages/InactiveUsers';
 import FloatButton from '@lead-management/components/FloatButton';
 
+import { ListUser } from '@core/store/ducks/listUser/types'
+
 const Tab = createMaterialTopTabNavigator();
 
 interface UsersListProps {
-  route: any,  
+  activeUsers: ListUser[],
+  inactiveUsers: ListUser[],
+  error: boolean,
+  loading: boolean
 }
 
-const UsersList : React.FC<UsersListProps> = () =>  {
+const UsersList : React.FC<UsersListProps> = ({activeUsers, inactiveUsers, error, loading}) =>  {
   
+
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -37,14 +43,19 @@ const UsersList : React.FC<UsersListProps> = () =>  {
       >
         <Tab.Screen
           name="0"
-          component={ActiveUsers}
+          children={
+            () => <ActiveUsers users={activeUsers}/>
+          }
           options={{
             tabBarLabel: "Ativos"
           }}
+
         />
         <Tab.Screen
           name="1"
-          component={InactiveUsers}
+          children={
+            () => <InactiveUsers users={inactiveUsers}/>
+          }
           options={{
             tabBarLabel: "Inativos"
           }}
