@@ -21,7 +21,7 @@ interface UserEditProps {
   selectedUser: SelectedUser,
   loading: boolean,
   error: boolean,
-  loadEditUser(data: Omit<SelectedUser, "createdAt" | "updatedAt" >): void,
+  loadEditUser(data: Omit<SelectedUser, "createdAt" | "updatedAt">): void,
   response: string,
 }
 
@@ -35,8 +35,7 @@ const UserEdit: React.FC<UserEditProps> = ({ selectedUser, loadEditUser, error, 
   const [modalVisible, setModalVisible] = useState<boolean>(false)
 
 
-  async function handleSaveButtom() {
-    // navigate('Usuário')
+  const handleSaveButtom = async () => {
     const data = {
       id: selectedUser.id,
       fullName,
@@ -48,10 +47,6 @@ const UserEdit: React.FC<UserEditProps> = ({ selectedUser, loadEditUser, error, 
     await loadEditUser(data)
     setModalVisible(true)
     await dispatch(listUserActions.loadRequest())
-    /**
-     * Necessário atualizar o store
-     * Necessário chamar a API de lista de usuários via Store
-     */
   }
 
 
@@ -118,10 +113,10 @@ const UserEdit: React.FC<UserEditProps> = ({ selectedUser, loadEditUser, error, 
         </View>
       </View>
       <ModalFeedback
-          modalVisible={modalVisible}
-          closeModalFunc={() => setModalVisible(false)}
-          text={response}
-        />
+        modalVisible={modalVisible}
+        closeModalFunc={() => setModalVisible(false)}
+        text={response}
+      />
 
 
     </View>
