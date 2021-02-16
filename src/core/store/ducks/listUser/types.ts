@@ -17,6 +17,9 @@ export enum ListUserTypes {
   SUCCESS_RESET_PASSWORD = "@listUser/SUCCESS_RESET_PASSWORD",
   FAILURE_RESET_PASSWORD = "@listUser/FAILURE_RESET_PASSWORD",
   
+  CREATE = "@listUser/CREATE",
+  SUCCESS_CREATE = "@listUser/SUCCESS_CREATE",
+  FAILURE_CREATE = "@listUser/FAILURE_CREATE",
 }
 
 
@@ -31,6 +34,9 @@ export interface User {
   updatedAt: Date
 }
 
+export interface CreateUserProps extends Omit<User, "createdAt" | "updatedAt" | "id"> {
+  password: string
+}
 
 export interface ListUserState {
   readonly data: User[]

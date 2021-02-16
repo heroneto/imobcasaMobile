@@ -10,13 +10,13 @@ import Switcher from '@lead-management/components/Switcher'
 import ModalFeedback from '@lead-management/components/ModalFeedback'
 
 import { TextInput } from 'react-native-gesture-handler';
-import { SelectedUser } from '@core/store/ducks/selectedUser/types';
+import { User } from '@core/store/ducks/listUser/types';
 
 interface UserEditProps {
-  selectedUser: SelectedUser,
+  selectedUser: User,
   loading: boolean,
   error: boolean,
-  edit(data: Omit<SelectedUser, "createdAt" | "updatedAt">): void,
+  edit(data: Omit<User, "createdAt" | "updatedAt">): void,
   response: string,
 }
 

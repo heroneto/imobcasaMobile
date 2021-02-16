@@ -23,6 +23,7 @@ import UserListContainer from '@lead-management/containers/UserList'
 import UserDetailsContainer from "@lead-management/containers/UserDetails"
 import UserEditContainer from '@lead-management/containers/UserEditContainer'
 import UserResetPasswordContainer from '@lead-management/containers/UserResetPassword'
+import UserCreateContainer from '@lead-management/containers/UserCreate'
 
 export type StackParameters = {
   "Meus Usuários": undefined
@@ -94,7 +95,7 @@ export const UserStackNavigator = () => {
       />
       <Stack.Screen
         name="Novo Usuário"
-        component={NewUser}
+        component={UserCreateContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true

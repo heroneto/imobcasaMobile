@@ -1,5 +1,11 @@
 import { Effect, put } from 'redux-saga/effects';
-import { getUsers, getUser, editSelectedUser, resetUserPassword as resetUserPasswordService  } from '@core/services/apis'
+import { 
+  getUsers, 
+  getUser, 
+  editSelectedUser, 
+  resetUserPassword as resetUserPasswordService,
+  createUser as createUserService
+} from '@core/services/apis'
 
 import { 
     successRequestList, 
@@ -8,9 +14,10 @@ import {
     failureSelect, 
     successEdit, 
     failureEdit,
-    resetPassword,
     failureResetPassword,
-    sucessResetPassword
+    sucessResetPassword,
+    successCreate,
+    failureCreate
   } from './actions';
 
 import { getAccessToken } from '@core/services/storage'
@@ -63,6 +70,21 @@ export function* resetUserPassword(action: Effect){
   } catch (error) {
     console.log(error.response)
     yield put(failureResetPassword("Falha ao trocar senha do usuário"));
+  }
+
+}
+
+export function* createUser(action:Effect){
+  try {
+    const accessToken = yield getAccessToken()
+    const result  = yield createUserService(action.payload.data, accessToken)
+    const resultUsers = yield getUsers(accessToken)
+
+    yield put(successCreate(result.data, resultUsers.data, "Usuário cadastrado com sucesso"))
+    
+  } catch (error) {
+    console.log(error.response)
+    yield put(failureCreate("Falha ao cadastrar usuário"));
   }
 
 }

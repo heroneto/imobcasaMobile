@@ -52,11 +52,11 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
       }
     case ListUserTypes.SUCCESS_EDIT:
       return {
-        ...state, 
-        loading: false, 
-        error: false, 
-        selectedUser: action.payload.selectedUser, 
-        data: action.payload.data, 
+        ...state,
+        loading: false,
+        error: false,
+        selectedUser: action.payload.selectedUser,
+        data: action.payload.data,
         response: action.payload.response
       }
     case ListUserTypes.FAILURE_EDIT:
@@ -73,6 +73,24 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
         ...state, loading: false, error: false, response: action.payload.response
       }
     case ListUserTypes.FAILURE_RESET_PASSWORD:
+      return {
+        ...state, loading: false, error: true, response: action.payload.response
+      }
+
+    case ListUserTypes.CREATE:
+      return {
+        ...state, loading: true, response: ""
+      }
+    case ListUserTypes.SUCCESS_CREATE:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        selectedUser: action.payload.selectedUser,
+        data: action.payload.data,
+        response: action.payload.response
+      }
+    case ListUserTypes.FAILURE_CREATE:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       }
