@@ -1,22 +1,24 @@
 import { Reducer } from 'redux';
 import { ListUserState, ListUserTypes } from './types';
 
+const INITIALSELETEDUSER = {
+  active: false,
+  admin: false,
+  createdAt: new Date,
+  updatedAt: new Date,
+  email: "",
+  fullName: "",
+  id: "",
+  username: ""
+}
+
 const INITIAL_STATE: ListUserState = {
   data: [],
   activeUsers: [],
   inactiveUsers: [],
   error: false,
   loading: false,
-  selectedUser: {
-    active: false,
-    admin: false,
-    createdAt: new Date,
-    updatedAt: new Date,
-    email: "",
-    fullName: "",
-    id: "",
-    username: ""
-  },
+  selectedUser: INITIALSELETEDUSER,
   response: ""
 };
 
@@ -79,7 +81,7 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
 
     case ListUserTypes.CREATE:
       return {
-        ...state, loading: true, response: ""
+        ...state, loading: true, response: "", selectedUser: INITIALSELETEDUSER
       }
     case ListUserTypes.SUCCESS_CREATE:
       return {
@@ -91,6 +93,24 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
         response: action.payload.response
       }
     case ListUserTypes.FAILURE_CREATE:
+      return {
+        ...state, loading: false, error: true, response: action.payload.response
+      }
+
+    case ListUserTypes.DELETE:
+      return {
+        ...state, loading: true, response: ""
+      }
+    case ListUserTypes.SUCCESS_DELETE:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        selectedUser: INITIALSELETEDUSER,
+        data: action.payload.data,
+        response: action.payload.response
+      }
+    case ListUserTypes.FAILURE_DELETE:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       }

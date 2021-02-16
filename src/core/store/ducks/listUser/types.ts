@@ -20,6 +20,10 @@ export enum ListUserTypes {
   CREATE = "@listUser/CREATE",
   SUCCESS_CREATE = "@listUser/SUCCESS_CREATE",
   FAILURE_CREATE = "@listUser/FAILURE_CREATE",
+
+  DELETE = "@listUser/DELETE",
+  SUCCESS_DELETE = "@listUser/SUCCESS_DELETE",
+  FAILURE_DELETE = "@listUser/FAILURE_DELETE",
 }
 
 

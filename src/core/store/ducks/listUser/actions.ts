@@ -20,3 +20,7 @@ export const failureResetPassword = (response: string) => action(ListUserTypes.F
 export const create = (data: CreateUserProps) => action(ListUserTypes.CREATE, { data });
 export const successCreate = (selectedUser: User, data: User[], response : string) => action(ListUserTypes.SUCCESS_CREATE, { selectedUser, data, response });
 export const failureCreate = (response: string) => action(ListUserTypes.FAILURE_CREATE, { response });
+
+export const deleteUser = (id: string) => action(ListUserTypes.DELETE, { id });
+export const successDelete = (data: User[], response : string) => action(ListUserTypes.SUCCESS_DELETE, { data, response });
+export const failureDelete = (response: string) => action(ListUserTypes.FAILURE_DELETE, { response });

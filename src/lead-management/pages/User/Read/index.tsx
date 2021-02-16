@@ -4,15 +4,21 @@ import styles from './styles'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
-import { SelectedUser } from '@core/store/ducks/selectedUser/types';
+import { User } from '@core/store/ducks/listUser/types';
+import ModalFeedback from '@lead-management/components/ModalFeedback';
 
 
 interface TaskViewProps {
-  selectedUser: SelectedUser
+  selectedUser: User,
+  deleteUser(id: string): void,
+  error: boolean,
+  response: string,
+  loading: boolean
 }
 
-const UserView: React.FC<TaskViewProps> = ({ selectedUser }) => {
+const UserView: React.FC<TaskViewProps> = ({ selectedUser, error, response, loading, deleteUser }) => {
   const { navigate } = useNavigation()
+  const [ modalVisible, setModalVisible ] = React.useState<boolean>(false)
 
   function handleNavigateToEditPage() {
     navigate('Edição de Usuário', { userid: selectedUser.id })
@@ -20,6 +26,18 @@ const UserView: React.FC<TaskViewProps> = ({ selectedUser }) => {
 
   function handleNavigateToPasswordChange() {
     navigate('Reset de Senha', { userid: selectedUser.id })
+  }
+
+  async function handleDeleteUser(){
+    await deleteUser(selectedUser.id)
+    setModalVisible(true)
+  }
+
+  function closeModalFunc(){
+    setModalVisible(false)
+    if(!error){
+      navigate("Meus Usuários")
+    }
   }
 
   return (
@@ -45,6 +63,14 @@ const UserView: React.FC<TaskViewProps> = ({ selectedUser }) => {
                 onPress={handleNavigateToPasswordChange}
               >
                 <Ionicons name="md-key" size={24} color="#FFF" />
+              </RectButton>
+            </View>
+            <View style={styles.rightButtonContainer}>
+              <RectButton
+                style={styles.middleButton}
+                onPress={handleDeleteUser}
+              >
+                <Ionicons name="md-trash" size={24} color="#FFF" />
               </RectButton>
             </View>
           </View>
@@ -110,6 +136,12 @@ const UserView: React.FC<TaskViewProps> = ({ selectedUser }) => {
           </View>
         </View>
       </ScrollView>
+      <ModalFeedback 
+        text={response}
+        modalVisible={modalVisible}
+        closeModalFunc={closeModalFunc}
+        key={response}
+      />
 
     </View>
   )

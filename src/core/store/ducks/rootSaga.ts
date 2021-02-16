@@ -24,5 +24,6 @@ export default function* rootSaga() {
     takeLatest(ListUserTypes.EDIT, listUserSagas.editUser),
     takeLatest(ListUserTypes.RESET_PASSWORD, listUserSagas.resetUserPassword),
     takeLatest(ListUserTypes.CREATE, listUserSagas.createUser),
+    takeLatest(ListUserTypes.DELETE, listUserSagas.deleteUser),
   ]);
 }

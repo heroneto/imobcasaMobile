@@ -4,7 +4,8 @@ import {
   getUser, 
   editSelectedUser, 
   resetUserPassword as resetUserPasswordService,
-  createUser as createUserService
+  createUser as createUserService,
+  deleteUser as deleteUserService
 } from '@core/services/apis'
 
 import { 
@@ -17,7 +18,9 @@ import {
     failureResetPassword,
     sucessResetPassword,
     successCreate,
-    failureCreate
+    failureCreate,
+    successDelete,
+    failureDelete
   } from './actions';
 
 import { getAccessToken } from '@core/services/storage'
@@ -85,6 +88,22 @@ export function* createUser(action:Effect){
   } catch (error) {
     console.log(error.response)
     yield put(failureCreate("Falha ao cadastrar usuário"));
+  }
+}
+
+
+export function* deleteUser(action:Effect){
+  try {
+    const { id } = action.payload
+    const accessToken = yield getAccessToken()
+    yield deleteUserService(accessToken, id)
+    const resultUsers = yield getUsers(accessToken)
+
+    yield put(successDelete(resultUsers.data, "Usuário deletado com sucesso"))
+    
+  } catch (error) {
+    console.log(error.response)
+    yield put(failureDelete("Falha ao deletar usuário"));
   }
 
 }

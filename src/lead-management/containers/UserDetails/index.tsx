@@ -8,7 +8,6 @@ import UserDetailsView from '@lead-management/pages/User/Read'
 import { User } from '@core/store/ducks/listUser/types'
 import * as listUserActions from '@core/store/ducks/listUser/actions'
 import { RouteProp } from '@react-navigation/native';
-import { StackParameters } from '../../../routes/StackNavigator'
 
 interface StateProps {
   selectedUser: User,
@@ -23,7 +22,8 @@ type UserDetailsScreenRouteProp = {
 
 interface DispatchProps {
   select(id: string): void,
-  route: RouteProp<UserDetailsScreenRouteProp, "User">
+  route: RouteProp<UserDetailsScreenRouteProp, "User">,
+  deleteUser(id: string): void
 }
 
 type Props = StateProps & DispatchProps 
@@ -35,10 +35,14 @@ class UserDetailsContainer extends React.Component<Props> {
     select(id)
   }
   render() {
-    const {  selectedUser, loading, error } = this.props
+    const {  selectedUser, loading, error, deleteUser, response} = this.props
     return (
       <UserDetailsView
         selectedUser={selectedUser}
+        deleteUser={deleteUser}
+        response={response}
+        error={error}
+        loading={loading}
       />
     );
   }
