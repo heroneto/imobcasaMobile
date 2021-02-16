@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, BackHandler } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text } from 'react-native'
 import styles from './styles'
 import StandardButton from '@lead-management/components/StandardButton';
-import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons';
 import colors from '@core/theme/colors';
 
@@ -13,20 +12,15 @@ import ModalFeedback from '@lead-management/components/ModalFeedback'
 import { TextInput } from 'react-native-gesture-handler';
 import { SelectedUser } from '@core/store/ducks/selectedUser/types';
 
-import * as listUserActions from "@core/store/ducks/listUser/actions"
-import { useDispatch } from 'react-redux';
-
-
 interface UserEditProps {
   selectedUser: SelectedUser,
   loading: boolean,
   error: boolean,
-  loadEditUser(data: Omit<SelectedUser, "createdAt" | "updatedAt">): void,
+  edit(data: Omit<SelectedUser, "createdAt" | "updatedAt">): void,
   response: string,
 }
 
-const UserEdit: React.FC<UserEditProps> = ({ selectedUser, loadEditUser, error, response, loading }) => {
-  const dispatch = useDispatch()
+const UserEdit: React.FC<UserEditProps> = ({ selectedUser, edit, error, response, loading }) => {
   const [fullName, setFullName] = useState<string>(selectedUser?.fullName)
   const [username, setUsername] = useState<string>(selectedUser?.username)
   const [email, setEmail] = useState<string>(selectedUser?.email)
@@ -44,9 +38,8 @@ const UserEdit: React.FC<UserEditProps> = ({ selectedUser, loadEditUser, error, 
       active,
       admin
     }
-    await loadEditUser(data)
+    await edit(data)
     setModalVisible(true)
-    await dispatch(listUserActions.loadRequest())
   }
 
 

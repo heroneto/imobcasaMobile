@@ -4,35 +4,34 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import { ApplicationState } from '@core/store';
 
-import UserEditView from '@lead-management/pages/User/Edit'
-import { User } from '@core/store/ducks/listUser/types'
+import UserResetPasswordView from '@lead-management/pages/User/ResetPassword'
 import * as listUserActions from '@core/store/ducks/listUser/actions'
 
 interface StateProps {
-  selectedUser: User,
+  id: string,
   loading: boolean,
   error: boolean,
   response: string,
 }
 
 interface DispatchProps {
-  edit(data: Omit<User, "createdAt" | "updatedAt" >): void
+  resetPassword(id:string, password:string): void
 }
 
 type Props = StateProps & DispatchProps
 
-class UserEditContainer extends React.Component<Props> {
+class UserResetPasswordContainer extends React.Component<Props> {
   componentDidMount() {
 
   }
   render() {
-    const {  selectedUser, loading, error, edit, response } = this.props
+    const {  id, loading, error, resetPassword, response } = this.props
     return (
-      <UserEditView
-        selectedUser={selectedUser}
+      <UserResetPasswordView
+        id={id}
         error={error}
         loading={loading}
-        edit={edit}
+        resetPassword={resetPassword}
         response={response}
       />
     );
@@ -42,10 +41,10 @@ class UserEditContainer extends React.Component<Props> {
 const mapStateToProps = (state: ApplicationState) => ({
   error: state.listUser.error,
   loading: state.listUser.loading,
-  selectedUser: state.listUser.selectedUser,
+  id: state.listUser.selectedUser.id,
   response: state.listUser.response
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(listUserActions, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserEditContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UserResetPasswordContainer);

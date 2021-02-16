@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import ItemCard from '@lead-management/components/ItemCard'
 import styles from './styles'
-import { ListUser } from '@core/store/ducks/listUser/types'
+import { User } from '@core/store/ducks/listUser/types'
 import { useNavigation } from '@react-navigation/native'
 import { RefreshControl } from 'react-native'
 import { setSelectedUser } from '@core/services/storage'
@@ -11,25 +11,25 @@ import { useDispatch } from 'react-redux'
 import * as ListUserActions from '@core/store/ducks/listUser/actions'
 
 interface ActiveUsersProps {
-  users: ListUser[]
+  users: User[]
 }
 
 const ActiveUsers: React.FC<ActiveUsersProps> = ({ users }) => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
   const [ refreshing, setRefreshing ] = React.useState<boolean>(false)
-  function onPress(user : ListUser) {
+  function onPress(user : User) {
     setSelectedUser(user)
 
     navigate("Usuário", {
-      userid: user
+      id: user.id
     })
   }
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     
-    await dispatch(ListUserActions.loadRequest())
+    await dispatch(ListUserActions.requestUserList())
     setRefreshing(false)
     
   }, []);

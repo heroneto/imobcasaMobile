@@ -5,25 +5,34 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import UserDetailsView from '@lead-management/pages/User/Read'
-import { SelectedUser } from '@core/store/ducks/selectedUser/types'
-import * as SelectedUserActions from '@core/store/ducks/selectedUser/actions'
+import { User } from '@core/store/ducks/listUser/types'
+import * as listUserActions from '@core/store/ducks/listUser/actions'
+import { RouteProp } from '@react-navigation/native';
+import { StackParameters } from '../../../routes/StackNavigator'
 
 interface StateProps {
-  selectedUser: SelectedUser,
+  selectedUser: User,
   loading: boolean,
-  error: boolean
+  error: boolean,
+  response: string
+}
+
+type UserDetailsScreenRouteProp = {
+  User: { id: string }
 }
 
 interface DispatchProps {
-  loadRequest(): void,
+  select(id: string): void,
+  route: RouteProp<UserDetailsScreenRouteProp, "User">
 }
 
-type Props = StateProps & DispatchProps
+type Props = StateProps & DispatchProps 
 
 class UserDetailsContainer extends React.Component<Props> {
   componentDidMount() {
-    const { loadRequest } = this.props
-    loadRequest()
+    const { select, route } = this.props
+    const { id } = route.params
+    select(id)
   }
   render() {
     const {  selectedUser, loading, error } = this.props
@@ -36,11 +45,12 @@ class UserDetailsContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  error: state.selectedUser.error,
-  loading: state.selectedUser.loading,
-  selectedUser: state.selectedUser.data
+  error: state.listUser.error,
+  loading: state.listUser.loading,
+  selectedUser: state.listUser.selectedUser,
+  response: state.listUser.response
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(SelectedUserActions, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(listUserActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetailsContainer);

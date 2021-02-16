@@ -2,8 +2,11 @@ import styled from 'styled-components/native'
 import { Text } from 'react-native'
 import { TypographyProps } from '.';
 import fonts from '@core/theme/fonts'
+import colors from '@core/theme/colors';
 
 export const CustomText = styled.Text<Omit<TypographyProps, "text">>`
+  color: ${({color}) => color ? color : colors.textTitle};
+
   ${({ size }) => {
     switch (size) {
       case "xs":

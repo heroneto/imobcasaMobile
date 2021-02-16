@@ -22,9 +22,30 @@ import { Header } from '@lead-management/components/Header'
 import UserListContainer from '@lead-management/containers/UserList'
 import UserDetailsContainer from "@lead-management/containers/UserDetails"
 import UserEditContainer from '@lead-management/containers/UserEditContainer'
+import UserResetPasswordContainer from '@lead-management/containers/UserResetPassword'
 
-const Stack = createStackNavigator()
+export type StackParameters = {
+  "Meus Usuários": undefined
+  "Edição de Usuário": { fullName: string, email: string, active: boolean, admin: boolean, username: string }
+  "Usuário": { id: string }
+  "Novo Usuário": undefined
+  "Reset de Senha": undefined
+  "Minhas Campanhas": undefined
+  "Nova Campanha": undefined
+  "Campanha": undefined
+  "Edição de Campanha": undefined
+  "Meus Leads": undefined
+  "Novo Lead": undefined
+  "Lead": undefined
+  "Edição de Lead": undefined
+  "Tarefa": undefined
+  "Nova Tarefa": undefined
+  "Edição de Tarefa": undefined
+  "Busca de Leads": undefined
+}
 
+
+const Stack = createStackNavigator<StackParameters>()
 
 
 export const UserStackNavigator = () => {
@@ -34,6 +55,8 @@ export const UserStackNavigator = () => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
       initialRouteName="Meus Usuários"
+      
+
     >
       <Stack.Screen
         name="Meus Usuários"
@@ -50,6 +73,13 @@ export const UserStackNavigator = () => {
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true
         }}
+        initialParams={{
+          active: false,
+          admin: false,
+          email: "",
+          fullName: "",
+          username: ""
+        }}
       />
       <Stack.Screen
         name="Usuário"
@@ -57,6 +87,9 @@ export const UserStackNavigator = () => {
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true
+        }}
+        initialParams={{
+          id: ""
         }}
       />
       <Stack.Screen
@@ -69,7 +102,7 @@ export const UserStackNavigator = () => {
       />
       <Stack.Screen
         name="Reset de Senha"
-        component={UserPasswordChange}
+        component={UserResetPasswordContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true

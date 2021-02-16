@@ -4,29 +4,29 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import { ApplicationState } from '@core/store';
 
-import { ListUser } from '@core/store/ducks/listUser/types';
+import { User } from '@core/store/ducks/listUser/types';
 import * as ListUserActions from '@core/store/ducks/listUser/actions';
 import * as ListUserSelectors from '@core/store/ducks/listUser/selectors'
 
 import UserListView from '@lead-management/pages/User/List'
 
 interface StateProps {
-  activeUsers?: ListUser[],
-  inactiveUsers?: ListUser[],
+  activeUsers?: User[],
+  inactiveUsers?: User[],
   loading: boolean,
   error: boolean
 }
 
 interface DispatchProps {
-  loadRequest(): void,
+  requestUserList(): void,
 }
 
 type Props = StateProps & DispatchProps
 
 class UserListsContainer extends React.Component<Props> {
   componentDidMount() {
-    const { loadRequest } = this.props
-    loadRequest()
+    const { requestUserList } = this.props
+    requestUserList()
   }
 
   render() {

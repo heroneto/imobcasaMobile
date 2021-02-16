@@ -7,10 +7,8 @@ import { LoggedUserTypes } from './loggedUser/types'
 import * as loggedUserActions from './loggedUser/sagas'
 
 import { ListUserTypes } from './listUser/types'
-import { getUsers } from './listUser/sagas'
+import * as listUserSagas from './listUser/sagas'
 
-import { SelectedUserTypes } from './selectedUser/types'
-import * as selectedUserSagas from './selectedUser/sagas'
 
 export default function* rootSaga() {
   return yield all([
@@ -21,8 +19,9 @@ export default function* rootSaga() {
     takeLatest(LoggedUserTypes.LOAD_EDIT_USER, loggedUserActions.editUser),
     takeLatest(LoggedUserTypes.LOAD_LOGOUT, loggedUserActions.logout),
     takeLatest(LoggedUserTypes.LOAD_CHANGE_PASSWORD, loggedUserActions.changeMyPassword),
-    takeLatest(ListUserTypes.LOAD_REQUEST, getUsers),
-    takeLatest(SelectedUserTypes.LOAD_REQUEST, selectedUserSagas.getUserStorage),
-    takeLatest(SelectedUserTypes.LOAD_EDIT_USER, selectedUserSagas.editUser)
+    takeLatest(ListUserTypes.REQUEST_LIST, listUserSagas.getUserList),
+    takeLatest(ListUserTypes.SELECT, listUserSagas.selectUser),
+    takeLatest(ListUserTypes.EDIT, listUserSagas.editUser),
+    takeLatest(ListUserTypes.RESET_PASSWORD, listUserSagas.resetUserPassword),
   ]);
 }

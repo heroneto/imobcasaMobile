@@ -1,13 +1,26 @@
 
 
 export enum ListUserTypes {
-  LOAD_REQUEST = "@listUser/LOAD_REQUEST",
-  LOAD_SUCCESS = "@listUser/LOAD_SUCCESS",
-  LOAD_FAILURE = "@listUser/LOAD_FAILURE",
+  REQUEST_LIST = "@listUser/REQUEST_LIST",
+  SUCCESS_REQUEST_LIST = "@listUser/SUCCESS_REQUEST_LIST",
+  FAILURE_REQUEST_LIST = "@listUser/FAILURE_REQUEST_LIST",
+
+  SELECT = "@listUser/SELECT",
+  SUCCESS_SELECT = "@listUser/SUCCESS_SELECT",
+  FAILURE_SELECT = "@listUser/FAILURE_SELECT",
+
+  EDIT = "@listUser/EDIT",
+  SUCCESS_EDIT = "@listUser/SUCCESS_EDIT",
+  FAILURE_EDIT = "@listUser/FAILURE_EDIT",
+  
+  RESET_PASSWORD = "@listUser/RESET_PASSWORD",
+  SUCCESS_RESET_PASSWORD = "@listUser/SUCCESS_RESET_PASSWORD",
+  FAILURE_RESET_PASSWORD = "@listUser/FAILURE_RESET_PASSWORD",
+  
 }
 
 
-export interface ListUser {
+export interface User {
   id: string,
   fullName: string,
   username: string,
@@ -20,10 +33,12 @@ export interface ListUser {
 
 
 export interface ListUserState {
-  readonly data: ListUser[]
+  readonly data: User[]
   readonly loading: boolean
-  readonly error: boolean,
-  readonly activeUsers?:ListUser[],
-  readonly inactiveUsers?:ListUser[]
+  readonly error: boolean
+  readonly activeUsers?:User[]
+  readonly inactiveUsers?:User[]
+  readonly selectedUser: User
+  readonly response: string
 }
 
