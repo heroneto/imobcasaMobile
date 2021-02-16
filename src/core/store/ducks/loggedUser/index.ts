@@ -12,7 +12,8 @@ const INITIAL_STATE: LoggedUserState = {
     active: false
   },
   error: false,
-  loading: false
+  loading: false,
+  response: ""
 };
 
 const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {
@@ -21,11 +22,11 @@ const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {
       return { ...state, loading: true };
     case LoggedUserTypes.LOAD_SUCCESS:
       return {
-      ...state, loading: false, error: false, data: action.payload.data,
+      ...state, loading: false, error: false, data: action.payload.data, response: action.payload.response
       };
     case LoggedUserTypes.LOAD_FAILURE:
       return {
-      ...state, loading: false, error: true
+      ...state, loading: false, error: true, response: action.payload.response
       };
     default:
       return state;

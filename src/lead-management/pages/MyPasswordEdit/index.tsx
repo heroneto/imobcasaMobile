@@ -13,7 +13,6 @@ import ModalFeedback from '@lead-management/components/ModalFeedback'
 interface MyPasswordEditProps {
   actions: {
     loadRequest(password: string, newPassword: string): void,
-    loadResetStore(): void
   },
   error: boolean,
   loading: boolean,

@@ -6,6 +6,7 @@ export enum LoggedUserTypes {
     LOAD_FAILURE = "@loggedUser/LOAD_FAILURE",
     LOAD_EDIT_USER = "@loggedUser/LOAD_EDIT_USER",
     LOAD_LOGOUT = "@loggedUser/LOAD_LOGOUT",
+    LOAD_CHANGE_PASSWORD = "@loggedUser/LOAD_CHANGE_PASSWORD",
   }
   
   
@@ -24,6 +25,7 @@ export enum LoggedUserTypes {
     readonly data: LoggedUser
     readonly loading: boolean
     readonly error: boolean
+    readonly response: string
   }
   
   

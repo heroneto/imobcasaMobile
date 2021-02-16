@@ -14,10 +14,10 @@ export function* getUserStorage() {
   try {
     const data = yield getUserService()
     const user = JSON.parse(data)
-    yield put(loadSuccess(user))
+    yield put(loadSuccess(user, "Usuário carregado com sucesso"))
   } catch (error) {
     console.log(error)
-    yield put(loadFailure());
+    yield put(loadFailure("Falha ao carregar usuário"));
   }
 }
 
@@ -36,10 +36,10 @@ export function* editUser(action: Effect) {
 
     
     yield setUserService(user)
-    yield put(loadSuccess(user))
+    yield put(loadSuccess(user, "Usuário editado com sucesso"))
   } catch (error) {
     console.log(error)
-    yield put(loadFailure());
+    yield put(loadFailure("Falha ao editar usuário"));
   }
 }
 
@@ -57,11 +57,30 @@ export function* logout(){
     yield setUserService(data)
     yield setAccessToken("")
     yield setRefreshToken("")
-    yield put(loadSuccess(data))
+    yield put(loadSuccess(data, ""))
 
   } catch (error) {
     console.log(error)
-    yield put(loadFailure())
+    yield put(loadFailure("Falha ao deslogar"))
   }
 }
 
+
+
+export function* changeMyPassword(action: Effect){
+  try {
+    const user = yield getUserService()
+    const { password, newPassword } = action.payload
+    const accessToken = yield getAccessToken()
+    yield changeMyPasswordService({
+      password,
+      newPassword
+    }, 
+      accessToken
+    )
+    yield put(loadSuccess(user, "Troca da senha com sucesso"))
+  } catch (error) {
+    console.log(error.response.status)
+    yield put(loadFailure("Ocorreu um erro ao alterar a senha, verifique a senha antiga digitada"))
+  }
+}

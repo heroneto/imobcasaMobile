@@ -62,7 +62,7 @@ const UsersList : React.FC<UsersListProps> = ({activeUsers, inactiveUsers, error
         />
       </Tab.Navigator>
       <FloatButton 
-        pageToNavigate="newuser"        
+        pageToNavigate="Novo Usuário"        
       />
     </View>
   )
