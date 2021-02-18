@@ -10,7 +10,7 @@ import Switcher from '@lead-management/components/Switcher'
 import ModalFeedback from '@lead-management/components/ModalFeedback'
 
 import { TextInput } from 'react-native-gesture-handler';
-import { User } from '@core/store/ducks/listUser/types';
+import { User } from '@core/store/ducks/users/types';
 
 interface UserEditProps {
   selectedUser: User,

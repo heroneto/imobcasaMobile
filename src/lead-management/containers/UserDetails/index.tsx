@@ -5,8 +5,8 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import UserDetailsView from '@lead-management/pages/User/Read'
-import { User } from '@core/store/ducks/listUser/types'
-import * as listUserActions from '@core/store/ducks/listUser/actions'
+import { User } from '@core/store/ducks/users/types'
+import * as listUserActions from '@core/store/ducks/users/actions'
 import { RouteProp } from '@react-navigation/native';
 
 interface StateProps {

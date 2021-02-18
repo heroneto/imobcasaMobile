@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { ListUserState, ListUserTypes } from './types';
+import { UsersState, UsersTypes } from './types';
 
 const INITIALSELETEDUSER = {
   active: false,
@@ -12,7 +12,7 @@ const INITIALSELETEDUSER = {
   username: ""
 }
 
-const INITIAL_STATE: ListUserState = {
+const INITIAL_STATE: UsersState = {
   data: [],
   activeUsers: [],
   inactiveUsers: [],
@@ -22,37 +22,37 @@ const INITIAL_STATE: ListUserState = {
   response: ""
 };
 
-const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<UsersState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ListUserTypes.REQUEST_LIST:
+    case UsersTypes.REQUEST_LIST:
       return { ...state, loading: true };
-    case ListUserTypes.SUCCESS_REQUEST_LIST:
+    case UsersTypes.SUCCESS_REQUEST_LIST:
       return {
         ...state, loading: false, error: false, data: action.payload.data, response: action.payload.response,
       };
-    case ListUserTypes.FAILURE_REQUEST_LIST:
+    case UsersTypes.FAILURE_REQUEST_LIST:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       };
 
-    case ListUserTypes.SELECT:
+    case UsersTypes.SELECT:
       return {
         ...state, loading: true, response: ""
       };
-    case ListUserTypes.SUCCESS_SELECT:
+    case UsersTypes.SUCCESS_SELECT:
       return {
         ...state, loading: false, error: false, selectedUser: action.payload.selectedUser
       };
-    case ListUserTypes.FAILURE_SELECT:
+    case UsersTypes.FAILURE_SELECT:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       };
 
-    case ListUserTypes.EDIT:
+    case UsersTypes.EDIT:
       return {
         ...state, loading: true, response: ""
       }
-    case ListUserTypes.SUCCESS_EDIT:
+    case UsersTypes.SUCCESS_EDIT:
       return {
         ...state,
         loading: false,
@@ -61,29 +61,29 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
         data: action.payload.data,
         response: action.payload.response
       }
-    case ListUserTypes.FAILURE_EDIT:
+    case UsersTypes.FAILURE_EDIT:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       }
 
-    case ListUserTypes.RESET_PASSWORD:
+    case UsersTypes.RESET_PASSWORD:
       return {
         ...state, loading: true, response: ""
       }
-    case ListUserTypes.SUCCESS_RESET_PASSWORD:
+    case UsersTypes.SUCCESS_RESET_PASSWORD:
       return {
         ...state, loading: false, error: false, response: action.payload.response
       }
-    case ListUserTypes.FAILURE_RESET_PASSWORD:
+    case UsersTypes.FAILURE_RESET_PASSWORD:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       }
 
-    case ListUserTypes.CREATE:
+    case UsersTypes.CREATE:
       return {
         ...state, loading: true, response: "", selectedUser: INITIALSELETEDUSER
       }
-    case ListUserTypes.SUCCESS_CREATE:
+    case UsersTypes.SUCCESS_CREATE:
       return {
         ...state,
         loading: false,
@@ -92,16 +92,16 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
         data: action.payload.data,
         response: action.payload.response
       }
-    case ListUserTypes.FAILURE_CREATE:
+    case UsersTypes.FAILURE_CREATE:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       }
 
-    case ListUserTypes.DELETE:
+    case UsersTypes.DELETE:
       return {
         ...state, loading: true, response: ""
       }
-    case ListUserTypes.SUCCESS_DELETE:
+    case UsersTypes.SUCCESS_DELETE:
       return {
         ...state,
         loading: false,
@@ -110,7 +110,7 @@ const reducer: Reducer<ListUserState> = (state = INITIAL_STATE, action) => {
         data: action.payload.data,
         response: action.payload.response
       }
-    case ListUserTypes.FAILURE_DELETE:
+    case UsersTypes.FAILURE_DELETE:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       }

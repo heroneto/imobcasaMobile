@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { ListUserState } from './types'
+import { UsersState } from './types'
 
-const userListSelector = (state: ListUserState) => state.data
+const userListSelector = (state: UsersState) => state.data
 
 
 export const activeUsersSelector = createSelector(

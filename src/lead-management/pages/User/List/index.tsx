@@ -6,7 +6,7 @@ import ActiveUsers from './pages/ActiveUsers';
 import InactiveUsers from './pages/InactiveUsers';
 import FloatButton from '@lead-management/components/FloatButton';
 
-import { ListUser } from '@core/store/ducks/listUser/types'
+import { ListUser } from '@core/store/ducks/users/types'
 
 const Tab = createMaterialTopTabNavigator();
 

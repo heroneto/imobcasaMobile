@@ -2,13 +2,13 @@ import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import ItemCard from '@lead-management/components/ItemCard'
 import styles from './styles'
-import { User } from '@core/store/ducks/listUser/types'
+import { User } from '@core/store/ducks/users/types'
 import { setSelectedUser } from '@core/services/storage'
 import { useNavigation } from '@react-navigation/native'
 import { RefreshControl } from 'react-native'
 import { useDispatch } from 'react-redux'
 
-import * as ListUserActions from '@core/store/ducks/listUser/actions'
+import * as ListUserActions from '@core/store/ducks/users/actions'
 
 
 interface InactiveUsersProps {

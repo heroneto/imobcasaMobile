@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import UserResetPasswordView from '@lead-management/pages/User/ResetPassword'
-import * as listUserActions from '@core/store/ducks/listUser/actions'
+import * as listUserActions from '@core/store/ducks/users/actions'
 
 interface StateProps {
   id: string,

@@ -4,7 +4,7 @@ import styles from './styles'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
-import { User } from '@core/store/ducks/listUser/types';
+import { User } from '@core/store/ducks/users/types';
 import ModalFeedback from '@lead-management/components/ModalFeedback';
 
 

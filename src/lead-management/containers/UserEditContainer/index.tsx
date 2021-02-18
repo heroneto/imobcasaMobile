@@ -5,8 +5,8 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import UserEditView from '@lead-management/pages/User/Edit'
-import { User } from '@core/store/ducks/listUser/types'
-import * as listUserActions from '@core/store/ducks/listUser/actions'
+import { User } from '@core/store/ducks/users/types'
+import * as listUserActions from '@core/store/ducks/users/actions'
 
 interface StateProps {
   selectedUser: User,

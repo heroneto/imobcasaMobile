@@ -4,9 +4,9 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import { ApplicationState } from '@core/store';
 
-import { User } from '@core/store/ducks/listUser/types';
-import * as ListUserActions from '@core/store/ducks/listUser/actions';
-import * as ListUserSelectors from '@core/store/ducks/listUser/selectors'
+import { User } from '@core/store/ducks/users/types';
+import * as ListUserActions from '@core/store/ducks/users/actions';
+import * as ListUserSelectors from '@core/store/ducks/users/selectors'
 
 import UserListView from '@lead-management/pages/User/List'
 

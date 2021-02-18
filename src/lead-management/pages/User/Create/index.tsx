@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import InputContainer from '@lead-management/components/InputContainer'
 import PasswordInput from '@lead-management/components/PasswordInput'
-import { CreateUserProps, User } from '@core/store/ducks/listUser/types'
+import { CreateUserProps, User } from '@core/store/ducks/users/types'
 import Switcher from '@lead-management/components/Switcher';
 import ModalFeedback from '@lead-management/components/ModalFeedback';
 import { useNavigation } from '@react-navigation/native';
