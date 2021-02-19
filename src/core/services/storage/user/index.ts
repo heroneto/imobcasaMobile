@@ -32,3 +32,10 @@ export const setUser = async (user: UserProps) => {
     }    
 }
 
+export const clearUser = async () => {
+    try {
+        return await storage.setItem(KEY, "")
+    } catch (error) {
+        console.log(error)   
+    } 
+}

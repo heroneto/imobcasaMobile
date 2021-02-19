@@ -9,19 +9,17 @@ export enum AuthTypes {
   SUCCESS_LOGOUT = "@auth/SUCCESS_LOGOUT",
   FAILURE_LOGOUT = "@auth/FAILURE_LOGOUT",
 
-  CHECK = "@auth/CHECK",
-  SUCCESS_CHECK = "@auth/SUCCESS_CHECK",
-  FAILURE_CHECK = "@auth/FAILURE_CHECK", 
-
   RENEW = "@auth/RENEW",
   SUCCESS_RENEW = "@auth/SUCCESS_RENEW",
   FAILURE_RENEW = "@auth/FAILURE_RENEW", 
+
+  RESET_STORE = "@auth/RESET_STORE"
 }
 
 
 export interface Auth {
   response: string,
-  httpCode: number
+  httpCode: number,
 }
 
 export interface AuthState {

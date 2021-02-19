@@ -26,21 +26,8 @@ const reducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
     case AuthTypes.LOGOUT:
       return { ...state, loading: true };
     case AuthTypes.SUCCESS_LOGOUT:
-      return {
-        ...state, loading: false, error: false, data: action.payload.data
-      };
+      return INITIAL_STATE
     case AuthTypes.FAILURE_LOGOUT:
-      return {
-        ...state, loading: false, error: true, data: action.payload.data
-      };
-
-    case AuthTypes.CHECK:
-      return { ...state, loading: true };
-    case AuthTypes.SUCCESS_CHECK:
-      return {
-        ...state, loading: false, error: false, data: action.payload.data
-      };
-    case AuthTypes.FAILURE_CHECK:
       return {
         ...state, loading: false, error: true, data: action.payload.data
       };
@@ -55,6 +42,9 @@ const reducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
       return {
         ...state, loading: false, error: true, data: action.payload.data
       };
+
+    case AuthTypes.RESET_STORE:
+      return INITIAL_STATE
     default:
       return state;
   }

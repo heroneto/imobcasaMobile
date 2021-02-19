@@ -10,20 +10,20 @@ import { useNavigation } from '@react-navigation/native'
 import InputContainer from '@lead-management/components/InputContainer'
 import PasswordInput from "@lead-management/components/PasswordInput"
 
-import { Tokens } from '@core/store/ducks/tokens/types';
-import { getUser } from '@core/services/storage'
+import { Auth } from '@core/store/ducks/auth/types';
+import ModalFeedback from '@lead-management/components/ModalFeedback'
 
 interface LoginViewProps {
-  tokens: Tokens,
   error: boolean,
   loading: boolean,
   actions: {
     login(username: string, password: string): void,
-    getLoggedUser():void
+    resetStore():void
   }
+  data: Auth
 }
 
-const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }) => {
+const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, data }) => {
   const { navigate } = useNavigation()
   const [isRememberMeSelected, setIsRememberMeSelected] = useState(false)
   const [username, setUsername] = useState<string>("")
@@ -33,22 +33,17 @@ const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }
     await actions.login(username, password)
   }
 
-  async function checkAuth(){
-    const data = await getUser()
-    if(data){
-      const user = JSON.parse(data)
-      if(user.isLogged  && !error){
-        await actions.getLoggedUser()
-        navigate('home')
-      }
+  async function checkAuth() {
+    if (data.httpCode === 200 && !error) {
+      setUsername("")
+      setPassword("")
+      navigate('home')
     }
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     checkAuth()
-  }, [tokens, error])
-
-
+  }, [data, error])
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -69,11 +64,11 @@ const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }
             enabled={!loading}
 
           >
-            <TextInput 
-              editable={!loading} 
-              value={username} 
-              onChangeText={text => setUsername(text)} 
-              placeholder={loading ? "Aguarde..." : "Digite seu Login"} 
+            <TextInput
+              editable={!loading}
+              value={username}
+              onChangeText={text => setUsername(text)}
+              placeholder={loading ? "Aguarde..." : "Digite seu Login"}
             />
           </InputContainer>
           <InputContainer
@@ -135,7 +130,11 @@ const LoginView: React.FC<LoginViewProps> = ({ actions, error, loading, tokens }
         </View>
       </View>
 
-
+      <ModalFeedback 
+        modalVisible={error}
+        closeModalFunc={() => actions.resetStore()}
+        text={data?.response}
+      />
 
     </KeyboardAvoidingView>
   )

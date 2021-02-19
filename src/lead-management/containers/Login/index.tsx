@@ -4,28 +4,25 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import { ApplicationState } from '@core/store';
 
-import { Tokens } from '@core/store/ducks/tokens/types';
-import * as TokenActions from '@core/store/ducks/tokens/actions';
+import { Auth } from '@core/store/ducks/auth/types';
+import * as AuthActions from '@core/store/ducks/auth/actions';
 
 import * as LoggedUserActions from '@core/store/ducks/loggedUser/actions'
 
 import LoginView from '@lead-management/pages/Login'
 
 interface StateProps {
-  tokens: Tokens,
+  data: Auth,
   loading: boolean,
   error: boolean
 }
 
 interface DispatchProps {
   actions: {
-    tokenActions: {
-      loadRequest(username: string, password: string): void,
-      getTokensStorage(): void,
-      refreshAccessToken(): void
-    },
-    loggedUserActions: {
-      loadRequest(): void
+    auth: {
+      login(username: string, password: string): void,
+      resetStore(): void,
+      renew():void
     }
   }
 }
@@ -34,38 +31,36 @@ type Props = StateProps & DispatchProps
 
 class LoginContainer extends Component<Props> {
   componentDidMount() {
-    const { refreshAccessToken } = this.props.actions.tokenActions
-    refreshAccessToken()
+    const { renew } = this.props.actions.auth
+    renew()
   }
 
   render() {
-    const { actions, tokens, error, loading } = this.props
+    const { actions, error, loading, data } = this.props
     return (
       <LoginView  
         actions={{
-          login: actions.tokenActions.loadRequest,
-          getLoggedUser: actions.loggedUserActions.loadRequest
+          login: actions.auth.login,
+          resetStore: actions.auth.resetStore
         }}
         error={error}
         loading={loading}
-        tokens={tokens}
+        data={data}
       />
     );
   }
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  tokens: state.tokens.data,
-  loggedUser: state.loggedUser.data,
-  error: state.tokens.error,
-  loading: state.tokens.loading
+  data: state.auth.data,
+  error: state.auth.error,
+  loading: state.auth.loading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     actions: {
-      tokenActions: bindActionCreators(TokenActions, dispatch),
-      loggedUserActions: bindActionCreators(LoggedUserActions, dispatch)
+      auth: bindActionCreators(AuthActions, dispatch),
     }
   }
 };
