@@ -1,5 +1,12 @@
-import { Effect, put } from 'redux-saga/effects';
-import { loadSuccess, loadFailure } from './actions';
+import { Effect, put, SagaReturnType } from 'redux-saga/effects';
+import { 
+    loadSuccess, 
+    loadFailure,
+    successGet,
+    failureGet,
+    successEdit,
+    failureEdit
+  } from './actions';
 
 import { 
     setUser as setUserService, 
@@ -14,12 +21,14 @@ export function* getUserStorage() {
   try {
     const data = yield getUserService()
     const user = JSON.parse(data)
-    yield put(loadSuccess(user, "Usuário carregado com sucesso"))
+    yield put(successGet(user, "Usuário carregado com sucesso"))
   } catch (error) {
     console.log(error)
-    yield put(loadFailure("Falha ao carregar usuário"));
+    yield put(failureGet("Falha ao carregar usuário"));
   }
 }
+
+type EditUserReturnType = SagaReturnType<typeof editLoggedUser>
 
 export function* editUser(action: Effect) {
   try {
@@ -27,19 +36,18 @@ export function* editUser(action: Effect) {
     data.active = true
 
     const accessToken = yield getAccessToken()
-    const result = yield editLoggedUser(data, accessToken)
-    const user = result.data
-    delete user.createdAt
-    delete user.updatedAt
-    delete user.password
-    user.isLogged = true
+    const result : EditUserReturnType = yield editLoggedUser(data, accessToken)
+    const { createdAt, updatedAt, password, ...user } = result.data
 
-    
-    yield setUserService(user)
-    yield put(loadSuccess(user, "Usuário editado com sucesso"))
+    const editedUser = {
+      ...user,
+      isLogged: true
+    }
+    yield setUserService(editedUser)
+    yield put(successEdit(editedUser, result.status,"Usuário editado com sucesso"))
   } catch (error) {
     console.log(error)
-    yield put(loadFailure("Falha ao editar usuário"));
+    yield put(failureEdit(error.response.status, "Falha ao editar usuário"));
   }
 }
 

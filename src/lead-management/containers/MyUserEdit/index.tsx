@@ -16,22 +16,22 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  loadRequest(): void,
-  loadEditUser(data: Omit<LoggedUser, 'isLogged'>): void,
+  get(): void,
+  edit(data: Omit<LoggedUser, 'isLogged'>): void,
 }
 
 type Props = StateProps & DispatchProps
 
 class MyUserEditContainer extends Component<Props> {
   componentDidMount() {
-    const { loadRequest } = this.props
-    loadRequest()
+    const { get } = this.props
+    get()
   }
 
   render() {
-    const { loggedUser, loadEditUser } = this.props
+    const { loggedUser, edit } = this.props
     return (
-      <MyUserEditView loggedUser={loggedUser} actions={{loadEditUser: loadEditUser}} />
+      <MyUserEditView loggedUser={loggedUser} actions={{loadEditUser: edit}} />
     );
   }
 }

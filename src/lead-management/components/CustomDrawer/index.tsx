@@ -25,9 +25,7 @@ const CustomDrawer = () => {
   const { navigate } = useNavigation()
   const insets = useSafeAreaInsets();
   const [optionsIsOpen, setOptionsIsOpen] = useState<boolean>(false)
-  const [ fullName, setFullName ] = useState<string>("")
-  const [ email, setEmail ] = useState<string>("")
-
+  
   const handleNavigate = (page: string) => {
     setOptionsIsOpen(false)
     navigate(page)
@@ -39,9 +37,8 @@ const CustomDrawer = () => {
   }
 
 
-
   useEffect(() => {
-    dispatch(LoggedUserActions.loadRequest())
+    dispatch(LoggedUserActions.get())
 
   }, [dispatch])
 

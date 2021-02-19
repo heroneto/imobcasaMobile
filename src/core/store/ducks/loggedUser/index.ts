@@ -13,21 +13,64 @@ const INITIAL_STATE: LoggedUserState = {
   },
   error: false,
   loading: false,
-  response: ""
+  response: "",
+  httpCode: 0
 };
 
 const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LoggedUserTypes.LOAD_REQUEST:
-      return { ...state, loading: true };
     case LoggedUserTypes.LOAD_SUCCESS:
       return {
-      ...state, loading: false, error: false, data: action.payload.data, response: action.payload.response
+        ...state, loading: false, error: false, data: action.payload.data, response: action.payload.response
       };
     case LoggedUserTypes.LOAD_FAILURE:
       return {
-      ...state, loading: false, error: true, response: action.payload.response
+        ...state, loading: false, error: true, response: action.payload.response
       };
+
+    case LoggedUserTypes.GET:
+      return {
+        ...state, loading: true
+      }
+    case LoggedUserTypes.SUCCESS_GET:
+      return {
+        ...state,
+        data: action.payload.data,
+        response: action.payload.response,
+        httpCode: 0,
+        loading: false,
+        error: false,
+      }
+    case LoggedUserTypes.FAILURE_GET:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+        response: action.payload.response
+      }
+
+    case LoggedUserTypes.EDIT:
+      return {
+        ...state, loading: true
+      }
+    case LoggedUserTypes.SUCCESS_EDIT:
+      return {
+        ...state, 
+        loading: false, 
+        error: false,
+        data: action.payload.data,
+        httpCode: action.payload.httpCode, 
+        response: action.payload.response
+      }
+    case LoggedUserTypes.FAILURE_EDIT:
+      return {
+        ...state, 
+        loading: false, 
+        error: true, 
+        httpCode: action.payload.httpCode, 
+        response: action.payload.response
+      }
+
     default:
       return state;
   }
