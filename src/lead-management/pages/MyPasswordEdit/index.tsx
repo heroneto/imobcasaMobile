@@ -12,7 +12,7 @@ import ModalFeedback from '@lead-management/components/ModalFeedback'
 
 interface MyPasswordEditProps {
   actions: {
-    loadRequest(password: string, newPassword: string): void,
+    changePassword(password: string, newPassword: string): void,
   },
   error: boolean,
   loading: boolean,
@@ -27,7 +27,7 @@ const MyPasswordEdit: React.FC<MyPasswordEditProps> = ({ actions, loading, error
   const [modalVisible, setModalVisible] = useState<boolean>(false)
 
   async function handleSaveButtom() {
-    await actions.loadRequest(oldPassword, password)
+    await actions.changePassword(oldPassword, password)
     setModalVisible(true)
 
   }

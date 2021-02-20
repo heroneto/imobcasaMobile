@@ -18,7 +18,7 @@ interface StateProps {
 
 interface DispatchProps {
   actions: {
-    loadChangePassword(password: string, newPassword: string): void,
+    changePassword(password: string, newPassword: string): void,
   }
 }
 
@@ -31,7 +31,7 @@ class MyPasswordEditContainer extends Component<Props> {
     return (
       <MyPasswordEdit  
         actions={{
-          loadRequest: actions.loadChangePassword,
+          changePassword: actions.changePassword,
         }}
         error={error}
         loading={loading}

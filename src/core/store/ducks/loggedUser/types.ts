@@ -1,10 +1,6 @@
 
 
 export enum LoggedUserTypes {
-    LOAD_SUCCESS = "@loggedUser/LOAD_SUCCESS",
-    LOAD_FAILURE = "@loggedUser/LOAD_FAILURE",
-    LOAD_CHANGE_PASSWORD = "@loggedUser/LOAD_CHANGE_PASSWORD",
-
     GET = "@loggedUser/GET",
     SUCCESS_GET = "@loggedUser/SUCCESS_GET",
     FAILURE_GET = "@loggedUser/FAILURE_GET",

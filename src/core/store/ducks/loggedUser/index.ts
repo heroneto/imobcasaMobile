@@ -19,15 +19,6 @@ const INITIAL_STATE: LoggedUserState = {
 
 const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LoggedUserTypes.LOAD_SUCCESS:
-      return {
-        ...state, loading: false, error: false, data: action.payload.data, response: action.payload.response
-      };
-    case LoggedUserTypes.LOAD_FAILURE:
-      return {
-        ...state, loading: false, error: true, response: action.payload.response
-      };
-
     case LoggedUserTypes.GET:
       return {
         ...state, loading: true
@@ -55,19 +46,40 @@ const reducer: Reducer<LoggedUserState> = (state = INITIAL_STATE, action) => {
       }
     case LoggedUserTypes.SUCCESS_EDIT:
       return {
-        ...state, 
-        loading: false, 
+        ...state,
+        loading: false,
         error: false,
         data: action.payload.data,
-        httpCode: action.payload.httpCode, 
+        httpCode: action.payload.httpCode,
         response: action.payload.response
       }
     case LoggedUserTypes.FAILURE_EDIT:
       return {
-        ...state, 
-        loading: false, 
-        error: true, 
-        httpCode: action.payload.httpCode, 
+        ...state,
+        loading: false,
+        error: true,
+        httpCode: action.payload.httpCode,
+        response: action.payload.response
+      }
+
+    case LoggedUserTypes.CHANGE_PASSWORD:
+      return {
+        ...state, loading: true
+      }
+    case LoggedUserTypes.SUCCESS_CHANGE_PASSWORD:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        httpCode: action.payload.httpCode,
+        response: action.payload.response
+      }
+    case LoggedUserTypes.FAILURE_CHANGE_PASSWORD:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        httpCode: action.payload.httpCode,
         response: action.payload.response
       }
 

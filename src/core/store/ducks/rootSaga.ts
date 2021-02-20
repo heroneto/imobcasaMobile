@@ -6,7 +6,6 @@ import * as loggedUserActions from './loggedUser/sagas'
 import { UsersTypes } from './users/types'
 import * as listUserSagas from './users/sagas'
 
-
 import { AuthTypes } from './auth/types'
 import * as AuthSagas from './auth/sagas'
 
@@ -14,7 +13,7 @@ export default function* rootSaga() {
   return yield all([
     takeLatest(LoggedUserTypes.GET, loggedUserActions.getUserStorage),
     takeLatest(LoggedUserTypes.EDIT, loggedUserActions.editUser),
-    takeLatest(LoggedUserTypes.LOAD_CHANGE_PASSWORD, loggedUserActions.changeMyPassword),
+    takeLatest(LoggedUserTypes.CHANGE_PASSWORD, loggedUserActions.changeMyPassword),
     takeLatest(UsersTypes.REQUEST_LIST, listUserSagas.getUserList),
     takeLatest(UsersTypes.SELECT, listUserSagas.selectUser),
     takeLatest(UsersTypes.EDIT, listUserSagas.editUser),

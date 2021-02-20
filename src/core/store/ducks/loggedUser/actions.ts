@@ -1,13 +1,6 @@
 import { action } from 'typesafe-actions';
 import { LoggedUser, LoggedUserTypes } from './types';
 
-export const loadSuccess = (data: LoggedUser, response: string) => action(LoggedUserTypes.LOAD_SUCCESS, { data, response });
-
-export const loadFailure = (response: string) => action(LoggedUserTypes.LOAD_FAILURE, { response });
-
-export const loadChangePassword = (password: string, newPassword: string) => action(LoggedUserTypes.LOAD_CHANGE_PASSWORD, {password, newPassword} );
-
-
 export const get = () => action(LoggedUserTypes.GET)
 export const successGet = (data: LoggedUser, response: string) => action(LoggedUserTypes.SUCCESS_GET, {data, response})
 export const failureGet = (response: string) => action(LoggedUserTypes.FAILURE_GET, {response})
