@@ -100,8 +100,8 @@ const CustomDrawer = () => {
           icon={props => {
             return <Ionicons name="logo-facebook" size={24} color={colors.textInput} />
           }}
-          label="Campanhas"
-          onPress={() => handleNavigate("CampaignsStack")}
+          label="Formluários"
+          onPress={() => handleNavigate("FormStack")}
         />
 
       </View>

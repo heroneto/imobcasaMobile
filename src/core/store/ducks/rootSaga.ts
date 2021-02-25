@@ -9,6 +9,9 @@ import * as listUserSagas from './users/sagas'
 import { AuthTypes } from './auth/types'
 import * as AuthSagas from './auth/sagas'
 
+import { FacebookFormsTypes } from './facebookForms/types'
+import * as FacebookFormsSagas from './facebookForms/sagas'
+
 export default function* rootSaga() {
   return yield all([
     takeLatest(LoggedUserTypes.GET, loggedUserActions.getUserStorage),
@@ -23,5 +26,8 @@ export default function* rootSaga() {
     takeLatest(AuthTypes.LOGIN, AuthSagas.login),
     takeLatest(AuthTypes.LOGOUT, AuthSagas.logout),
     takeLatest(AuthTypes.RENEW, AuthSagas.renew),
+    takeLatest(FacebookFormsTypes.LIST, FacebookFormsSagas.listForms),
+    takeLatest(FacebookFormsTypes.LOAD_MORE, FacebookFormsSagas.listMoreForms),
+
   ]);
 }

@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import { LoggedUserState } from './ducks/loggedUser/types';
 import { UsersState } from './ducks/users/types'
 import { AuthState } from './ducks/auth/types'
+import { FacebookFormsState } from './ducks/facebookForms/types';
 
 import rootReducer from './ducks/rootReducer';
 import rootSaga from './ducks/rootSaga';
@@ -13,6 +14,7 @@ export interface ApplicationState {
   loggedUser: LoggedUserState,
   listUser: UsersState,
   auth: AuthState
+  facebookForms: FacebookFormsState
 }
 
 const sagaMiddleware = createSagaMiddleware();

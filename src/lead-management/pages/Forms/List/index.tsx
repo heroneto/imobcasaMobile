@@ -15,11 +15,11 @@ interface CampaignsListProps {
 }
 
 
-const Campaigns: React.FC<CampaignsListProps> = ({navigation}) => {
+const Campaigns: React.FC<CampaignsListProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-       <Tab.Navigator
+      <Tab.Navigator
         initialRouteName="0"
         tabBarOptions={{
           style: styles.navigatorContainer,
@@ -37,26 +37,25 @@ const Campaigns: React.FC<CampaignsListProps> = ({navigation}) => {
             padding: 5,
           },
         }}
-
       >
         <Tab.Screen
           name="0"
           component={ActiveCampaigs}
           options={{
-            tabBarLabel: "Aguardando",
+            tabBarLabel: "Ativadas",
           }}
         />
         <Tab.Screen
           name="1"
           component={InactiveCampaigs}
           options={{
-            tabBarLabel: "Inativas"
+            tabBarLabel: "Inativadas"
           }}
         />
       </Tab.Navigator>
 
       <FloatButton
-        pageToNavigate="Nova Campanha"
+        pageToNavigate="FormAdd"
       />
     </View>
   )

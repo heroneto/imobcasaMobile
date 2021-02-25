@@ -21,29 +21,10 @@ interface IItemCardProps {
     text: string,
   },
   level: 'error' | 'success' | 'info' | 'neutral',
-  pageToNavigate: string,
-  navigationParameters: object,
   onPressFunc():void
 }
 
-const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, middleIcon, leftBottomText, rightBottomText, customRightText, level, pageToNavigate, navigationParameters, onPressFunc }) => {
-  const { navigate } = useNavigation()
-  const [isShowingModal, setIsShowingModal] = useState(false)
-
-  function showModal() {
-    console.log("teste")
-    setIsShowingModal(true)
-  }
-
-  function closeModal() {
-    setIsShowingModal(false)
-  }
-
-  // function handleCardItem(){
-
-  //   navigate(pageToNavigate, navigationParameters)
-  // }
-
+const ItemCard: React.FC<IItemCardProps> = ({ topIcon, topText, middleText, middleIcon, leftBottomText, rightBottomText, customRightText, level, onPressFunc }) => {
   return (
     <TouchableOpacity
       onPress={onPressFunc}

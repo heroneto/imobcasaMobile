@@ -6,6 +6,7 @@ export interface TypographyProps {
   color: string,
   font: "primaryRegular" | "primarySemiBold" | "primaryBold" | "secondaryRegular" | "secondaryBold"
   text: string, 
+  align: "center" | "end" | "start" | "left" | "right" | "justify" | "inherit" | "initial" | "unset"
 }
 
 const Typography : React.FC<TypographyProps> = ({
@@ -13,12 +14,14 @@ const Typography : React.FC<TypographyProps> = ({
   font,
   size,
   text,
+  align
 }) => {
   return (
     <CustomText
       size={size}
       color={color}
       font={font}
+      align={align}
     >
       {text}
     </CustomText>

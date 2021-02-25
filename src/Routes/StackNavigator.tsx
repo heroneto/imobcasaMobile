@@ -7,16 +7,11 @@ import LeadView from '@lead-management/pages/Lead/Read'
 import LeadEdit from '@lead-management/pages/Lead/Edit'
 import SearchPage from '@lead-management/pages/Lead/Search'
 import TaskEdit from '@lead-management/pages/Task/Edit'
-import UsersList from '@lead-management/pages/User/List'
-import UserEdit from '@lead-management/pages/User/Edit'
-import UserView from '@lead-management/pages/User/Read'
-import UserPasswordChange from '@lead-management/pages/User/ResetPassword'
-import NewUser from '@lead-management/pages/User/Create'
-import NewCampaign from '@lead-management/pages/Campaign/Create'
+import CreateFormStackNavivagor from '@lead-management/pages/Forms/Create'
 import NewLead from '@lead-management/pages/Lead/Create'
-import Campaigns from '@lead-management/pages/Campaign/List'
-import CampaignView from '@lead-management/pages/Campaign/Read'
-import CampaignEdit from '@lead-management/pages/Campaign/Edit'
+import Campaigns from '@lead-management/pages/Forms/List'
+import CampaignView from '@lead-management/pages/Forms/Read'
+import CampaignEdit from '@lead-management/pages/Forms/Edit'
 import { Header } from '@lead-management/components/Header'
 
 import UserListContainer from '@lead-management/containers/UserList'
@@ -31,10 +26,10 @@ export type StackParameters = {
   "Usuário": { id: string }
   "Novo Usuário": undefined
   "Reset de Senha": undefined
-  "Minhas Campanhas": undefined
-  "Nova Campanha": undefined
-  "Campanha": undefined
-  "Edição de Campanha": undefined
+  "FormList": undefined
+  "FormAdd": undefined
+  "Form": undefined
+  "FormEdit": undefined
   "Meus Leads": undefined
   "Novo Lead": undefined
   "Lead": undefined
@@ -114,45 +109,44 @@ export const UserStackNavigator = () => {
 
 }
 
-export const CampaignStackNavigator = () => {
+export const FormStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}
-      initialRouteName="Minhas Campanhas"
+      initialRouteName="FormList"
     >
       <Stack.Screen
-        name="Minhas Campanhas"
+        name="FormList"
         component={Campaigns}
         options={{
-          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={true} />,
+          header: props => <Header {...props} title="Formulários" primaryStyle={true} />,
           headerShown: true
         }}
       />
       <Stack.Screen
-        name="Nova Campanha"
-        component={NewCampaign}
+        name="FormAdd"        
+        component={CreateFormStackNavivagor}
         options={{
-          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
-          headerShown: true
+          headerShown: false
         }}
       />
       <Stack.Screen
-        name="Campanha"
+        name="Form"
         component={CampaignView}
         options={{
-          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
+          header: props => <Header {...props} title="Detalhes do formulário" primaryStyle={false} showSearchButton={false}  />,
           headerShown: true
         }}
       />
       <Stack.Screen
-        name="Edição de Campanha"
+        name="FormEdit"
         component={CampaignEdit}
         options={{
-          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
-          headerShown: true
+          header: props => <Header {...props} title="Edição do formulário" primaryStyle={false} showSearchButton={false} />,
+          headerShown: false
         }}
       />
     </Stack.Navigator>

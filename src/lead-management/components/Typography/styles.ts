@@ -6,6 +6,7 @@ import colors from '@core/theme/colors';
 
 export const CustomText = styled.Text<Omit<TypographyProps, "text">>`
   color: ${({color}) => color ? color : colors.textTitle};
+  text-align: ${({align}) => align};
 
   ${({ size }) => {
     switch (size) {
