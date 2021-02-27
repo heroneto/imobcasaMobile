@@ -7,7 +7,9 @@ export enum FacebookFormsTypes {
 
   LOAD_MORE = "@facebookForms/LOAD_MORE_FACEBOOK_FORMS",
   SUCCESS_LOAD_MORE = "@facebookForms/SUCCESS_LOAD_MORE",
-  FAILURE_LOAD_MORE = "@facebookForms/FAILURE_LIST",
+  FAILURE_LOAD_MORE = "@facebookForms/FAILURE_LOAD_MORE",
+
+  RESET_STATE = "@facebookForms/RESET_STATE",
 }
 
 

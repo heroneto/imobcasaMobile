@@ -34,9 +34,9 @@ const reducer: Reducer<FacebookFormsState> = (state = INITIAL_STATE, action) => 
       return { ...state, loading: true };
     case FacebookFormsTypes.SUCCESS_LOAD_MORE:
       return {
-        ...state, 
-        loading: false, 
-        error: false, 
+        ...state,
+        loading: false,
+        error: false,
         data: {
           after: action.payload.data.after,
           next: action.payload.data.next,
@@ -48,6 +48,10 @@ const reducer: Reducer<FacebookFormsState> = (state = INITIAL_STATE, action) => 
       return {
         ...state, loading: false, error: true, response: action.payload.response
       };
+
+
+    case FacebookFormsTypes.RESET_STATE:
+      return INITIAL_STATE
 
     default:
       return state;

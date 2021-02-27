@@ -8,3 +8,6 @@ export const failurelistFacebookForms = (response: string) => action(FacebookFor
 export const loadMoreFacebookForms = (after: string) => action(FacebookFormsTypes.LOAD_MORE, { after });
 export const successLoadMoreFacebookForms = (data: Data, response : string) => action(FacebookFormsTypes.SUCCESS_LOAD_MORE, { data, response });
 export const failureLoadMoreFacebookForms = (response: string) => action(FacebookFormsTypes.FAILURE_LOAD_MORE, { response });
+
+
+export const resetState = () => action(FacebookFormsTypes.RESET_STATE);

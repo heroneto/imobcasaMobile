@@ -17,12 +17,14 @@ import ItemCard from '@lead-management/components/ItemCard'
 
 import FacebookIcon from "@commons/assets/icons/facebook.png"
 import StandardButton from '@lead-management/components/StandardButton'
+import ModalFeedback from '@lead-management/components/ModalFeedback'
+import { useNavigation } from '@react-navigation/native'
 
 const FormList = () => {
+  const { goBack } = useNavigation()
   const dispatch = useDispatch()
   const { data, error, loading, response } = useSelector(facebookFormStateSelector)
   const [forms, setForms] = React.useState<FacebookForm[]>([])
-  const [refreshing, setRefreshing] = React.useState(false);
   const [ loadMore, setLoadMore ] = React.useState<boolean>(false)
   const after = useSelector(afterSelector)
 
@@ -34,6 +36,11 @@ const FormList = () => {
     setForms(data.forms)
     setLoadMore(data.next.length > 0)
   }, [data])
+
+  const onErrorSubmit = React.useCallback(() => {
+    dispatch(facebookFormsActions.resetState())
+    goBack()
+  }, [])
 
   const onRefresh = React.useCallback(() => {
     dispatch(facebookFormsActions.listFacebookForms())
@@ -93,7 +100,11 @@ const FormList = () => {
           </View>
         </View>
       )}
-
+      <ModalFeedback 
+        modalVisible={error}
+        closeModalFunc={onErrorSubmit}
+        text={response}
+      />
     </ScrollView>
   )
 }
