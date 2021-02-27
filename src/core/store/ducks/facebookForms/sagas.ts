@@ -26,10 +26,8 @@ export function* listForms(){
 
 export function* listMoreForms(action: Effect){
   try {
-    console.log("AFTER ENVIADO", action.payload.after)
     const accessToken = yield getAccessToken()
     const result = yield getMoreFacebookFormList(accessToken, action.payload.after)
-    console.log("AFTER RECEBIDO", result.data.after)
     yield put(successLoadMoreFacebookForms(result.data, "Lista carregada com sucesso"))
   } catch (error) {
     console.log(error.response)

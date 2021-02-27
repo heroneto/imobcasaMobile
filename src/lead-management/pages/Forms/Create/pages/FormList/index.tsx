@@ -7,7 +7,8 @@ import styles from './styles'
 
 import * as facebookFormsActions from '@core/store/ducks/facebookForms/actions'
 import {
-  facebookFormStateSelector
+  facebookFormStateSelector,
+  afterSelector
 } from '@core/store/ducks/facebookForms/selectors'
 import { FacebookForm } from '@core/store/ducks/facebookForms/types'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -23,7 +24,7 @@ const FormList = () => {
   const [forms, setForms] = React.useState<FacebookForm[]>([])
   const [refreshing, setRefreshing] = React.useState(false);
   const [ loadMore, setLoadMore ] = React.useState<boolean>(false)
-  const [ after, setAfter ] = React.useState<string>("")
+  const after = useSelector(afterSelector)
 
   React.useEffect(() => {
     dispatch(facebookFormsActions.listFacebookForms())
@@ -32,18 +33,16 @@ const FormList = () => {
   React.useEffect(() => {
     setForms(data.forms)
     setLoadMore(data.next.length > 0)
-  }, [data, after])
+  }, [data])
 
   const onRefresh = React.useCallback(() => {
     dispatch(facebookFormsActions.listFacebookForms())
   }, [])
 
-  const handleLoadMoreButton = React.useCallback(() => {
-    dispatch(facebookFormsActions.loadMoreFacebookForms(data.forms, data.after))
+  const handleLoadMoreButton = React.useCallback((after) => {
+    dispatch(facebookFormsActions.loadMoreFacebookForms(after))
   }, [])
-
-  console.log(after)
-
+  
   return (
     <ScrollView
       style={styles.container}
@@ -58,7 +57,7 @@ const FormList = () => {
         visible={loading}
       />
 
-      {!loading && !error && (
+      {!error && (
         <View style={styles.TitleContainer}>
           <Typography
             align="center"
@@ -87,7 +86,7 @@ const FormList = () => {
           <View style={styles.buttonContainer}>
             <StandardButton 
               text="Carregar mais"
-              onPress={handleLoadMoreButton}
+              onPress={() => handleLoadMoreButton(after)}
               disabled={!loadMore}
               variant={loadMore ? "normal" : "disabled"}
             />
