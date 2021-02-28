@@ -27,20 +27,20 @@ export enum FormsTypes {
 export interface Form {
   id: string,
   name: string,
-  fbCreatedDate: string,
+  fbCreatedDate: Date,
   fbFormId: string,
   active: boolean,
   createdAt: Date,
   updatedAt: Date
 }
 
-export interface UsersState {
+export interface FormState {
   readonly data: Form[]
   readonly loading: boolean
   readonly error: boolean
   readonly activeForms?:Form[]
   readonly inactiveForms?:Form[]
-  readonly selectedForm: Form
+  readonly selectedForm: Form | null
   readonly response: string
 }
 

@@ -1,16 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { UsersState } from './types'
+import { ApplicationState } from '@core/store'
 
-const userListSelector = (state: UsersState) => state.data
+export const formStateSelector = (state: ApplicationState) => state.forms
 
-
-export const activeUsersSelector = createSelector(
-  userListSelector,
-  users => users.filter(user => user.active)
-)
-
-export const inactiveUsersSelector = createSelector(
-  userListSelector,
-  users => users.filter(user => !user.active)
-)

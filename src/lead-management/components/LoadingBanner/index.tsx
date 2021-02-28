@@ -6,10 +6,11 @@ import styles, { ModalContainer } from './styles'
 
 
 interface LoadingBannerProps {
-  visible: boolean
+  visible: boolean,
+  text: string
 }
 
-const LoadingBanner: React.FC<LoadingBannerProps> = ({ visible }) => {
+const LoadingBanner: React.FC<LoadingBannerProps> = ({ visible, text }) => {
   return (
     <Modal
       animationType="fade"
@@ -26,7 +27,7 @@ const LoadingBanner: React.FC<LoadingBannerProps> = ({ visible }) => {
           color="#FFF"
           font="primaryBold"
           size="lg"
-          text="Encontrando formulários"
+          text={text}
         />
       </ModalContainer>
 

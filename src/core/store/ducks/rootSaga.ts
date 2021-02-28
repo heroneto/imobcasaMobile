@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, call, takeLatest } from 'redux-saga/effects';
 
 import { LoggedUserTypes } from './loggedUser/types'
 import * as loggedUserActions from './loggedUser/sagas'
@@ -11,6 +11,9 @@ import * as AuthSagas from './auth/sagas'
 
 import { FacebookFormsTypes } from './facebookForms/types'
 import * as FacebookFormsSagas from './facebookForms/sagas'
+
+import { FormsTypes } from './forms/types'
+import * as FormsSagas from './forms/sagas'
 
 export default function* rootSaga() {
   return yield all([
@@ -28,6 +31,7 @@ export default function* rootSaga() {
     takeLatest(AuthTypes.RENEW, AuthSagas.renew),
     takeLatest(FacebookFormsTypes.LIST, FacebookFormsSagas.listForms),
     takeLatest(FacebookFormsTypes.LOAD_MORE, FacebookFormsSagas.listMoreForms),
+    takeLatest(FormsTypes.CREATE, FormsSagas.createFormSagas),
 
   ]);
 }

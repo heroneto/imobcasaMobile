@@ -1,119 +1,51 @@
 import { Reducer } from 'redux';
-import { UsersState, UsersTypes } from './types';
+import { FormState, FormsTypes } from './types';
 
-const INITIALSELETEDUSER = {
-  active: false,
-  admin: false,
-  createdAt: new Date,
-  updatedAt: new Date,
-  email: "",
-  fullName: "",
-  id: "",
-  username: ""
-}
-
-const INITIAL_STATE: UsersState = {
+const INITIAL_STATE: FormState = {
   data: [],
-  activeUsers: [],
-  inactiveUsers: [],
+  selectedForm: null,
   error: false,
   loading: false,
-  selectedUser: INITIALSELETEDUSER,
-  response: ""
+  response: "",
+  activeForms: [],
+  inactiveForms: []
 };
 
-const reducer: Reducer<UsersState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<FormState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UsersTypes.REQUEST_LIST:
+    case FormsTypes.REQUEST_LIST:
       return { ...state, loading: true };
-    case UsersTypes.SUCCESS_REQUEST_LIST:
+    case FormsTypes.SUCCESS_REQUEST_LIST:
       return {
         ...state, loading: false, error: false, data: action.payload.data, response: action.payload.response,
       };
-    case UsersTypes.FAILURE_REQUEST_LIST:
+    case FormsTypes.FAILURE_REQUEST_LIST:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       };
 
-    case UsersTypes.SELECT:
+    case FormsTypes.CREATE:
+      return { ...state, loading: true, error: false };
+    case FormsTypes.SUCCESS_CREATE:
       return {
-        ...state, loading: true, response: ""
+        ...state, loading: false, error: false, selectedForm: action.payload.data, response: action.payload.response,
       };
-    case UsersTypes.SUCCESS_SELECT:
-      return {
-        ...state, loading: false, error: false, selectedUser: action.payload.selectedUser
-      };
-    case UsersTypes.FAILURE_SELECT:
+    case FormsTypes.FAILURE_CREATE:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       };
 
-    case UsersTypes.EDIT:
+    case FormsTypes.SELECT:
+      return { ...state, loading: true, error: false };
+    case FormsTypes.SUCCESS_SELECT:
       return {
-        ...state, loading: true, response: ""
-      }
-    case UsersTypes.SUCCESS_EDIT:
+        ...state, loading: false, error: false, selectedForm: action.payload.data, response: action.payload.response,
+      };
+    case FormsTypes.FAILURE_SELECT:
       return {
-        ...state,
-        loading: false,
-        error: false,
-        selectedUser: action.payload.selectedUser,
-        data: action.payload.data,
-        response: action.payload.response
-      }
-    case UsersTypes.FAILURE_EDIT:
-      return {
-        ...state, loading: false, error: true, response: action.payload.response
-      }
+        ...state, loading: false, error: true, ressponse: action.payload.response
+      };
 
-    case UsersTypes.RESET_PASSWORD:
-      return {
-        ...state, loading: true, response: ""
-      }
-    case UsersTypes.SUCCESS_RESET_PASSWORD:
-      return {
-        ...state, loading: false, error: false, response: action.payload.response
-      }
-    case UsersTypes.FAILURE_RESET_PASSWORD:
-      return {
-        ...state, loading: false, error: true, response: action.payload.response
-      }
-
-    case UsersTypes.CREATE:
-      return {
-        ...state, loading: true, response: "", selectedUser: INITIALSELETEDUSER
-      }
-    case UsersTypes.SUCCESS_CREATE:
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        selectedUser: action.payload.selectedUser,
-        data: action.payload.data,
-        response: action.payload.response
-      }
-    case UsersTypes.FAILURE_CREATE:
-      return {
-        ...state, loading: false, error: true, response: action.payload.response
-      }
-
-    case UsersTypes.DELETE:
-      return {
-        ...state, loading: true, response: ""
-      }
-    case UsersTypes.SUCCESS_DELETE:
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        selectedUser: INITIALSELETEDUSER,
-        data: action.payload.data,
-        response: action.payload.response
-      }
-    case UsersTypes.FAILURE_DELETE:
-      return {
-        ...state, loading: false, error: true, response: action.payload.response
-      }
     default:
       return state;
   }

@@ -23,4 +23,8 @@ export const InfoBox = styled.View`
   align-items: center;
 `
 
-export const ButtonBox = styled.View``
+export const ButtonBox = styled.View`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+`

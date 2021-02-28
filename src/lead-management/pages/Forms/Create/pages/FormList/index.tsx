@@ -10,6 +10,13 @@ import {
   facebookFormStateSelector,
   afterSelector
 } from '@core/store/ducks/facebookForms/selectors'
+
+import {
+  formStateSelector
+} from '@core/store/ducks/forms/selectors'
+import * as formActions from '@core/store/ducks/forms/actions'
+
+
 import { FacebookForm } from '@core/store/ducks/facebookForms/types'
 import { ScrollView } from 'react-native-gesture-handler'
 import LoadingBanner from '@lead-management/components/LoadingBanner'
@@ -19,23 +26,46 @@ import FacebookIcon from "@commons/assets/icons/facebook.png"
 import StandardButton from '@lead-management/components/StandardButton'
 import ModalFeedback from '@lead-management/components/ModalFeedback'
 import { useNavigation } from '@react-navigation/native'
+import ModalOptions from '@lead-management/components/ModalOptions'
+
 
 const FormList = () => {
-  const { goBack } = useNavigation()
+  const { goBack, navigate } = useNavigation()
   const dispatch = useDispatch()
   const { data, error, loading, response } = useSelector(facebookFormStateSelector)
+  const { loading: formStateLoading, selectedForm } = useSelector(formStateSelector)
   const [forms, setForms] = React.useState<FacebookForm[]>([])
-  const [ loadMore, setLoadMore ] = React.useState<boolean>(false)
+  const [loadMore, setLoadMore] = React.useState<boolean>(false)
   const after = useSelector(afterSelector)
+  const [showOptionsModal, setShowOptionsModal] = React.useState<boolean>(false)
+  const [optionsModalTitle, setOptionsModalTitle] = React.useState<string>("")
+  const [loadingText, setLoadingText] = React.useState<string>("")
+  const [formSelected, setFormSelected] = React.useState<{
+    name: string,
+    fbFormId: string
+  }>()
 
   React.useEffect(() => {
     dispatch(facebookFormsActions.listFacebookForms())
+    setLoadingText("Encontrando formulários")
   }, [])
 
   React.useEffect(() => {
-    setForms(data.forms)
-    setLoadMore(data.next.length > 0)
+    if (data.forms.length < 10) {
+      handleLoadMoreButton(data.after)
+    } else {
+      setForms(data.forms)
+      setLoadMore(data.next.length > 0)
+      setLoadingText("Encontrando formulários")
+    }
   }, [data])
+
+  React.useEffect(() => {
+    if(formStateLoading === false && selectedForm){
+      setOptionsModalTitle("Formulário cadastrado com sucesso")
+      setShowOptionsModal(true)
+    }
+  }, [selectedForm, formStateLoading])
 
   const onErrorSubmit = React.useCallback(() => {
     dispatch(facebookFormsActions.resetState())
@@ -49,7 +79,38 @@ const FormList = () => {
   const handleLoadMoreButton = React.useCallback((after) => {
     dispatch(facebookFormsActions.loadMoreFacebookForms(after))
   }, [])
-  
+
+  const handleItem = React.useCallback((name: string, fbFormId: string) => {
+    setOptionsModalTitle(`O Formulário ${name} será cadastrado. Deseja continuar?`)
+    setFormSelected({
+      name,
+      fbFormId
+    })
+    setShowOptionsModal(true)
+  }, [])
+
+  const createForm = React.useCallback((name: string | undefined, fbFormId: string | undefined) => {
+
+    if (name && fbFormId) {
+      setLoadingText("Cadastrando formulário")
+      const data = {
+        name,
+        fbFormId,
+        active: true,
+        fbCreatedDate: new Date(),
+      }
+      dispatch(formActions.create(data))
+    }
+    setLoadingText("Encontrando formulários")
+    setShowOptionsModal(false)
+    navigate("Form")
+  }, [])
+
+
+
+
+
+
   return (
     <ScrollView
       style={styles.container}
@@ -61,7 +122,8 @@ const FormList = () => {
       }
     >
       <LoadingBanner
-        visible={loading}
+        visible={loading || formStateLoading}
+        text={loadingText}
       />
 
       {!error && (
@@ -80,18 +142,18 @@ const FormList = () => {
 
           {forms.map((form, idx) => {
             return (
-              <ItemCard 
-                 level="info"
-                 middleText={form.status}
-                 topIcon={<Image source={FacebookIcon} />}
-                 onPressFunc={()=>{}}
-                 key={idx}
-                 topText={form.name}
+              <ItemCard
+                level="info"
+                middleText={form.status}
+                topIcon={<Image source={FacebookIcon} />}
+                onPressFunc={() => handleItem(form.name, form.id)}
+                key={idx}
+                topText={form.name}
               />
             )
           })}
           <View style={styles.buttonContainer}>
-            <StandardButton 
+            <StandardButton
               text="Carregar mais"
               onPress={() => handleLoadMoreButton(after)}
               disabled={!loadMore}
@@ -100,10 +162,19 @@ const FormList = () => {
           </View>
         </View>
       )}
-      <ModalFeedback 
+      <ModalFeedback
         modalVisible={error}
         closeModalFunc={onErrorSubmit}
         text={response}
+      />
+      <ModalOptions
+        text={optionsModalTitle}
+        closeModalFunc={() => setShowOptionsModal(false)}
+        yesFunc={() => createForm(formSelected?.name, formSelected?.fbFormId)}
+        yesLabel="Sim"
+        noLabel="Não, voltar"
+        noFunc={() => setShowOptionsModal(false)}
+        modalVisible={showOptionsModal}
       />
     </ScrollView>
   )

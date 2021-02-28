@@ -1,21 +1,30 @@
-import { Effect, put } from 'redux-saga/effects';
+import { Effect, put, takeLatest } from 'redux-saga/effects';
 import { 
-
+createForm
 } from '@core/services/apis'
 
 import { 
-
+successCreate,
+failureCreate
   } from './actions';
+
+import { FormsTypes as Types } from './types'
 
 import { getAccessToken } from '@core/services/storage'
 
-export function* getUserList(){
+export function* createFormSagas(action: Effect){ 
   try {
     const accessToken = yield getAccessToken()
-    const result = yield getUsers(accessToken)
-    yield put(successRequestList(result.data, "Usuários carregados com sucesso"))
+    const result = yield createForm(action.payload.data, accessToken)
+    yield put(successCreate(result.data, "Usuários carregados com sucesso"))
   } catch (error) {
     console.log(error.response)
-    yield put(failureRequestList("Falha ao obter lista de usuários"));
+    yield put(failureCreate("Falha ao obter lista de usuários"));
   }
+}
+
+
+
+export function rootFormSagas() {
+  return takeLatest(Types.CREATE, createFormSagas)
 }
