@@ -16,10 +16,10 @@ export function* createFormSagas(action: Effect){
   try {
     const accessToken = yield getAccessToken()
     const result = yield createForm(action.payload.data, accessToken)
-    yield put(successCreate(result.data, "Usuários carregados com sucesso"))
+    yield put(successCreate(result.data, "Formulário criado com sucesso"))
   } catch (error) {
     console.log(error.response)
-    yield put(failureCreate("Falha ao obter lista de usuários"));
+    yield put(failureCreate("Falha ao cadastrar formulário"));
   }
 }
 
