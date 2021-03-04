@@ -33,7 +33,7 @@ const FormList = () => {
   const { goBack, navigate } = useNavigation()
   const dispatch = useDispatch()
   const { data, error, loading, response } = useSelector(facebookFormStateSelector)
-  const { loading: formStateLoading, selectedForm } = useSelector(formStateSelector)
+  const { loading: formStateLoading, createdForm } = useSelector(formStateSelector)
   const [forms, setForms] = React.useState<FacebookForm[]>([])
   const [loadMore, setLoadMore] = React.useState<boolean>(false)
   const after = useSelector(afterSelector)
@@ -61,11 +61,10 @@ const FormList = () => {
   }, [data])
 
   React.useEffect(() => {
-    if(formStateLoading === false && selectedForm){
-      setOptionsModalTitle("Formulário cadastrado com sucesso")
-      setShowOptionsModal(true)
+    if(createdForm && !error){
+      navigate("Form", { id: createdForm.id })
     }
-  }, [selectedForm, formStateLoading])
+  }, [createdForm, formStateLoading, error])
 
   const onErrorSubmit = React.useCallback(() => {
     dispatch(facebookFormsActions.resetState())
@@ -100,10 +99,9 @@ const FormList = () => {
         fbCreatedDate: new Date(),
       }
       dispatch(formActions.create(data))
+      setShowOptionsModal(false)
     }
-    setLoadingText("Encontrando formulários")
-    setShowOptionsModal(false)
-    navigate("Form")
+
   }, [])
 
 

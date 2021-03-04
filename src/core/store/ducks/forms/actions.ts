@@ -5,10 +5,10 @@ export const requestUserList = () => action(FormsTypes.REQUEST_LIST);
 export const successRequestList = (data: Form[], response: string) => action(FormsTypes.SUCCESS_REQUEST_LIST, { data, response });
 export const failureRequestList = (response: string) => action(FormsTypes.FAILURE_REQUEST_LIST, { response });
 
-export const select = (id: string) => action(FormsTypes.SELECT, { id });
-export const successSelect = (selectedForm: Form) => action(FormsTypes.SUCCESS_SELECT, { selectedForm });
-export const failureSelect = (response: string) => action(FormsTypes.FAILURE_SELECT, { response });
+export const get = (id: string) => action(FormsTypes.GET, { id });
+export const successGet = (form: Form) => action(FormsTypes.SUCCESS_GET, { form });
+export const failureGet = (response: string) => action(FormsTypes.FAILURE_GET, { response });
 
 export const create = (data: Omit<Form, "createdAt" | "updatedAt" | "id">) => action(FormsTypes.CREATE, { data });
-export const successCreate = (selectedForm: Form, response : string) => action(FormsTypes.SUCCESS_CREATE, { selectedForm, response });
+export const successCreate = (form:Form, response : string) => action(FormsTypes.SUCCESS_CREATE, { form, response });
 export const failureCreate = (response: string) => action(FormsTypes.FAILURE_CREATE, { response });

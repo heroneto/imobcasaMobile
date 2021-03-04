@@ -5,10 +5,22 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import ButtonContainer from '@lead-management/components/ButtonContainer'
 import ItemDetails from '@lead-management/components/ItemDetails'
 import styles from './styles'
+import { Form } from '@core/store/ducks/forms/types'
+import { fromPairs } from 'lodash'
 
-const CampaignView : React.FC = () => {
+
+interface FormDetailsProps {
+  form: Form | null,
+  loading: boolean,
+  error: boolean,
+  response: string
+}
+
+
+const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, response}) => {
   const { navigate } = useNavigation()
 
+  console.log(form)
   
   function handleNavigateToEditPage(){
     navigate('Edição de Campanha')
@@ -18,7 +30,7 @@ const CampaignView : React.FC = () => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.contentContainer}>
-          <Text style={styles.campaignName}>Aricanduva</Text>
+          <Text style={styles.campaignName}>{form?.name}</Text>
           <Text style={styles.campaignDetails}>150 Leads - 2 usuários</Text>
           <View style={styles.headerActions}>
             <ButtonContainer position={"left"}>
@@ -40,23 +52,19 @@ const CampaignView : React.FC = () => {
             itens={[
               {
                 category: "ID Facebook",
-                value: "_I98a9sdjajej20d0mq"
+                value: form?.fbFormId
               },
               {
                 category: "Data Criação",
-                value: "14/03/2020"
-              },
-              {
-                category: "Data do cadastro no I-Mobcasa App",
-                value: "15/03/2020"
+                value: form?.createdAt.toLocaleString()
               },
               {
                 category: "Status",
-                value: "Ativa"
+                value: form?.active ? "Ativa" : "Desativada"
               }
             ]}
           />
-          <ItemDetails 
+          {/* <ItemDetails 
             title="Leads da Campanha"
             itens={[
               {
@@ -76,7 +84,7 @@ const CampaignView : React.FC = () => {
                 value: "75"
               }
             ]}
-          />
+          /> */}
         </View>
       </ScrollView>
 
@@ -84,4 +92,4 @@ const CampaignView : React.FC = () => {
   )
 }
 
-export default CampaignView
+export default FormDetails

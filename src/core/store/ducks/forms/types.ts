@@ -5,9 +5,9 @@ export enum FormsTypes {
   SUCCESS_REQUEST_LIST = "@forms/SUCCESS_REQUEST_LIST",
   FAILURE_REQUEST_LIST = "@forms/FAILURE_REQUEST_LIST",
 
-  SELECT = "@forms/SELECT",
-  SUCCESS_SELECT = "@forms/SUCCESS_SELECT",
-  FAILURE_SELECT = "@forms/FAILURE_SELECT",
+  GET = "@forms/GET",
+  SUCCESS_GET = "@forms/SUCCESS_GET",
+  FAILURE_GET = "@forms/FAILURE_GET",
 
   CREATE = "@forms/CREATE",
   SUCCESS_CREATE = "@forms/SUCCESS_CREATE",
@@ -40,7 +40,8 @@ export interface FormState {
   readonly error: boolean
   readonly activeForms?:Form[]
   readonly inactiveForms?:Form[]
-  readonly selectedForm: Form | null
+  readonly form: Form | null
+  readonly createdForm: Form | null
   readonly response: string
 }
 

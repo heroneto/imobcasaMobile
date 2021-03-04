@@ -108,7 +108,7 @@ const UserView: React.FC<TaskViewProps> = ({ selectedUser, error, response, load
               </View>
             </View>
           </View>
-          <View style={styles.contentGroup}>
+          {/* <View style={styles.contentGroup}>
             <View style={styles.contentGroupHeader}>
               <Text style={styles.headerTitle}>
                 Sobre seus Leads
@@ -133,7 +133,7 @@ const UserView: React.FC<TaskViewProps> = ({ selectedUser, error, response, load
                 <Text style={styles.value}>666</Text>
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
       <ModalFeedback 

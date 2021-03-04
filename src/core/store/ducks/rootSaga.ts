@@ -32,6 +32,6 @@ export default function* rootSaga() {
     takeLatest(FacebookFormsTypes.LIST, FacebookFormsSagas.listForms),
     takeLatest(FacebookFormsTypes.LOAD_MORE, FacebookFormsSagas.listMoreForms),
     takeLatest(FormsTypes.CREATE, FormsSagas.createFormSagas),
-
+    takeLatest(FormsTypes.GET, FormsSagas.getFormSaga)
   ]);
 }

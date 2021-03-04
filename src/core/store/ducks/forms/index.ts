@@ -3,7 +3,8 @@ import { FormState, FormsTypes } from './types';
 
 const INITIAL_STATE: FormState = {
   data: [],
-  selectedForm: null,
+  form: null,
+  createdForm: null,
   error: false,
   loading: false,
   response: "",
@@ -28,20 +29,20 @@ const reducer: Reducer<FormState> = (state = INITIAL_STATE, action) => {
       return { ...state, loading: true, error: false };
     case FormsTypes.SUCCESS_CREATE:
       return {
-        ...state, loading: false, error: false, selectedForm: action.payload.data, response: action.payload.response,
+        ...state, loading: false, error: false, response: action.payload.response, createdForm: action.payload.form,
       };
     case FormsTypes.FAILURE_CREATE:
       return {
         ...state, loading: false, error: true, response: action.payload.response
       };
 
-    case FormsTypes.SELECT:
+    case FormsTypes.GET:
       return { ...state, loading: true, error: false };
-    case FormsTypes.SUCCESS_SELECT:
+    case FormsTypes.SUCCESS_GET:
       return {
-        ...state, loading: false, error: false, selectedForm: action.payload.data, response: action.payload.response,
+        ...state, loading: false, error: false, form: action.payload.form,
       };
-    case FormsTypes.FAILURE_SELECT:
+    case FormsTypes.FAILURE_GET:
       return {
         ...state, loading: false, error: true, ressponse: action.payload.response
       };

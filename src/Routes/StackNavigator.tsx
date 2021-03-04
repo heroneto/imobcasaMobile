@@ -10,7 +10,6 @@ import TaskEdit from '@lead-management/pages/Task/Edit'
 import CreateFormStackNavivagor from '@lead-management/pages/Forms/Create'
 import NewLead from '@lead-management/pages/Lead/Create'
 import Campaigns from '@lead-management/pages/Forms/List'
-import CampaignView from '@lead-management/pages/Forms/Read'
 import CampaignEdit from '@lead-management/pages/Forms/Edit'
 import { Header } from '@lead-management/components/Header'
 
@@ -20,6 +19,8 @@ import UserEditContainer from '@lead-management/containers/UserEditContainer'
 import UserResetPasswordContainer from '@lead-management/containers/UserResetPassword'
 import UserCreateContainer from '@lead-management/containers/UserCreate'
 
+import FormDetailsContainer from '@lead-management/containers/FormDetails'
+
 export type StackParameters = {
   "Meus Usuários": undefined
   "Edição de Usuário": { fullName: string, email: string, active: boolean, admin: boolean, username: string }
@@ -28,7 +29,7 @@ export type StackParameters = {
   "Reset de Senha": undefined
   "FormList": undefined
   "FormAdd": undefined
-  "Form": undefined
+  "Form": { id: string }
   "FormEdit": undefined
   "Meus Leads": undefined
   "Novo Lead": undefined
@@ -135,7 +136,7 @@ export const FormStackNavigator = () => {
       />
       <Stack.Screen
         name="Form"
-        component={CampaignView}
+        component={FormDetailsContainer}
         options={{
           header: props => <Header {...props} title="Detalhes do formulário" primaryStyle={false} showSearchButton={false}  />,
           headerShown: true
