@@ -3,20 +3,19 @@ import { View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import styles from './styles'
 import FloatButton from '@lead-management/components/FloatButton'
-import ActiveCampaigs from './pages/ActiveCampaigns'
-import InactiveCampaigs from './pages/InactiveCampaigns'
+import ActiveForms from './pages/ActiveForms'
+import InactiveForms from './pages/InactiveForms'
+import { Form } from '@core/store/ducks/forms/types';
 
 
 const Tab = createMaterialTopTabNavigator();
 
-interface CampaignsListProps {
-  route: any,
-  navigation: any
+interface FormListProps {
+  activeForms: Form[],
+  inactiveForms: Form[]
 }
 
-
-const Campaigns: React.FC<CampaignsListProps> = ({ navigation }) => {
-
+const FormList : React.FC<FormListProps> = ({activeForms, inactiveForms}) => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -40,14 +39,18 @@ const Campaigns: React.FC<CampaignsListProps> = ({ navigation }) => {
       >
         <Tab.Screen
           name="0"
-          component={ActiveCampaigs}
+          children={
+            () => <ActiveForms data={activeForms} />
+          }
           options={{
             tabBarLabel: "Ativadas",
           }}
         />
         <Tab.Screen
           name="1"
-          component={InactiveCampaigs}
+          children={
+            () => <InactiveForms data={inactiveForms} />
+          }
           options={{
             tabBarLabel: "Inativadas"
           }}
@@ -61,4 +64,5 @@ const Campaigns: React.FC<CampaignsListProps> = ({ navigation }) => {
   )
 }
 
-export default Campaigns
+
+export default FormList

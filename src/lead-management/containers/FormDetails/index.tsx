@@ -23,6 +23,8 @@ type ScreenRouteProps = {
 interface DispatchProps {
   get(id: string): void,
   route: RouteProp<ScreenRouteProps, "Form">,
+  active(id:string): void,
+  inactivate(id: string): void
 }
 
 type Props = StateProps & DispatchProps 
@@ -34,13 +36,16 @@ class FormDetailsContainer extends React.Component<Props> {
     get(id)
   }
   render() {
-    const { form, loading, error, response } = this.props
+    const { form, loading, error, response, get, active, inactivate } = this.props
     return (
       <FormDetailsView
         form={form}
         loading={loading}
         error={error}
         response={response}
+        getForm={get}
+        enable={active}
+        disable={inactivate}
       />
     );
   }

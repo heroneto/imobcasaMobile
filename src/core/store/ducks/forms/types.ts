@@ -17,7 +17,6 @@ export enum FormsTypes {
   SUCCESS_DISABLE = "@forms/SUCCESS_DISABLE",
   FAILURE_DISABLE = "@forms/FAILURE_DISABLE",
 
-
   ENABLE = "@forms/ENABLE",
   SUCCESS_ENABLE = "@forms/SUCCESS_ENABLE",
   FAILURE_ENABLE = "@forms/FAILURE_ENABLE",

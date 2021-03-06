@@ -9,7 +9,6 @@ import SearchPage from '@lead-management/pages/Lead/Search'
 import TaskEdit from '@lead-management/pages/Task/Edit'
 import CreateFormStackNavivagor from '@lead-management/pages/Forms/Create'
 import NewLead from '@lead-management/pages/Lead/Create'
-import Campaigns from '@lead-management/pages/Forms/List'
 import CampaignEdit from '@lead-management/pages/Forms/Edit'
 import { Header } from '@lead-management/components/Header'
 
@@ -20,6 +19,7 @@ import UserResetPasswordContainer from '@lead-management/containers/UserResetPas
 import UserCreateContainer from '@lead-management/containers/UserCreate'
 
 import FormDetailsContainer from '@lead-management/containers/FormDetails'
+import FormListContainer from '@lead-management/containers/FormList'
 
 export type StackParameters = {
   "Meus Usuários": undefined
@@ -121,7 +121,7 @@ export const FormStackNavigator = () => {
     >
       <Stack.Screen
         name="FormList"
-        component={Campaigns}
+        component={FormListContainer}
         options={{
           header: props => <Header {...props} title="Formulários" primaryStyle={true} />,
           headerShown: true

@@ -6,24 +6,37 @@ import ButtonContainer from '@lead-management/components/ButtonContainer'
 import ItemDetails from '@lead-management/components/ItemDetails'
 import styles from './styles'
 import { Form } from '@core/store/ducks/forms/types'
-import { fromPairs } from 'lodash'
-
+import { fromPairs, get } from 'lodash'
+import { useDispatch } from 'react-redux'
 
 interface FormDetailsProps {
   form: Form | null,
   loading: boolean,
   error: boolean,
-  response: string
+  response: string,
+  getForm(id: string):void,
+  enable(id: string):void,
+  disable(id: string): void,
 }
 
 
-const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, response}) => {
+const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, response, disable, enable, getForm}) => {
   const { navigate } = useNavigation()
+  const dispatch = useDispatch()
 
   console.log(form)
   
   function handleNavigateToEditPage(){
     navigate('Edição de Campanha')
+  }
+
+  function handleFormStatusButton(id:string, active: boolean){
+    if(active){
+      disable(id)
+    }else {
+      enable(id)
+    }
+    getForm(id)
   }
 
   return (
@@ -34,8 +47,15 @@ const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, respons
           <Text style={styles.campaignDetails}>150 Leads - 2 usuários</Text>
           <View style={styles.headerActions}>
             <ButtonContainer position={"left"}>
-              <TouchableOpacity style={styles.headerButton}>
-                <Text style={styles.buttonText}>Inativar</Text>
+              <TouchableOpacity 
+                style={styles.headerButton}
+                onPress={() => {
+                  if(form){
+                    handleFormStatusButton(form?.id, form?.active)
+                  }
+                }}  
+              >
+                <Text style={styles.buttonText}>{form?.active ? "Inativar" : "Ativar"}</Text>
               </TouchableOpacity>            
             </ButtonContainer>
             <ButtonContainer position={"right"}>

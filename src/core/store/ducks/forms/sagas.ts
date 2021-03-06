@@ -1,14 +1,23 @@
 import { call, Effect, put, SagaReturnType, takeLatest } from 'redux-saga/effects';
 import { 
   createForm,
-  getForm as getFormService
+  getForm as getFormService,
+  getFormList as getFormListService,
+  activeForm as activeFormService,
+  inactiveForm as inactiveFormService
 } from '@core/services/apis'
 
 import { 
 successCreate,
 failureCreate,
 successGet,
-failureGet
+failureGet,
+successRequestList,
+failureRequestList,
+successActive,
+successInactivate,
+failureActive,
+failureInactivate
   } from './actions';
 
 import { FormsTypes as Types } from './types'
@@ -43,6 +52,49 @@ export function* getFormSaga(action: Effect){
     yield put(failureGet("Falha ao obter formulário"));
   }
 }
+
+type GetFormListServiceResponse = SagaReturnType<typeof getFormListService>
+
+export function* getFormListSaga(){
+  try {
+    const accessToken = yield getAccessToken()
+    const result : GetFormListServiceResponse = yield call(getFormListService, accessToken)
+    yield put(successRequestList(result.data, "Sucesso ao obter lista de formulários"))    
+  } catch (error) {
+    console.log(error.response)
+    yield put(failureRequestList("Falha ao obter formulário"));
+  }
+}
+
+type ActiveFormServiceResponse = SagaReturnType<typeof activeFormService>
+
+
+export function* activeFormSaga(action: Effect){
+  try {
+    const { id } = action.payload
+    const accessToken = yield getAccessToken()
+    const result : ActiveFormServiceResponse = yield call(activeFormService, id, accessToken)
+    yield put(successActive("Sucesso ao obter lista de formulários"))    
+  } catch (error) {
+    console.log(error.response)
+    yield put(failureActive("Falha ao obter formulário"));
+  }
+}
+
+type InactiveFormServiceResponse = SagaReturnType<typeof inactiveFormService>
+
+export function* inactiveFormSaga(action: Effect){
+  try {
+    const { id } = action.payload
+    const accessToken = yield getAccessToken()
+    const result : InactiveFormServiceResponse = yield call(inactiveFormService, id, accessToken)
+    yield put(successInactivate("Sucesso ao obter lista de formulários"))    
+  } catch (error) {
+    console.log(error.response)
+    yield put(failureInactivate("Falha ao obter formulário"));
+  }
+}
+
 
 
 export function rootFormSagas() {
