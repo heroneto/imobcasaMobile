@@ -31,11 +31,14 @@ class FormListContainers extends React.Component<Props> {
 
   
   render() {
-    const { activeForms, inactiveForms } = this.props
+    const { activeForms, inactiveForms, requestList, loading, error } = this.props
     return (
         <FormList 
           activeForms={activeForms}
           inactiveForms={inactiveForms}
+          requestList={requestList}
+          loading={loading}
+          error={error}
         />
     );
   }
@@ -46,7 +49,8 @@ const mapStateToProps = (state: ApplicationState) => ({
   loading: state.forms.loading,
   response: state.forms.response,
   activeForms: FormListSelectors.activeForms(state),
-  inactiveForms: FormListSelectors.inactiveForms(state)
+  inactiveForms: FormListSelectors.inactiveForms(state),
+
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(formActions, dispatch)

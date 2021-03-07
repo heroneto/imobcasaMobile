@@ -53,6 +53,7 @@ const UserEdit: React.FC<UserEditProps> = ({ selectedUser, edit, error, response
           <InputContainer
             variant="top"
             label="Nome completo"
+            enabled={true}
           >
             <TextInput
               placeholder="Insira o nome completo"

@@ -5,15 +5,20 @@ import styled from 'styled-components/native'
 
 interface InputContainerProps {
   label: string,
-  variant?: "top" | "middle" | "bottom",
+  variant?: "top" | "middle" | "bottom" | "unique",
   enabled?: boolean
 }
 
-const Container = styled.View`
+interface ContainerStyleProps {
+  variant?: "top" | "middle" | "bottom" | "unique",
+  enabled?: boolean
+}
+
+const Container = styled.View<ContainerStyleProps>`
     padding: 20px;
     border-width: .5px;
     border-color: #E6E6E6;
-    background-color: ${({enabled}) => enabled ? "#FFF" : "#F1F1F1"};
+    background-color: ${({ enabled }) => enabled ? "#FFFFFF" : "#F1F1F1"};
 
 
     ${({ variant }) => {
@@ -23,7 +28,7 @@ const Container = styled.View`
           border-top-left-radius: 8px;
           border-top-right-radius: 8px;
         `
-      case "bottom": 
+      case "bottom":
         return `
           border-bottom-left-radius: 8px;
           border-bottom-right-radius: 8px;
@@ -31,14 +36,19 @@ const Container = styled.View`
       case "middle":
         return ""
       default:
-        return ""
+        return `
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+        `
     }
   }}
 `
 
-const InputContainer: React.FC<InputContainerProps> = ({ children, enabled, label, variant }) => {
+const InputContainer: React.FC<InputContainerProps> = ({ children, enabled = true, label, variant }) => {
   return (
-    <Container 
+    <Container
       variant={variant}
       enabled={enabled}
     >

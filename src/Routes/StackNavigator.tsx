@@ -9,7 +9,7 @@ import SearchPage from '@lead-management/pages/Lead/Search'
 import TaskEdit from '@lead-management/pages/Task/Edit'
 import CreateFormStackNavivagor from '@lead-management/pages/Forms/Create'
 import NewLead from '@lead-management/pages/Lead/Create'
-import CampaignEdit from '@lead-management/pages/Forms/Edit'
+import FormEdit from '@lead-management/pages/Forms/Edit'
 import { Header } from '@lead-management/components/Header'
 
 import UserListContainer from '@lead-management/containers/UserList'
@@ -144,10 +144,10 @@ export const FormStackNavigator = () => {
       />
       <Stack.Screen
         name="FormEdit"
-        component={CampaignEdit}
+        component={FormEdit}
         options={{
           header: props => <Header {...props} title="Edição do formulário" primaryStyle={false} showSearchButton={false} />,
-          headerShown: false
+          headerShown: true
         }}
       />
     </Stack.Navigator>

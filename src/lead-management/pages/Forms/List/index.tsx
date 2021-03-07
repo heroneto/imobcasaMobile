@@ -12,10 +12,13 @@ const Tab = createMaterialTopTabNavigator();
 
 interface FormListProps {
   activeForms: Form[],
-  inactiveForms: Form[]
+  inactiveForms: Form[],
+  requestList(): void,
+  loading: boolean,
+  error: boolean,
 }
 
-const FormList : React.FC<FormListProps> = ({activeForms, inactiveForms}) => {
+const FormList : React.FC<FormListProps> = ({activeForms, inactiveForms, requestList, error, loading}) => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -40,7 +43,13 @@ const FormList : React.FC<FormListProps> = ({activeForms, inactiveForms}) => {
         <Tab.Screen
           name="0"
           children={
-            () => <ActiveForms data={activeForms} />
+            () => 
+            <ActiveForms 
+              data={activeForms}
+              loading={loading} 
+              requestList={requestList}
+              error={error}
+            />
           }
           options={{
             tabBarLabel: "Ativadas",
@@ -49,7 +58,13 @@ const FormList : React.FC<FormListProps> = ({activeForms, inactiveForms}) => {
         <Tab.Screen
           name="1"
           children={
-            () => <InactiveForms data={inactiveForms} />
+            () => 
+            <InactiveForms 
+              data={inactiveForms} 
+              requestList={requestList}  
+              loading={loading}
+              error={error}
+            />
           }
           options={{
             tabBarLabel: "Inativadas"

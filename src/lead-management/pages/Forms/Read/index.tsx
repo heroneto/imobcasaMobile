@@ -22,12 +22,9 @@ interface FormDetailsProps {
 
 const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, response, disable, enable, getForm}) => {
   const { navigate } = useNavigation()
-  const dispatch = useDispatch()
-
-  console.log(form)
   
   function handleNavigateToEditPage(){
-    navigate('Edição de Campanha')
+    navigate('FormEdit')
   }
 
   function handleFormStatusButton(id:string, active: boolean){

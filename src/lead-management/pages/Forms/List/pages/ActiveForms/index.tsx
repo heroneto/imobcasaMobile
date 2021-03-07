@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, Image } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, Image, RefreshControl } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import ItemCard from '@lead-management/components/ItemCard'
 import styles from './styles'
@@ -10,13 +10,25 @@ import { Form } from '@core/store/ducks/forms/types'
 import { fromPairs } from 'lodash'
 
 interface activeCampanigsProps {
-  data: Form[]
+  data: Form[],
+  requestList(): void,
+  loading: boolean,
+  error: boolean,
 }
 
-const ActiveForms: React.FC<activeCampanigsProps> = ({ data }) => {
+const ActiveForms: React.FC<activeCampanigsProps> = ({ data, requestList, error, loading }) => {
   const { navigate } = useNavigation()
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      style={styles.container}
+      refreshControl={
+        <RefreshControl 
+          refreshing={loading}
+          onRefresh={requestList}
+        />
+      }
+    >
       {data.map(form => {
         return (
           <ItemCard
