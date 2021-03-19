@@ -1,9 +1,9 @@
 import colors, { ColorsProps } from "./colors";
-import fonts from './fonts';
+import fonts, { fontProps } from './fonts';
 
 export interface ThemeProps {
   colors: ColorsProps,
-  fonts: any,
+  fonts: fontProps,
   header: any
 }
 

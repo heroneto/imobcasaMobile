@@ -13,7 +13,9 @@ interface StateProps {
   form: Form | null,
   loading: boolean,
   error: boolean,
-  response: string
+  response: string,
+  route: RouteProp<ScreenRouteProps, "Form">,
+
 }
 
 type ScreenRouteProps = {
@@ -22,7 +24,6 @@ type ScreenRouteProps = {
 
 interface DispatchProps {
   get(id: string): void,
-  route: RouteProp<ScreenRouteProps, "Form">,
   active(id:string): void,
   inactivate(id: string): void
 }

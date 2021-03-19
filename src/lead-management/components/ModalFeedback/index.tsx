@@ -8,7 +8,7 @@ interface ModalProps {
   text: string,
 }
 
-const ModalOptions: React.FC<ModalProps> = ({ 
+const ModalFeedback: React.FC<ModalProps> = ({ 
   modalVisible, 
   closeModalFunc, 
   text 
@@ -43,4 +43,4 @@ const ModalOptions: React.FC<ModalProps> = ({
   )
 }
 
-export default ModalOptions
+export default ModalFeedback

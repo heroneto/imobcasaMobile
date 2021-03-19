@@ -30,11 +30,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerButton: {
-    padding: 8,
+    padding: 14,
+    flexDirection: "row",
+    width: 100,
+    justifyContent: "space-around"
 
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: fonts.primary.bold,
     color: "#FFF" ,
   }

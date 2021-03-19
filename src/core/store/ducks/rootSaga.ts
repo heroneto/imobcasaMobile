@@ -15,7 +15,7 @@ import * as FacebookFormsSagas from './facebookForms/sagas'
 import { FormsTypes } from './forms/types'
 import * as FormsSagas from './forms/sagas'
 
-export default function* rootSaga() {
+export default function* rootSaga() : Generator {
   return yield all([
     takeLatest(LoggedUserTypes.GET, loggedUserActions.getUserStorage),
     takeLatest(LoggedUserTypes.EDIT, loggedUserActions.editUser),
@@ -35,7 +35,8 @@ export default function* rootSaga() {
     takeLatest(FormsTypes.GET, FormsSagas.getFormSaga),
     takeLatest(FormsTypes.REQUEST_LIST, FormsSagas.getFormListSaga),
     takeLatest(FormsTypes.ENABLE, FormsSagas.activeFormSaga),
-    takeLatest(FormsTypes.DISABLE, FormsSagas.inactiveFormSaga)
-
+    takeLatest(FormsTypes.DISABLE, FormsSagas.inactiveFormSaga),
+    takeLatest(FormsTypes.ADD_USER, FormsSagas.addUser),
+    
   ]);
 }

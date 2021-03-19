@@ -6,31 +6,42 @@ import ButtonContainer from '@lead-management/components/ButtonContainer'
 import ItemDetails from '@lead-management/components/ItemDetails'
 import styles from './styles'
 import { Form } from '@core/store/ducks/forms/types'
-import { fromPairs, get } from 'lodash'
-import { useDispatch } from 'react-redux'
+import { Feather } from '@expo/vector-icons';
+import Typography from '@lead-management/components/Typography'
+import LoadingBanner from '@lead-management/components/LoadingBanner'
+import ModalFeedback from '@lead-management/components/ModalFeedback'
+
 
 interface FormDetailsProps {
-  form: Form | null,
+  form: Form,
   loading: boolean,
   error: boolean,
   response: string,
-  getForm(id: string):void,
-  enable(id: string):void,
+  getForm(id: string): void,
+  enable(id: string): void,
   disable(id: string): void,
 }
 
 
-const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, response, disable, enable, getForm}) => {
-  const { navigate } = useNavigation()
-  
-  function handleNavigateToEditPage(){
-    navigate('FormEdit')
+const FormDetails: React.FC<FormDetailsProps> = ({ form, loading, error, response, disable, enable, getForm }) => {
+  const { navigate, goBack } = useNavigation()
+
+  function handleNavigateToEditPage() {
+    navigate('FormAddUsers', {
+      id: form?.id || ""
+    })
   }
 
-  function handleFormStatusButton(id:string, active: boolean){
-    if(active){
+  function handleNavigateToUsersView(page:string){
+    navigate(page, {
+      id: form.id
+    })
+  }
+
+  function handleFormStatusButton(id: string, active: boolean) {
+    if (active) {
       disable(id)
-    }else {
+    } else {
       enable(id)
     }
     getForm(id)
@@ -44,36 +55,61 @@ const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, respons
           <Text style={styles.campaignDetails}>150 Leads - 2 usuários</Text>
           <View style={styles.headerActions}>
             <ButtonContainer position={"left"}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.headerButton}
                 onPress={() => {
-                  if(form){
+                  if (form) {
                     handleFormStatusButton(form?.id, form?.active)
                   }
-                }}  
+                }}
               >
-                <Text style={styles.buttonText}>{form?.active ? "Inativar" : "Ativar"}</Text>
-              </TouchableOpacity>            
+                <Typography
+                  color="#FFF"
+                  font="primaryBold"
+                  size="md"
+                  text={form?.active ? "Inativar" : "Ativar"}
+                  align="center"
+                />
+              </TouchableOpacity>
+            </ButtonContainer>
+            <ButtonContainer position="middle">
+              <TouchableOpacity onPress={() => handleNavigateToUsersView("FormAddUsers")} style={styles.headerButton}>
+                <Feather name="user-plus" size={24} color="white" />
+                <Typography
+                  color="#FFF"
+                  font="primaryBold"
+                  size="md"
+                  text="ADD"
+                  align="center"
+                />
+              </TouchableOpacity>
             </ButtonContainer>
             <ButtonContainer position={"right"}>
-              <TouchableOpacity onPress={handleNavigateToEditPage} style={styles.headerButton}>
-                <Text style={styles.buttonText}>Editar usuários</Text>
-              </TouchableOpacity>             
+              <TouchableOpacity onPress={() => handleNavigateToUsersView("FormRemoveUsers")} style={styles.headerButton}>
+                <Feather name="user-x" size={24} color="white" />
+                <Typography
+                  color="#FFF"
+                  font="primaryBold"
+                  size="s"
+                  text="DEL"
+                  align="center"
+                />
+              </TouchableOpacity>
             </ButtonContainer>
-          </View>        
+          </View>
         </View>
 
         <View style={styles.contentContainer}>
-          <ItemDetails 
+          <ItemDetails
             title="Dados da Campanha"
             itens={[
               {
                 category: "ID Facebook",
-                value: form?.fbFormId
+                value: form?.fbFormId || ""
               },
               {
                 category: "Data Criação",
-                value: form?.createdAt.toLocaleString()
+                value: form?.createdAt.toLocaleString() || ""
               },
               {
                 category: "Status",
@@ -81,29 +117,31 @@ const FormDetails : React.FC<FormDetailsProps> = ({form, loading, error, respons
               }
             ]}
           />
-          {/* <ItemDetails 
-            title="Leads da Campanha"
+          <ItemDetails 
+            title="Usuários da campanha"
             itens={[
               {
-                category: "Total",
-                value: "150"
+                category: "Total de usuários",
+                value: "2"
               },
               {
-                category: "Aguardando",
-                value: "50"
+                category: "Nome dos usuários",
+                value: "Heron Eto, Vagner Zanela, Guilherme"
               },
-              {
-                category: "Negociação em andamento",
-                value: "25"
-              },
-              {
-                category: "Negociação Concluída",
-                value: "75"
-              }
             ]}
-          /> */}
+          />
         </View>
       </ScrollView>
+      <LoadingBanner 
+        visible={loading}
+        text="Carregando..."
+      />
+
+      <ModalFeedback 
+        modalVisible={error}
+        text={response}
+        closeModalFunc={goBack}        
+      />
 
     </View>
   )

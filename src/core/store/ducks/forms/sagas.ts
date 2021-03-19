@@ -1,36 +1,37 @@
 import { call, Effect, put, SagaReturnType, takeLatest } from 'redux-saga/effects';
-import { 
+import {
   createForm,
   getForm as getFormService,
   getFormList as getFormListService,
   activeForm as activeFormService,
-  inactiveForm as inactiveFormService
+  inactiveForm as inactiveFormService,
+  UserFormAdd as userFormAddService
 } from '@core/services/apis'
 
-import { 
-successCreate,
-failureCreate,
-successGet,
-failureGet,
-successRequestList,
-failureRequestList,
-successActive,
-successInactivate,
-failureActive,
-failureInactivate
-  } from './actions';
-
-import { FormsTypes as Types } from './types'
+import {
+  successCreate,
+  failureCreate,
+  successGet,
+  failureGet,
+  successRequestList,
+  failureRequestList,
+  successActive,
+  successInactivate,
+  failureActive,
+  failureInactivate,
+  successAddUser,
+  failureAddUser
+} from './actions';
 
 import { getAccessToken } from '@core/services/storage'
 
 
 type CreateFormServiceResponse = SagaReturnType<typeof getFormService>
 
-export function* createFormSagas(action: Effect){ 
+export function* createFormSagas(action: Effect) {
   try {
-    const accessToken = yield getAccessToken()
-    const result : CreateFormServiceResponse = yield createForm(action.payload.data, accessToken)
+    const accessToken : string = yield getAccessToken()
+    const result: CreateFormServiceResponse = yield createForm(action.payload.data, accessToken)
     yield put(successCreate(result.data, "Formulário criado com sucesso"))
   } catch (error) {
     console.log(error.response)
@@ -40,11 +41,11 @@ export function* createFormSagas(action: Effect){
 
 type GetFormServiceResponse = SagaReturnType<typeof getFormService>
 
-export function* getFormSaga(action: Effect){
+export function* getFormSaga(action: Effect) {
   try {
-    const accessToken = yield getAccessToken()
+    const accessToken : string = yield getAccessToken()
     const { id } = action.payload
-    const result : GetFormServiceResponse = yield call(getFormService, id, accessToken)
+    const result: GetFormServiceResponse = yield call(getFormService, id, accessToken)
     yield put(successGet(result.data))
 
   } catch (error) {
@@ -55,48 +56,54 @@ export function* getFormSaga(action: Effect){
 
 type GetFormListServiceResponse = SagaReturnType<typeof getFormListService>
 
-export function* getFormListSaga(){
+export function* getFormListSaga() {
   try {
-    const accessToken = yield getAccessToken()
-    const result : GetFormListServiceResponse = yield call(getFormListService, accessToken)
-    yield put(successRequestList(result.data, "Sucesso ao obter lista de formulários"))    
+    const accessToken : string = yield getAccessToken()
+    const result: GetFormListServiceResponse = yield call(getFormListService, accessToken)
+    yield put(successRequestList(result.data, "Sucesso ao obter lista de formulários"))
   } catch (error) {
     console.log(error.response)
     yield put(failureRequestList("Falha ao obter formulário"));
   }
 }
 
-type ActiveFormServiceResponse = SagaReturnType<typeof activeFormService>
-
-
-export function* activeFormSaga(action: Effect){
+export function* activeFormSaga(action: Effect) {
   try {
     const { id } = action.payload
-    const accessToken = yield getAccessToken()
-    const result : ActiveFormServiceResponse = yield call(activeFormService, id, accessToken)
-    yield put(successActive("Sucesso ao obter lista de formulários"))    
+    const accessToken : string = yield getAccessToken()
+    yield call(activeFormService, id, accessToken)
+    yield put(successActive("Sucesso ao ativar formulário"))
   } catch (error) {
     console.log(error.response)
-    yield put(failureActive("Falha ao obter formulário"));
+    yield put(failureActive("Falha ao ativar formulário"));
   }
 }
 
-type InactiveFormServiceResponse = SagaReturnType<typeof inactiveFormService>
-
-export function* inactiveFormSaga(action: Effect){
+export function* inactiveFormSaga(action: Effect) {
   try {
     const { id } = action.payload
-    const accessToken = yield getAccessToken()
-    const result : InactiveFormServiceResponse = yield call(inactiveFormService, id, accessToken)
-    yield put(successInactivate("Sucesso ao obter lista de formulários"))    
+    const accessToken : string = yield getAccessToken()
+    yield call(inactiveFormService, id, accessToken)
+    yield put(successInactivate("Formluário inativado com sucesso"))
   } catch (error) {
     console.log(error.response)
-    yield put(failureInactivate("Falha ao obter formulário"));
+    yield put(failureInactivate("Falha ao inativar formulário"));
   }
 }
 
 
 
-export function rootFormSagas() {
-  return takeLatest(Types.CREATE, createFormSagas)
+type UserFormAddServiceResponse = SagaReturnType<typeof userFormAddService>
+
+
+export function* addUser(action: Effect) {
+  try {
+    const { userId, formId } = action.payload
+    const accessToken : string = yield getAccessToken()
+    const result: UserFormAddServiceResponse = yield call(userFormAddService, userId, formId, accessToken)
+    yield put(successAddUser("Usuário adicionado com sucesso."))
+  } catch (error) {
+    console.log(error.response)
+    yield put(failureAddUser("Falha ao adicionar usuário no formulário."));
+  }
 }

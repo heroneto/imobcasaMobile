@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
   textInput: {
     color: colors.textInput,
     fontWeight: "500",
-
+  },
+  userListContainer: {
+    marginTop: 50,
+    paddingHorizontal: 10
   }
 })
 

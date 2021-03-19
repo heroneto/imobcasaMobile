@@ -11,4 +11,16 @@ const fonts = {
 }
 
 
+export interface fontProps {
+  primary: {
+    bold: string,
+    semiBold: string,
+    regular: string,
+  },
+  secondary: {
+    bold: string,
+    regular: string
+  }
+}
+
 export default fonts

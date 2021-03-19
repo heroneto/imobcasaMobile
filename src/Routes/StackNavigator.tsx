@@ -9,7 +9,7 @@ import SearchPage from '@lead-management/pages/Lead/Search'
 import TaskEdit from '@lead-management/pages/Task/Edit'
 import CreateFormStackNavivagor from '@lead-management/pages/Forms/Create'
 import NewLead from '@lead-management/pages/Lead/Create'
-import FormEdit from '@lead-management/pages/Forms/Edit'
+import FormEdit from '@lead-management/pages/Forms/AddUsers'
 import { Header } from '@lead-management/components/Header'
 
 import UserListContainer from '@lead-management/containers/UserList'
@@ -20,6 +20,8 @@ import UserCreateContainer from '@lead-management/containers/UserCreate'
 
 import FormDetailsContainer from '@lead-management/containers/FormDetails'
 import FormListContainer from '@lead-management/containers/FormList'
+import FormAddUsersContainer from '@lead-management/containers/FormAddUsers'
+import RemoveUserForm from '@lead-management/pages/Forms/RemoveUsers'
 
 export type StackParameters = {
   "Meus Usuários": undefined
@@ -30,7 +32,8 @@ export type StackParameters = {
   "FormList": undefined
   "FormAdd": undefined
   "Form": { id: string }
-  "FormEdit": undefined
+  "FormAddUsers": { id: string },
+  "FormRemoveUsers": {id: string},
   "Meus Leads": undefined
   "Novo Lead": undefined
   "Lead": undefined
@@ -52,7 +55,7 @@ export const UserStackNavigator = () => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
       initialRouteName="Meus Usuários"
-      
+
 
     >
       <Stack.Screen
@@ -128,7 +131,7 @@ export const FormStackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="FormAdd"        
+        name="FormAdd"
         component={CreateFormStackNavivagor}
         options={{
           headerShown: false
@@ -138,15 +141,23 @@ export const FormStackNavigator = () => {
         name="Form"
         component={FormDetailsContainer}
         options={{
-          header: props => <Header {...props} title="Detalhes do formulário" primaryStyle={false} showSearchButton={false}  />,
+          header: props => <Header {...props} title="Detalhes do formulário" primaryStyle={false} showSearchButton={false} />,
           headerShown: true
         }}
       />
       <Stack.Screen
-        name="FormEdit"
-        component={FormEdit}
+        name="FormAddUsers"
+        component={FormAddUsersContainer}
         options={{
-          header: props => <Header {...props} title="Edição do formulário" primaryStyle={false} showSearchButton={false} />,
+          header: props => <Header {...props} title="Adição de usuários no formulário" primaryStyle={false} showSearchButton={false} />,
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="FormRemoveUsers"
+        component={RemoveUserForm}
+        options={{
+          header: props => <Header {...props} title="Remoção de usuários no formulário" primaryStyle={false} showSearchButton={false} />,
           headerShown: true
         }}
       />
