@@ -39,8 +39,9 @@ export default function* rootSaga() : Generator {
     takeLatest(FormsTypes.REQUEST_LIST, FormsSagas.getFormListSaga),
     takeLatest(FormsTypes.ENABLE, FormsSagas.activeFormSaga),
     takeLatest(FormsTypes.DISABLE, FormsSagas.inactiveFormSaga),
-    takeLatest(FormsTypes.ADD_USER, FormsSagas.addUser),
-    takeLatest(UserFormTypes.REQUEST_LIST, UserFormSagas.requestUsers),    
+    takeLatest(UserFormTypes.REQUEST_LIST, UserFormSagas.requestUsers),
+    takeLatest(UserFormTypes.LIST_NOT_RELATED_USERS, UserFormSagas.requestUsersNotRelated),
+    takeLatest(UserFormTypes.ADD, UserFormSagas.addUserForm),
     takeLatest(UserFormTypes.REMOVE, UserFormSagas.removeUserForm),
   ]);
 }

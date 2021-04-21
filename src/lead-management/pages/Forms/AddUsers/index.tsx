@@ -5,19 +5,22 @@ import InputContainer from '@lead-management/components/InputContainer'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import ItemUserCard from '@lead-management/components/ItemUserCard'
 import ModalOptions from '@lead-management/components/ModalOptions'
-import { User } from '@core/store/ducks/users/types'
+import { User } from '@core/store/ducks/userForm/types'
 import { Form } from '@core/store/ducks/forms/types'
 import LoadingBanner from '@lead-management/components/LoadingBanner'
 import ModalFeedback from '@lead-management/components/ModalFeedback'
 import { useNavigation } from '@react-navigation/core'
+import Typography from '@lead-management/components/Typography'
 
 var searchTimeout: any = null
 
 interface AddUserFormViewProps {
   users: User[],
-  form: Form,
+  form: Form | null,
   actions: {
-    addUser(formId: string, userId: string): void
+    addUser(formId: string, userId: string): void,
+    resetStore(): void,
+    listNotRelatedUsers(formId: string): void,
   }
   usersLoading: boolean,
   usersError: boolean,
@@ -43,6 +46,9 @@ const AddUserForm: React.FC<AddUserFormViewProps> = ({
   const { goBack } = useNavigation()
 
   useEffect(() => {
+    if (users.length === 0) {
+      setListUsers([])
+    }
     if (users.length > 0) {
       setListUsers(users)
     }
@@ -59,28 +65,47 @@ const AddUserForm: React.FC<AddUserFormViewProps> = ({
     }
   }
 
-  const handleAddUser = async () => {
-    if (selectedUser) {
-      await actions.addUser(form.id, selectedUser.id)
+  const handleAddUser = () => {
+    if (selectedUser && form) {
+      actions.addUser(form.id, selectedUser.id)
+      setSelectedUser(null)
     }
   }
 
+  const handleGoback = React.useCallback(() => {
+    actions.resetStore()
+    setListUsers([])
+    goBack()
+  }, [actions])
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.inputSearchContainer}>
         <InputContainer
-          label="Usuário"
+          label="Buscar usuário pelo nome"
+          enabled={listUsers.length > 0}
         >
           <TextInput
-            placeholder="Digite o nome do usuário"
-            enabled={true}
+            placeholder="Digite o nome do usuário"            
             style={styles.textInput}
             onChangeText={value => handleSearch(value)}
+            editable={listUsers.length > 0}
           />
         </InputContainer>
       </View>
       <View style={styles.userListContainer}>
-        {listUsers.map(user => {
+        {listUsers && listUsers.length === 0 && (
+          <Typography
+
+            align="center"
+            font="primaryRegular"
+            size="md"
+            text="Nenhum usuário disponível para cadastrar neste formulário"
+            color="#000"
+          />
+        )}
+
+        {listUsers && listUsers.length > 0 && listUsers.map(user => {
           return (
             <ItemUserCard
               fullName={user.fullName}
@@ -101,20 +126,26 @@ const AddUserForm: React.FC<AddUserFormViewProps> = ({
         noLabel="Não"
         noFunc={() => setSelectedUser(null)}
       />
-      <ModalFeedback
-        text={formsResponse}
-        closeModalFunc={goBack}
-        modalVisible={formsResponse && !formsError ? true : false} 
 
+
+      <ModalFeedback
+        text={usersResponse}
+        closeModalFunc={() => {
+          if (form) {
+            actions.listNotRelatedUsers(form.id)
+          }
+        }}
+        modalVisible={usersResponse && !usersError ? true : false}
       />
+
       <ModalFeedback
         text={formsResponse}
-        closeModalFunc={goBack}
+        closeModalFunc={handleGoback}
         modalVisible={formsError}
       />
       <ModalFeedback
         text={usersResponse}
-        closeModalFunc={goBack}
+        closeModalFunc={handleGoback}
         modalVisible={usersError}
       />
       <LoadingBanner
@@ -122,7 +153,7 @@ const AddUserForm: React.FC<AddUserFormViewProps> = ({
         visible={usersLoading || formsLoading}
       />
 
-    </View>
+    </ScrollView>
   )
 }
 

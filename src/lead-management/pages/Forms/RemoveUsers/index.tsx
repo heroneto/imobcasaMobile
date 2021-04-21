@@ -34,6 +34,9 @@ const RemoveUserForm: React.FC<RemoveUserFormProps> = ({ data, actions, loading,
   const [modalOptionsVisible, setModalOptionsVisible] = useState<boolean>(false)
 
   useEffect(() => {
+    if(data.length === 0){
+      setUserFormList([])
+    }
     if (data.length > 0) {
       setUserFormList(data)
     }
@@ -72,11 +75,12 @@ const RemoveUserForm: React.FC<RemoveUserFormProps> = ({ data, actions, loading,
     <ScrollView style={styles.container}>
       <View style={styles.inputSearchContainer}>
         <InputContainer
-          label="Usuário"
+          label="Buscar usuário pelo nome"
+          enabled={userFormList.length > 0}
         >
           <TextInput
             placeholder="Digite o nome do usuário"
-            enabled={true}
+            editable={userFormList.length > 0}
             style={styles.textInput}
             onChangeText={value => handleSearch(value)}
           />

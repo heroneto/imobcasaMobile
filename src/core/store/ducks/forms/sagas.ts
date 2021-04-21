@@ -5,7 +5,6 @@ import {
   getFormList as getFormListService,
   activeForm as activeFormService,
   inactiveForm as inactiveFormService,
-  UserFormAdd as userFormAddService
 } from '@core/services/apis'
 
 import {
@@ -19,8 +18,6 @@ import {
   successInactivate,
   failureActive,
   failureInactivate,
-  successAddUser,
-  failureAddUser
 } from './actions';
 
 import { getAccessToken } from '@core/services/storage'
@@ -88,22 +85,5 @@ export function* inactiveFormSaga(action: Effect) {
   } catch (error) {
     console.log(error.response)
     yield put(failureInactivate("Falha ao inativar formulário"));
-  }
-}
-
-
-
-type UserFormAddServiceResponse = SagaReturnType<typeof userFormAddService>
-
-
-export function* addUser(action: Effect) {
-  try {
-    const { userId, formId } = action.payload
-    const accessToken : string = yield getAccessToken()
-    const result: UserFormAddServiceResponse = yield call(userFormAddService, userId, formId, accessToken)
-    yield put(successAddUser("Usuário adicionado com sucesso."))
-  } catch (error) {
-    console.log(error.response)
-    yield put(failureAddUser("Falha ao adicionar usuário no formulário."));
   }
 }

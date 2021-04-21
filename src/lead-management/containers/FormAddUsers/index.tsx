@@ -5,27 +5,27 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import FormAddUsersView from '@lead-management/pages/Forms/AddUsers'
-import { User } from '@core/store/ducks/users/types';
+import { User } from '@core/store/ducks/userForm/types';
 import * as ListUserActions from '@core/store/ducks/users/actions';
-import * as ListUserSelectors from '@core/store/ducks/users/selectors';
 import * as FormsActions from '@core/store/ducks/forms/actions'
+import * as UsersFormsActions from '@core/store/ducks/userForm/actions'
 import { RouteProp } from '@react-navigation/core';
 import { Form } from '@core/store/ducks/forms/types';
 
 
 interface StateProps {
   route: RouteProp<ScreenRouteProps, "FormAddUsers">,
-  listUser: {
-    error: boolean,
-    loading: boolean,
-    activeUsers: User[] | [],
-    response: string
-  },
   forms: {
     loading: boolean,
     error: boolean,
     response: string,
-    form: Form
+    form: Form | null
+  },
+  usersForms: {
+    loading: boolean,
+    error: boolean,
+    response: string,
+    usersNotRelated: User[]
   }
 }
 
@@ -35,12 +35,14 @@ type ScreenRouteProps = {
 
 interface DispatchProps {
   actions: {
-    listUser: {
-      requestUserList(): void
-    },
     forms: {
       addUser(formId: string, userId: string): void
       get(id: string): void
+    },
+    usersForms: {
+      listNotRelatedUsers(formId: string): void,
+      add(formId: string, userId: string): void,
+      resetStore(): void
     }
   }
 }
@@ -50,51 +52,55 @@ type Props = StateProps & DispatchProps & ScreenRouteProps
 class FormAddUsers extends React.Component<Props> {
   componentDidMount() {
     const { id } = this.props.route.params
-    const { listUser, forms } = this.props.actions
-    listUser.requestUserList()
-    forms.get(id)
-    
+    const { forms, usersForms } = this.props.actions
+    usersForms.listNotRelatedUsers(id)
+    forms.get(id)  
   }
+
   render() {
-    const { listUser, forms, actions } = this.props
+    const { forms, actions, usersForms } = this.props
     return (
       <FormAddUsersView
-        users={listUser.activeUsers}
+        users={usersForms.usersNotRelated}
+        usersResponse={usersForms.response}
+        usersLoading={usersForms.loading}
+        usersError={usersForms.error}
         form={forms.form}
         actions={{
-          addUser: actions.forms.addUser
+          addUser: actions.usersForms.add,
+          resetStore: actions.usersForms.resetStore,
+          listNotRelatedUsers: actions.usersForms.listNotRelatedUsers
         }}
         formsLoading={forms.loading}
         formsError={forms.error}
         formsResponse={forms.response}
-        usersResponse={listUser.response}
-        usersLoading={listUser.loading}
-        usersError={listUser.error}
+
       />
     );
   }
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  listUser: {
-    error: state.listUser.error,
-    loading: state.listUser.loading,
-    activeUsers: ListUserSelectors.activeUsersSelector(state.listUser),
-    response: state.listUser.response
-  },
   forms: {
     loading: state.forms.loading,
     error: state.forms.error,
     response: state.forms.response,
     form: state.forms.form
-  }  
+  },
+  usersForms: {
+    loading: state.userForm.loading,
+    error: state.userForm.error,
+    usersNotRelated: state.userForm.usersNotRelated,
+    response: state.userForm.response
+  }
+  
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     actions: {
-      listUser: bindActionCreators(ListUserActions, dispatch),
-      forms: bindActionCreators(FormsActions, dispatch)
+      forms: bindActionCreators(FormsActions, dispatch),
+      usersForms: bindActionCreators(UsersFormsActions, dispatch)
     }
   }
 }

@@ -46,18 +46,6 @@ const reducer: Reducer<FormState> = (state = INITIAL_STATE, action) => {
       return {
         ...state, loading: false, error: true, ressponse: action.payload.response
       };
-
-    case FormsTypes.ADD_USER:
-      return { ...state, loading: true, error: false, response: "" };
-    case FormsTypes.SUCCESS_ADD_USER:
-      return {
-        ...state, loading: false, error: false, response: action.payload.response,
-      };
-    case FormsTypes.FAILURE_ADD_USER:
-      return {
-        ...state, loading: false, error: true, response: action.payload.response
-      };
-
     default:
       return state;
   }
