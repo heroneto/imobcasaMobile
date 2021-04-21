@@ -49,6 +49,6 @@ export interface FormState {
   readonly inactiveForms?:Form[]
   readonly form: Form | null
   readonly createdForm: Form | null
-  readonly response: string
+  readonly response: string,
 }
 

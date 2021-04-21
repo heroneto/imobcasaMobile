@@ -21,7 +21,7 @@ import UserCreateContainer from '@lead-management/containers/UserCreate'
 import FormDetailsContainer from '@lead-management/containers/FormDetails'
 import FormListContainer from '@lead-management/containers/FormList'
 import FormAddUsersContainer from '@lead-management/containers/FormAddUsers'
-import RemoveUserForm from '@lead-management/pages/Forms/RemoveUsers'
+import FormRemoveUserContainer from '@lead-management/containers/FormRemoveUsers'
 
 export type StackParameters = {
   "Meus Usuários": undefined
@@ -155,7 +155,7 @@ export const FormStackNavigator = () => {
       />
       <Stack.Screen
         name="FormRemoveUsers"
-        component={RemoveUserForm}
+        component={FormRemoveUserContainer}
         options={{
           header: props => <Header {...props} title="Remoção de usuários no formulário" primaryStyle={false} showSearchButton={false} />,
           headerShown: true

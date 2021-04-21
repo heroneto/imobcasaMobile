@@ -6,6 +6,7 @@ import { UsersState } from './ducks/users/types'
 import { AuthState } from './ducks/auth/types'
 import { FacebookFormsState } from './ducks/facebookForms/types';
 import { FormState } from './ducks/forms/types';
+import { UserFormState } from './ducks/userForm/types';
 
 
 import rootReducer from './ducks/rootReducer';
@@ -17,7 +18,8 @@ export interface ApplicationState {
   listUser: UsersState,
   auth: AuthState
   facebookForms: FacebookFormsState,
-  forms: FormState
+  forms: FormState,
+  userForm: UserFormState
 }
 
 const sagaMiddleware = createSagaMiddleware();

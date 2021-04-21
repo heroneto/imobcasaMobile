@@ -15,7 +15,7 @@ interface ModalProps {
   yesFunc(): void,
 }
 
-const ModalFeedback: React.FC<ModalProps> = ({
+const ModalOptions: React.FC<ModalProps> = ({
   modalVisible,
   closeModalFunc,
   yesFunc,
@@ -68,4 +68,4 @@ const ModalFeedback: React.FC<ModalProps> = ({
   )
 }
 
-export default ModalFeedback
+export default ModalOptions

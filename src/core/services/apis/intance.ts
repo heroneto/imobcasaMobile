@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const HOST = __DEV__ ? "http://192.168.15.11:8000" : "https://imobcasa.herokuapp.com"
+const HOST = __DEV__ ? "http://192.168.15.6:8000" : "https://imobcasa.herokuapp.com"
 const instance = axios.create({
   baseURL: HOST
 })

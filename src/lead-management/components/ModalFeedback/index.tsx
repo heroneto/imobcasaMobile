@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Text } from 'react-native'
 import { Container,InfoBox,InfoContainer } from './styles'
 import StandardButton from '@lead-management/components/StandardButton';
+
 interface ModalProps {
   modalVisible: boolean,
   closeModalFunc(): void,
@@ -37,7 +38,6 @@ const ModalFeedback: React.FC<ModalProps> = ({
 
         </InfoContainer>
       </Container>
-
 
     </Modal>
   )
