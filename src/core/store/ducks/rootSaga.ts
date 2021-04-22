@@ -18,6 +18,12 @@ import * as FormsSagas from './forms/sagas'
 import { UserFormTypes } from './userForm/types'
 import * as UserFormSagas from './userForm/sagas'
 
+import { LeadTypes } from './lead/types'
+import * as LeadSagas from './lead/sagas'
+
+import { LeadStatusTypes } from './leadStatus/types'
+import * as LeadStatusSagas from './leadStatus/sagas'
+
 export default function* rootSaga() : Generator {
   return yield all([
     takeLatest(LoggedUserTypes.GET, loggedUserActions.getUserStorage),
@@ -43,5 +49,7 @@ export default function* rootSaga() : Generator {
     takeLatest(UserFormTypes.LIST_NOT_RELATED_USERS, UserFormSagas.requestUsersNotRelated),
     takeLatest(UserFormTypes.ADD, UserFormSagas.addUserForm),
     takeLatest(UserFormTypes.REMOVE, UserFormSagas.removeUserForm),
+    takeLatest(LeadTypes.LIST, LeadSagas.getLeadListSagas),
+    takeLatest(LeadStatusTypes.LIST, LeadStatusSagas.getLeadStatusListSagas),
   ]);
 }
