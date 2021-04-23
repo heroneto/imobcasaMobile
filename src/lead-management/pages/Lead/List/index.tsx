@@ -6,22 +6,32 @@ import ItemCard from '@lead-management/components/ItemCard'
 import { ScrollView } from 'react-native-gesture-handler'
 import facebookIcon from '@commons/assets/icons/facebook.png'
 import FloatButton from '@lead-management/components/FloatButton'
+import { LeadStatus } from '@core/store/ducks/leadStatus/types'
+import LoadingBanner from '@lead-management/components/LoadingBanner'
 
 const Tab = createMaterialTopTabNavigator()
 
 interface LeadsViewProps {
-  navigation: any,
-  theme: any
+  data: LeadStatus[],
+  error: boolean,
+  loading: boolean,
+  response: string
+
 }
 
-const LeadsView: React.FC<LeadsViewProps> = (props) => {
-  
+const LeadsView: React.FC<LeadsViewProps> = ({
+  data,
+  error,
+  loading,
+  response
+}) => {
 
   return (
     <View style={styles.container}>
       <Tab.Navigator
-        initialRouteName="0"
+        initialRouteName={data[0].id}
         tabBarOptions={{
+          scrollEnabled: true,
           style: styles.navigatorContainer,
           activeTintColor: "#FFF",
           indicatorStyle: {
@@ -37,9 +47,23 @@ const LeadsView: React.FC<LeadsViewProps> = (props) => {
             padding: 5,
           },
         }}
-
       >
-        <Tab.Screen
+        {!error && data.length > 0 && data && (
+          data.map(status => {
+            const { name, id } = status
+
+            return (
+              <Tab.Screen
+                name={id}
+                component={TodayLeads}
+                options={{
+                  tabBarLabel: name
+                }}
+              />
+            )
+          })
+        )}
+        {/* <Tab.Screen
           name="0"
           component={TodayLeads}
           options={{
@@ -59,11 +83,16 @@ const LeadsView: React.FC<LeadsViewProps> = (props) => {
           options={{
             tabBarLabel: "Concluídos"
           }}
-        />
+        /> */}
       </Tab.Navigator>
 
       <FloatButton
         pageToNavigate="Novo Lead"
+      />
+
+      <LoadingBanner
+        visible={loading}
+        text="Carregando"
       />
     </View>
   )
@@ -148,11 +177,11 @@ function CommingLeads() {
         }}
       />
       <ItemCard
-      pageToNavigate="Lead"
-      navigationParameters={{
-        leadid: 1223232323,
-      }}
-      level="success"
+        pageToNavigate="Lead"
+        navigationParameters={{
+          leadid: 1223232323,
+        }}
+        level="success"
         topText="José da Silva"
         middleIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
         middleText="[Tatuapé] Tatuapé"

@@ -23,6 +23,8 @@ import FormListContainer from '@lead-management/containers/FormList'
 import FormAddUsersContainer from '@lead-management/containers/FormAddUsers'
 import FormRemoveUserContainer from '@lead-management/containers/FormRemoveUsers'
 
+import LeadListContainer from '@lead-management/containers/LeadList'
+
 export type StackParameters = {
   "Meus Usuários": undefined
   "Edição de Usuário": { fullName: string, email: string, active: boolean, admin: boolean, username: string }
@@ -34,7 +36,7 @@ export type StackParameters = {
   "Form": { id: string }
   "FormAddUsers": { id: string },
   "FormRemoveUsers": {id: string},
-  "Meus Leads": undefined
+  "LeadList": undefined
   "Novo Lead": undefined
   "Lead": undefined
   "Edição de Lead": undefined
@@ -171,13 +173,13 @@ export const LeadStackNavigator = () => {
     <Stack.Navigator screenOptions={{
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
     }}
-      initialRouteName="Meus Leads"
+      initialRouteName="LeadList"
     >
       <Stack.Screen
-        name="Meus Leads"
-        component={LeadsView}
+        name="LeadList"
+        component={LeadListContainer}
         options={{
-          header: props => <Header {...props} title={props.scene.route.name} primaryStyle={true} />,
+          header: props => <Header {...props} title="Meus Leads" primaryStyle={true} />,
           headerShown: true
         }}
       />

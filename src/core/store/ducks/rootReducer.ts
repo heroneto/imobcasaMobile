@@ -6,6 +6,8 @@ import auth from './auth'
 import facebookForms from './facebookForms'
 import forms from './forms'
 import userForm from './userForm'
+import lead from './lead'
+import leadStatus from './leadStatus'
 
 export default combineReducers({
   loggedUser,
@@ -13,5 +15,7 @@ export default combineReducers({
   auth,
   facebookForms,
   forms,
-  userForm
+  userForm,
+  lead,
+  leadStatus
 });
