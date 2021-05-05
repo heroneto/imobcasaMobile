@@ -13,11 +13,10 @@ import { getLeadList } from '@core/services/apis'
 type GetLeadListResponse = SagaReturnType<typeof getLeadList>
 
 
-export function* getLeadListSagas(action: Effect) {
+export function* getLeadListSagas() {
   try { 
-    const { statusId } = action.payload
     const accessToken : string = yield getAccessToken()
-    const result : GetLeadListResponse = yield getLeadList(accessToken, 0, 10, statusId)
+    const result : GetLeadListResponse = yield getLeadList(accessToken, 0, 10)
     yield put(successList(result.data))
   } catch (error) {
     console.log(error)

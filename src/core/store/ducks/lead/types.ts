@@ -24,7 +24,14 @@ export enum LeadTypes {
     negociationStartedAt: Date,
     negociationCompletedAt: Date | null,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    formData: {
+      name: string,
+    },
+    ownerData: {
+      username: string,
+      fullName: string
+    }
   }
   
   

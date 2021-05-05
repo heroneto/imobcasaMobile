@@ -13,14 +13,21 @@ interface ReturnContract {
   negociationStartedAt: Date,
   negociationCompletedAt: Date | null,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  formData: {
+    name: string,
+  },
+  ownerData: {
+    username: string,
+    fullName: string
+  }
 }
 
 interface GetLeadListService {
-  (accessToken: string, skip: number, limit: number, statusId: string): Promise<AxiosResponse<ReturnContract[]>>
+  (accessToken: string, skip: number, limit: number): Promise<AxiosResponse<ReturnContract[]>>
 }
 
-export const getLeadList : GetLeadListService = async (accessToken: string, skip: number, limit: number, statusId: string) => {
+export const getLeadList : GetLeadListService = async (accessToken: string, skip: number, limit: number) => {
   return await instance.get('/leads', {
     headers: {
       Authorization: `Bearer ${accessToken}`
@@ -28,7 +35,6 @@ export const getLeadList : GetLeadListService = async (accessToken: string, skip
     params: {
       skip,
       limit,
-      statusId
     }
   }) 
 }
