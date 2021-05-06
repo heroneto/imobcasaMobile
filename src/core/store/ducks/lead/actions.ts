@@ -6,6 +6,18 @@ export const successList = (data: Lead[]) => action(LeadTypes.SUCCESS_LIST, {dat
 export const failureList = (response: string) => action(LeadTypes.FAILURE_LIST, {response})
 
 
+export const add = (data: Omit<Lead, 
+    "id" | 
+    "negociationCompletedAt" | 
+    "createdAt" | 
+    "updatedAt" | 
+    "formData" | 
+    "ownerData">
+    ) => action(LeadTypes.ADD, { data })
+export const successAdd = (response: string) => action(LeadTypes.SUCCESS_ADD, {response})
+export const failureAdd = (response: string) => action(LeadTypes.FAILURE_ADD, {response})
+
+
 // TODO - Implementar listagem por status
 // export const listByStatys = (statusId: string) => action(LeadTypes.LIST, { statusId })
 // export const successListByStatus = (data: Lead[]) => action(LeadTypes.SUCCESS_LIST, {data})

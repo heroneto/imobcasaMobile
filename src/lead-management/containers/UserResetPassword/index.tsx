@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import UserResetPasswordView from '@lead-management/pages/User/ResetPassword'
-import * as listUserActions from '@core/store/ducks/users/actions'
+import * as UserActions from '@core/store/ducks/users/actions'
 
 interface StateProps {
   id: string,
@@ -39,12 +39,12 @@ class UserResetPasswordContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  error: state.listUser.error,
-  loading: state.listUser.loading,
-  id: state.listUser.selectedUser.id,
-  response: state.listUser.response
+  error: state.user.error,
+  loading: state.user.loading,
+  id: state.user.selectedUser.id,
+  response: state.user.response
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(listUserActions, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(UserActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserResetPasswordContainer);

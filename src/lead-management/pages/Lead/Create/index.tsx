@@ -10,22 +10,62 @@ import { useNavigation } from '@react-navigation/native'
 import * as data from '../../appData.json'
 import PickerInput from '@lead-management/components/PickerInput';
 import InputContainer from '@lead-management/components/InputContainer';
+import { LeadStatus } from '@core/store/ducks/leadStatus/types';
+import { LeadSource } from '@core/store/ducks/leadSources/types';
+import { User } from '@core/store/ducks/users/types';
+import { Form } from '@core/store/ducks/forms/types';
 
 
 interface inputPickerProps {
   key?: any,
   label?: any,
-  section?: any
+  section?: boolean
 }
 
-export default function NewLead() {
+
+interface OptionsProps {
+  key: number,
+  label: string,
+}
+
+interface LeadAddProps {
+  leadStatus: OptionsProps[],
+  leadStatusLoading: boolean,
+  leadStatusError: boolean,
+  leadSources: LeadSource[],
+  leadSourcesLoading: boolean,
+  leadSourcesError: boolean,
+  users: User[],
+  usersLoading: boolean,
+  usersError: boolean,
+  forms: Form[],
+  formsLoading: boolean,
+  formsError: boolean,
+}
+
+const LeadAddView: React.FC<LeadAddProps> = (
+  {
+    forms,
+    formsError,
+    formsLoading,
+    leadSources,
+    leadSourcesError,
+    leadSourcesLoading,
+    leadStatus,
+    leadStatusError,
+    leadStatusLoading,
+    users,
+    usersError,
+    usersLoading
+  }
+) => {
   const { navigate } = useNavigation()
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [origin, setOrigin] = useState<inputPickerProps>({})
   const [campaign, setCampaign] = useState<inputPickerProps>({})
   const [user, setUser] = useState<inputPickerProps>({})
-  const [leadStatus, setLeadStatus] = useState<inputPickerProps>({})
+  const [leadStatusSelected, setLeadStatusSelected] = useState<inputPickerProps>()
 
   function handleSaveButtom() {
     navigate('leadview', {
@@ -35,7 +75,7 @@ export default function NewLead() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>        
+      <ScrollView>
         <View style={styles.formContent}>
           <View
             style={styles.inputGroup}
@@ -52,7 +92,7 @@ export default function NewLead() {
               }}
               label="Nome"
             >
-              <TextInput 
+              <TextInput
                 placeholder="Insira o nome do Lead"
                 value={name}
                 onChangeText={value => setName(value)}
@@ -68,7 +108,7 @@ export default function NewLead() {
               }}
               label="Telefone"
             >
-              <TextInput 
+              <TextInput
                 placeholder="Insira o telefone"
                 value={phone}
                 onChangeText={value => setPhone(value)}
@@ -136,21 +176,28 @@ export default function NewLead() {
             <Text style={styles.inputTitle}>
               Negociação
                     </Text>
-            <PickerInput
-              data={data.leadStatus}
-              borderRadius={{
-                bottomLeft: 8,
-                bottomRight: 8,
-                topLeft: 8,
-                topRight: 8
-              }}
-              label="Status"
-              placeholder="Insira o status da negociação"
-              value={leadStatus.label}
-              onChange={(option) => {
-                setLeadStatus(option)
-              }}
-            />
+            {!leadStatusLoading &&
+              leadStatus &&
+              leadStatus.length > 0 &&
+              !leadStatusError &&
+              (
+                <PickerInput
+                  data={leadStatus}
+                  borderRadius={{
+                    bottomLeft: 8,
+                    bottomRight: 8,
+                    topLeft: 8,
+                    topRight: 8
+                  }}
+                  label="Status"
+                  placeholder="Insira o status da negociação"
+                  value={leadStatusSelected && leadStatusSelected?.label || ""}
+                  onChange={(option) => {
+                    setLeadStatusSelected(option)
+                  }}
+                />
+              )}
+
           </View>
 
           <View style={styles.formActions}>
@@ -166,3 +213,7 @@ export default function NewLead() {
     </View>
   )
 }
+
+
+
+export default LeadAddView

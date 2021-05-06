@@ -8,7 +8,7 @@ import { RefreshControl } from 'react-native'
 import { setSelectedUser } from '@core/services/storage'
 import { useDispatch } from 'react-redux'
 
-import * as ListUserActions from '@core/store/ducks/users/actions'
+import * as UserActions from '@core/store/ducks/users/actions'
 
 interface ActiveUsersProps {
   users: User[]
@@ -29,7 +29,7 @@ const ActiveUsers: React.FC<ActiveUsersProps> = ({ users }) => {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     
-    await dispatch(ListUserActions.requestUserList())
+    await dispatch(UserActions.requestUserList())
     setRefreshing(false)
     
   }, []);

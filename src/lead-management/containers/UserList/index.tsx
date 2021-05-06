@@ -5,8 +5,8 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { ApplicationState } from '@core/store';
 
 import { User } from '@core/store/ducks/users/types';
-import * as ListUserActions from '@core/store/ducks/users/actions';
-import * as ListUserSelectors from '@core/store/ducks/users/selectors'
+import * as UserActions from '@core/store/ducks/users/actions';
+import * as UserSelectors from '@core/store/ducks/users/selectors'
 
 import UserListView from '@lead-management/pages/User/List'
 
@@ -45,12 +45,12 @@ class UserListsContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  activeUsers: ListUserSelectors.activeUsersSelector(state.listUser),
-  inactiveUsers: ListUserSelectors.inactiveUsersSelector(state.listUser),
-  error: state.listUser.error,
-  loading: state.listUser.loading
+  activeUsers: UserSelectors.activeUsersSelector(state.user),
+  inactiveUsers: UserSelectors.inactiveUsersSelector(state.user),
+  error: state.user.error,
+  loading: state.user.loading
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(ListUserActions, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(UserActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserListsContainer);

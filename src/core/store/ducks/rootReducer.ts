@@ -1,21 +1,24 @@
 import { combineReducers } from 'redux';
 
 import loggedUser from './loggedUser'
-import listUser from './users'
+import user from './users'
 import auth from './auth'
 import facebookForms from './facebookForms'
 import forms from './forms'
 import userForm from './userForm'
 import lead from './lead'
 import leadStatus from './leadStatus'
+import leadSources from './leadSources'
 
 export default combineReducers({
   loggedUser,
-  listUser,
+  user,
   auth,
   facebookForms,
   forms,
   userForm,
   lead,
-  leadStatus
+  leadStatus,
+  leadSources
 });
+

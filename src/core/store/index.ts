@@ -9,6 +9,7 @@ import { FormState } from './ducks/forms/types';
 import { UserFormState } from './ducks/userForm/types';
 import { LeadState } from './ducks/lead/types';
 import { LeadStatusState } from './ducks/leadStatus/types';
+import { LeadSourceState } from './ducks/leadSources/types';
 
 
 import rootReducer from './ducks/rootReducer';
@@ -17,13 +18,14 @@ import rootSaga from './ducks/rootSaga';
 
 export interface ApplicationState {
   loggedUser: LoggedUserState,
-  listUser: UsersState,
+  user: UsersState,
   auth: AuthState
   facebookForms: FacebookFormsState,
   forms: FormState,
   userForm: UserFormState,
   lead: LeadState,
-  leadStatus: LeadStatusState
+  leadStatus: LeadStatusState,
+  leadSources: LeadSourceState
 }
 
 const sagaMiddleware = createSagaMiddleware();

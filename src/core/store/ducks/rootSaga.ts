@@ -4,7 +4,7 @@ import { LoggedUserTypes } from './loggedUser/types'
 import * as loggedUserActions from './loggedUser/sagas'
 
 import { UsersTypes } from './users/types'
-import * as listUserSagas from './users/sagas'
+import * as UserSagas from './users/sagas'
 
 import { AuthTypes } from './auth/types'
 import * as AuthSagas from './auth/sagas'
@@ -24,17 +24,20 @@ import * as LeadSagas from './lead/sagas'
 import { LeadStatusTypes } from './leadStatus/types'
 import * as LeadStatusSagas from './leadStatus/sagas'
 
+import { LeadSourceTypes } from './leadSources/types'
+import * as LeadSourceSagas from './leadSources/sagas'
+
 export default function* rootSaga() : Generator {
   return yield all([
     takeLatest(LoggedUserTypes.GET, loggedUserActions.getUserStorage),
     takeLatest(LoggedUserTypes.EDIT, loggedUserActions.editUser),
     takeLatest(LoggedUserTypes.CHANGE_PASSWORD, loggedUserActions.changeMyPassword),
-    takeLatest(UsersTypes.REQUEST_LIST, listUserSagas.getUserList),
-    takeLatest(UsersTypes.SELECT, listUserSagas.selectUser),
-    takeLatest(UsersTypes.EDIT, listUserSagas.editUser),
-    takeLatest(UsersTypes.RESET_PASSWORD, listUserSagas.resetUserPassword),
-    takeLatest(UsersTypes.CREATE, listUserSagas.createUser),
-    takeLatest(UsersTypes.DELETE, listUserSagas.deleteUser),
+    takeLatest(UsersTypes.REQUEST_LIST, UserSagas.getUserList),
+    takeLatest(UsersTypes.SELECT, UserSagas.selectUser),
+    takeLatest(UsersTypes.EDIT, UserSagas.editUser),
+    takeLatest(UsersTypes.RESET_PASSWORD, UserSagas.resetUserPassword),
+    takeLatest(UsersTypes.CREATE, UserSagas.createUser),
+    takeLatest(UsersTypes.DELETE, UserSagas.deleteUser),
     takeLatest(AuthTypes.LOGIN, AuthSagas.login),
     takeLatest(AuthTypes.LOGOUT, AuthSagas.logout),
     takeLatest(AuthTypes.RENEW, AuthSagas.renew),
@@ -50,6 +53,8 @@ export default function* rootSaga() : Generator {
     takeLatest(UserFormTypes.ADD, UserFormSagas.addUserForm),
     takeLatest(UserFormTypes.REMOVE, UserFormSagas.removeUserForm),
     takeLatest(LeadTypes.LIST, LeadSagas.getLeadListSagas),
+    takeLatest(LeadTypes.ADD, LeadSagas.addLeadSagas),
     takeLatest(LeadStatusTypes.LIST, LeadStatusSagas.getLeadStatusListSagas),
+    takeLatest(LeadSourceTypes.LIST, LeadSourceSagas.getLeadSourcesSagas),
   ]);
 }

@@ -6,7 +6,7 @@ import { ApplicationState } from '@core/store';
 
 import UserCreateView from '@lead-management/pages/User/Create'
 import { CreateUserProps, User } from '@core/store/ducks/users/types'
-import * as listUserActions from '@core/store/ducks/users/actions'
+import * as UserActions from '@core/store/ducks/users/actions'
 
 interface StateProps {
   selectedUser: User,
@@ -40,12 +40,12 @@ class UserCreateContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  error: state.listUser.error,
-  loading: state.listUser.loading,
-  response: state.listUser.response,
-  selectedUser: state.listUser.selectedUser
+  error: state.user.error,
+  loading: state.user.loading,
+  response: state.user.response,
+  selectedUser: state.user.selectedUser
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(listUserActions, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(UserActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserCreateContainer);

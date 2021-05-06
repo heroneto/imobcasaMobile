@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { RefreshControl } from 'react-native'
 import { useDispatch } from 'react-redux'
 
-import * as ListUserActions from '@core/store/ducks/users/actions'
+import * as UserActions from '@core/store/ducks/users/actions'
 
 
 interface InactiveUsersProps {
@@ -31,7 +31,7 @@ const InactiveUsers: React.FC<InactiveUsersProps> = ({ users }) => {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     
-    await dispatch(ListUserActions.requestUserList())
+    await dispatch(UserActions.requestUserList())
     setRefreshing(false)
     
   }, []);

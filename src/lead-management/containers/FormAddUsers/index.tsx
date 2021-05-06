@@ -6,7 +6,6 @@ import { ApplicationState } from '@core/store';
 
 import FormAddUsersView from '@lead-management/pages/Forms/AddUsers'
 import { User } from '@core/store/ducks/userForm/types';
-import * as ListUserActions from '@core/store/ducks/users/actions';
 import * as FormsActions from '@core/store/ducks/forms/actions'
 import * as UsersFormsActions from '@core/store/ducks/userForm/actions'
 import { RouteProp } from '@react-navigation/core';

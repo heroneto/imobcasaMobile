@@ -6,7 +6,7 @@ import { ApplicationState } from '@core/store';
 
 import UserEditView from '@lead-management/pages/User/Edit'
 import { User } from '@core/store/ducks/users/types'
-import * as listUserActions from '@core/store/ducks/users/actions'
+import * as UserActions from '@core/store/ducks/users/actions'
 
 interface StateProps {
   selectedUser: User,
@@ -40,12 +40,12 @@ class UserEditContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  error: state.listUser.error,
-  loading: state.listUser.loading,
-  selectedUser: state.listUser.selectedUser,
-  response: state.listUser.response
+  error: state.user.error,
+  loading: state.user.loading,
+  selectedUser: state.user.selectedUser,
+  response: state.user.response
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(listUserActions, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(UserActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserEditContainer);
