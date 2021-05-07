@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Text, Image, View } from 'react-native'
+import React, { useCallback } from 'react'
+import { Text, Image, View, RefreshControl } from 'react-native'
 import styles from './styles'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import ItemCard from '@lead-management/components/ItemCard'
 import { ScrollView } from 'react-native-gesture-handler'
 import facebookIcon from '@commons/assets/icons/facebook.png'
 import FloatButton from '@lead-management/components/FloatButton'
-import { LeadStatus } from '@core/store/ducks/leadStatus/types'
 import LoadingBanner from '@lead-management/components/LoadingBanner'
-import { Lead } from '@core/store/ducks/lead/types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import * as leadActions from '@core/store/ducks/lead/actions'
-import { leadByState } from '@core/store/ducks/lead/selectors'
+import { LeadStatus } from '@core/store/ducks/leadStatus/types'
+import * as LeadStatusActions from '@core/store/ducks/leadStatus/actions'
+
+import { Lead } from '@core/store/ducks/lead/types'
+import * as LeadActions from '@core/store/ducks/lead/actions';
+
+
 import { useNavigation } from '@react-navigation/core'
+import Typography from '@lead-management/components/Typography'
+import colors from '@core/theme/colors'
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -37,9 +42,37 @@ const LeadsView: React.FC<LeadsViewProps> = ({
   leadsLoading,
   leadsError
 }) => {
+  const dispatch = useDispatch()
+  const [ refreshing, setRefreshing ] = React.useState<boolean>(false)
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    dispatch(LeadStatusActions.list())
+    dispatch(LeadActions.list())
+    setRefreshing(false)
+    
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView 
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl 
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+    }
+    >
+
+      {leadStatus.length === 0 && (
+        <Typography
+          align="center"
+          color={colors.imobcasaPrimary}
+          font="primaryRegular"
+          size="md"
+          text="Lista não carregada, arraste para baixo para carregar"
+        />
+      )}
 
       {loading && !error && (
         <LoadingBanner
@@ -96,7 +129,7 @@ const LeadsView: React.FC<LeadsViewProps> = ({
 
 
 
-    </View>
+    </ScrollView>
   )
 }
 
@@ -105,10 +138,28 @@ interface LeadListProps {
 }
 
 const LeadList: React.FC<LeadListProps> = ({ leads }) => {
+  const dispatch = useDispatch()
   const { navigate } = useNavigation()
+  const [ refreshing, setRefreshing ] = React.useState<boolean>(false)
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    dispatch(LeadStatusActions.list())
+    dispatch(LeadActions.list())
+    setRefreshing(false)
+    
+  }, []);
+
 
   return (
-    <ScrollView style={styles.contentContainer}>
+    <ScrollView 
+      style={styles.contentContainer}
+      refreshControl={
+        <RefreshControl 
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      }      >
       <Text style={styles.itemGroupName}>Total({leads?.length})</Text>
       {leads?.map(lead => {
         return (
@@ -133,103 +184,6 @@ const LeadList: React.FC<LeadListProps> = ({ leads }) => {
     </ScrollView>
   )
 }
-
-
-
-// function TodayLeads() {
-//   return (
-//     <ScrollView style={styles.contentContainer}>
-//       <Text style={styles.itemGroupName}>Não respondidas(1)</Text>
-//       <ItemCard
-//         pageToNavigate="Lead"
-//         navigationParameters={{
-//           leadid: 1223232323,
-//         }}
-//         level="neutral"
-//         topText="José da Silva"
-//         middleIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
-//         middleText="[Tatuapé] Tatuapé"
-//         leftBottomText="Vagner Fernando Zanella"
-//         customRightText={{
-//           text: "Duas Aguardando",
-//           value: 5,
-//         }}
-//       />
-//     </ScrollView>
-//   )
-// }
-// function OverdueLeads() {
-//   return (
-//     <ScrollView style={styles.contentContainer}>
-//       <Text style={styles.itemGroupName}>Pendentes(1)</Text>
-//       <ItemCard
-//         pageToNavigate="Lead"
-//         navigationParameters={{
-//           leadid: 1223232323,
-//         }}
-//         level="neutral"
-//         topText="José da Silva"
-//         middleIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
-//         middleText="[Tatuapé] Tatuapé"
-//         leftBottomText="Vagner Fernando Zanella"
-//         customRightText={{
-//           text: "Duas Aguardando",
-//           value: 5,
-//         }}
-//       />
-//       <Text style={styles.itemGroupName}>Futuras(1)</Text>
-//       <ItemCard
-//         pageToNavigate="Lead"
-//         navigationParameters={{
-//           leadid: 1223232323,
-//         }}
-//         level="info"
-//         topText="José da Silva"
-//         middleIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
-//         middleText="[Tatuapé] Tatuapé"
-//         leftBottomText="Vagner Fernando Zanella"
-//         customRightText={{
-//           text: "Visita agendada para 12 horas"
-//         }}
-//       />
-//     </ScrollView>
-//   )
-// }
-// function CommingLeads() {
-//   return (
-//     <ScrollView style={styles.contentContainer}>
-//       <Text style={styles.itemGroupName}>Concluídos(2)</Text>
-//       <ItemCard
-//         pageToNavigate="Lead"
-//         navigationParameters={{
-//           leadid: 1223232323,
-//         }}
-//         level="neutral"
-//         topText="José da Silva"
-//         middleIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
-//         middleText="[Tatuapé] Tatuapé"
-//         leftBottomText="Vagner Fernando Zanella"
-//         customRightText={{
-//           text: "Arquivado - Sem contato",
-//         }}
-//       />
-//       <ItemCard
-//         pageToNavigate="Lead"
-//         navigationParameters={{
-//           leadid: 1223232323,
-//         }}
-//         level="success"
-//         topText="José da Silva"
-//         middleIcon={<Image source={facebookIcon} style={styles.socialIcon} />}
-//         middleText="[Tatuapé] Tatuapé"
-//         leftBottomText="Vagner Fernando Zanella"
-//         customRightText={{
-//           text: "Negócio fechado em 15/04/2020",
-//         }}
-//       />
-// </ScrollView>
-// )
-// }
 
 
 export default LeadsView

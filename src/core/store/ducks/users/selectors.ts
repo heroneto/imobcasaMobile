@@ -1,3 +1,4 @@
+import { ApplicationState } from '@core/store'
 import { createSelector } from 'reselect'
 
 import { UsersState } from './types'
@@ -13,4 +14,17 @@ export const activeUsersSelector = createSelector(
 export const inactiveUsersSelector = createSelector(
   userListSelector,
   users => users.filter(user => !user.active)
+)
+
+export const userStateSelector = (state: ApplicationState) => state.user
+
+export const userOptionsSelector = createSelector(
+  userStateSelector,
+  usersState => usersState.data.map((user, idx) => {
+    return {
+      key: idx,
+      label: user.fullName,
+      id: user.id
+    }
+  })
 )

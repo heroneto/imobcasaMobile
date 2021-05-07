@@ -11,6 +11,7 @@ export const leadStatusOptions = createSelector(
     return {
       key: idx,
       label: leadStatus.name,
+      id: leadStatus.id
     }
   })
 )

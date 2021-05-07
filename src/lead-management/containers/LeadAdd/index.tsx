@@ -10,35 +10,41 @@ import * as LeadStatusSelectors from '@core/store/ducks/leadStatus/selectos'
 
 
 import * as LeadSourcesActions from '@core/store/ducks/leadSources/actions'
+import * as LeadSourcesSelectors from '@core/store/ducks/leadSources/selectors'
+
+
 import * as UserActions from '@core/store/ducks/users/actions'
+import * as UserSelectors from '@core/store/ducks/users/selectors'
+
 import * as FormActions from '@core/store/ducks/forms/actions'
+import * as FormSelectors from '@core/store/ducks/forms/selectors'
+
 import LeadAddView from '@lead-management/pages/Lead/Create'
 
-import { Lead } from '@core/store/ducks/lead/types';
+import { Lead, LeadState } from '@core/store/ducks/lead/types';
 import * as LeadActions from '@core/store/ducks/lead/actions';
-import { User } from '@core/store/ducks/users/types';
-import { LeadSource } from '@core/store/ducks/leadSources/types';
-import { Form } from '@core/store/ducks/forms/types';
 
 
 interface OptionsProps {
   key: number,
   label: string,
+  id: string
 }
 
 interface StateProps {
   leadStatus: OptionsProps[],
   leadStatusLoading: boolean,
   leadStatusError: boolean, 
-  leadSources: LeadSource[],
+  leadSources: OptionsProps[],
   leadSourcesLoading: boolean,
   leadSourcesError: boolean,
-  users: User[],
+  users: OptionsProps[],
   usersLoading: boolean,
   usersError: boolean,
-  forms: Form[],
+  forms: OptionsProps[],
   formsLoading: boolean,
   formsError: boolean,
+  leadState: LeadState
 }
 
 interface DispatchProps {
@@ -54,7 +60,8 @@ interface DispatchProps {
         "updatedAt" | 
         "formData" | 
         "ownerData">
-        ): void
+        ): void,
+      reset(): void
     },
     leadSources: {
       list(): void
@@ -83,7 +90,8 @@ const LeadAddContainer: React.FC<Props> = ({
   forms,
   formsLoading,
   formsError,
-  actions
+  actions,
+  leadState
    }) => {
 
 
@@ -98,6 +106,26 @@ const LeadAddContainer: React.FC<Props> = ({
   return (
     <LeadAddView
       leadStatus={leadStatus}
+      leadStatusError={leadStatusError}
+      leadStatusLoading={leadStatusLoading}
+      forms={forms}
+      formsLoading={formsLoading}
+      formsError={formsError}
+      leadSources={leadSources}
+      leadSourcesError={leadSourcesError}
+      leadSourcesLoading={leadSourcesLoading}
+      users={users}
+      usersError={usersError}
+      usersLoading={usersLoading}
+      actions={{
+        lead: {
+          add: actions.lead.add,
+          reset: actions.lead.reset
+        }
+      }}
+      leadActionResponse={leadState.response}
+      leadError={leadState.error}
+      leadLoading={leadState.loading}
     />
   )
 }
@@ -106,15 +134,17 @@ const mapStateToProps = (state: ApplicationState) => ({
   leadStatus: LeadStatusSelectors.leadStatusOptions(state),
   leadStatusLoading: state.leadStatus.loading,
   leadStatusError: state.leadStatus.error,
-  leadSources:  state.leadSources.data,
+  leadSources: LeadSourcesSelectors.leadSourceOptionsSelector(state),
   leadSourcesLoading:  state.leadSources.loading,
   leadSourcesError:  state.leadSources.error,
-  users:  state.user.data,
+  users:  UserSelectors.userOptionsSelector(state),
   usersLoading:  state.user.loading,
   usersError:  state.user.error,
-  forms:  state.forms.data,
+  forms:  FormSelectors.formsOptions(state),
   formsLoading:  state.forms.loading,
   formsError:  state.forms.error,
+  leadState: state.lead
+
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -125,7 +155,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       users: bindActionCreators(UserActions, dispatch),
       leadSources: bindActionCreators(LeadSourcesActions, dispatch),
       forms: bindActionCreators(FormActions, dispatch),
-
     }
   }
 }

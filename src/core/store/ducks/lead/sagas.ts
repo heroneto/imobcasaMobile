@@ -38,8 +38,12 @@ export function* addLeadSagas(action: Effect) {
     if(result.status === 200){
       yield put(successAdd("Lead cadastrado com sucesso"))
     }    
-  } catch (error) {
-    console.log(error)
-    yield put(failureAdd("Falha ao cadastrar Lead"));
+  } catch (error) {   
+    if(error.response.status === 400 || error.response.status === 409){
+      yield put(failureAdd(error.response.data));
+    }else {
+      yield put(failureAdd("Falha ao cadastrar Lead"));
+    }
+    
   }
 }

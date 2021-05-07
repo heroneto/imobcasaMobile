@@ -51,7 +51,7 @@ const reducer: Reducer<LeadState> = (state = INITIAL_STATE, action) => {
       }
 
     case LeadTypes.RESET:
-      return state
+      return INITIAL_STATE
 
     case LeadTypes.FAILURE_RESET:
       return state
