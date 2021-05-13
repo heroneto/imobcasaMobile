@@ -22,6 +22,7 @@
     "@types/lodash": "^4.14.161",
     "@types/react-redux": "^7.1.12",
     "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
     "expo": "^38.0.0",
     "expo-facebook": "~8.2.1",
     "expo-font": "~8.2.1",

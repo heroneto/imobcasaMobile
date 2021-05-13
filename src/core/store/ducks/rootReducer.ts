@@ -9,6 +9,7 @@ import userForm from './userForm'
 import lead from './lead'
 import leadStatus from './leadStatus'
 import leadSources from './leadSources'
+import leadDetails from './lead/leadDetails'
 
 export default combineReducers({
   loggedUser,
@@ -19,6 +20,7 @@ export default combineReducers({
   userForm,
   lead,
   leadStatus,
-  leadSources
+  leadSources,
+  leadDetails
 });
 

@@ -25,6 +25,7 @@ import FormRemoveUserContainer from '@lead-management/containers/FormRemoveUsers
 
 import LeadListContainer from '@lead-management/containers/LeadList'
 import LeadAddContainer from '@lead-management/containers/LeadAdd'
+import LeadDetailsContainer from '@lead-management/containers/LeadDetails'
 
 export type StackParameters = {
   "Meus Usuários": undefined
@@ -194,7 +195,7 @@ export const LeadStackNavigator = () => {
       />
       <Stack.Screen
         name="Lead"
-        component={LeadView}
+        component={LeadDetailsContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true,
