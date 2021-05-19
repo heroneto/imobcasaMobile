@@ -5,11 +5,26 @@ export enum LeadDetailsTypes {
   SUCCESS_GET = "@leadDetails/SUCCESS_GET",
   FAILURE_GET = "@leadDetails/FAILURE_GET",
 
+  EDIT = "@leadDetails/EDIT",
+  SUCCESS_EDIT = "@leadDetails/SUCCESS_EDIT",
+  FAILURE_EDIT = "@leadDetails/FAILURE_EDIT",
+
   RESET_STORE = "@leadDetails/RESET_STORE",
   SUCCESS_RESET_STORE = "@leadDetails/SUCCESS_RESET_STORE",
   FAILURE_RESET_STORE = "@leadDetails/FAILURE_RESET_STORE",
+
+
 }
 
+
+export interface LeadEditPayload  {
+	id: string, 
+	name: string, 
+  phone: number, 
+  sourceid: string, 
+  formid: string,
+  userid: string
+}
 
 export interface Task {
   active: boolean,
@@ -36,7 +51,6 @@ export interface Task {
 
 export interface LeadDetails {
   id: string,
-
   name: string,
   phone: string,
   sourceid: string,

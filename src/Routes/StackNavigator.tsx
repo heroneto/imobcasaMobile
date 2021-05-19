@@ -1,15 +1,10 @@
 import React from 'react'
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack'
-import LeadsView from '@lead-management/pages/Lead/List'
 import TaskView from '@lead-management/pages/Task/Read'
 import NewTaskView from '@lead-management/pages/Task/Create'
-import LeadView from '@lead-management/pages/Lead/Read'
-import LeadEdit from '@lead-management/pages/Lead/Edit'
 import SearchPage from '@lead-management/pages/Lead/Search'
 import TaskEdit from '@lead-management/pages/Task/Edit'
 import CreateFormStackNavivagor from '@lead-management/pages/Forms/Create'
-import NewLead from '@lead-management/pages/Lead/Create'
-import FormEdit from '@lead-management/pages/Forms/AddUsers'
 import { Header } from '@lead-management/components/Header'
 
 import UserListContainer from '@lead-management/containers/UserList'
@@ -26,6 +21,7 @@ import FormRemoveUserContainer from '@lead-management/containers/FormRemoveUsers
 import LeadListContainer from '@lead-management/containers/LeadList'
 import LeadAddContainer from '@lead-management/containers/LeadAdd'
 import LeadDetailsContainer from '@lead-management/containers/LeadDetails'
+import LeadEditContainer from '@lead-management/containers/LeadEdit'
 
 export type StackParameters = {
   "Meus Usuários": undefined
@@ -203,7 +199,7 @@ export const LeadStackNavigator = () => {
       />
       <Stack.Screen
         name="Edição de Lead"
-        component={LeadEdit}
+        component={LeadEditContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true,

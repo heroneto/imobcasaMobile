@@ -60,5 +60,6 @@ export default function* rootSaga() : Generator {
     takeLatest(LeadStatusTypes.LIST, LeadStatusSagas.getLeadStatusListSagas),
     takeLatest(LeadSourceTypes.LIST, LeadSourceSagas.getLeadSourcesSagas),
     takeLatest(LeadDetailsTypes.GET, LeadDetailsSagas.getLeadDetailsRequest),
+    takeLatest(LeadDetailsTypes.EDIT, LeadDetailsSagas.editLeadDetailsRequest),
   ]);
 }

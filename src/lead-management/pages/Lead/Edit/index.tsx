@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
@@ -7,35 +7,83 @@ import StandardButton from '@lead-management/components/StandardButton';
 import { useNavigation } from '@react-navigation/native'
 import PickerInput from '@lead-management/components/PickerInput';
 
-import * as data from '../../appData.json'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputContainer from '@lead-management/components/InputContainer';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { formsOptions as formsOptionsSelector } from '@core/store/ducks/forms/selectors'
+import { leadSourceOptionsSelector } from '@core/store/ducks/leadSources/selectors'
+import { leadDetailsState } from '@core/store/ducks/lead/leadDetails/selectors'
+import { userOptionsSelector } from '@core/store/ducks/users/selectors'
+import * as LeadDetailsActions from '@core/store/ducks/lead/leadDetails/actions'
+import LoadingBanner from '@lead-management/components/LoadingBanner';
+import ModalFeedback from '@lead-management/components/ModalFeedback';
 
 interface LeadEditProps {
-  route: any
+  leadId: string
 }
 
 interface inputPickerProps {
   key?: any,
   label?: any,
-  section?: any
+  section?: any,
+  id?: any
 }
 
-const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
-  const { leadid } = route.params
+const LeadEdit: React.FC<LeadEditProps> = ({ leadId }) => {
+  const dispatch = useDispatch()
+  const leadSources = useSelector(leadSourceOptionsSelector)
+  const formsOptions = useSelector(formsOptionsSelector)
+  const usersOptions = useSelector(userOptionsSelector)
+  const { data, error, response, loading } = useSelector(leadDetailsState)
+
+
   const { navigate } = useNavigation()
-  const [name, setName] = useState('Everisto de Barros')
-  const [phone, setPhone] = useState('119999999')
-  const [origin, setOrigin] = useState<inputPickerProps>({ key: 5, label: "Facebook" })
-  const [campaign, setCampaign] = useState<inputPickerProps>({ key: 5, label: "Vila Formosa" })
-  const [user, setUser] = useState<inputPickerProps>({ key: 5, label: "Heron Hideki" })
-  const [leadStatus, setLeadStatus] = useState<inputPickerProps>({ key: 5, label: "Negociação em andamento" })
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [leadSourceSelected, setLeadSourceSelected] = useState<inputPickerProps>({})
+  const [formSelected, setFormSelected] = useState<inputPickerProps>({})
+  const [userSelected, setUserSelected] = useState<inputPickerProps>({})
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   function handleSaveButtom() {
-    navigate('Lead', {
-      leadid
-    })
+
+    const editData = {
+      formid: formSelected.id,
+      id: leadId,
+      name: name,
+      phone: parseInt(phone),
+      sourceid: leadSourceSelected.id,
+      userid: userSelected.id
+    }
+    dispatch(LeadDetailsActions.editLead(editData))
+    setShowModal(true)
+
   }
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name)
+      setPhone(data.phone)
+      setLeadSourceSelected(leadSources.find(leadSource => leadSource.id === data.sourceid) || {})
+      setFormSelected(formsOptions.find(form => form.id === data.formid) || {})
+      setUserSelected(usersOptions.find(user => user.id === data.userid) || {})
+    }
+  }, [data])
+
+
+  const handleCloseModal = useCallback(() => {
+    if (!error) {
+      dispatch(LeadDetailsActions.getLeadDetails(leadId))
+      dispatch(LeadDetailsActions.getLeadDetails(leadId))
+      setShowModal(false)
+      navigate('Lead', {
+        leadid: leadId
+      })
+    }else {
+      setShowModal(false)
+    }
+  }, [response, error])
 
 
   return (
@@ -49,14 +97,9 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
           >
             <Text style={styles.inputTitle}>
               Dados do Lead
-                    </Text>
+            </Text>
             <InputContainer
-              inputRadiusStyle={{
-                bottomLeft: false,
-                bottomRight: false,
-                topLeft: true,
-                topRight: true,
-              }}
+              variant="top"
               label="Nome"
             >
               <TextInput
@@ -67,12 +110,7 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
               <Feather name="user" size={24} color="rgba(0,0,0,.2)" />
             </InputContainer>
             <InputContainer
-              inputRadiusStyle={{
-                bottomLeft: false,
-                bottomRight: false,
-                topLeft: true,
-                topRight: true,
-              }}
+              variant="bottom"
               label="Telefone"
             >
               <TextInput
@@ -91,7 +129,7 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
               Origem
                     </Text>
             <PickerInput
-              data={data.leadOrigin}
+              data={leadSources}
               borderRadius={{
                 bottomLeft: 0,
                 bottomRight: 0,
@@ -100,13 +138,13 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
               }}
               label="Origem"
               placeholder="Selecione a origem do Lead"
-              value={origin.label}
+              value={leadSourceSelected.label}
               onChange={(option) => {
-                setOrigin(option)
+                setLeadSourceSelected(option)
               }}
             />
             <PickerInput
-              data={data.leadCampaign}
+              data={formsOptions}
               borderRadius={{
                 bottomLeft: 8,
                 bottomRight: 8,
@@ -115,9 +153,9 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
               }}
               label="Origem"
               placeholder="Selecione a campanha do Lead"
-              value={campaign.label}
+              value={formSelected.label}
               onChange={(option) => {
-                setCampaign(option)
+                setFormSelected(option)
               }}
             />
           </View>
@@ -126,7 +164,7 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
               Responsável
                     </Text>
             <PickerInput
-              data={data.users}
+              data={usersOptions}
               borderRadius={{
                 bottomLeft: 8,
                 bottomRight: 8,
@@ -135,29 +173,9 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
               }}
               label="Usuário"
               placeholder="Selecione o usuário"
-              value={user.label}
+              value={userSelected.label}
               onChange={(option) => {
-                setUser(option)
-              }}
-            />
-          </View>
-          <View style={styles.inputGroup}>
-            <Text style={styles.inputTitle}>
-              Negociação
-                    </Text>
-            <PickerInput
-              data={data.leadStatus}
-              borderRadius={{
-                bottomLeft: 8,
-                bottomRight: 8,
-                topLeft: 8,
-                topRight: 8
-              }}
-              label="Status"
-              placeholder="Insira o status da negociação"
-              value={leadStatus.label}
-              onChange={(option) => {
-                setLeadStatus(option)
+                setUserSelected(option)
               }}
             />
           </View>
@@ -171,6 +189,18 @@ const LeadEdit: React.FC<LeadEditProps> = ({ route }) => {
           </View>
         </View>
       </ScrollView>
+
+
+      <LoadingBanner
+        visible={loading}
+        text="Carregando..."
+      />
+
+      <ModalFeedback
+        closeModalFunc={handleCloseModal}
+        modalVisible={showModal}
+        text={response}
+      />
 
 
     </SafeAreaView>

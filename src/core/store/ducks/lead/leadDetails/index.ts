@@ -31,6 +31,26 @@ const reducer: Reducer<LeadDetailsState> = (state = INITIAL_STATE, action) => {
         response: action.payload.response
       }
 
+    case LeadDetailsTypes.EDIT:
+      return {
+        ...state, loading: true
+      }
+    case LeadDetailsTypes.SUCCESS_EDIT:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        response: action.payload.response
+      }
+    case LeadDetailsTypes.FAILURE_EDIT:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+        response: action.payload.response
+      }
+
+
     case LeadDetailsTypes.RESET_STORE:
       return INITIAL_STATE
 
