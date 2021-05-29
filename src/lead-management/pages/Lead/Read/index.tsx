@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { View, Text, Image, Linking, RefreshControl } from 'react-native'
 import styles from './styles'
 import HeaderActions from '@lead-management/components/HeaderActions'
@@ -21,6 +21,7 @@ import LoadingBanner from '@lead-management/components/LoadingBanner'
 import Typography from '@lead-management/components/Typography'
 import { useSelector } from 'react-redux'
 import {Task} from '@core/store/ducks/lead/leadDetails/types'
+import ModalOptions from '@lead-management/components/ModalOptions'
 
 interface LeadViewProps {
   data: LeadDetails | null,
@@ -32,7 +33,8 @@ interface LeadViewProps {
 
 const LeadView: React.FC<LeadViewProps> = ({ data, id, loading, error, getLeadDetails }) => {
   const { navigate } = useNavigation()
-  const [refreshing, setRefreshing] = React.useState<boolean>(false)
+  const [refreshing, setRefreshing] = useState<boolean>(false)
+  const [ showTaskExistsModal, setShowTaskExistsModal ] = useState<boolean>(false)
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -125,6 +127,18 @@ const LeadView: React.FC<LeadViewProps> = ({ data, id, loading, error, getLeadDe
     return ""
    }
 
+  const handleCreateNewTask = useCallback(() => {
+    if(!activeTask){
+      if(data?.id){
+        navigate("Nova Tarefa", {
+          leadId: data?.id
+        })
+      }
+    }else {
+      setShowTaskExistsModal(true)
+    }
+  }, [activeTask])
+
 
   return (
     <View style={styles.container}>
@@ -190,7 +204,7 @@ const LeadView: React.FC<LeadViewProps> = ({ data, id, loading, error, getLeadDe
                     <ButtonContainer position="left">
                       <TouchableOpacity
                         style={styles.button}
-                        onPress={() => { }}
+                        onPress={handleCreateNewTask}
                       >
                         <Text style={styles.buttonStepText}>Agendar Atividade</Text>
                       </TouchableOpacity>
@@ -301,9 +315,17 @@ const LeadView: React.FC<LeadViewProps> = ({ data, id, loading, error, getLeadDe
 
             </>
           )}
-
-
       </ScrollView>
+
+      <ModalOptions 
+        modalVisible={showTaskExistsModal}
+        text="Já existe uma tarefa para este Lead. Se continuar a tarefa atual será encerrada."
+        noFunc={() => setShowTaskExistsModal(false)}
+        closeModalFunc={() => setShowTaskExistsModal(false)}
+        noLabel="Voltar"
+        yesFunc={() => {}}
+        yesLabel="Continuar"
+      />
 
     </View>
   )

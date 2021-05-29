@@ -30,6 +30,13 @@ import * as LeadSourceSagas from './leadSources/sagas'
 import { LeadDetailsTypes } from './lead/leadDetails/types'
 import * as LeadDetailsSagas from './lead/leadDetails/sagas'
 
+import { TaskTypes } from './tasks/types'
+import * as TaskSagas from './tasks/sagas'
+
+import { TaskTypesTypes } from './taskTypes/types'
+import * as TaskTypesSagas from './taskTypes/sagas'
+
+
 export default function* rootSaga() : Generator {
   return yield all([
     takeLatest(LoggedUserTypes.GET, loggedUserActions.getUserStorage),
@@ -61,5 +68,9 @@ export default function* rootSaga() : Generator {
     takeLatest(LeadSourceTypes.LIST, LeadSourceSagas.getLeadSourcesSagas),
     takeLatest(LeadDetailsTypes.GET, LeadDetailsSagas.getLeadDetailsRequest),
     takeLatest(LeadDetailsTypes.EDIT, LeadDetailsSagas.editLeadDetailsRequest),
+    takeLatest(TaskTypes.ADD, TaskSagas.addTaskSagas),
+    takeLatest(TaskTypes.GET, TaskSagas.getTaskSagas),
+    takeLatest(TaskTypesTypes.LIST, TaskTypesSagas.getTaskTypesListSagas),
   ]);
 }
+

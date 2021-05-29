@@ -23,6 +23,8 @@ import LeadAddContainer from '@lead-management/containers/LeadAdd'
 import LeadDetailsContainer from '@lead-management/containers/LeadDetails'
 import LeadEditContainer from '@lead-management/containers/LeadEdit'
 
+import TaskAddContainer from '@lead-management/containers/TaskAdd'
+
 export type StackParameters = {
   "Meus Usuários": undefined
   "Edição de Usuário": { fullName: string, email: string, active: boolean, admin: boolean, username: string }
@@ -215,7 +217,7 @@ export const LeadStackNavigator = () => {
       />
       <Stack.Screen
         name="Nova Tarefa"
-        component={NewTaskView}
+        component={TaskAddContainer}
         options={{
           header: props => <Header {...props} title={props.scene.route.name} primaryStyle={false} />,
           headerShown: true,

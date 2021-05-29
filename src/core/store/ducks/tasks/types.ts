@@ -1,15 +1,13 @@
 
 
 export enum TaskTypes {
-  LIST = "@task/LIST",
-  SUCCESS_LIST = "@task/SUCCESS_LIST",
-  FAILURE_LIST = "@task/FAILURE_LIST",
-
   ADD = "@task/ADD",
   SUCCESS_ADD = "@task/SUCCESS_ADD",
   FAILURE_ADD = "@task/FAILURE_ADD",
 
-  
+  GET = "@task/GET",
+  SUCCESS_GET = "@task/SUCCESS_GET",
+  FAILURE_GET = "@task/FAILURE_GET",
 
   RESET = "@task/RESET",
   SUCCESS_RESET = "@task/SUCCESS_RESET",
@@ -27,12 +25,11 @@ export interface Task {
   startdate: Date,
   tasktypeid: string,
   updatedAt: Date,
-  createdAt: Date,
+  createdAt: Date
 }
 
-
 export interface TaskState {
-  readonly data: Task[]
+  readonly data: Task | null
   readonly loading: boolean
   readonly error: boolean
   readonly response: string

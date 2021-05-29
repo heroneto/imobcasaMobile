@@ -1,48 +1,54 @@
 import { Effect, put, SagaReturnType } from 'redux-saga/effects';
 import { 
-    successList,
-    failureList,
     successAdd,
-    failureAdd
+    failureAdd,
+    successGet,
+    failureGet
   } from './actions';
 
 import { 
-    getAccessToken,
+  getAccessToken,
   } from '@core/services/storage'
-import { getLeadList, leadAdd } from '@core/services/apis'
+import { addTask, getTask } from '@core/services/apis'
 
+type TaskAddResponse = SagaReturnType<typeof addTask>
 
-type GetLeadListResponse = SagaReturnType<typeof getLeadList>
-
-
-export function* getLeadListSagas() {
+export function* addTaskSagas(action: Effect) {
   try { 
+    const { data } = action.payload
     const accessToken : string = yield getAccessToken()
-    const result : GetLeadListResponse = yield getLeadList(accessToken, 0, 10)
-    yield put(successList(result.data))
-  } catch (error) {
-    console.log(error)
-    yield put(failureList("Falha ao carregar usuário"));
+    const result : TaskAddResponse = yield addTask(accessToken, data)
+
+    if(result.status === 200){
+      yield put(successAdd(result.data, "Tarefa cadastrada com sucesso"))
+    }    
+  } catch (error) {   
+    if(error.response.status === 400 || error.response.status === 403){
+      yield put(failureAdd(error.response.data));
+    }else {
+      yield put(failureAdd("Falha ao cadastrar tarefa"));
+    }
+    
   }
 }
 
 
-type LeadAddResponse = SagaReturnType<typeof leadAdd>
+type TaskDetailsResponse = SagaReturnType<typeof getTask>
 
-export function* addLeadSagas(action: Effect) {
+export function* getTaskSagas(action: Effect) {
   try { 
-    const { data } = action.payload
+    const { taskId } = action.payload
     const accessToken : string = yield getAccessToken()
-    const result : LeadAddResponse = yield leadAdd(accessToken, data)
+    const result : TaskDetailsResponse = yield getTask(accessToken, taskId)
 
     if(result.status === 200){
-      yield put(successAdd("Lead cadastrado com sucesso"))
+      yield put(successGet(result.data))
     }    
   } catch (error) {   
-    if(error.response.status === 400 || error.response.status === 409){
-      yield put(failureAdd(error.response.data));
+    if(error.response.status === 400 || error.response.status === 403){
+      yield put(failureGet(error.response.data));
     }else {
-      yield put(failureAdd("Falha ao cadastrar Lead"));
+      yield put(failureGet("Falha ao cadastrar tarefa"));
     }
     
   }

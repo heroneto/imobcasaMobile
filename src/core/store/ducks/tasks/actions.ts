@@ -1,29 +1,15 @@
 import { action } from 'typesafe-actions';
-import { Lead, LeadTypes } from './types';
+import { Task, TaskTypes } from './types';
 
-export const list = () => action(LeadTypes.LIST)
-export const successList = (data: Lead[]) => action(LeadTypes.SUCCESS_LIST, {data})
-export const failureList = (response: string) => action(LeadTypes.FAILURE_LIST, {response})
+export const add = (data: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => action(TaskTypes.ADD, { data })
+export const successAdd = (data: Task, response: string) => action(TaskTypes.SUCCESS_ADD, {response, data})
+export const failureAdd = (response: string) => action(TaskTypes.FAILURE_ADD, {response})
 
-
-export const add = (data: Omit<Lead, 
-    "id" | 
-    "negociationCompletedAt" | 
-    "createdAt" | 
-    "updatedAt" | 
-    "formData" | 
-    "ownerData">
-    ) => action(LeadTypes.ADD, { data })
-export const successAdd = (response: string) => action(LeadTypes.SUCCESS_ADD, {response})
-export const failureAdd = (response: string) => action(LeadTypes.FAILURE_ADD, {response})
+export const get = (taskId: string) => action(TaskTypes.GET, { taskId })
+export const successGet = (data: Task) => action(TaskTypes.SUCCESS_GET, { data })
+export const failureGet = (response: string) => action(TaskTypes.FAILURE_GET, {response})
 
 
-// TODO - Implementar listagem por status
-// export const listByStatys = (statusId: string) => action(LeadTypes.LIST, { statusId })
-// export const successListByStatus = (data: Lead[]) => action(LeadTypes.SUCCESS_LIST, {data})
-// export const failureListByStatus = (response: string) => action(LeadTypes.FAILURE_LIST, {response})
-
-
-export const reset = () => action(LeadTypes.RESET)
-export const successReset = () => action(LeadTypes.SUCCESS_RESET) 
-export const failureReset = () => action(LeadTypes.FAILURE_RESET)
+export const reset = () => action(TaskTypes.RESET)
+export const successReset = () => action(TaskTypes.SUCCESS_RESET) 
+export const failureReset = () => action(TaskTypes.FAILURE_RESET)

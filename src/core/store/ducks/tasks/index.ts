@@ -1,62 +1,64 @@
 import { Reducer } from 'redux';
-import { LeadState, LeadTypes } from './types';
+import { TaskState, TaskTypes } from './types';
 
-const INITIAL_STATE: LeadState = {
-  data: [],
+const INITIAL_STATE: TaskState = {
+  data: null,
   error: false,
   loading: false,
   response: "",
   httpCode: 0
 };
 
-const reducer: Reducer<LeadState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<TaskState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LeadTypes.LIST:
-      return {
-        ...state, loading: true
-      }
-    case LeadTypes.SUCCESS_LIST:
-      return {
-        ...state,
-        data: action.payload.data,
-        httpCode: 0,
-        loading: false,
-        error: false,
-      }
-    case LeadTypes.FAILURE_LIST:
-      return {
-        ...state,
-        error: true,
-        loading: false,
-        response: action.payload.response
-      }
 
-    case LeadTypes.ADD:
+    case TaskTypes.ADD:
       return {
         ...state, loading: true
       }
-    case LeadTypes.SUCCESS_ADD:
+    case TaskTypes.SUCCESS_ADD:
       return {
         ...state,
         loading: false,
         error: false,
-        response: action.payload.response
+        response: action.payload.response,
+        data: action.payload.data
       }
-    case LeadTypes.FAILURE_ADD:
+    case TaskTypes.FAILURE_ADD:
       return {
         ...state,
         error: true,
         loading: false,
-        response: action.payload.response
+        response: action.payload.response,
       }
 
-    case LeadTypes.RESET:
+    case TaskTypes.GET:
+      return {
+        ...state, loading: true
+      }
+    case TaskTypes.SUCCESS_GET:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        data: action.payload.data
+      }
+    case TaskTypes.FAILURE_GET:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+        response: action.payload.response,
+      }
+
+
+    case TaskTypes.RESET:
       return INITIAL_STATE
 
-    case LeadTypes.FAILURE_RESET:
+    case TaskTypes.FAILURE_RESET:
       return state
 
-    case LeadTypes.SUCCESS_RESET:
+    case TaskTypes.SUCCESS_RESET:
       return INITIAL_STATE
 
     default:

@@ -10,6 +10,8 @@ import lead from './lead'
 import leadStatus from './leadStatus'
 import leadSources from './leadSources'
 import leadDetails from './lead/leadDetails'
+import taskTypes from './taskTypes'
+import tasks from './tasks'
 
 export default combineReducers({
   loggedUser,
@@ -21,6 +23,9 @@ export default combineReducers({
   lead,
   leadStatus,
   leadSources,
-  leadDetails
+  leadDetails,
+  taskTypes,
+  tasks
 });
+
 

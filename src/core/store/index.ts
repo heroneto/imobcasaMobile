@@ -11,6 +11,8 @@ import { LeadState } from './ducks/lead/types';
 import { LeadStatusState } from './ducks/leadStatus/types';
 import { LeadSourceState } from './ducks/leadSources/types';
 import { LeadDetailsState } from './ducks/lead/leadDetails/types';
+import { TaskTypesState } from './ducks/taskTypes/types';
+import { TaskState } from './ducks/tasks/types';
 
 import rootReducer from './ducks/rootReducer';
 import rootSaga from './ducks/rootSaga';
@@ -26,7 +28,9 @@ export interface ApplicationState {
   lead: LeadState,
   leadStatus: LeadStatusState,
   leadSources: LeadSourceState,
-  leadDetails: LeadDetailsState
+  leadDetails: LeadDetailsState,
+  taskTypes: TaskTypesState,
+  tasks: TaskState
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -36,3 +40,4 @@ const store: Store<ApplicationState> = createStore(rootReducer, applyMiddleware(
 sagaMiddleware.run(rootSaga);
 
 export default store;
+

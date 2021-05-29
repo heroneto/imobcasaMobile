@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, Image, Linking } from 'react-native'
 import styles from './styles'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
@@ -10,22 +10,38 @@ import WhatsAppIcon from '@commons/assets/icons/WhatsApp.png'
 import colors from '@core/theme/colors';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormPageHeader from '@lead-management/components/HeaderFormContainer'
+import { useDispatch, useSelector } from 'react-redux';
+import * as TaskActions from '@core/store/ducks/tasks/actions'
+import * as TaskSelectors from '@core/store/ducks/tasks/selectors'
+
 
 interface TaskViewProps {
   route: any
 }
 
 const TaskView: React.FC<TaskViewProps> = ({ route }) => {
-  const { taskid } = route.params
+  const dispatch = useDispatch()
+  const { taskId } = route.params
   const { navigate, goBack } = useNavigation()
+  const { data } = useSelector(TaskSelectors.taskState)
+
+  
 
   function handleToWhatsApp() {
     Linking.openURL(`whatsapp://send?phone=${'+5511952827212'}`)
   }
 
   function handleNavigateToEditPage() {
-    navigate('Edição de Tarefa', { taskid })
+    navigate('Edição de Tarefa', { taskId })
   }
+
+  useEffect(() => {
+    if(taskId){
+      dispatch(TaskActions.get(taskId))
+    }
+  }, [taskId, dispatch])
+
+  console.log(data)
 
   return (
     <SafeAreaView style={styles.container}>

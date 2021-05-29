@@ -15,7 +15,7 @@ interface StateProps {
 
 
 
-const LeadEdit: React.FC<StateProps> = ({
+const LeadEditContainer: React.FC<StateProps> = ({
   route
 }) => {
   const { leadid } = route.params
@@ -34,4 +34,4 @@ const LeadEdit: React.FC<StateProps> = ({
   return <LeadEditView leadId={leadid} />;
 }
 
-export default LeadEdit;
+export default LeadEditContainer;
